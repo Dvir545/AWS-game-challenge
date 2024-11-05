@@ -10,3 +10,4 @@ export const auth = defineAuth({
     phone: true,
   },
 });
+
