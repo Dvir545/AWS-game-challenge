@@ -9,7 +9,7 @@ const backend = defineBackend({
 
 backend.addOutput({
   storage: {
-    aws_region: "<region>",
-    bucket_name: "eu-north-1",
+    aws_region: "eu-north-1",
+    bucket_name: "fbf-assets-s3",
   },
 });
