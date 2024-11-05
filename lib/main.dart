@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';  // to force orientation
+import 'package:flame/game.dart';
+import 'game.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    GameWidget(game: MyGame())
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,6 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Set landscape orientation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
