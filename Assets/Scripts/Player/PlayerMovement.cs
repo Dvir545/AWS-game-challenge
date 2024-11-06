@@ -1,9 +1,5 @@
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
 using Utils;
-using Debug = UnityEngine.Debug;
 
 namespace Player
 {
@@ -12,8 +8,9 @@ namespace Player
         [SerializeField] private float movementSpeed = 5f;
         private Animator _animator;
         private Rigidbody2D _rb;
-        public int facingDirection;
-        private static readonly int Beans = Animator.StringToHash("beans");
+        private SpriteRenderer _spriteRenderer;
+        private static readonly int AnimationFacing = Animator.StringToHash("facing");
+        private static readonly int AnimationMoving = Animator.StringToHash("moving");
 
         private Vector2 _movementDirection;
         private bool _isMoving;
@@ -21,20 +18,25 @@ namespace Player
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
-            facingDirection = (int)PlayerFacingDirection.Down;
+            _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
         }
 
         void Update()
         {
             CheckInput();
+            Move();
         }
 
         private void CheckInput()
         {
-            if (Input.GetMouseButtonDown(0)) // Left mouse button pressed
+            if (Input.GetMouseButtonDown(0))
             {
-                _isMoving = true;
+                _animator.SetBool(AnimationMoving, true);
+            }
+            if (Input.GetMouseButton(0))
+            {
                 // get player position relative to parent
                 Vector2 playerPos = transform.localPosition;
                 // get mouse position, relative to middle of screen
@@ -42,32 +44,36 @@ namespace Player
                 // get direction normalized vector from player to mouse
                 _movementDirection = (mousePos - playerPos).normalized;
                 SetFacingDirection();
-                Debug.Log(_movementDirection);
-            } else
+            }
+            if (Input.GetMouseButtonUp(0)) // Left mouse button released
             {
+                _animator.SetBool(AnimationMoving, false);
                 _movementDirection = Vector2.zero;
             }
         }
         
         private void SetFacingDirection()
         {
-            if (_movementDirection.x > 0)
+            // set facing direction based on direction angle
+            float angle = Vector2.SignedAngle(Vector2.up, _movementDirection);
+            if (angle is > -45 and <= 45)
             {
-                facingDirection = (int)PlayerFacingDirection.Right;
+                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Up);
             }
-            else if (_movementDirection.x < 0)
+            else if (angle is > 45 and <= 135)
             {
-                facingDirection = (int)PlayerFacingDirection.Left;
+                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Right);
+                _spriteRenderer.flipX = true;
             }
-            else if (_movementDirection.y > 0)
+            else if (angle is > 135 or <= -135)
             {
-                facingDirection = (int)PlayerFacingDirection.Up;
+                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
             }
-            else if (_movementDirection.y < 0)
+            else if (angle is > -135 and <= -45)
             {
-                facingDirection = (int)PlayerFacingDirection.Down;
+                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Left);
+                _spriteRenderer.flipX = false;
             }
-            // animator.SetInteger("FacingDirection", facingDirection);
         }
 
         private void Move()
