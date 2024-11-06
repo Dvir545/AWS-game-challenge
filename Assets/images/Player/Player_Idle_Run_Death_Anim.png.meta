@@ -1,0 +1,2002 @@
+fileFormatVersion: 2
+guid: b7fa0b3035c3691848db6ec9a44b27f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4998809030512954890
+    second: Player_Idle_Run_Death_Anim_0
+  - first:
+      213: 7512075106166968502
+    second: Player_Idle_Run_Death_Anim_1
+  - first:
+      213: -2483948232329799839
+    second: Player_Idle_Run_Death_Anim_2
+  - first:
+      213: -3848963858909509714
+    second: Player_Idle_Run_Death_Anim_3
+  - first:
+      213: 3185653201065488359
+    second: Player_Idle_Run_Death_Anim_4
+  - first:
+      213: 8126246328460867290
+    second: Player_Idle_Run_Death_Anim_5
+  - first:
+      213: 302159537296403588
+    second: Player_Idle_Run_Death_Anim_6
+  - first:
+      213: 3609774448813340877
+    second: Player_Idle_Run_Death_Anim_7
+  - first:
+      213: -603185980566174650
+    second: Player_Idle_Run_Death_Anim_8
+  - first:
+      213: 3055039122668975894
+    second: Player_Idle_Run_Death_Anim_9
+  - first:
+      213: -2798335825967475556
+    second: Player_Idle_Run_Death_Anim_10
+  - first:
+      213: -8696310357553772102
+    second: Player_Idle_Run_Death_Anim_11
+  - first:
+      213: -7820858351927888583
+    second: Player_Idle_Run_Death_Anim_12
+  - first:
+      213: -7979230941969534839
+    second: Player_Idle_Run_Death_Anim_13
+  - first:
+      213: 7164030178579721796
+    second: Player_Idle_Run_Death_Anim_14
+  - first:
+      213: -1605601740504244804
+    second: Player_Idle_Run_Death_Anim_15
+  - first:
+      213: -4950681462100623002
+    second: Player_Idle_Run_Death_Anim_16
+  - first:
+      213: 8326001889503443699
+    second: Player_Idle_Run_Death_Anim_17
+  - first:
+      213: 3126589685377562036
+    second: Player_Idle_Run_Death_Anim_18
+  - first:
+      213: -9084828346998294048
+    second: Player_Idle_Run_Death_Anim_19
+  - first:
+      213: -3525823430394390686
+    second: Player_Idle_Run_Death_Anim_20
+  - first:
+      213: 8386222959204057555
+    second: Player_Idle_Run_Death_Anim_21
+  - first:
+      213: -5886913843203069634
+    second: Player_Idle_Run_Death_Anim_22
+  - first:
+      213: -7811646497753575370
+    second: Player_Idle_Run_Death_Anim_23
+  - first:
+      213: -8758336238188450439
+    second: Player_Idle_Run_Death_Anim_24
+  - first:
+      213: -6700329077200518334
+    second: Player_Idle_Run_Death_Anim_25
+  - first:
+      213: -8836044306162463934
+    second: Player_Idle_Run_Death_Anim_26
+  - first:
+      213: 2940786578834873007
+    second: Player_Idle_Run_Death_Anim_27
+  - first:
+      213: -2912869228335545173
+    second: Player_Idle_Run_Death_Anim_28
+  - first:
+      213: 7170068007359443676
+    second: Player_Idle_Run_Death_Anim_29
+  - first:
+      213: 3560801534185906883
+    second: Player_Idle_Run_Death_Anim_30
+  - first:
+      213: -185663940658957966
+    second: Player_Idle_Run_Death_Anim_31
+  - first:
+      213: -7547237344799618634
+    second: Player_Idle_Run_Death_Anim_32
+  - first:
+      213: 1033924371831078793
+    second: Player_Idle_Run_Death_Anim_33
+  - first:
+      213: -452837721688178782
+    second: Player_Idle_Run_Death_Anim_34
+  - first:
+      213: -7206165393423454394
+    second: Player_Idle_Run_Death_Anim_35
+  - first:
+      213: 1335108723138051540
+    second: Player_Idle_Run_Death_Anim_36
+  - first:
+      213: -5133991649244690078
+    second: Player_Idle_Run_Death_Anim_37
+  - first:
+      213: 6595296891058606968
+    second: Player_Idle_Run_Death_Anim_38
+  - first:
+      213: 5434600081156271440
+    second: Player_Idle_Run_Death_Anim_39
+  - first:
+      213: -6687899268967047237
+    second: Player_Idle_Run_Death_Anim_40
+  - first:
+      213: 7175960365417789395
+    second: Player_Idle_Run_Death_Anim_41
+  - first:
+      213: -8775857404911379611
+    second: Player_Idle_Run_Death_Anim_42
+  - first:
+      213: 7000523120744920536
+    second: Player_Idle_Run_Death_Anim_43
+  - first:
+      213: 4516525554405467624
+    second: Player_Idle_Run_Death_Anim_44
+  - first:
+      213: -7080160666750964215
+    second: Player_Idle_Run_Death_Anim_45
+  - first:
+      213: -7622564556879649758
+    second: Player_Idle_Run_Death_Anim_46
+  - first:
+      213: 9184436082067561118
+    second: Player_Idle_Run_Death_Anim_47
+  - first:
+      213: 760940954997840310
+    second: Player_Idle_Run_Death_Anim_48
+  - first:
+      213: 3713345998958953394
+    second: Player_Idle_Run_Death_Anim_49
+  - first:
+      213: -648967694202875367
+    second: Player_Idle_Run_Death_Anim_50
+  - first:
+      213: -6752835904243473183
+    second: Player_Idle_Run_Death_Anim_51
+  - first:
+      213: 7866703833922499163
+    second: Player_Idle_Run_Death_Anim_52
+  - first:
+      213: 7841876498163010743
+    second: Player_Idle_Run_Death_Anim_53
+  - first:
+      213: -1634658066469287418
+    second: Player_Idle_Run_Death_Anim_54
+  - first:
+      213: -7945525124913728356
+    second: Player_Idle_Run_Death_Anim_55
+  - first:
+      213: 915878912337984018
+    second: Player_Idle_Run_Death_Anim_56
+  - first:
+      213: 2557896834714196094
+    second: Player_Idle_Run_Death_Anim_57
+  - first:
+      213: -3566649054050622812
+    second: Player_Idle_Run_Death_Anim_58
+  - first:
+      213: 4662315781588636313
+    second: Player_Idle_Run_Death_Anim_59
+  - first:
+      213: -8038531566778595744
+    second: Player_Idle_Run_Death_Anim_60
+  - first:
+      213: -1969399105021379347
+    second: Player_Idle_Run_Death_Anim_61
+  - first:
+      213: -5373169932905274738
+    second: Player_Idle_Run_Death_Anim_62
+  - first:
+      213: -693618374796328819
+    second: Player_Idle_Run_Death_Anim_63
+  - first:
+      213: -204323369928455448
+    second: Player_Idle_Run_Death_Anim_64
+  - first:
+      213: -1998690744856663852
+    second: Player_Idle_Run_Death_Anim_65
+  - first:
+      213: -1641989494510448006
+    second: Player_Idle_Run_Death_Anim_66
+  - first:
+      213: 8162798323453938167
+    second: Player_Idle_Run_Death_Anim_67
+  - first:
+      213: 1024807965501179911
+    second: Player_Idle_Run_Death_Anim_68
+  - first:
+      213: -3798920707951303736
+    second: Player_Idle_Run_Death_Anim_69
+  - first:
+      213: 2069252859426921090
+    second: Player_Idle_Run_Death_Anim_70
+  - first:
+      213: 2577224986286316364
+    second: Player_Idle_Run_Death_Anim_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 390
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f1b24ceba9a0aab0800000000000000
+      internalID: -4998809030512954890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 390
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b013252280404860800000000000000
+      internalID: 7512075106166968502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 390
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 167d5834e3e378dd0800000000000000
+      internalID: -2483948232329799839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 390
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7c16453cbb59ac0800000000000000
+      internalID: -3848963858909509714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 390
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef281345b6b53c20800000000000000
+      internalID: 3185653201065488359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 390
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad67b352bf936c070800000000000000
+      internalID: 8126246328460867290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_6
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48c6c0e8f7c713400800000000000000
+      internalID: 302159537296403588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_7
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8fccc5cbe781230800000000000000
+      internalID: 3609774448813340877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_8
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 358
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6448bd6eb8d01a7f0800000000000000
+      internalID: -603185980566174650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_9
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 358
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 617fa9155eda56a20800000000000000
+      internalID: 3055039122668975894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_10
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9495fa74605a29d0800000000000000
+      internalID: -2798335825967475556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_11
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab905790ecf705780800000000000000
+      internalID: -8696310357553772102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 935f0bef3cab67390800000000000000
+      internalID: -7820858351927888583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_13
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 980b91bebb3144190800000000000000
+      internalID: -7979230941969534839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_14
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 326
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e2c62ad7fbb6360800000000000000
+      internalID: 7164030178579721796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 326
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbdde7e49b1c7b9e0800000000000000
+      internalID: -1605601740504244804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_16
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6618167a075ab4bb0800000000000000
+      internalID: -4950681462100623002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_17
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa751ffa96eb8370800000000000000
+      internalID: 8326001889503443699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 294
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b57453e0c0e36b20800000000000000
+      internalID: 3126589685377562036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_19
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 294
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e974cb70c43ce180800000000000000
+      internalID: -9084828346998294048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_20
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 267d79a4542c11fc0800000000000000
+      internalID: -3525823430394390686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_21
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 294
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d1459a6959d16470800000000000000
+      internalID: 8386222959204057555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_22
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 294
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e392d80cc0b7d4ea0800000000000000
+      internalID: -5886913843203069634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_23
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630597ee5e4779390800000000000000
+      internalID: -7811646497753575370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_24
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 262
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97da8535893247680800000000000000
+      internalID: -8758336238188450439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_25
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 262
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2430e334436a303a0800000000000000
+      internalID: -6700329077200518334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_26
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 262
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24bc297d480106580800000000000000
+      internalID: -8836044306162463934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_27
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 262
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faa50bfffc5cfc820800000000000000
+      internalID: 2940786578834873007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_28
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 262
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba4c4efaed86397d0800000000000000
+      internalID: -2912869228335545173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_29
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 262
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd27d023dd2318360800000000000000
+      internalID: 7170068007359443676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_30
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 230
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c221d021228a6130800000000000000
+      internalID: 3560801534185906883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_31
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 230
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2717c6131a36c6df0800000000000000
+      internalID: -185663940658957966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_32
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 230
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b908a33f93d24790800000000000000
+      internalID: -7547237344799618634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_33
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 230
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98f3c9bfcbc395e00800000000000000
+      internalID: 1033924371831078793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_34
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 230
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aff0e9cd7237b9f0800000000000000
+      internalID: -452837721688178782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_35
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 230
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64f284c21ce8efb90800000000000000
+      internalID: -7206165393423454394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_36
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 198
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd3b2b5f42478210800000000000000
+      internalID: 1335108723138051540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_37
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 198
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 269c2facbc560c8b0800000000000000
+      internalID: -5133991649244690078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_38
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 198
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87359cb3493378b50800000000000000
+      internalID: 6595296891058606968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_39
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 198
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05de0a5eaf39b6b40800000000000000
+      internalID: 5434600081156271440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_40
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbfdf938c0fcf23a0800000000000000
+      internalID: -6687899268967047237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_41
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d77207bee1269360800000000000000
+      internalID: 7175960365417789395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_42
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b96cccf24e53680800000000000000
+      internalID: -8775857404911379611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_43
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d5f8ed10bad62160800000000000000
+      internalID: 7000523120744920536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_44
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e5ef49ef0cedae30800000000000000
+      internalID: 4516525554405467624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_45
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ead99c2673ebd90800000000000000
+      internalID: -7080160666750964215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_46
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 224a4bdebe5373690800000000000000
+      internalID: -7622564556879649758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_47
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9adae594fba57f70800000000000000
+      internalID: 9184436082067561118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_48
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b951b554c76f8a00800000000000000
+      internalID: 760940954997840310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_49
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b3011c0384788330800000000000000
+      internalID: 3713345998958953394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_50
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 912555c02576ef6f0800000000000000
+      internalID: -648967694202875367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_51
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e4601de58b1942a0800000000000000
+      internalID: -6752835904243473183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_52
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b52772615752c2d60800000000000000
+      internalID: 7866703833922499163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_53
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc8d758021f3dc60800000000000000
+      internalID: 7841876498163010743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_54
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 70
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a0fda36278059e0800000000000000
+      internalID: -1634658066469287418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_55
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 70
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c94739ffef2dbb190800000000000000
+      internalID: -7945525124913728356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_56
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21a3d2ba40bd5bc00800000000000000
+      internalID: 915878912337984018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_57
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e785c3d6e997f7320800000000000000
+      internalID: 2557896834714196094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_58
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a264de0597b08ec0800000000000000
+      internalID: -3566649054050622812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_59
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 992d948508fd3b040800000000000000
+      internalID: 4662315781588636313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_60
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 38
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 066c5664126617090800000000000000
+      internalID: -8038531566778595744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_61
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 38
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dec7a34c2f94ba4e0800000000000000
+      internalID: -1969399105021379347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_62
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e822f5f0a6aae65b0800000000000000
+      internalID: -5373169932905274738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_63
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d80c49853c5cf56f0800000000000000
+      internalID: -693618374796328819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_64
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 6
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ea8a144af81a2df0800000000000000
+      internalID: -204323369928455448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_65
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 6
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d825f86b593344e0800000000000000
+      internalID: -1998690744856663852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_66
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 6
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7218ce114b7639e0800000000000000
+      internalID: -1641989494510448006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_67
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 6
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f940aaa3d5184170800000000000000
+      internalID: 8162798323453938167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_68
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 6
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70840ba3a69d83e00800000000000000
+      internalID: 1024807965501179911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_69
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 6
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c3efa06eb5874bc0800000000000000
+      internalID: -3798920707951303736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_70
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 6
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a5a94238677bc10800000000000000
+      internalID: 2069252859426921090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Idle_Run_Death_Anim_71
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 6
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4b5bd5687424c320800000000000000
+      internalID: 2577224986286316364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Idle_Run_Death_Anim_0: -4998809030512954890
+      Player_Idle_Run_Death_Anim_1: 7512075106166968502
+      Player_Idle_Run_Death_Anim_10: -2798335825967475556
+      Player_Idle_Run_Death_Anim_11: -8696310357553772102
+      Player_Idle_Run_Death_Anim_12: -7820858351927888583
+      Player_Idle_Run_Death_Anim_13: -7979230941969534839
+      Player_Idle_Run_Death_Anim_14: 7164030178579721796
+      Player_Idle_Run_Death_Anim_15: -1605601740504244804
+      Player_Idle_Run_Death_Anim_16: -4950681462100623002
+      Player_Idle_Run_Death_Anim_17: 8326001889503443699
+      Player_Idle_Run_Death_Anim_18: 3126589685377562036
+      Player_Idle_Run_Death_Anim_19: -9084828346998294048
+      Player_Idle_Run_Death_Anim_2: -2483948232329799839
+      Player_Idle_Run_Death_Anim_20: -3525823430394390686
+      Player_Idle_Run_Death_Anim_21: 8386222959204057555
+      Player_Idle_Run_Death_Anim_22: -5886913843203069634
+      Player_Idle_Run_Death_Anim_23: -7811646497753575370
+      Player_Idle_Run_Death_Anim_24: -8758336238188450439
+      Player_Idle_Run_Death_Anim_25: -6700329077200518334
+      Player_Idle_Run_Death_Anim_26: -8836044306162463934
+      Player_Idle_Run_Death_Anim_27: 2940786578834873007
+      Player_Idle_Run_Death_Anim_28: -2912869228335545173
+      Player_Idle_Run_Death_Anim_29: 7170068007359443676
+      Player_Idle_Run_Death_Anim_3: -3848963858909509714
+      Player_Idle_Run_Death_Anim_30: 3560801534185906883
+      Player_Idle_Run_Death_Anim_31: -185663940658957966
+      Player_Idle_Run_Death_Anim_32: -7547237344799618634
+      Player_Idle_Run_Death_Anim_33: 1033924371831078793
+      Player_Idle_Run_Death_Anim_34: -452837721688178782
+      Player_Idle_Run_Death_Anim_35: -7206165393423454394
+      Player_Idle_Run_Death_Anim_36: 1335108723138051540
+      Player_Idle_Run_Death_Anim_37: -5133991649244690078
+      Player_Idle_Run_Death_Anim_38: 6595296891058606968
+      Player_Idle_Run_Death_Anim_39: 5434600081156271440
+      Player_Idle_Run_Death_Anim_4: 3185653201065488359
+      Player_Idle_Run_Death_Anim_40: -6687899268967047237
+      Player_Idle_Run_Death_Anim_41: 7175960365417789395
+      Player_Idle_Run_Death_Anim_42: -8775857404911379611
+      Player_Idle_Run_Death_Anim_43: 7000523120744920536
+      Player_Idle_Run_Death_Anim_44: 4516525554405467624
+      Player_Idle_Run_Death_Anim_45: -7080160666750964215
+      Player_Idle_Run_Death_Anim_46: -7622564556879649758
+      Player_Idle_Run_Death_Anim_47: 9184436082067561118
+      Player_Idle_Run_Death_Anim_48: 760940954997840310
+      Player_Idle_Run_Death_Anim_49: 3713345998958953394
+      Player_Idle_Run_Death_Anim_5: 8126246328460867290
+      Player_Idle_Run_Death_Anim_50: -648967694202875367
+      Player_Idle_Run_Death_Anim_51: -6752835904243473183
+      Player_Idle_Run_Death_Anim_52: 7866703833922499163
+      Player_Idle_Run_Death_Anim_53: 7841876498163010743
+      Player_Idle_Run_Death_Anim_54: -1634658066469287418
+      Player_Idle_Run_Death_Anim_55: -7945525124913728356
+      Player_Idle_Run_Death_Anim_56: 915878912337984018
+      Player_Idle_Run_Death_Anim_57: 2557896834714196094
+      Player_Idle_Run_Death_Anim_58: -3566649054050622812
+      Player_Idle_Run_Death_Anim_59: 4662315781588636313
+      Player_Idle_Run_Death_Anim_6: 302159537296403588
+      Player_Idle_Run_Death_Anim_60: -8038531566778595744
+      Player_Idle_Run_Death_Anim_61: -1969399105021379347
+      Player_Idle_Run_Death_Anim_62: -5373169932905274738
+      Player_Idle_Run_Death_Anim_63: -693618374796328819
+      Player_Idle_Run_Death_Anim_64: -204323369928455448
+      Player_Idle_Run_Death_Anim_65: -1998690744856663852
+      Player_Idle_Run_Death_Anim_66: -1641989494510448006
+      Player_Idle_Run_Death_Anim_67: 8162798323453938167
+      Player_Idle_Run_Death_Anim_68: 1024807965501179911
+      Player_Idle_Run_Death_Anim_69: -3798920707951303736
+      Player_Idle_Run_Death_Anim_7: 3609774448813340877
+      Player_Idle_Run_Death_Anim_70: 2069252859426921090
+      Player_Idle_Run_Death_Anim_71: 2577224986286316364
+      Player_Idle_Run_Death_Anim_8: -603185980566174650
+      Player_Idle_Run_Death_Anim_9: 3055039122668975894
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

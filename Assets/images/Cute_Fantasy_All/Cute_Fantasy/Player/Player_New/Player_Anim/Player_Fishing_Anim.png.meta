@@ -1,0 +1,1482 @@
+fileFormatVersion: 2
+guid: 39e3a24da54daf3a79e6f8f59585809a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8780176592232124610
+    second: Player_Fishing_Anim_0
+  - first:
+      213: 316941191076692973
+    second: Player_Fishing_Anim_1
+  - first:
+      213: -6390615653825490115
+    second: Player_Fishing_Anim_2
+  - first:
+      213: -9017916909596208727
+    second: Player_Fishing_Anim_3
+  - first:
+      213: -3524025592729484826
+    second: Player_Fishing_Anim_4
+  - first:
+      213: -3117774764156787225
+    second: Player_Fishing_Anim_5
+  - first:
+      213: -5254306158746479780
+    second: Player_Fishing_Anim_6
+  - first:
+      213: -1463121344893815855
+    second: Player_Fishing_Anim_7
+  - first:
+      213: -1995217501697410078
+    second: Player_Fishing_Anim_8
+  - first:
+      213: 1386166868331161783
+    second: Player_Fishing_Anim_9
+  - first:
+      213: 2787197649049525310
+    second: Player_Fishing_Anim_10
+  - first:
+      213: 5309876621469254653
+    second: Player_Fishing_Anim_11
+  - first:
+      213: 6712951561405765778
+    second: Player_Fishing_Anim_12
+  - first:
+      213: 648923494122599990
+    second: Player_Fishing_Anim_13
+  - first:
+      213: 4637401619929956287
+    second: Player_Fishing_Anim_14
+  - first:
+      213: 5525355628629406070
+    second: Player_Fishing_Anim_15
+  - first:
+      213: -2627806550550041667
+    second: Player_Fishing_Anim_16
+  - first:
+      213: 4696313578536227993
+    second: Player_Fishing_Anim_17
+  - first:
+      213: -7563070952011894525
+    second: Player_Fishing_Anim_18
+  - first:
+      213: -1552720003330775321
+    second: Player_Fishing_Anim_19
+  - first:
+      213: 1645226064846253371
+    second: Player_Fishing_Anim_20
+  - first:
+      213: 4428824223088780036
+    second: Player_Fishing_Anim_21
+  - first:
+      213: -8611985021575592040
+    second: Player_Fishing_Anim_22
+  - first:
+      213: -7603793016579383579
+    second: Player_Fishing_Anim_23
+  - first:
+      213: -390532011216399631
+    second: Player_Fishing_Anim_24
+  - first:
+      213: 5895249020071502108
+    second: Player_Fishing_Anim_25
+  - first:
+      213: -740890296451147090
+    second: Player_Fishing_Anim_26
+  - first:
+      213: -3381861072802972094
+    second: Player_Fishing_Anim_27
+  - first:
+      213: 6090971857299177932
+    second: Player_Fishing_Anim_28
+  - first:
+      213: -859713840747722951
+    second: Player_Fishing_Anim_29
+  - first:
+      213: -5212841116878203476
+    second: Player_Fishing_Anim_30
+  - first:
+      213: 6727888409018600219
+    second: Player_Fishing_Anim_31
+  - first:
+      213: -8650708606875096493
+    second: Player_Fishing_Anim_32
+  - first:
+      213: 8365186140751225014
+    second: Player_Fishing_Anim_33
+  - first:
+      213: 7380860096217887113
+    second: Player_Fishing_Anim_34
+  - first:
+      213: -1974492232004250913
+    second: Player_Fishing_Anim_35
+  - first:
+      213: -5263260451668147207
+    second: Player_Fishing_Anim_36
+  - first:
+      213: -4271166428661110128
+    second: Player_Fishing_Anim_37
+  - first:
+      213: -8467068070747892037
+    second: Player_Fishing_Anim_38
+  - first:
+      213: -5152033391080652296
+    second: Player_Fishing_Anim_39
+  - first:
+      213: -4175151754658350076
+    second: Player_Fishing_Anim_40
+  - first:
+      213: -1943296931361533122
+    second: Player_Fishing_Anim_41
+  - first:
+      213: -3586522489040777931
+    second: Player_Fishing_Anim_42
+  - first:
+      213: -6221733788663443652
+    second: Player_Fishing_Anim_43
+  - first:
+      213: 498931233989791518
+    second: Player_Fishing_Anim_44
+  - first:
+      213: 2411999738279278939
+    second: Player_Fishing_Anim_45
+  - first:
+      213: -5047037481585872849
+    second: Player_Fishing_Anim_46
+  - first:
+      213: 6726853077242801090
+    second: Player_Fishing_Anim_47
+  - first:
+      213: 1859700334577909672
+    second: Player_Fishing_Anim_48
+  - first:
+      213: 7951249127702587262
+    second: Player_Fishing_Anim_49
+  - first:
+      213: -8020839487399386617
+    second: Player_Fishing_Anim_50
+  - first:
+      213: 5903746599058150487
+    second: Player_Fishing_Anim_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3fedc2a8eb862680800000000000000
+      internalID: -8780176592232124610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3c0d48550066400800000000000000
+      internalID: 316941191076692973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 470
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d335ea9fbe8ff47a0800000000000000
+      internalID: -6390615653825490115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 470
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a19785895ce9d280800000000000000
+      internalID: -9017916909596208727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_4
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e149fdf465281fc0800000000000000
+      internalID: -3524025592729484826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_5
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e5e1c4ee507bb4d0800000000000000
+      internalID: -3117774764156787225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_6
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53d4ca1364f417b0800000000000000
+      internalID: -5254306158746479780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_7
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d3ff4683e2f1bbe0800000000000000
+      internalID: -1463121344893815855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_8
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 470
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebfea9d0409f44e0800000000000000
+      internalID: -1995217501697410078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_9
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 406
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b86b4a2c67ac3310800000000000000
+      internalID: 1386166868331161783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_10
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 406
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3c966e9e7d1ea620800000000000000
+      internalID: 2787197649049525310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_11
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 406
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df383df77a870b940800000000000000
+      internalID: 5309876621469254653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_12
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 406
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2989efbd0e1392d50800000000000000
+      internalID: 6712951561405765778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_13
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 342
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6363591da70710900800000000000000
+      internalID: 648923494122599990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_14
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbffebc043c5b5040800000000000000
+      internalID: 4637401619929956287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_15
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 671392e6ba10eac40800000000000000
+      internalID: 5525355628629406070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_16
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbb25007dd7288bd0800000000000000
+      internalID: -2627806550550041667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_17
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 994de7a4158ac2140800000000000000
+      internalID: 4696313578536227993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_18
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 301714e3a039a0790800000000000000
+      internalID: -7563070952011894525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_19
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 342
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e663d53261a37ae0800000000000000
+      internalID: -1552720003330775321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_20
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 342
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3def52a36405d610800000000000000
+      internalID: 1645226064846253371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_21
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 278
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4032add7a28567d30800000000000000
+      internalID: 4428824223088780036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_22
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 278
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 897800a40451c7880800000000000000
+      internalID: -8611985021575592040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_23
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 278
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ee903db986e97690800000000000000
+      internalID: -7603793016579383579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_24
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 278
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f21706743d849af0800000000000000
+      internalID: -390532011216399631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_25
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 278
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11e4d7dfb120d150800000000000000
+      internalID: 5895249020071502108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_26
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaade766334d7b5f0800000000000000
+      internalID: -740890296451147090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_27
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24e7bdba5473111d0800000000000000
+      internalID: -3381861072802972094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_28
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 214
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1083302aa778450800000000000000
+      internalID: 6090971857299177932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_29
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 214
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 937ceb911dea114f0800000000000000
+      internalID: -859713840747722951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_30
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca59ced7f9448a7b0800000000000000
+      internalID: -5212841116878203476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_31
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1b8504bcd24e5d50800000000000000
+      internalID: 6727888409018600219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_32
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35aabcffa5282f780800000000000000
+      internalID: -8650708606875096493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_33
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b06f7f697c171470800000000000000
+      internalID: 8365186140751225014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_34
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 214
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9813cebe6251e6660800000000000000
+      internalID: 7380860096217887113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_35
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 150
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd25e9bb6c13994e0800000000000000
+      internalID: -1974492232004250913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_36
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 150
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f345f1518425f6b0800000000000000
+      internalID: -5263260451668147207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_37
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 150
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09aa41343c4c9b4c0800000000000000
+      internalID: -4271166428661110128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_38
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 150
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6150a337eee7a80800000000000000
+      internalID: -8467068070747892037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_39
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 86
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f1cfad6dec4088b0800000000000000
+      internalID: -5152033391080652296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_40
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c7d3c9991ee06c0800000000000000
+      internalID: -4175151754658350076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_41
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e33d619acb50805e0800000000000000
+      internalID: -1943296931361533122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_42
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d46c56ccc1a3ec0800000000000000
+      internalID: -3586522489040777931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_43
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f8ba75516f7a9a0800000000000000
+      internalID: -6221733788663443652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_44
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1f0f49505f8ce600800000000000000
+      internalID: 498931233989791518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_45
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 86
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59b87e8bf4297120800000000000000
+      internalID: 2411999738279278939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_46
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 86
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f20fdfd962255f9b0800000000000000
+      internalID: -5047037481585872849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_47
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 22
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cbec4dbb359a5d50800000000000000
+      internalID: 6726853077242801090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_48
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 22
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aff037e99bfec910800000000000000
+      internalID: 1859700334577909672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_49
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 22
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e77e85144f2885e60800000000000000
+      internalID: 7951249127702587262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_50
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 22
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70222218bf040b090800000000000000
+      internalID: -8020839487399386617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Fishing_Anim_51
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 22
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75418c0a0425ee150800000000000000
+      internalID: 5903746599058150487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Fishing_Anim_0: -8780176592232124610
+      Player_Fishing_Anim_1: 316941191076692973
+      Player_Fishing_Anim_10: 2787197649049525310
+      Player_Fishing_Anim_11: 5309876621469254653
+      Player_Fishing_Anim_12: 6712951561405765778
+      Player_Fishing_Anim_13: 648923494122599990
+      Player_Fishing_Anim_14: 4637401619929956287
+      Player_Fishing_Anim_15: 5525355628629406070
+      Player_Fishing_Anim_16: -2627806550550041667
+      Player_Fishing_Anim_17: 4696313578536227993
+      Player_Fishing_Anim_18: -7563070952011894525
+      Player_Fishing_Anim_19: -1552720003330775321
+      Player_Fishing_Anim_2: -6390615653825490115
+      Player_Fishing_Anim_20: 1645226064846253371
+      Player_Fishing_Anim_21: 4428824223088780036
+      Player_Fishing_Anim_22: -8611985021575592040
+      Player_Fishing_Anim_23: -7603793016579383579
+      Player_Fishing_Anim_24: -390532011216399631
+      Player_Fishing_Anim_25: 5895249020071502108
+      Player_Fishing_Anim_26: -740890296451147090
+      Player_Fishing_Anim_27: -3381861072802972094
+      Player_Fishing_Anim_28: 6090971857299177932
+      Player_Fishing_Anim_29: -859713840747722951
+      Player_Fishing_Anim_3: -9017916909596208727
+      Player_Fishing_Anim_30: -5212841116878203476
+      Player_Fishing_Anim_31: 6727888409018600219
+      Player_Fishing_Anim_32: -8650708606875096493
+      Player_Fishing_Anim_33: 8365186140751225014
+      Player_Fishing_Anim_34: 7380860096217887113
+      Player_Fishing_Anim_35: -1974492232004250913
+      Player_Fishing_Anim_36: -5263260451668147207
+      Player_Fishing_Anim_37: -4271166428661110128
+      Player_Fishing_Anim_38: -8467068070747892037
+      Player_Fishing_Anim_39: -5152033391080652296
+      Player_Fishing_Anim_4: -3524025592729484826
+      Player_Fishing_Anim_40: -4175151754658350076
+      Player_Fishing_Anim_41: -1943296931361533122
+      Player_Fishing_Anim_42: -3586522489040777931
+      Player_Fishing_Anim_43: -6221733788663443652
+      Player_Fishing_Anim_44: 498931233989791518
+      Player_Fishing_Anim_45: 2411999738279278939
+      Player_Fishing_Anim_46: -5047037481585872849
+      Player_Fishing_Anim_47: 6726853077242801090
+      Player_Fishing_Anim_48: 1859700334577909672
+      Player_Fishing_Anim_49: 7951249127702587262
+      Player_Fishing_Anim_5: -3117774764156787225
+      Player_Fishing_Anim_50: -8020839487399386617
+      Player_Fishing_Anim_51: 5903746599058150487
+      Player_Fishing_Anim_6: -5254306158746479780
+      Player_Fishing_Anim_7: -1463121344893815855
+      Player_Fishing_Anim_8: -1995217501697410078
+      Player_Fishing_Anim_9: 1386166868331161783
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
