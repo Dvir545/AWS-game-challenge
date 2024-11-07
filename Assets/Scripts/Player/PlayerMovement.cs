@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Player
@@ -7,9 +8,9 @@ namespace Player
     {
         [SerializeField] private Camera mainCamera;
         [SerializeField] private float movementSpeed = 5f;
-        private Animator _animator;
+        [SerializeField] private Animator animator;
         private Rigidbody2D _rb;
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         private static readonly int AnimationFacing = Animator.StringToHash("facing");
         private static readonly int AnimationMoving = Animator.StringToHash("moving");
 
@@ -19,9 +20,7 @@ namespace Player
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _animator = GetComponent<Animator>();
-            _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
+            animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
         }
 
         void Update()
@@ -36,14 +35,14 @@ namespace Player
             _movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             if (_movementDirection.magnitude > 0)
             {
-                _animator.SetBool(AnimationMoving, true);
+                animator.SetBool(AnimationMoving, true);
                 SetFacingDirection();
             }
             else  // if no keyboard input, check for mouse input
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _animator.SetBool(AnimationMoving, true);
+                    animator.SetBool(AnimationMoving, true);
                 }
                 else if (Input.GetMouseButton(0))
                 {
@@ -58,7 +57,7 @@ namespace Player
                 }
                 else // no input
                 {
-                    _animator.SetBool(AnimationMoving, false);
+                    animator.SetBool(AnimationMoving, false);
                     _movementDirection = Vector2.zero;
                 }
             }
@@ -70,21 +69,21 @@ namespace Player
             float angle = Vector2.SignedAngle(Vector2.up, _movementDirection);
             if (angle is > -45 and < 45)
             {
-                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Up);
+                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Up);
             }
             else if (angle is >= 45 and <= 135)
             {
-                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Right);
-                _spriteRenderer.flipX = true;
+                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Right);
+                spriteRenderer.flipX = true;
             }
             else if (angle is > 135 or < -135)
             {
-                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
+                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
             }
             else if (angle is >= -135 and <= -45)
             {
-                _animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Left);
-                _spriteRenderer.flipX = false;
+                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Left);
+                spriteRenderer.flipX = false;
             }
         }
 

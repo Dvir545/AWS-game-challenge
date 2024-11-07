@@ -1,0 +1,14 @@
+Vector2 towards = GetClosestPlayer().transform.position;
+# prompt:
+// set facing to look at the player
+# result:
+if (towards.x < transform.position.x)
+{
+    transform.localScale = new Vector3(-1, 1, 1);
+}
+# problem: this will flip the direction whenever i am to the left of the player, instead of looking at him.
+# correct answer:
+if ((transform.position.x - towards.x) * math.sign(transform.localScale.x) < 0)
+{
+    transform.localScale = new Vector3(-1, 1, 1);
+}
