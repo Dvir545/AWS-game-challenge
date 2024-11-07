@@ -264,7 +264,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -329,10 +329,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 390
-        width: 15
-        height: 22
+        x: 0
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -351,10 +351,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 390
-        width: 15
-        height: 22
+        x: 32
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,10 +373,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_2
       rect:
         serializedVersion: 2
-        x: 72
-        y: 390
-        width: 15
-        height: 21
+        x: 64
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -395,10 +395,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_3
       rect:
         serializedVersion: 2
-        x: 104
-        y: 390
-        width: 15
-        height: 21
+        x: 96
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -417,10 +417,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_4
       rect:
         serializedVersion: 2
-        x: 136
-        y: 390
-        width: 15
-        height: 22
+        x: 128
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,10 +439,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_5
       rect:
         serializedVersion: 2
-        x: 168
-        y: 390
-        width: 15
-        height: 22
+        x: 160
+        y: 384
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -461,10 +461,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_6
       rect:
         serializedVersion: 2
-        x: 9
-        y: 358
-        width: 15
-        height: 22
+        x: 0
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -483,10 +483,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_7
       rect:
         serializedVersion: 2
-        x: 41
-        y: 358
-        width: 15
-        height: 22
+        x: 32
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -505,10 +505,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_8
       rect:
         serializedVersion: 2
-        x: 73
-        y: 358
-        width: 15
-        height: 21
+        x: 64
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -527,10 +527,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_9
       rect:
         serializedVersion: 2
-        x: 105
-        y: 358
-        width: 15
-        height: 21
+        x: 96
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -549,10 +549,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_10
       rect:
         serializedVersion: 2
-        x: 137
-        y: 358
-        width: 15
-        height: 22
+        x: 128
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -571,10 +571,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_11
       rect:
         serializedVersion: 2
-        x: 169
-        y: 358
-        width: 15
-        height: 22
+        x: 160
+        y: 352
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -593,10 +593,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_12
       rect:
         serializedVersion: 2
-        x: 8
-        y: 326
-        width: 15
-        height: 22
+        x: 0
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -615,10 +615,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_13
       rect:
         serializedVersion: 2
-        x: 40
-        y: 326
-        width: 15
-        height: 22
+        x: 32
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -637,10 +637,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_14
       rect:
         serializedVersion: 2
-        x: 72
-        y: 326
-        width: 15
-        height: 21
+        x: 64
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -659,10 +659,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_15
       rect:
         serializedVersion: 2
-        x: 104
-        y: 326
-        width: 15
-        height: 21
+        x: 96
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -681,10 +681,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_16
       rect:
         serializedVersion: 2
-        x: 136
-        y: 326
-        width: 15
-        height: 22
+        x: 128
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -703,10 +703,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_17
       rect:
         serializedVersion: 2
-        x: 168
-        y: 326
-        width: 15
-        height: 22
+        x: 160
+        y: 320
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -725,10 +725,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_18
       rect:
         serializedVersion: 2
-        x: 8
-        y: 294
-        width: 15
-        height: 24
+        x: 0
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -747,10 +747,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_19
       rect:
         serializedVersion: 2
-        x: 40
-        y: 294
-        width: 15
-        height: 23
+        x: 32
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -769,10 +769,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_20
       rect:
         serializedVersion: 2
-        x: 72
-        y: 294
-        width: 15
-        height: 22
+        x: 64
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -791,10 +791,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_21
       rect:
         serializedVersion: 2
-        x: 104
-        y: 294
-        width: 15
-        height: 24
+        x: 96
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -813,10 +813,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_22
       rect:
         serializedVersion: 2
-        x: 136
-        y: 294
-        width: 15
-        height: 23
+        x: 128
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -835,10 +835,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_23
       rect:
         serializedVersion: 2
-        x: 168
-        y: 294
-        width: 15
-        height: 22
+        x: 160
+        y: 288
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -857,10 +857,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_24
       rect:
         serializedVersion: 2
-        x: 9
-        y: 262
-        width: 15
-        height: 24
+        x: 0
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -879,10 +879,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_25
       rect:
         serializedVersion: 2
-        x: 41
-        y: 262
-        width: 15
-        height: 23
+        x: 32
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -901,10 +901,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_26
       rect:
         serializedVersion: 2
-        x: 73
-        y: 262
-        width: 15
-        height: 22
+        x: 64
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -923,10 +923,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_27
       rect:
         serializedVersion: 2
-        x: 105
-        y: 262
-        width: 15
-        height: 24
+        x: 96
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -945,10 +945,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_28
       rect:
         serializedVersion: 2
-        x: 137
-        y: 262
-        width: 15
-        height: 23
+        x: 128
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -967,10 +967,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_29
       rect:
         serializedVersion: 2
-        x: 169
-        y: 262
-        width: 15
-        height: 22
+        x: 160
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -989,10 +989,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_30
       rect:
         serializedVersion: 2
-        x: 8
-        y: 230
-        width: 15
-        height: 24
+        x: 0
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1011,10 +1011,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_31
       rect:
         serializedVersion: 2
-        x: 40
-        y: 230
-        width: 15
-        height: 23
+        x: 32
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1033,10 +1033,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_32
       rect:
         serializedVersion: 2
-        x: 72
-        y: 230
-        width: 15
-        height: 22
+        x: 64
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1055,10 +1055,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_33
       rect:
         serializedVersion: 2
-        x: 104
-        y: 230
-        width: 15
-        height: 24
+        x: 96
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1077,10 +1077,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_34
       rect:
         serializedVersion: 2
-        x: 136
-        y: 230
-        width: 15
-        height: 23
+        x: 128
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1099,10 +1099,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_35
       rect:
         serializedVersion: 2
-        x: 168
-        y: 230
-        width: 15
-        height: 22
+        x: 160
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1121,10 +1121,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_36
       rect:
         serializedVersion: 2
-        x: 9
-        y: 198
-        width: 15
-        height: 22
+        x: 0
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1143,10 +1143,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_37
       rect:
         serializedVersion: 2
-        x: 41
-        y: 198
-        width: 17
-        height: 20
+        x: 32
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1165,10 +1165,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_38
       rect:
         serializedVersion: 2
-        x: 73
-        y: 198
-        width: 19
-        height: 18
+        x: 64
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1187,10 +1187,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_39
       rect:
         serializedVersion: 2
-        x: 105
-        y: 198
-        width: 19
-        height: 16
+        x: 96
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1209,10 +1209,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_40
       rect:
         serializedVersion: 2
-        x: 8
-        y: 166
-        width: 15
-        height: 22
+        x: 0
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1231,10 +1231,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_41
       rect:
         serializedVersion: 2
-        x: 40
-        y: 166
-        width: 15
-        height: 22
+        x: 32
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1253,10 +1253,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_42
       rect:
         serializedVersion: 2
-        x: 72
-        y: 166
-        width: 15
-        height: 22
+        x: 64
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1275,10 +1275,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_43
       rect:
         serializedVersion: 2
-        x: 104
-        y: 166
-        width: 15
-        height: 22
+        x: 96
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1297,10 +1297,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_44
       rect:
         serializedVersion: 2
-        x: 9
-        y: 134
-        width: 15
-        height: 22
+        x: 0
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1319,10 +1319,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_45
       rect:
         serializedVersion: 2
-        x: 41
-        y: 134
-        width: 15
-        height: 22
+        x: 32
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1341,10 +1341,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_46
       rect:
         serializedVersion: 2
-        x: 73
-        y: 134
-        width: 15
-        height: 22
+        x: 64
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1363,10 +1363,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_47
       rect:
         serializedVersion: 2
-        x: 105
-        y: 134
-        width: 15
-        height: 22
+        x: 96
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1385,10 +1385,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_48
       rect:
         serializedVersion: 2
-        x: 8
-        y: 102
-        width: 15
-        height: 22
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1407,10 +1407,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_49
       rect:
         serializedVersion: 2
-        x: 40
-        y: 102
-        width: 15
-        height: 22
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1429,10 +1429,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_50
       rect:
         serializedVersion: 2
-        x: 72
-        y: 102
-        width: 15
-        height: 22
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1451,10 +1451,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_51
       rect:
         serializedVersion: 2
-        x: 104
-        y: 102
-        width: 15
-        height: 22
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1473,10 +1473,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_52
       rect:
         serializedVersion: 2
-        x: 8
-        y: 70
-        width: 15
-        height: 22
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1495,10 +1495,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_53
       rect:
         serializedVersion: 2
-        x: 40
-        y: 70
-        width: 15
-        height: 22
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1517,10 +1517,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_54
       rect:
         serializedVersion: 2
-        x: 72
-        y: 70
-        width: 15
-        height: 21
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1539,10 +1539,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_55
       rect:
         serializedVersion: 2
-        x: 104
-        y: 70
-        width: 15
-        height: 21
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1561,10 +1561,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_56
       rect:
         serializedVersion: 2
-        x: 136
-        y: 70
-        width: 15
-        height: 22
+        x: 128
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1583,10 +1583,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_57
       rect:
         serializedVersion: 2
-        x: 168
-        y: 70
-        width: 15
-        height: 22
+        x: 160
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1605,10 +1605,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_58
       rect:
         serializedVersion: 2
-        x: 9
-        y: 38
-        width: 15
-        height: 22
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1627,10 +1627,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_59
       rect:
         serializedVersion: 2
-        x: 41
-        y: 38
-        width: 15
-        height: 22
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1649,10 +1649,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_60
       rect:
         serializedVersion: 2
-        x: 73
-        y: 38
-        width: 15
-        height: 21
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1671,10 +1671,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_61
       rect:
         serializedVersion: 2
-        x: 105
-        y: 38
-        width: 15
-        height: 21
+        x: 96
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1693,10 +1693,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_62
       rect:
         serializedVersion: 2
-        x: 137
-        y: 38
-        width: 15
-        height: 22
+        x: 128
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1715,10 +1715,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_63
       rect:
         serializedVersion: 2
-        x: 169
-        y: 38
-        width: 15
-        height: 22
+        x: 160
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1737,10 +1737,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_64
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 15
-        height: 22
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1759,10 +1759,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_65
       rect:
         serializedVersion: 2
-        x: 40
-        y: 6
-        width: 16
-        height: 22
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1781,10 +1781,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_66
       rect:
         serializedVersion: 2
-        x: 72
-        y: 6
-        width: 17
-        height: 22
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1803,10 +1803,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_67
       rect:
         serializedVersion: 2
-        x: 104
-        y: 6
-        width: 16
-        height: 22
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1825,10 +1825,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_68
       rect:
         serializedVersion: 2
-        x: 136
-        y: 6
-        width: 15
-        height: 22
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1847,10 +1847,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_69
       rect:
         serializedVersion: 2
-        x: 167
-        y: 6
-        width: 16
-        height: 22
+        x: 160
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1869,10 +1869,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_70
       rect:
         serializedVersion: 2
-        x: 198
-        y: 6
-        width: 17
-        height: 22
+        x: 192
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1891,10 +1891,10 @@ TextureImporter:
       name: Player_Idle_Run_Death_Anim_71
       rect:
         serializedVersion: 2
-        x: 231
-        y: 6
-        width: 16
-        height: 22
+        x: 224
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1913,7 +1913,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: caa7de7979b5ce7958bde6a4c7111f19
     internalID: 0
     vertices: []
     indices: 

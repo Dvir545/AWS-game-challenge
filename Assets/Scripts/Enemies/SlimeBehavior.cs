@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
@@ -25,11 +26,13 @@ namespace Enemies
         private bool _isJumping;
         [SerializeField] private GameObject players;
         private GameObject[] _players;
+        private Rigidbody2D _rb;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _isJumping = false;
+            _rb = GetComponent<Rigidbody2D>();
             // set the players array to the children of the players object
             _players = new GameObject[players.transform.childCount];
             for (int i = 0; i < players.transform.childCount; i++)
@@ -71,11 +74,15 @@ namespace Enemies
             towards = Quaternion.Euler(0, 0, angle) * towards;
             Vector2 destination = transform.position + (Vector3)(towards - (Vector2)transform.position).normalized * jumpDistance;
             animator.SetFloat(AnimationJumpSpeedMultiplier, 1/jumpDistance);
-            transform.DOMove(destination, jumpDuration).SetEase(Ease.OutSine).OnComplete(() =>
-            {
-                _isJumping = false;
-                animator.SetBool(AnimationMoving, false);
-            });
+            // _rb.DOMove(destination, jumpDuration).SetEase(Ease.OutSine);
+            Vector2 direction = (destination - (Vector2)transform.position).normalized;
+            float forceMagnitude = jumpDistance / jumpDuration;
+            Vector2 jumpForce = direction * forceMagnitude;
+            _rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(jumpDuration);
+            _rb.linearVelocity = Vector2.zero;
+            _isJumping = false;
+            animator.SetBool(AnimationMoving, false);
         }
 
         private bool Facing(Vector2 pos, Vector2 towards)
@@ -99,6 +106,5 @@ namespace Enemies
             }
             return closestPlayer;
         }
-        
     }
 }

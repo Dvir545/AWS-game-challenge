@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: HighWaterfall
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -595953332, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1647590024, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -1988690311, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 917289124, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 298214630, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -897743615, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -555679069, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 770050158, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1295658013, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -697730049, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1170479254, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -1788504450, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1722616254, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: -1463431206, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1273103084, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  - {fileID: 1528580299, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 1
+  m_TileAnimationFlags: 0
