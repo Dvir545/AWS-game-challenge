@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gerzil_0: 7283376016152425006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

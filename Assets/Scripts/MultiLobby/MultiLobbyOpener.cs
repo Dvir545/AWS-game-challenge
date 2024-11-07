@@ -16,6 +16,13 @@ namespace MultiLobby
         {
             if (isHost)
             {
+                string joinCode = GetJoinCode(); // DVIR - get join code from server
+                if joinCode == null
+                {
+                    ShowErrorMessage("could not get join code from server");
+                    return;
+                }
+                MultiLobbyBehavior.JoinCode = joinCode;
                 MultiLobbyBehavior.IsHost = true;
                 Debug.Log("Host");
                 SceneManager.LoadScene("MultiLobby");
@@ -34,7 +41,10 @@ namespace MultiLobby
                 }
             }
         }
-        
+        private string GetJoinCode()
+        {
+            return "zzzz" ; // DVIR - get join code from server
+        }
         private bool JoinCodeIsValid()
         {
             return false;  // DVIR - allow entrance only if join code is valid

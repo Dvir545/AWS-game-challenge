@@ -10,13 +10,12 @@ namespace MultiLobby
         [SerializeField] private TextMeshProUGUI numPlayers;
         [SerializeField] private TextMeshProUGUI joinCode;
         public static bool IsHost;
+        public static string JoinCode;
         private int _currentPlayers = 1;  // DVIR - change this number from server
-        private string _joinCode; // DVIR - change this number from server
         public void Start()
         {
             SetHost();
-            _joinCode = "zzzz"; // DVIR - get join code from server
-            joinCode.text = _joinCode;
+            joinCode.text = JoinCode;
         }
 
         public void Update()
