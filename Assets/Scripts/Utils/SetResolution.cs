@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SetResolution : MonoBehaviour
 {
-    private const float width = 1920f;
-    private const float height = 1080f;
+    private const float Width = 1920f;
+    private const float Height = 1080f;
     
-    private const float landscapeRatio =  width / height;
+    private const float LandscapeRatio =  Width / Height;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +19,13 @@ public class SetResolution : MonoBehaviour
         float ratio = (float)Screen.width / (float)Screen.height;
 
         // Cammera settings to landscape
-        if (ratio >= landscapeRatio)
+        if (ratio >= LandscapeRatio)
         {
-            Camera.main.orthographicSize = height/ 200f;
+            Camera.main.orthographicSize = Height/ 200f;
         }
         else
         {
-            float scaledHeight = width / ratio;
+            float scaledHeight = Width / ratio;
             Camera.main.orthographicSize = scaledHeight / 200f;
         }
     }

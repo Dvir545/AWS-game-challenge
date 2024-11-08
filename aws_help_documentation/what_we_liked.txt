@@ -1,0 +1,2 @@
+* Able to select a portion of your code content, and that automatically becomes the context of Q.
+* When Q takes code from the internet, it provides resources and even tells you when the reference code is under MIT license!

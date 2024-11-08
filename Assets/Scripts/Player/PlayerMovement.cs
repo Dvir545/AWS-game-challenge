@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.EventSystems;
 using Utils;
 
 namespace Player
@@ -40,28 +40,39 @@ namespace Player
             }
             else  // if no keyboard input, check for mouse input
             {
-                if (Input.GetMouseButtonDown(0))
+                // Check if the mouse is over a UI element
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    animator.SetBool(AnimationMoving, true);
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        animator.SetBool(AnimationMoving, true);
+                    }
+                    else if (Input.GetMouseButton(0))
+                    {
+                        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+                        // get player position relative to middle of screen
+                        Vector2 playerPos = mainCamera.WorldToScreenPoint(transform.position) - screenCenter;
+                        // get mouse position, relative to middle of screen
+                        Vector2 mousePos = Input.mousePosition - screenCenter;
+                        // get direction normalized vector from player to mouse
+                        _movementDirection = (mousePos - playerPos).normalized;
+                        SetFacingDirection();
+                    }
+                    else // no input
+                    {
+                        animator.SetBool(AnimationMoving, false);
+                        _movementDirection = Vector2.zero;
+                    }
                 }
-                else if (Input.GetMouseButton(0))
+                else
                 {
-                    Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-                    // get player position relative to middle of screen
-                    Vector2 playerPos = mainCamera.WorldToScreenPoint(transform.position) - screenCenter;
-                    // get mouse position, relative to middle of screen
-                    Vector2 mousePos = Input.mousePosition - screenCenter;
-                    // get direction normalized vector from player to mouse
-                    _movementDirection = (mousePos - playerPos).normalized;
-                    SetFacingDirection();
-                }
-                else // no input
-                {
+                    // Mouse is over a UI element, so we ignore mouse input
                     animator.SetBool(AnimationMoving, false);
                     _movementDirection = Vector2.zero;
                 }
             }
         }
+
         
         private void SetFacingDirection()
         {
