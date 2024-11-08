@@ -17,7 +17,7 @@ namespace MultiLobby
             if (isHost)
             {
                 string joinCode = GetJoinCode(); // DVIR - get join code from server
-                if joinCode == null
+                if (joinCode == null)
                 {
                     ShowErrorMessage("could not get join code from server");
                     return;
