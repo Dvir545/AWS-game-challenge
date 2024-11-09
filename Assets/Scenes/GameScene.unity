@@ -30117,7 +30117,7 @@ Tilemap:
       - {fileID: -1463431206, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1273103084, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1528580299, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 1, y: 4, z: 0}
@@ -31452,7 +31452,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -31463,7 +31463,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 3564055903593826501, guid: 65f18147539508e0eb38857cf99fc890, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: afe0c45499bdb1f8482e321fb66673f0, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -31497,7 +31497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6941140745245052397, guid: 92869fb17b21607b286a92398c9ca1c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7fb38e79a801912009ee039fbf8ada39, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
