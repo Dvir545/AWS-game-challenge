@@ -176,10 +176,10 @@ TextureImporter:
       name: hammer_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 124
-        width: 17
-        height: 17
+        x: 0
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,10 +198,10 @@ TextureImporter:
       name: hammer_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 110
-        width: 50
-        height: 33
+        x: 48
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +220,10 @@ TextureImporter:
       name: hammer_2
       rect:
         serializedVersion: 2
-        x: 121
-        y: 116
-        width: 17
-        height: 27
+        x: 96
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,10 +242,10 @@ TextureImporter:
       name: hammer_3
       rect:
         serializedVersion: 2
-        x: 219
-        y: 128
-        width: 20
-        height: 17
+        x: 144
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,10 +264,10 @@ TextureImporter:
       name: hammer_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 131
-        width: 12
-        height: 17
+        x: 192
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,10 +286,10 @@ TextureImporter:
       name: hammer_5
       rect:
         serializedVersion: 2
-        x: 173
-        y: 116
-        width: 13
-        height: 14
+        x: 240
+        y: 102
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,10 +308,10 @@ TextureImporter:
       name: hammer_6
       rect:
         serializedVersion: 2
-        x: 16
-        y: 83
-        width: 8
-        height: 20
+        x: 0
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -330,10 +330,10 @@ TextureImporter:
       name: hammer_7
       rect:
         serializedVersion: 2
-        x: 63
-        y: 65
-        width: 8
-        height: 31
+        x: 48
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -352,10 +352,10 @@ TextureImporter:
       name: hammer_8
       rect:
         serializedVersion: 2
-        x: 111
-        y: 66
-        width: 8
-        height: 29
+        x: 96
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -374,10 +374,10 @@ TextureImporter:
       name: hammer_9
       rect:
         serializedVersion: 2
-        x: 207
-        y: 76
-        width: 8
-        height: 17
+        x: 144
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -396,10 +396,10 @@ TextureImporter:
       name: hammer_10
       rect:
         serializedVersion: 2
-        x: 255
-        y: 81
-        width: 8
-        height: 17
+        x: 192
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,10 +418,10 @@ TextureImporter:
       name: hammer_11
       rect:
         serializedVersion: 2
-        x: 159
-        y: 66
-        width: 8
-        height: 15
+        x: 240
+        y: 54
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -440,10 +440,10 @@ TextureImporter:
       name: hammer_12
       rect:
         serializedVersion: 2
-        x: 24
-        y: 36
-        width: 8
-        height: 19
+        x: 0
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -462,10 +462,10 @@ TextureImporter:
       name: hammer_13
       rect:
         serializedVersion: 2
-        x: 73
-        y: 33
-        width: 8
-        height: 22
+        x: 48
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -484,10 +484,10 @@ TextureImporter:
       name: hammer_14
       rect:
         serializedVersion: 2
-        x: 121
-        y: 35
-        width: 8
-        height: 21
+        x: 96
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -506,10 +506,10 @@ TextureImporter:
       name: hammer_15
       rect:
         serializedVersion: 2
-        x: 171
-        y: 34
-        width: 6
-        height: 7
+        x: 144
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,10 +528,10 @@ TextureImporter:
       name: hammer_16
       rect:
         serializedVersion: 2
-        x: 217
-        y: 37
-        width: 8
-        height: 10
+        x: 192
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -550,10 +550,10 @@ TextureImporter:
       name: hammer_17
       rect:
         serializedVersion: 2
-        x: 265
-        y: 37
-        width: 8
-        height: 13
+        x: 240
+        y: 6
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -568,77 +568,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: hammer_18
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 25
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 85d91424941f831d0800000000000000
-      internalID: -3370679024140313256
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hammer_19
-      rect:
-        serializedVersion: 2
-        x: 123
-        y: 26
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 949eeeec059d4e3c0800000000000000
-      internalID: -4331098000531199671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hammer_20
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 25
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2bdb8dff878ac8d60800000000000000
-      internalID: 7893869484515573170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e48982427d118e30ea4fddb467c28083
     internalID: 0
     vertices: []
     indices: 
@@ -658,10 +592,7 @@ TextureImporter:
       hammer_15: 3792571915530056257
       hammer_16: -8513103162584473425
       hammer_17: 6719641860199963690
-      hammer_18: -3370679024140313256
-      hammer_19: -4331098000531199671
       hammer_2: -8258728375015105676
-      hammer_20: 7893869484515573170
       hammer_3: -1159298483449069950
       hammer_4: 1784401183296663280
       hammer_5: 1632725881280823895
