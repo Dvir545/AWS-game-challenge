@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Amazon.CognitoIdentity;
 using Amazon.Runtime;
-using Amazon.Util;
-using Amazon.Runtime.Internal.Auth;
+using System.Text;
+using System.Security.Cryptography;
+using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
 
 public class GameLiftClientManager : MonoBehaviour
 {
@@ -24,11 +27,12 @@ public class GameLiftClientManager : MonoBehaviour
         }
     }
 
-    // AWS Configuration - Replace these with your values
+    // AWS Configuration
     private const string IDENTITY_POOL_ID = "us-east-1:f163ac26-b96c-43bf-9d2a-86c8f91f3ca6";
     private const string AWS_REGION = "us-east-1";
     private const string GAME_API_URL = "https://g2pad9a2x9.execute-api.us-east-1.amazonaws.com/game";
-    private const string NAME_API_URL = "https://zemr70uloh.execute-api.us-east-1.amazonaws.com/names";
+    private const string NAME_API_URL = "https://zemr70uloh.execute-api.us-east-1.amazonaws.com/GET";
+    private const string SERVICE = "execute-api";
 
     // Events
     public event Action<int> OnPlayerCountChanged;
@@ -37,6 +41,7 @@ public class GameLiftClientManager : MonoBehaviour
     public event Action<string> OnError;
 
     private CognitoAWSCredentials _credentials;
+    private ImmutableCredentials _currentCredentials;
     private string _identityId;
     private string _playerName;
     private bool _isInitialized = false;
@@ -66,36 +71,95 @@ public class GameLiftClientManager : MonoBehaviour
             );
 
             _identityId = await _credentials.GetIdentityIdAsync();
+            _currentCredentials = await _credentials.GetCredentialsAsync();
             Debug.Log($"Got identity ID: {_identityId}");
+            _isInitialized = true;
+            StartCoroutine(GetPlayerNameCoroutine());
         }
         catch (Exception e)
         {
             Debug.LogError($"Error initializing AWS: {e}");
             OnError?.Invoke("Failed to initialize AWS services");
         }
-        StartCoroutine(GetPlayerNameCoroutine());
-        Debug.Log(_playerName);
+    }
+
+    private string SignRequest(string url, string method, string content = "", Dictionary<string, string> additionalHeaders = null)
+    {
+        if (_currentCredentials == null) return null;
+
+        var requestDate = DateTime.UtcNow;
+        var datestamp = requestDate.ToString("yyyyMMdd");
+        var amzdate = requestDate.ToString("yyyyMMddTHHmmssZ");
+        var uri = new Uri(url);
+        var host = uri.Host;
+        
+        var headers = new Dictionary<string, string>
+        {
+            {"host", host},
+            {"x-amz-date", amzdate},
+            {"x-amz-security-token", _currentCredentials.Token}
+        };
+
+        if (additionalHeaders != null)
+        {
+            foreach (var header in additionalHeaders)
+            {
+                headers[header.Key.ToLower()] = header.Value;
+            }
+        }
+
+        var signedHeaders = string.Join(";", headers.Keys.OrderBy(k => k));
+        var canonicalHeaders = string.Join("\n", headers.OrderBy(k => k.Key).Select(h => $"{h.Key}:{h.Value}")) + "\n";
+        var payloadHash = HashSHA256(content);
+
+        var canonicalRequest = $"{method}\n{uri.AbsolutePath}\n{uri.Query.TrimStart('?')}\n{canonicalHeaders}\n{signedHeaders}\n{payloadHash}";
+        var credentialScope = $"{datestamp}/{AWS_REGION}/{SERVICE}/aws4_request";
+        var stringToSign = $"AWS4-HMAC-SHA256\n{amzdate}\n{credentialScope}\n{HashSHA256(canonicalRequest)}";
+        
+        var kSecret = Encoding.UTF8.GetBytes($"AWS4{_currentCredentials.SecretKey}");
+        var kDate = HmacSHA256(Encoding.UTF8.GetBytes(datestamp), kSecret);
+        var kRegion = HmacSHA256(Encoding.UTF8.GetBytes(AWS_REGION), kDate);
+        var kService = HmacSHA256(Encoding.UTF8.GetBytes(SERVICE), kRegion);
+        var kSigning = HmacSHA256(Encoding.UTF8.GetBytes("aws4_request"), kService);
+        var signature = ToHexString(HmacSHA256(Encoding.UTF8.GetBytes(stringToSign), kSigning));
+
+        return $"AWS4-HMAC-SHA256 Credential={_currentCredentials.AccessKey}/{credentialScope}, SignedHeaders={signedHeaders}, Signature={signature}";
+    }
+
+    private string HashSHA256(string data)
+    {
+        using (var sha256 = SHA256.Create())
+        {
+            var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(data));
+            return ToHexString(bytes);
+        }
+    }
+
+    private byte[] HmacSHA256(byte[] data, byte[] key)
+    {
+        using (var hmac = new HMACSHA256(key))
+        {
+            return hmac.ComputeHash(data);
+        }
+    }
+
+    private string ToHexString(byte[] bytes)
+    {
+        return BitConverter.ToString(bytes).Replace("-", "").ToLowerInvariant();
     }
 
     public IEnumerator GetPlayerNameCoroutine()
     {
         using (UnityWebRequest www = UnityWebRequest.Get(NAME_API_URL))
         {
-            // Add error handling for credentials
-            try 
+            string authorization = SignRequest(NAME_API_URL, "GET");
+            if (authorization != null)
             {
-                var credentials = _credentials.GetCredentials();
-                Debug.Log(credentials.Token);
-                if (credentials != null)
-                {
-                    www.SetRequestHeader("Authorization", credentials.Token);
-                }
+                www.SetRequestHeader("Authorization", authorization);
+                www.SetRequestHeader("x-amz-date", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
+                www.SetRequestHeader("x-amz-security-token", _currentCredentials.Token);
             }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"Could not get credentials: {e.Message}");
-            }
-
+            
             www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();
@@ -108,15 +172,12 @@ public class GameLiftClientManager : MonoBehaviour
                     _playerName = response.guestName;
                     Debug.Log($"Got player name: {_playerName}");
                     OnPlayerNameReceived?.Invoke(_playerName);
-                    _isInitialized = true;
                 }
                 catch (Exception e)
                 {
                     Debug.LogError($"Error parsing name response: {e.Message}");
-                    // Fallback name generation
                     _playerName = $"Guest_{UnityEngine.Random.Range(1000, 9999)}";
                     OnPlayerNameReceived?.Invoke(_playerName);
-                    _isInitialized = true;
                 }
             }
             else
@@ -125,13 +186,10 @@ public class GameLiftClientManager : MonoBehaviour
                 Debug.LogError($"Response Code: {www.responseCode}");
                 Debug.LogError($"Response: {www.downloadHandler?.text}");
                 
-                // Fallback name generation
                 _playerName = $"Guest_{UnityEngine.Random.Range(1000, 9999)}";
                 OnPlayerNameReceived?.Invoke(_playerName);
-                _isInitialized = true;
             }
         }
-        // CreateGameCoroutine();
     }
 
     public void CreateGame()
@@ -142,7 +200,6 @@ public class GameLiftClientManager : MonoBehaviour
             return;
         }
         StartCoroutine(CreateGameCoroutine());
-        // StartCoroutine(GetPlayerNameCoroutine());
     }
 
     public void JoinGame(string gameCode)
@@ -173,15 +230,22 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Create game request: {jsonRequest}");
 
-        using (UnityWebRequest www = UnityWebRequest.PostWwwForm($"{GAME_API_URL}/game", jsonRequest))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
         {
-            www.SetRequestHeader("Content-Type", "application/json");
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
+            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            www.downloadHandler = new DownloadHandlerBuffer();
             
-            var credentials = _credentials.GetCredentials();
-            if (credentials != null)
+            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest, 
+                new Dictionary<string, string> { {"Content-Type", "application/json"} });
+            
+            if (authorization != null)
             {
-                www.SetRequestHeader("Authorization", credentials.Token);
+                www.SetRequestHeader("Authorization", authorization);
+                www.SetRequestHeader("x-amz-date", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
+                www.SetRequestHeader("x-amz-security-token", _currentCredentials.Token);
             }
+            www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();
 
@@ -208,15 +272,22 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Join game request: {jsonRequest}");
 
-        using (UnityWebRequest www = UnityWebRequest.PostWwwForm($"{GAME_API_URL}/game", jsonRequest))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
         {
-            www.SetRequestHeader("Content-Type", "application/json");
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
+            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            www.downloadHandler = new DownloadHandlerBuffer();
             
-            var credentials = _credentials.GetCredentials();
-            if (credentials != null)
+            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest,
+                new Dictionary<string, string> { {"Content-Type", "application/json"} });
+            
+            if (authorization != null)
             {
-                www.SetRequestHeader("Authorization", credentials.Token);
+                www.SetRequestHeader("Authorization", authorization);
+                www.SetRequestHeader("x-amz-date", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
+                www.SetRequestHeader("x-amz-security-token", _currentCredentials.Token);
             }
+            www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();
 
