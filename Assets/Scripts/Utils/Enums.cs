@@ -1,5 +1,4 @@
-// make an enum for player facing direction - down, up, left, right with int values
-
+using UnityEngine;
 
 namespace Utils
 {
@@ -9,5 +8,18 @@ namespace Utils
         Up = 1,
         Left = 2,
         Right = 3
+    }
+
+    public enum HeldTool
+    {
+        Sword = 0,
+        Hoe = 1,
+        Hammer = 2
+    }
+    
+
+    public static class Constants
+    {
+        public static int NumTools = 3;
     }
 }
