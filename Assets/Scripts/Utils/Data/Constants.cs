@@ -4,6 +4,6 @@ namespace Utils
     {
         public static int NumTools = 3;
         public static int NumCrops = 5;
-        public const float FarmProgressIncreasePerSecond = 10f;
+        public const float FarmProgressIncreasePerSecond = 20f;
     }
 }

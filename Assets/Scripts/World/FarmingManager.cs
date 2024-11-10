@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
@@ -15,6 +16,7 @@ namespace World
         [SerializeField] private GameObject cropSpritePrefab;
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
+        [SerializeField] private PlayerMovement playerMovement;
         
         private class FarmData
         {
@@ -73,25 +75,41 @@ namespace World
             // If we're on a tile that's being farmed, increase its progress
             if (_farms.ContainsKey(tilePos))
             {
-                _farms[tilePos].AddToProgress(Constants.FarmProgressIncreasePerSecond * 
-                                   GameData.GetProgressSpeedMultiplier * Time.deltaTime);
-                Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
-                if (!(cropSprite is null))
+                HandleFarm(tilePos);
+            }
+            else  // check if there's an adjacent tile to farm
+            {
+                foreach (Vector3Int adjacentTilePos in tilePos.GetAdjacentTiles(playerMovement.GetFacingDirection()))
                 {
-                    _farms[tilePos].GetCropSpriteRenderer().sprite = cropSprite;
+                    if (_farms.ContainsKey(adjacentTilePos))
+                    {
+                        HandleFarm(adjacentTilePos);
+                        break;
+                    }
                 }
+            }
+        }
+
+        private void HandleFarm(Vector3Int tilePos)
+        {
+            _farms[tilePos].AddToProgress(Constants.FarmProgressIncreasePerSecond * 
+                                          GameData.GetProgressSpeedMultiplier * Time.deltaTime);
+            Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
+            if (!(cropSprite is null))
+            {
+                _farms[tilePos].GetCropSpriteRenderer().sprite = cropSprite;
+            }
                 
-                // Check if farming is complete
-                if (_farms[tilePos].GetProgress() >= 100f)
-                {
-                    // Remove the tile and its progress
-                    farmTilemap.SetTile(tilePos, null);
-                    Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
-                    _farms.Remove(tilePos);
+            // Check if farming is complete
+            if (_farms[tilePos].GetProgress() >= 100f)
+            {
+                // Remove the tile and its progress
+                farmTilemap.SetTile(tilePos, null);
+                Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
+                _farms.Remove(tilePos);
             
-                    // Here you can add additional effects or rewards
-                    // For example: SpawnReward(tilePos);
-                }
+                // Here you can add additional effects or rewards
+                // For example: SpawnReward(tilePos);
             }
         }
 
