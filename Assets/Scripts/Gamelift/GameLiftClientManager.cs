@@ -28,10 +28,10 @@ public class GameLiftClientManager : MonoBehaviour
     }
 
     // AWS Configuration
-    private const string IDENTITY_POOL_ID = "us-east-1:f163ac26-b96c-43bf-9d2a-86c8f91f3ca6";
+    private const string IDENTITY_POOL_ID = "us-east-1:3d07bb6e-52c8-4224-be10-0ba5e4dd36e5";
     private const string AWS_REGION = "us-east-1";
     private const string GAME_API_URL = "https://g2pad9a2x9.execute-api.us-east-1.amazonaws.com/game";
-    private const string NAME_API_URL = "https://zemr70uloh.execute-api.us-east-1.amazonaws.com/GET";
+    private const string NAME_API_URL = "https://dgusnm2m1l.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
     private const string SERVICE = "execute-api";
 
     // Events
@@ -74,7 +74,6 @@ public class GameLiftClientManager : MonoBehaviour
             _currentCredentials = await _credentials.GetCredentialsAsync();
             Debug.Log($"Got identity ID: {_identityId}");
             _isInitialized = true;
-            StartCoroutine(GetPlayerNameCoroutine());
         }
         catch (Exception e)
         {
@@ -149,6 +148,7 @@ public class GameLiftClientManager : MonoBehaviour
     }
 
     public IEnumerator GetPlayerNameCoroutine()
+
     {
         using (UnityWebRequest www = UnityWebRequest.Get(NAME_API_URL))
         {
@@ -190,6 +190,9 @@ public class GameLiftClientManager : MonoBehaviour
                 OnPlayerNameReceived?.Invoke(_playerName);
             }
         }
+        // if succeeded:
+        
+        StartCoroutine(CreateGameCoroutine());
     }
 
     public void CreateGame()
@@ -199,7 +202,7 @@ public class GameLiftClientManager : MonoBehaviour
             OnError?.Invoke("AWS services not yet initialized");
             return;
         }
-        StartCoroutine(CreateGameCoroutine());
+        StartCoroutine(GetPlayerNameCoroutine());
     }
 
     public void JoinGame(string gameCode)
