@@ -19,7 +19,8 @@ namespace Player
 
         private Vector2 _movementDirection;
         private bool _isMoving;
-    
+        private PlayerFacingDirection _facing;
+
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -110,8 +111,14 @@ namespace Player
 
         private void ChangeDirection(PlayerFacingDirection direction)
         {
+            _facing = direction;
             playerAnimator.SetInteger(AnimationFacing, (int)direction);
             toolAnimator.SetInteger(AnimationFacing, (int)direction);
+        }
+        
+        public PlayerFacingDirection GetFacingDirection()
+        {
+            return _facing;
         }
     }
 }

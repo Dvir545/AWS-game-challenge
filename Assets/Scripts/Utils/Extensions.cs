@@ -15,4 +15,44 @@ namespace Utils
             };
         }
     }
+
+    public static class TileExtensions
+    {
+        public static Vector3Int[] GetAdjacentTiles(this Vector3Int tile, PlayerFacingDirection facingDirection)
+        {
+            switch (facingDirection)
+            {
+                case PlayerFacingDirection.Down:
+                    return new[]
+                    {
+                        tile + new Vector3Int(0, -1, 0),
+                        tile + new Vector3Int(1, -1, 0),
+                        tile + new Vector3Int(-1, -1, 0)
+                    };
+                case PlayerFacingDirection.Up:
+                    return new[]
+                    {
+                        tile + new Vector3Int(0, 1, 0),
+                        tile + new Vector3Int(1, 1, 0),
+                        tile + new Vector3Int(-1, 1, 0)
+                    };
+                case  PlayerFacingDirection.Left:
+                    return new[]
+                    {
+                        tile + new Vector3Int(1, 0, 0),
+                        tile + new Vector3Int(1, 1, 0),
+                        tile + new Vector3Int(1, -1, 0)
+                    };
+                case PlayerFacingDirection.Right:
+                    return new[]
+                    {
+                        tile + new Vector3Int(-1, 0, 0),
+                        tile + new Vector3Int(-1, 1, 0),
+                        tile + new Vector3Int(-1, -1, 0)
+                    };
+                default:
+                    return null;
+            }
+        }
+    }
 }
