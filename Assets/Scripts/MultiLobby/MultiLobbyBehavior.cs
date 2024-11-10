@@ -1,42 +1,91 @@
-using System;
 using TMPro;
 using UnityEngine;
 
 namespace MultiLobby
 {
-    public class MultiLobbyBehavior: MonoBehaviour
+    public class MultiLobbyBehavior : MonoBehaviour
     {
         [SerializeField] private GameObject startButton;
         [SerializeField] private TextMeshProUGUI numPlayers;
         [SerializeField] private TextMeshProUGUI joinCode;
+        [SerializeField] private TextMeshProUGUI errorText;
+        [SerializeField] private TextMeshProUGUI playerNameText;    
         public static bool IsHost;
         public static string JoinCode;
-        private int _currentPlayers = 1;  // DVIR - change this number from server
+        private int _currentPlayers = 1;
+
+        private GameLiftClientManager _gameLiftClient;
+
         public void Start()
         {
+            _gameLiftClient = GameLiftClientManager.Instance;
+
+            // Subscribe to events
+            _gameLiftClient.OnPlayerCountChanged += UpdatePlayerCount;
+            _gameLiftClient.OnGameCodeReceived += UpdateGameCode;
+            _gameLiftClient.OnError += ShowError;
+            _gameLiftClient.OnPlayerNameReceived += UpdatePlayerName;
+
             SetHost();
-            joinCode.text = JoinCode;
+
+            if (IsHost)
+            {
+                _gameLiftClient.CreateGame();
+            }
         }
 
-        public void Update()
+        private void OnDestroy()
         {
-            int players = 2; // DVIR - if any change received from server, update _currentPlayers
-            if (players != _currentPlayers)
+            if (_gameLiftClient != null)
             {
-                _currentPlayers = players;
-                numPlayers.text = $"{_currentPlayers}";
+                _gameLiftClient.OnPlayerCountChanged -= UpdatePlayerCount;
+                _gameLiftClient.OnGameCodeReceived -= UpdateGameCode;
+                _gameLiftClient.OnError -= ShowError;
+                _gameLiftClient.OnPlayerNameReceived -= UpdatePlayerName;
             }
+        }
+
+        private void UpdatePlayerName(string name)
+        {
+            playerNameText.text = $"Playing as: {name}";
+        }
+
+        private void UpdatePlayerCount(int count)
+        {
+            _currentPlayers = count;
+            numPlayers.text = count.ToString();
+        }
+
+        private void UpdateGameCode(string code)
+        {
+            JoinCode = code;
+            joinCode.text = code;
+        }
+
+        private void ShowError(string message)
+        {
+            errorText.text = message;
+            errorText.gameObject.SetActive(true);
+            Invoke(nameof(HideError), 3f);
+        }
+
+        private void HideError()
+        {
+            errorText.gameObject.SetActive(false);
         }
 
         private void SetHost()
         {
+            startButton.SetActive(IsHost);
             if (IsHost)
             {
-                startButton.SetActive(true);
-            } else
-            {
-                startButton.SetActive(false);
+                joinCode.transform.parent.gameObject.SetActive(true);
             }
+        }
+
+        public void JoinGameWithCode(string code)
+        {
+            _gameLiftClient.JoinGame(code);
         }
     }
 }
