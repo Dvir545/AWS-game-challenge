@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Player
@@ -8,9 +9,11 @@ namespace Player
     {
         [SerializeField] private Camera mainCamera;
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private Animator animator;
+        [SerializeField] private Animator playerAnimator;
+        [SerializeField] private Animator toolAnimator;
         private Rigidbody2D _rb;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer bodySpriteRenderer;
+        [SerializeField] private SpriteRenderer toolSpriteRenderer;
         private static readonly int AnimationFacing = Animator.StringToHash("facing");
         private static readonly int AnimationMoving = Animator.StringToHash("moving");
 
@@ -20,7 +23,7 @@ namespace Player
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
-            animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
+            ChangeDirection(PlayerFacingDirection.Down);
         }
 
         void Update()
@@ -35,7 +38,7 @@ namespace Player
             _movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             if (_movementDirection.magnitude > 0)
             {
-                animator.SetBool(AnimationMoving, true);
+                playerAnimator.SetBool(AnimationMoving, true);
                 SetFacingDirection();
             }
             else  // if no keyboard input, check for mouse input
@@ -45,7 +48,7 @@ namespace Player
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        animator.SetBool(AnimationMoving, true);
+                        playerAnimator.SetBool(AnimationMoving, true);
                     }
                     else if (Input.GetMouseButton(0))
                     {
@@ -60,14 +63,14 @@ namespace Player
                     }
                     else // no input
                     {
-                        animator.SetBool(AnimationMoving, false);
+                        playerAnimator.SetBool(AnimationMoving, false);
                         _movementDirection = Vector2.zero;
                     }
                 }
                 else
                 {
                     // Mouse is over a UI element, so we ignore mouse input
-                    animator.SetBool(AnimationMoving, false);
+                    playerAnimator.SetBool(AnimationMoving, false);
                     _movementDirection = Vector2.zero;
                 }
             }
@@ -80,27 +83,35 @@ namespace Player
             float angle = Vector2.SignedAngle(Vector2.up, _movementDirection);
             if (angle is > -45 and < 45)
             {
-                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Up);
+                ChangeDirection(PlayerFacingDirection.Up);
             }
             else if (angle is >= 45 and <= 135)
             {
-                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Right);
-                spriteRenderer.flipX = true;
+                ChangeDirection(PlayerFacingDirection.Right);
+                bodySpriteRenderer.flipX = true;
+                toolSpriteRenderer.flipX = true;
             }
             else if (angle is > 135 or < -135)
             {
-                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Down);
+                ChangeDirection(PlayerFacingDirection.Down);
             }
             else if (angle is >= -135 and <= -45)
             {
-                animator.SetInteger(AnimationFacing, (int)PlayerFacingDirection.Left);
-                spriteRenderer.flipX = false;
+                ChangeDirection(PlayerFacingDirection.Left);
+                bodySpriteRenderer.flipX = false;
+                toolSpriteRenderer.flipX = false;
             }
         }
 
         private void Move()
         {
             _rb.linearVelocity = _movementDirection * movementSpeed;
+        }
+
+        private void ChangeDirection(PlayerFacingDirection direction)
+        {
+            playerAnimator.SetInteger(AnimationFacing, (int)direction);
+            toolAnimator.SetInteger(AnimationFacing, (int)direction);
         }
     }
 }

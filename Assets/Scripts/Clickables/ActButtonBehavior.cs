@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,8 +8,8 @@ namespace Clickables
     public class ActButtonBehavior : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField] private GameObject iconObject;
+        [SerializeField] private PlayerAction playerAction;
         [SerializeField] private float pressedOffset = 2f;
-        [SerializeField] private KeyCode attackKey = KeyCode.Space;
         
         private Button _button;
         private Vector3 _originalIconPosition;
@@ -34,21 +35,15 @@ namespace Clickables
 
         private void Update()
         {
-            if (Input.GetKeyDown(attackKey))
+            if (Input.GetButtonDown("Attack"))
             {
                 PressButton();
-                if (_pressedSprite != null)
-                {
-                    _buttonImage.sprite = _pressedSprite;
-                }
+                _buttonImage.sprite = _pressedSprite;
             }
-            else if (Input.GetKeyUp(attackKey))
+            else if (Input.GetButtonUp("Attack"))
             {
                 ReleaseButton();
-                if (_normalSprite != null)
-                {
-                    _buttonImage.sprite = _normalSprite;
-                }
+                _buttonImage.sprite = _normalSprite;
             }
         }
 
@@ -70,6 +65,7 @@ namespace Clickables
                 Vector3 pressedPosition = _originalIconPosition + new Vector3(0, -pressedOffset, 0);
                 iconObject.transform.localPosition = pressedPosition;
                 _button.onClick.Invoke();
+                playerAction.StartActing();
             }
         }
 
@@ -79,6 +75,7 @@ namespace Clickables
             {
                 _isPressed = false;
                 iconObject.transform.localPosition = _originalIconPosition;
+                playerAction.StopActing();
             }
         }
     }

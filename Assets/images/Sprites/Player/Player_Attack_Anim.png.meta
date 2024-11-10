@@ -221,10 +221,10 @@ TextureImporter:
       name: Player_Attack_Anim_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 262
-        width: 16
-        height: 21
+        x: 0
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +243,10 @@ TextureImporter:
       name: Player_Attack_Anim_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 262
-        width: 17
-        height: 22
+        x: 32
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +265,10 @@ TextureImporter:
       name: Player_Attack_Anim_2
       rect:
         serializedVersion: 2
-        x: 72
-        y: 262
-        width: 16
-        height: 22
+        x: 64
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,10 +287,10 @@ TextureImporter:
       name: Player_Attack_Anim_3
       rect:
         serializedVersion: 2
-        x: 104
-        y: 262
-        width: 15
-        height: 22
+        x: 96
+        y: 256
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -309,10 +309,10 @@ TextureImporter:
       name: Player_Attack_Anim_4
       rect:
         serializedVersion: 2
-        x: 8
-        y: 230
-        width: 16
-        height: 21
+        x: 0
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +331,10 @@ TextureImporter:
       name: Player_Attack_Anim_5
       rect:
         serializedVersion: 2
-        x: 40
-        y: 230
-        width: 17
-        height: 22
+        x: 32
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -353,10 +353,10 @@ TextureImporter:
       name: Player_Attack_Anim_6
       rect:
         serializedVersion: 2
-        x: 71
-        y: 230
-        width: 16
-        height: 22
+        x: 64
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,10 +375,10 @@ TextureImporter:
       name: Player_Attack_Anim_7
       rect:
         serializedVersion: 2
-        x: 104
-        y: 230
-        width: 15
-        height: 22
+        x: 96
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,10 +397,10 @@ TextureImporter:
       name: Player_Attack_Anim_8
       rect:
         serializedVersion: 2
-        x: 6
-        y: 198
-        width: 17
-        height: 21
+        x: 0
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -419,10 +419,10 @@ TextureImporter:
       name: Player_Attack_Anim_9
       rect:
         serializedVersion: 2
-        x: 40
-        y: 198
-        width: 15
-        height: 22
+        x: 32
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -441,10 +441,10 @@ TextureImporter:
       name: Player_Attack_Anim_10
       rect:
         serializedVersion: 2
-        x: 71
-        y: 198
-        width: 16
-        height: 22
+        x: 64
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -463,10 +463,10 @@ TextureImporter:
       name: Player_Attack_Anim_11
       rect:
         serializedVersion: 2
-        x: 104
-        y: 198
-        width: 15
-        height: 22
+        x: 96
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -485,10 +485,10 @@ TextureImporter:
       name: Player_Attack_Anim_12
       rect:
         serializedVersion: 2
-        x: 9
-        y: 166
-        width: 17
-        height: 21
+        x: 0
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,10 +507,10 @@ TextureImporter:
       name: Player_Attack_Anim_13
       rect:
         serializedVersion: 2
-        x: 39
-        y: 166
-        width: 16
-        height: 21
+        x: 32
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -529,10 +529,10 @@ TextureImporter:
       name: Player_Attack_Anim_14
       rect:
         serializedVersion: 2
-        x: 72
-        y: 166
-        width: 16
-        height: 21
+        x: 64
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -551,10 +551,10 @@ TextureImporter:
       name: Player_Attack_Anim_15
       rect:
         serializedVersion: 2
-        x: 105
-        y: 166
-        width: 15
-        height: 22
+        x: 96
+        y: 160
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -573,10 +573,10 @@ TextureImporter:
       name: Player_Attack_Anim_16
       rect:
         serializedVersion: 2
-        x: 7
-        y: 134
-        width: 16
-        height: 21
+        x: 0
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -595,10 +595,10 @@ TextureImporter:
       name: Player_Attack_Anim_17
       rect:
         serializedVersion: 2
-        x: 41
-        y: 134
-        width: 17
-        height: 21
+        x: 32
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -617,10 +617,10 @@ TextureImporter:
       name: Player_Attack_Anim_18
       rect:
         serializedVersion: 2
-        x: 73
-        y: 134
-        width: 15
-        height: 21
+        x: 64
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -639,10 +639,10 @@ TextureImporter:
       name: Player_Attack_Anim_19
       rect:
         serializedVersion: 2
-        x: 105
-        y: 134
-        width: 15
-        height: 22
+        x: 96
+        y: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -661,10 +661,10 @@ TextureImporter:
       name: Player_Attack_Anim_20
       rect:
         serializedVersion: 2
-        x: 7
-        y: 102
-        width: 16
-        height: 21
+        x: 0
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -683,10 +683,10 @@ TextureImporter:
       name: Player_Attack_Anim_21
       rect:
         serializedVersion: 2
-        x: 41
-        y: 102
-        width: 17
-        height: 21
+        x: 32
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -705,10 +705,10 @@ TextureImporter:
       name: Player_Attack_Anim_22
       rect:
         serializedVersion: 2
-        x: 73
-        y: 102
-        width: 15
-        height: 21
+        x: 64
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -727,10 +727,10 @@ TextureImporter:
       name: Player_Attack_Anim_23
       rect:
         serializedVersion: 2
-        x: 105
-        y: 102
-        width: 15
-        height: 22
+        x: 96
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -749,10 +749,10 @@ TextureImporter:
       name: Player_Attack_Anim_24
       rect:
         serializedVersion: 2
-        x: 8
-        y: 70
-        width: 15
-        height: 21
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -771,10 +771,10 @@ TextureImporter:
       name: Player_Attack_Anim_25
       rect:
         serializedVersion: 2
-        x: 40
-        y: 70
-        width: 16
-        height: 22
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -793,10 +793,10 @@ TextureImporter:
       name: Player_Attack_Anim_26
       rect:
         serializedVersion: 2
-        x: 72
-        y: 70
-        width: 15
-        height: 22
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -815,10 +815,10 @@ TextureImporter:
       name: Player_Attack_Anim_27
       rect:
         serializedVersion: 2
-        x: 104
-        y: 70
-        width: 15
-        height: 22
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -837,10 +837,10 @@ TextureImporter:
       name: Player_Attack_Anim_28
       rect:
         serializedVersion: 2
-        x: 8
-        y: 38
-        width: 15
-        height: 21
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -859,10 +859,10 @@ TextureImporter:
       name: Player_Attack_Anim_29
       rect:
         serializedVersion: 2
-        x: 39
-        y: 38
-        width: 16
-        height: 22
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -881,10 +881,10 @@ TextureImporter:
       name: Player_Attack_Anim_30
       rect:
         serializedVersion: 2
-        x: 72
-        y: 38
-        width: 15
-        height: 22
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -903,10 +903,10 @@ TextureImporter:
       name: Player_Attack_Anim_31
       rect:
         serializedVersion: 2
-        x: 104
-        y: 38
-        width: 15
-        height: 22
+        x: 96
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -925,10 +925,10 @@ TextureImporter:
       name: Player_Attack_Anim_32
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 16
-        height: 21
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -947,10 +947,10 @@ TextureImporter:
       name: Player_Attack_Anim_33
       rect:
         serializedVersion: 2
-        x: 40
-        y: 6
-        width: 16
-        height: 22
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -969,10 +969,10 @@ TextureImporter:
       name: Player_Attack_Anim_34
       rect:
         serializedVersion: 2
-        x: 72
-        y: 6
-        width: 15
-        height: 22
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -991,10 +991,10 @@ TextureImporter:
       name: Player_Attack_Anim_35
       rect:
         serializedVersion: 2
-        x: 104
-        y: 6
-        width: 15
-        height: 22
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1013,7 +1013,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5346472b0601a6db3a8b7e85c6238861
     internalID: 0
     vertices: []
     indices: 
