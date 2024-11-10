@@ -9,8 +9,6 @@ using System.Security.Cryptography;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
-using Amazon.CognitoIdentityProvider;
-using Amazon.CognitoIdentityProvider.Model;
 
 public class GameLiftClientManager : MonoBehaviour
 {
@@ -32,12 +30,9 @@ public class GameLiftClientManager : MonoBehaviour
     // AWS Configuration
     private const string IDENTITY_POOL_ID = "us-east-1:a0a56cdd-1d80-45ef-a675-1eeedf6d3336";
     private const string AWS_REGION = "us-east-1";
-    private const string GAME_API_URL = "https://d4g6l42usl.execute-api.us-east-1.amazonaws.com/dvir-test-stage/game";
+    private const string GAME_API_URL = "https://d4g6l42usl.execute-api.us-east-1.amazonaws.com/dvir-test-stage";
     private const string NAME_API_URL = "https://d4g6l42usl.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
     private const string SERVICE = "execute-api";
-    private const string USER_POOL_ID = "us-east-1_zBI5DVfxg"; 
-    private const string APP_CLIENT_ID = "74fnbcj9p2fim2k1j6oapi792d";
-    private string _idToken; // To store the Cognito token
 
     // Events
     public event Action<int> OnPlayerCountChanged;
@@ -50,42 +45,6 @@ public class GameLiftClientManager : MonoBehaviour
     private string _identityId;
     private string _playerName;
     private bool _isInitialized = false;
-    private IEnumerator AuthenticateAnonymously()
-    {
-        try
-        {
-            AmazonCognitoIdentityProviderClient provider = new AmazonCognitoIdentityProviderClient(
-                new AnonymousAWSCredentials(),
-                RegionEndpoint.GetBySystemName(AWS_REGION)
-            );
-
-            // Initiate auth request
-            InitiateAuthRequest initiateRequest = new InitiateAuthRequest
-            {
-                AuthFlow = AuthFlowType.CUSTOM_AUTH,
-                ClientId = APP_CLIENT_ID
-            };
-
-            var authRequest = provider.InitiateAuthAsync(initiateRequest);
-            while (!authRequest.IsCompleted)
-            {
-                yield return null;
-            }
-
-            if (authRequest.Exception != null)
-            {
-                throw authRequest.Exception;
-            }
-
-            var authResponse = authRequest.Result;
-            _idToken = authResponse.AuthenticationResult.IdToken;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Authentication failed: {e}");
-            OnError?.Invoke("Authentication failed");
-        }
-    }
 
     private void Awake()
     {
@@ -196,7 +155,7 @@ public class GameLiftClientManager : MonoBehaviour
             string authorization = SignRequest(NAME_API_URL, "GET");
             if (authorization != null)
             {
-                www.SetRequestHeader("Authorization", _idToken); // Use Cognito token
+                www.SetRequestHeader("Authorization", authorization);
                 www.SetRequestHeader("x-amz-date", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
                 www.SetRequestHeader("x-amz-security-token", _currentCredentials.Token);
             }
@@ -232,7 +191,7 @@ public class GameLiftClientManager : MonoBehaviour
             }
         }
         // if succeeded:
-
+        
         StartCoroutine(CreateGameCoroutine());
     }
 
@@ -243,14 +202,7 @@ public class GameLiftClientManager : MonoBehaviour
             OnError?.Invoke("AWS services not yet initialized");
             return;
         }
-        
-        StartCoroutine(CreateGameWithAuth());
-    }
-
-    private IEnumerator CreateGameWithAuth()
-    {
-        yield return StartCoroutine(AuthenticateAnonymously());
-        yield return StartCoroutine(GetPlayerNameCoroutine());
+        StartCoroutine(GetPlayerNameCoroutine());
     }
 
     public void JoinGame(string gameCode)
@@ -260,20 +212,12 @@ public class GameLiftClientManager : MonoBehaviour
             OnError?.Invoke("AWS services not yet initialized");
             return;
         }
-        
         if (string.IsNullOrEmpty(gameCode))
         {
             OnError?.Invoke("Game code cannot be empty");
             return;
         }
-        
-        StartCoroutine(JoinGameWithAuth(gameCode));
-    }
-
-    private IEnumerator JoinGameWithAuth(string gameCode)
-    {
-        yield return StartCoroutine(AuthenticateAnonymously());
-        yield return StartCoroutine(JoinGameCoroutine(gameCode));
+        StartCoroutine(JoinGameCoroutine(gameCode));
     }
 
     private IEnumerator CreateGameCoroutine()
@@ -289,18 +233,18 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Create game request: {jsonRequest}");
 
-        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             
-            string authorization = SignRequest(GAME_API_URL , "POST", jsonRequest, 
+            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest, 
                 new Dictionary<string, string> { {"Content-Type", "application/json"} });
             
             if (authorization != null)
             {
-                www.SetRequestHeader("Authorization", _idToken); // Use Cognito token
+                www.SetRequestHeader("Authorization", authorization);
                 www.SetRequestHeader("x-amz-date", DateTime.UtcNow.ToString("yyyyMMddTHHmmssZ"));
                 www.SetRequestHeader("x-amz-security-token", _currentCredentials.Token);
             }
@@ -331,13 +275,13 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Join game request: {jsonRequest}");
 
-        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             
-            string authorization = SignRequest(GAME_API_URL, "POST", jsonRequest,
+            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest,
                 new Dictionary<string, string> { {"Content-Type", "application/json"} });
             
             if (authorization != null)
