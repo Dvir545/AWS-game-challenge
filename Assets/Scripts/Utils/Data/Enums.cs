@@ -16,10 +16,13 @@ namespace Utils
         Hoe = 1,
         Hammer = 2
     }
-    
 
-    public static class Constants
+    public enum Crop
     {
-        public static int NumTools = 3;
+        Wheat = 0,
+        Carrot = 1,
+        Tomato = 2,
+        Corn = 3,
+        Pumpkin = 4
     }
 }
