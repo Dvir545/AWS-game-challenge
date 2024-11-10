@@ -85,7 +85,6 @@ public class GameLiftClientManager : MonoBehaviour
             try 
             {
                 var credentials = _credentials.GetCredentials();
-                Debug.Log(credentials.Token);
                 if (credentials != null)
                 {
                     www.SetRequestHeader("Authorization", credentials.Token);
