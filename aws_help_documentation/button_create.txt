@@ -1,0 +1,204 @@
+### Asking to position the icon a bit down:
+
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Utils;
+
+public class ActButtonBehavior : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+{
+    [SerializeField] private GameObject iconObject;
+    [SerializeField] private float pressedOffset = 2f; // How many pixels to move down when pressed
+    private Button _button;
+    private Vector3 _originalIconPosition;
+
+    private void Start()
+    {
+        _button = GetComponent<Button>();
+        if (iconObject != null)
+        {
+            _originalIconPosition = iconObject.transform.localPosition;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (iconObject != null && _button.interactable)
+        {
+            Vector3 pressedPosition = _originalIconPosition + new Vector3(0, -pressedOffset, 0);
+            iconObject.transform.localPosition = pressedPosition;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (iconObject != null)
+        {
+            iconObject.transform.localPosition = _originalIconPosition;
+        }
+    }
+}
+
+
+### Asking to trigger button also on keyboard press:
+
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Clickables
+{
+    public class ActButtonBehavior : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    {
+        [SerializeField] private GameObject iconObject;
+        [SerializeField] private float pressedOffset = 2f;
+        [SerializeField] private KeyCode attackKey = KeyCode.Space; // Add this line
+        
+        private Button _button;
+        private Vector3 _originalIconPosition;
+        private bool _isPressed = false; // Add this to track press state
+
+        private void Start()
+        {
+            _button = GetComponent<Button>();
+            if (iconObject != null)
+            {
+                _originalIconPosition = iconObject.transform.localPosition;
+            }
+        }
+
+        private void Update()
+        {
+            // Handle keyboard input
+            if (Input.GetKeyDown(attackKey))
+            {
+                PressButton();
+            }
+            else if (Input.GetKeyUp(attackKey))
+            {
+                ReleaseButton();
+            }
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            PressButton();
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            ReleaseButton();
+        }
+
+        private void PressButton()
+        {
+            if (_button.interactable && !_isPressed)
+            {
+                _isPressed = true;
+                Vector3 pressedPosition = _originalIconPosition + new Vector3(0, -pressedOffset, 0);
+                iconObject.transform.localPosition = pressedPosition;
+                
+                // Invoke the button's onClick event
+                _button.onClick.Invoke();
+            }
+        }
+
+        private void ReleaseButton()
+        {
+            if (_isPressed)
+            {
+                _isPressed = false;
+                iconObject.transform.localPosition = _originalIconPosition;
+            }
+        }
+    }
+}
+
+### Asking to fix small bug - no sprite swap from keyboard:
+
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Clickables
+{
+    public class ActButtonBehavior : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    {
+        [SerializeField] private GameObject iconObject;
+        [SerializeField] private float pressedOffset = 2f;
+        [SerializeField] private KeyCode attackKey = KeyCode.Space;
+        
+        private Button _button;
+        private Vector3 _originalIconPosition;
+        private bool _isPressed = false;
+        private Sprite _normalSprite;
+        private Sprite _pressedSprite;
+        private Image _buttonImage;
+
+        private void Start()
+        {
+            _button = GetComponent<Button>();
+            _buttonImage = GetComponent<Image>();
+            
+            // Cache the button sprites
+            _normalSprite = _button.spriteState.disabledSprite ?? _buttonImage.sprite;
+            _pressedSprite = _button.spriteState.pressedSprite;
+
+            if (iconObject != null)
+            {
+                _originalIconPosition = iconObject.transform.localPosition;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(attackKey))
+            {
+                PressButton();
+                if (_pressedSprite != null)
+                {
+                    _buttonImage.sprite = _pressedSprite;
+                }
+            }
+            else if (Input.GetKeyUp(attackKey))
+            {
+                ReleaseButton();
+                if (_normalSprite != null)
+                {
+                    _buttonImage.sprite = _normalSprite;
+                }
+            }
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            PressButton();
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            ReleaseButton();
+        }
+
+        private void PressButton()
+        {
+            if (_button.interactable && !_isPressed)
+            {
+                _isPressed = true;
+                Vector3 pressedPosition = _originalIconPosition + new Vector3(0, -pressedOffset, 0);
+                iconObject.transform.localPosition = pressedPosition;
+                _button.onClick.Invoke();
+            }
+        }
+
+        private void ReleaseButton()
+        {
+            if (_isPressed)
+            {
+                _isPressed = false;
+                iconObject.transform.localPosition = _originalIconPosition;
+            }
+        }
+    }
+}
