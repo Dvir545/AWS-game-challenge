@@ -1,0 +1,61 @@
+using System.Collections.Generic;
+using UnityEngine.Events;
+
+namespace Utils
+{
+    public class EventManager : Singleton<EventManager>
+    {
+        public const string CashChanged = "CashChanged";
+
+        protected EventManager()
+        {
+            Init();
+        } // guarantee this will be always a singleton only - can't use the constructor!
+
+        public class FloatEvent : UnityEvent<object> {} //empty class; just needs to exist
+
+
+        private Dictionary <string, FloatEvent> _eventDictionary;
+
+        private void Init ()
+        {
+            if (_eventDictionary == null)
+            {
+                _eventDictionary = new Dictionary<string, FloatEvent>();
+            }
+        }
+	
+        public void StartListening (string eventName, UnityAction<object> listener)
+        {
+            FloatEvent thisEvent = null;
+            if (_eventDictionary.TryGetValue (eventName, out thisEvent))
+            {
+                thisEvent.AddListener (listener);
+            } 
+            else
+            {
+                thisEvent = new FloatEvent ();
+                thisEvent.AddListener (listener);
+                _eventDictionary.Add (eventName, thisEvent);
+            }
+        }
+	
+        public void StopListening (string eventName, UnityAction<object> listener)
+        {
+            FloatEvent thisEvent = null;
+            if (_eventDictionary.TryGetValue (eventName, out thisEvent))
+            {
+                thisEvent.RemoveListener (listener);
+            }
+        }
+	
+        public void TriggerEvent (string eventName, object obj)
+        {
+            FloatEvent thisEvent = null;
+            if (_eventDictionary.TryGetValue (eventName, out thisEvent))
+            {
+                thisEvent.Invoke (obj);
+            }
+        }
+    }
+}

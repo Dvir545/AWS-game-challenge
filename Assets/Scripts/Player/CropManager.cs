@@ -7,6 +7,7 @@ namespace Player
 {
     public class CropManager : MonoBehaviour
     {
+        [SerializeField] private PlayerData  playerData;
         [Header("Crop Sprites")]
         [SerializeField] private Sprite[] wheatSprites;
         [SerializeField] private Sprite[] carrotSprites;
@@ -30,7 +31,6 @@ namespace Player
         private Vector2 _uiStartPos = new(0, 50);
         private int _uiXoffset = 100;
 
-        private int[] _numCrops = {1, 1, 1, 1, 1};
         private Vector2 _uiCurOffset;
 
         private void Awake()
@@ -47,22 +47,22 @@ namespace Player
             _cropAmount.Add(Crop.Corn, cornAmount);
             _cropAmount.Add(Crop.Pumpkin, pumpkinAmount);
             
-            for (var i = 0; i < _cropUI.Count; i++)
+            for (var i = 0; i < playerData.GetNumCropTypes(); i++)
             {
-                if (_numCrops[i] == 0)
+                if (playerData.GetNumCrops((Crop)i) == 0)
                     DisableCropUI((Crop)i);
-                _cropAmount[(Crop)i].text = _numCrops[i].ToString();
+                _cropAmount[(Crop)i].text = playerData.GetNumCrops((Crop)i).ToString();
             }
 
-            _uiCurOffset = new Vector2(_numCrops.Length * 100, 0);
+            _uiCurOffset = new Vector2(_cropUI.Count * 100, 0);
         }
         
         public void AddCrop(Crop crop)
         {
-            if (_numCrops[(int)crop] == 0)
+            if (playerData.GetNumCrops(crop) == 0)
                 EnableCropUI(crop);
-            _numCrops[(int)crop]++;
-            _cropAmount[crop].text = _numCrops[(int)crop].ToString();
+            playerData.AddCrop(crop);
+            _cropAmount[crop].text = playerData.GetNumCrops(crop).ToString();
         }
 
         public void AddCrop(int cropN)
@@ -72,23 +72,21 @@ namespace Player
 
         public bool HasCrops()
         {
-            foreach (var numCrop in _numCrops)
+            for (var i = 0; i < playerData.GetNumCropTypes(); i++)
             {
-                if (numCrop > 0)
-                {
+                if (playerData.GetNumCrops((Crop)i) > 0)
                     return true;
-                }
             }
             return false;
         }
         
         public void RemoveCrop(Crop crop)
         {
-            _numCrops[(int)crop]--;
-            if (_numCrops[(int)crop] == 0)
+            playerData.RemoveCrop(crop);
+            if (playerData.GetNumCrops(crop) == 0)
                 DisableCropUI(crop);
             else
-                _cropAmount[crop].text = _numCrops[(int)crop].ToString();
+                _cropAmount[crop].text = playerData.GetNumCrops(crop).ToString();
         }
         
         private void EnableCropUI(Crop crop)
@@ -138,9 +136,9 @@ namespace Player
 
         public Crop GetBestAvailableCrop()
         {
-            for (var i = _numCrops.Length - 1; i >= 0; i--)
+            for (var i = playerData.GetNumCropTypes() - 1; i >= 0; i--)
             {
-                if (_numCrops[i] > 0)
+                if (playerData.GetNumCrops((Crop)i) > 0)
                 {
                     return (Crop)i;
                 }

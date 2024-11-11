@@ -11,6 +11,7 @@ namespace Clickables
         [SerializeField] private Image actIcon;
         [SerializeField] private Sprite[] icons;
         [SerializeField] private PlayerAction playerAction;
+        [SerializeField] private PlayerData playerData;
         
         private Button _button;
         
@@ -40,8 +41,8 @@ namespace Clickables
         
         private void OnClick()
         {
-            GameData.SwitchTool();
-            actIcon.sprite = GameData.GetCurTool().GetToolSprite(icons);
+            playerData.SwitchTool();
+            actIcon.sprite = playerData.GetCurTool().GetToolSprite(icons);
             playerAction.SwitchActing();
         }
     }

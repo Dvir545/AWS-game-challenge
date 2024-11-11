@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2706113421944635756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1099002475820884984}
+  - component: {fileID: 545334646389976391}
+  - component: {fileID: 3819727084976741168}
+  m_Layer: 5
+  m_Name: DarkOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1099002475820884984
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706113421944635756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2303958698268389802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &545334646389976391
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706113421944635756}
+  m_CullTransparentMesh: 1
+--- !u!114 &3819727084976741168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706113421944635756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2972734248320461920
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +194,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9198596772428912016}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7271934532499026074}
+        m_TargetAssemblyTypeName: Stores.GeneralStoreManager, Assembly-CSharp
+        m_MethodName: CloseStore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4853877524899737385
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2303958698268389802}
+  - component: {fileID: 7271934532499026074}
   m_Layer: 5
   m_Name: Store
   m_TagString: Untagged
@@ -148,14 +236,29 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1099002475820884984}
   - {fileID: 2221440047945556747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1024, y: 768}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7271934532499026074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853877524899737385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0d13a986294a5bb6a8509bc94bb102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowCanvas: {fileID: 8484124949987462757}
+  darkOverlay: {fileID: 2706113421944635756}
 --- !u!1 &7103040079949995613
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2221440047945556747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -498,6 +601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1992388194, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item3
@@ -600,6 +707,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -922097348, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item5
@@ -804,6 +915,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -537088810, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item4
@@ -906,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -159688587, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item2

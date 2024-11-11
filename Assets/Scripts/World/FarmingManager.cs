@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Utils;
+using Utils.Data;
 
 namespace World
 {
@@ -17,6 +18,7 @@ namespace World
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerMovement playerMovement;
+        [SerializeField] private PlayerData playerData;
         
         private Dictionary<Vector3Int, FarmData> _farms = new();
         
@@ -93,8 +95,8 @@ namespace World
 
         private void HandleFarm(Vector3Int tilePos)
         {
-            _farms[tilePos].AddToProgress(Constants.FarmProgressIncreasePerSecond * 
-                                          GameData.GetProgressSpeedMultiplier * Time.deltaTime);
+            _farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
+                                          / CropsData.Instance.GetGrowthTime(_farms[tilePos].GetCrop()));
             Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
             if (!(cropSprite is null))
             {
@@ -102,31 +104,32 @@ namespace World
             }
                 
             // Check if farming is complete
-            if (_farms[tilePos].GetProgress() >= 100f)
+            if (_farms[tilePos].GetProgress() >= 1f)
             {
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
                 Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
+                
+                // Reward player with the crop sell price
+                playerData.AddCash(CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop()));
+                
                 _farms.Remove(tilePos);
-            
-                // Here you can add additional effects or rewards
-                // For example: SpawnReward(tilePos);
             }
         }
 
         private Sprite GetCropSprite(FarmData farmData)
         {
             Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
-            if (farmData.GetProgress() >= 80)
+            if (farmData.GetProgress() >= .8f)
             {
                 return sprites[3];
-            } if (farmData.GetProgress() >= 60)
+            } if (farmData.GetProgress() >= .6f)
             {
                 return sprites[2];
-            } if (farmData.GetProgress() >= 40)
+            } if (farmData.GetProgress() >= .4f)
             {
                 return sprites[1];
-            } if (farmData.GetProgress() >= 20)
+            } if (farmData.GetProgress() >= .2f)
             {
                 return sprites[0];
             } 

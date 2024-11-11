@@ -17,13 +17,19 @@ namespace Player
         private float _actTime = 0;
         private bool _acting = false;
         [SerializeField] private FarmingManager farmingManager;
+        private PlayerData _playerData;
+        
+        private void Start()
+        {
+            _playerData = GetComponent<PlayerData>();
+        }
         
         public void StartActing()
         {
             _acting = true;
             playerAnimator.SetBool(AnimationActing, true);
             toolAnimator.SetBool(AnimationActing, true);
-            HeldTool curTool = GameData.GetCurTool();
+            HeldTool curTool = _playerData.GetCurTool();
             int curToolNum = (int)curTool;
             playerAnimator.SetInteger(AnimationActType, curToolNum);
             toolAnimator.SetInteger(AnimationActType, curToolNum);
@@ -58,7 +64,7 @@ namespace Player
         {
             if (_acting)
             {
-                HeldTool curTool = GameData.GetCurTool();
+                HeldTool curTool = _playerData.GetCurTool();
                 switch (curTool)
                 {
                     case HeldTool.Hoe:

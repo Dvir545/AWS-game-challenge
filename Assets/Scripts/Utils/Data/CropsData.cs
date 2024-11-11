@@ -50,5 +50,20 @@ namespace Utils.Data
             {Crop.Corn, new CropData(50, 2.5f, 15)},  // 5$ profit per second
             { Crop.Pumpkin, new CropData(200, 2f, 20)}  // 10$ profit per second
         };
+        
+        public int GetPrice(Crop crop)
+        {
+            return _cropsData[crop].GetPrice();
+        }
+        
+        public int GetSellPrice(Crop crop)
+        {
+            return _cropsData[crop].GetSellPrice();
+        }
+        
+        public int GetGrowthTime(Crop crop)
+        {
+            return _cropsData[crop].GetGrowthTime();
+        }
     }
 }
