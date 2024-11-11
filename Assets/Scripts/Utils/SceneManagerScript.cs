@@ -8,12 +8,5 @@ namespace Utils
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
-        
-        public void LoadSceneWithArgs(string sceneName, object args)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-            // pass args to the next scene
-            
-        }
     }
 }

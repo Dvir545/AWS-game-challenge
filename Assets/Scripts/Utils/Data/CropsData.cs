@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Utils.Data
@@ -26,10 +28,11 @@ namespace Utils.Data
         [SerializeField] private TextMeshProUGUI pumpkinAmount;
         private Dictionary<Crop, GameObject> _cropUI = new Dictionary<Crop, GameObject>();
         private Dictionary<Crop, TextMeshProUGUI> _cropAmount = new Dictionary<Crop, TextMeshProUGUI>();
-        private Vector2 _UIstartPos = new Vector2(0, 50);
-        private int _UIXoffset = 100;
+        private Vector2 _uiStartPos = new(0, 50);
+        private int _uiXoffset = 100;
 
         private int[] _numCrops = {1, 1, 1, 1, 1};
+        private Vector2 _uiCurOffset;
 
         private void Awake()
         {
@@ -51,6 +54,8 @@ namespace Utils.Data
                     DisableCropUI((Crop)i);
                 _cropAmount[(Crop)i].text = _numCrops[i].ToString();
             }
+
+            _uiCurOffset = new Vector2(_numCrops.Length * 100, 0);
         }
         
         public void AddCrop(Crop crop)
@@ -59,6 +64,11 @@ namespace Utils.Data
                 EnableCropUI(crop);
             _numCrops[(int)crop]++;
             _cropAmount[crop].text = _numCrops[(int)crop].ToString();
+        }
+
+        public void AddCrop(int cropN)
+        {
+            AddCrop((Crop)cropN);
         }
 
         public bool HasCrops()
@@ -84,15 +94,34 @@ namespace Utils.Data
         
         private void EnableCropUI(Crop crop)
         {
+            float xOffset = _uiCurOffset.x;
+            // move all crops after this crop by offset to the right
+            foreach (var cropUI in _cropUI)
+            {
+                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    if (cropUI.Value.transform.localPosition.x < xOffset) 
+                        xOffset = cropUI.Value.transform.localPosition.x;
+                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffset, 0, 0);
+                }
+            }
+            _cropUI[crop].transform.localPosition = _uiStartPos + new Vector2(xOffset, 0);
+            _uiCurOffset += new Vector2(_uiXoffset, 0);
             _cropUI[crop].SetActive(true);
-            _cropUI[crop].transform.localPosition = _UIstartPos;
-            _UIstartPos.x += _UIXoffset;
         }
 
         private void DisableCropUI(Crop crop)
         {
             _cropUI[crop].SetActive(false);
-            _UIstartPos.x -= _UIXoffset;
+            // move all crops after this one to the left
+            foreach (var cropUI in _cropUI)
+            {
+                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffset, 0, 0);
+                }
+            }
+            _uiCurOffset.x -= _uiXoffset;
         }
 
         public Sprite[] GetCropSprites(Crop crop)
