@@ -1,0 +1,151 @@
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using Utils;
+
+namespace Player
+{
+    public class CropManager : MonoBehaviour
+    {
+        [Header("Crop Sprites")]
+        [SerializeField] private Sprite[] wheatSprites;
+        [SerializeField] private Sprite[] carrotSprites;
+        [SerializeField] private Sprite[] tomatoSprites;
+        [SerializeField] private Sprite[] cornSprites;
+        [SerializeField] private Sprite[] pumpkinSprites;
+        [Header("Crop UI")] 
+        [SerializeField] private GameObject wheatUI;
+
+        [SerializeField] private TextMeshProUGUI wheatAmount;
+        [SerializeField] private GameObject carrotUI;
+        [SerializeField] private TextMeshProUGUI carrotAmount;
+        [SerializeField] private GameObject tomatoUI;
+        [SerializeField] private TextMeshProUGUI tomatoAmount;
+        [SerializeField] private GameObject cornUI;
+        [SerializeField] private TextMeshProUGUI cornAmount;
+        [SerializeField] private GameObject pumpkinUI;
+        [SerializeField] private TextMeshProUGUI pumpkinAmount;
+        private Dictionary<Crop, GameObject> _cropUI = new Dictionary<Crop, GameObject>();
+        private Dictionary<Crop, TextMeshProUGUI> _cropAmount = new Dictionary<Crop, TextMeshProUGUI>();
+        private Vector2 _uiStartPos = new(0, 50);
+        private int _uiXoffset = 100;
+
+        private int[] _numCrops = {1, 1, 1, 1, 1};
+        private Vector2 _uiCurOffset;
+
+        private void Awake()
+        {
+            _cropUI.Add(Crop.Wheat, wheatUI);
+            _cropUI.Add(Crop.Carrot, carrotUI);
+            _cropUI.Add(Crop.Tomato, tomatoUI);
+            _cropUI.Add(Crop.Corn, cornUI);
+            _cropUI.Add(Crop.Pumpkin, pumpkinUI);
+
+            _cropAmount.Add(Crop.Wheat, wheatAmount);
+            _cropAmount.Add(Crop.Carrot, carrotAmount);
+            _cropAmount.Add(Crop.Tomato, tomatoAmount);
+            _cropAmount.Add(Crop.Corn, cornAmount);
+            _cropAmount.Add(Crop.Pumpkin, pumpkinAmount);
+            
+            for (var i = 0; i < _cropUI.Count; i++)
+            {
+                if (_numCrops[i] == 0)
+                    DisableCropUI((Crop)i);
+                _cropAmount[(Crop)i].text = _numCrops[i].ToString();
+            }
+
+            _uiCurOffset = new Vector2(_numCrops.Length * 100, 0);
+        }
+        
+        public void AddCrop(Crop crop)
+        {
+            if (_numCrops[(int)crop] == 0)
+                EnableCropUI(crop);
+            _numCrops[(int)crop]++;
+            _cropAmount[crop].text = _numCrops[(int)crop].ToString();
+        }
+
+        public void AddCrop(int cropN)
+        {
+            AddCrop((Crop)cropN);
+        }
+
+        public bool HasCrops()
+        {
+            foreach (var numCrop in _numCrops)
+            {
+                if (numCrop > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public void RemoveCrop(Crop crop)
+        {
+            _numCrops[(int)crop]--;
+            if (_numCrops[(int)crop] == 0)
+                DisableCropUI(crop);
+            else
+                _cropAmount[crop].text = _numCrops[(int)crop].ToString();
+        }
+        
+        private void EnableCropUI(Crop crop)
+        {
+            float xOffset = _uiCurOffset.x;
+            // move all crops after this crop by offset to the right
+            foreach (var cropUI in _cropUI)
+            {
+                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    if (cropUI.Value.transform.localPosition.x < xOffset) 
+                        xOffset = cropUI.Value.transform.localPosition.x;
+                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffset, 0, 0);
+                }
+            }
+            _cropUI[crop].transform.localPosition = _uiStartPos + new Vector2(xOffset, 0);
+            _uiCurOffset += new Vector2(_uiXoffset, 0);
+            _cropUI[crop].SetActive(true);
+        }
+
+        private void DisableCropUI(Crop crop)
+        {
+            _cropUI[crop].SetActive(false);
+            // move all crops after this one to the left
+            foreach (var cropUI in _cropUI)
+            {
+                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffset, 0, 0);
+                }
+            }
+            _uiCurOffset.x -= _uiXoffset;
+        }
+
+        public Sprite[] GetCropSprites(Crop crop)
+        {
+            return crop switch
+            {
+                Crop.Wheat => wheatSprites,
+                Crop.Carrot => carrotSprites,
+                Crop.Tomato => tomatoSprites,
+                Crop.Corn => cornSprites,
+                Crop.Pumpkin => pumpkinSprites,
+                _ => throw new KeyNotFoundException("Crop not found")
+            };
+        }
+
+        public Crop GetBestAvailableCrop()
+        {
+            for (var i = _numCrops.Length - 1; i >= 0; i--)
+            {
+                if (_numCrops[i] > 0)
+                {
+                    return (Crop)i;
+                }
+            }
+            throw new KeyNotFoundException("No available crops");
+        }
+    }
+}

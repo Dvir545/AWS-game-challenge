@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Utils;
-using Utils.Data;
 
 namespace World
 {
@@ -12,11 +12,13 @@ namespace World
         [SerializeField] private Tilemap canFarmTilemap;
         [SerializeField] private Tilemap farmTilemap;
         [SerializeField] private TileBase farmTile;
-        [SerializeField] private CropsData cropsData;
+        [FormerlySerializedAs("cropsData")] [SerializeField] private CropManager cropManager;
         [SerializeField] private GameObject cropSpritePrefab;
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerMovement playerMovement;
+        
+        private Dictionary<Vector3Int, FarmData> _farms = new();
         
         private class FarmData
         {
@@ -51,12 +53,11 @@ namespace World
             }
         }
         
-        private Dictionary<Vector3Int, FarmData> _farms = new();
         
         public void Farm()
         {
             Vector3Int tilePos = canFarmTilemap.WorldToCell(playerTransform.position);
-            bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropsData.HasCrops();
+            bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropManager.HasCrops();
             bool emptyTile = farmTilemap.GetTile(tilePos) is null;
 
             if (canFarm && emptyTile)
@@ -67,8 +68,8 @@ namespace World
                     farmTilemap.SetTile(tilePos, farmTile);
                     GameObject cropSprite = Instantiate(cropSpritePrefab, tilePos, Quaternion.identity);
                     cropSprite.transform.SetParent(cropsParent.transform);
-                    _farms[tilePos] = new FarmData(cropsData.GetBestAvailableCrop(), cropSprite, 0f);
-                    cropsData.RemoveCrop(_farms[tilePos].GetCrop());
+                    _farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
+                    cropManager.RemoveCrop(_farms[tilePos].GetCrop());
                 }
             }
 
@@ -115,7 +116,7 @@ namespace World
 
         private Sprite GetCropSprite(FarmData farmData)
         {
-            Sprite[] sprites = cropsData.GetCropSprites(farmData.GetCrop());
+            Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
             if (farmData.GetProgress() >= 80)
             {
                 return sprites[3];

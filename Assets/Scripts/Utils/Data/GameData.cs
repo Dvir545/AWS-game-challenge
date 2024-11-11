@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils.Data;
 
 namespace Utils
 {
@@ -26,8 +28,8 @@ namespace Utils
         
         public static void SwitchTool() => Instance.OnSwitchTool();
         public static HeldTool GetCurTool() => Instance._curTool;
-        public static float GetAnimationSpeedMultiplier => Tools.GetAnimationSpeedMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
-        public static float GetProgressSpeedMultiplier => Tools.GetProgressSpeedMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
-        public static float GetDamageMultiplier => Tools.GetDamageMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
+        public static float GetAnimationSpeedMultiplier => ToolsData.GetAnimationSpeedMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
+        public static float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
+        public static float GetDamageMultiplier => ToolsData.GetDamageMultiplier(Instance.GetTypeOfCurTool(), Instance._curTool);
     }
 }
