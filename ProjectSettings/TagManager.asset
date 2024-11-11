@@ -50,7 +50,7 @@ TagManager:
   - name: WithPlayer
     uniqueID: 3697737061
     locked: 0
-  - name: Background
+  - name: InFrontOfEverything
     uniqueID: 2763632167
     locked: 0
   m_RenderingLayers:
