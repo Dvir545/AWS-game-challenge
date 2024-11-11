@@ -28,10 +28,10 @@ public class GameLiftClientManager : MonoBehaviour
     }
 
     // AWS Configuration
-    private const string IDENTITY_POOL_ID = "us-east-1:406443a1-08ef-451c-95f8-905b8b4ed943";
+    private const string IDENTITY_POOL_ID = "us-east-1:130f1c80-7a0d-48dc-9c3e-f43adba5c407";
     private const string AWS_REGION = "us-east-1";
-    private const string GAME_API_URL = "https://xu7vdwujmf.execute-api.us-east-1.amazonaws.com/dvir-test-stage/game";
-    private const string NAME_API_URL = "https://xu7vdwujmf.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
+    private const string GAME_API_URL = "https://gvl8jc7atl.execute-api.us-east-1.amazonaws.com/dvir-test-stage/game";
+    private const string NAME_API_URL = "https://gvl8jc7atl.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
     private const string SERVICE = "execute-api";
 
     // Events
