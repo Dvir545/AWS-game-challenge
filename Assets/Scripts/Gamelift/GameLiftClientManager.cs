@@ -28,10 +28,10 @@ public class GameLiftClientManager : MonoBehaviour
     }
 
     // AWS Configuration
-    private const string IDENTITY_POOL_ID = "us-east-1:a0a56cdd-1d80-45ef-a675-1eeedf6d3336";
+    private const string IDENTITY_POOL_ID = "us-east-1:406443a1-08ef-451c-95f8-905b8b4ed943";
     private const string AWS_REGION = "us-east-1";
-    private const string GAME_API_URL = "https://d4g6l42usl.execute-api.us-east-1.amazonaws.com/dvir-test-stage";
-    private const string NAME_API_URL = "https://d4g6l42usl.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
+    private const string GAME_API_URL = "https://xu7vdwujmf.execute-api.us-east-1.amazonaws.com/dvir-test-stage/game";
+    private const string NAME_API_URL = "https://xu7vdwujmf.execute-api.us-east-1.amazonaws.com/dvir-test-stage/names";
     private const string SERVICE = "execute-api";
 
     // Events
@@ -147,8 +147,32 @@ public class GameLiftClientManager : MonoBehaviour
         return BitConverter.ToString(bytes).Replace("-", "").ToLowerInvariant();
     }
 
-    public IEnumerator GetPlayerNameCoroutine()
+    public void CreateGame()
+    {
+        if (!_isInitialized)
+        {
+            OnError?.Invoke("AWS services not yet initialized");
+            return;
+        }
+        StartCoroutine(GetPlayerNameCoroutine());
+    }
 
+    public void JoinGame(string gameCode)
+    {
+        if (!_isInitialized)
+        {
+            OnError?.Invoke("AWS services not yet initialized");
+            return;
+        }
+        if (string.IsNullOrEmpty(gameCode))
+        {
+            OnError?.Invoke("Game code cannot be empty");
+            return;
+        }
+        StartCoroutine(JoinGameCoroutine(gameCode));
+    }
+
+    private IEnumerator GetPlayerNameCoroutine()
     {
         using (UnityWebRequest www = UnityWebRequest.Get(NAME_API_URL))
         {
@@ -190,34 +214,8 @@ public class GameLiftClientManager : MonoBehaviour
                 OnPlayerNameReceived?.Invoke(_playerName);
             }
         }
-        // if succeeded:
-        
+
         StartCoroutine(CreateGameCoroutine());
-    }
-
-    public void CreateGame()
-    {
-        if (!_isInitialized)
-        {
-            OnError?.Invoke("AWS services not yet initialized");
-            return;
-        }
-        StartCoroutine(GetPlayerNameCoroutine());
-    }
-
-    public void JoinGame(string gameCode)
-    {
-        if (!_isInitialized)
-        {
-            OnError?.Invoke("AWS services not yet initialized");
-            return;
-        }
-        if (string.IsNullOrEmpty(gameCode))
-        {
-            OnError?.Invoke("Game code cannot be empty");
-            return;
-        }
-        StartCoroutine(JoinGameCoroutine(gameCode));
     }
 
     private IEnumerator CreateGameCoroutine()
@@ -233,13 +231,13 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Create game request: {jsonRequest}");
 
-        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             
-            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest, 
+            string authorization = SignRequest(GAME_API_URL, "POST", jsonRequest,
                 new Dictionary<string, string> { {"Content-Type", "application/json"} });
             
             if (authorization != null)
@@ -275,13 +273,13 @@ public class GameLiftClientManager : MonoBehaviour
         string jsonRequest = JsonUtility.ToJson(request);
         Debug.Log($"Join game request: {jsonRequest}");
 
-        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}/game", "POST"))
+        using (UnityWebRequest www = new UnityWebRequest($"{GAME_API_URL}", "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonRequest);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             
-            string authorization = SignRequest(GAME_API_URL + "/game", "POST", jsonRequest,
+            string authorization = SignRequest(GAME_API_URL, "POST", jsonRequest,
                 new Dictionary<string, string> { {"Content-Type", "application/json"} });
             
             if (authorization != null)
