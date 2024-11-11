@@ -1,152 +1,69 @@
+using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 namespace Utils.Data
 {
-    public class CropsData : MonoBehaviour
+    struct CropData
     {
-        [Header("Crop Sprites")]
-        [SerializeField] private Sprite[] wheatSprites;
-        [SerializeField] private Sprite[] carrotSprites;
-        [SerializeField] private Sprite[] tomatoSprites;
-        [SerializeField] private Sprite[] cornSprites;
-        [SerializeField] private Sprite[] pumpkinSprites;
-        [Header("Crop UI")] 
-        [SerializeField] private GameObject wheatUI;
+        private int _price;
+        private float _profit_multiplier;
+        private int _growthTime;
 
-        [SerializeField] private TextMeshProUGUI wheatAmount;
-        [SerializeField] private GameObject carrotUI;
-        [SerializeField] private TextMeshProUGUI carrotAmount;
-        [SerializeField] private GameObject tomatoUI;
-        [SerializeField] private TextMeshProUGUI tomatoAmount;
-        [SerializeField] private GameObject cornUI;
-        [SerializeField] private TextMeshProUGUI cornAmount;
-        [SerializeField] private GameObject pumpkinUI;
-        [SerializeField] private TextMeshProUGUI pumpkinAmount;
-        private Dictionary<Crop, GameObject> _cropUI = new Dictionary<Crop, GameObject>();
-        private Dictionary<Crop, TextMeshProUGUI> _cropAmount = new Dictionary<Crop, TextMeshProUGUI>();
-        private Vector2 _uiStartPos = new(0, 50);
-        private int _uiXoffset = 100;
-
-        private int[] _numCrops = {1, 1, 1, 1, 1};
-        private Vector2 _uiCurOffset;
-
-        private void Awake()
+        public CropData(int price, float profit_multiplier, int growthTime)
         {
-            _cropUI.Add(Crop.Wheat, wheatUI);
-            _cropUI.Add(Crop.Carrot, carrotUI);
-            _cropUI.Add(Crop.Tomato, tomatoUI);
-            _cropUI.Add(Crop.Corn, cornUI);
-            _cropUI.Add(Crop.Pumpkin, pumpkinUI);
+            _price = price;
+            _profit_multiplier = profit_multiplier;
+            _growthTime = growthTime;
+        }
 
-            _cropAmount.Add(Crop.Wheat, wheatAmount);
-            _cropAmount.Add(Crop.Carrot, carrotAmount);
-            _cropAmount.Add(Crop.Tomato, tomatoAmount);
-            _cropAmount.Add(Crop.Corn, cornAmount);
-            _cropAmount.Add(Crop.Pumpkin, pumpkinAmount);
-            
-            for (var i = 0; i < _cropUI.Count; i++)
-            {
-                if (_numCrops[i] == 0)
-                    DisableCropUI((Crop)i);
-                _cropAmount[(Crop)i].text = _numCrops[i].ToString();
-            }
+        public int GetPrice()
+        {
+            return _price;
+        }
 
-            _uiCurOffset = new Vector2(_numCrops.Length * 100, 0);
+        public int GetSellPrice()
+        {
+            float sellPrice = _price * _profit_multiplier;
+            sellPrice *= UnityEngine.Random.Range(0.8f, 1.2f); // for fun
+            return (int)sellPrice;
+        }
+
+        public int GetGrowthTime()
+        {
+            return _growthTime;
+        }
+
+        public float GetProfitPerSecond()
+        {
+            return (_price * _profit_multiplier - _price) / _growthTime;
+        }
+    }
+
+    public class CropsData : Singleton<CropsData>
+    {
+        private Dictionary<Crop, CropData> _cropsData = new () {
+            {Crop.Wheat, new CropData(1, 3f, 5)},  // 0.4$ profit per second
+            {Crop.Carrot, new CropData(3, 4.33f, 10)},  // 1$ profit per second
+            {Crop.Tomato, new CropData(10, 2.5f, 5)},  // 3$ profit per second
+            {Crop.Corn, new CropData(50, 2.5f, 15)},  // 5$ profit per second
+            { Crop.Pumpkin, new CropData(200, 2f, 20)}  // 10$ profit per second
+        };
+        
+        public int GetPrice(Crop crop)
+        {
+            return _cropsData[crop].GetPrice();
         }
         
-        public void AddCrop(Crop crop)
+        public int GetSellPrice(Crop crop)
         {
-            if (_numCrops[(int)crop] == 0)
-                EnableCropUI(crop);
-            _numCrops[(int)crop]++;
-            _cropAmount[crop].text = _numCrops[(int)crop].ToString();
-        }
-
-        public void AddCrop(int cropN)
-        {
-            AddCrop((Crop)cropN);
-        }
-
-        public bool HasCrops()
-        {
-            foreach (var numCrop in _numCrops)
-            {
-                if (numCrop > 0)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return _cropsData[crop].GetSellPrice();
         }
         
-        public void RemoveCrop(Crop crop)
+        public int GetGrowthTime(Crop crop)
         {
-            _numCrops[(int)crop]--;
-            if (_numCrops[(int)crop] == 0)
-                DisableCropUI(crop);
-            else
-                _cropAmount[crop].text = _numCrops[(int)crop].ToString();
-        }
-        
-        private void EnableCropUI(Crop crop)
-        {
-            float xOffset = _uiCurOffset.x;
-            // move all crops after this crop by offset to the right
-            foreach (var cropUI in _cropUI)
-            {
-                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
-                {
-                    if (cropUI.Value.transform.localPosition.x < xOffset) 
-                        xOffset = cropUI.Value.transform.localPosition.x;
-                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffset, 0, 0);
-                }
-            }
-            _cropUI[crop].transform.localPosition = _uiStartPos + new Vector2(xOffset, 0);
-            _uiCurOffset += new Vector2(_uiXoffset, 0);
-            _cropUI[crop].SetActive(true);
-        }
-
-        private void DisableCropUI(Crop crop)
-        {
-            _cropUI[crop].SetActive(false);
-            // move all crops after this one to the left
-            foreach (var cropUI in _cropUI)
-            {
-                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
-                {
-                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffset, 0, 0);
-                }
-            }
-            _uiCurOffset.x -= _uiXoffset;
-        }
-
-        public Sprite[] GetCropSprites(Crop crop)
-        {
-            return crop switch
-            {
-                Crop.Wheat => wheatSprites,
-                Crop.Carrot => carrotSprites,
-                Crop.Tomato => tomatoSprites,
-                Crop.Corn => cornSprites,
-                Crop.Pumpkin => pumpkinSprites,
-                _ => throw new KeyNotFoundException("Crop not found")
-            };
-        }
-
-        public Crop GetBestAvailableCrop()
-        {
-            for (var i = _numCrops.Length - 1; i >= 0; i--)
-            {
-                if (_numCrops[i] > 0)
-                {
-                    return (Crop)i;
-                }
-            }
-            throw new KeyNotFoundException("No available crops");
+            return _cropsData[crop].GetGrowthTime();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Utils;
 using Utils.Data;
@@ -12,11 +13,14 @@ namespace World
         [SerializeField] private Tilemap canFarmTilemap;
         [SerializeField] private Tilemap farmTilemap;
         [SerializeField] private TileBase farmTile;
-        [SerializeField] private CropsData cropsData;
+        [FormerlySerializedAs("cropsData")] [SerializeField] private CropManager cropManager;
         [SerializeField] private GameObject cropSpritePrefab;
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerMovement playerMovement;
+        [SerializeField] private PlayerData playerData;
+        
+        private Dictionary<Vector3Int, FarmData> _farms = new();
         
         private class FarmData
         {
@@ -51,12 +55,11 @@ namespace World
             }
         }
         
-        private Dictionary<Vector3Int, FarmData> _farms = new();
         
         public void Farm()
         {
             Vector3Int tilePos = canFarmTilemap.WorldToCell(playerTransform.position);
-            bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropsData.HasCrops();
+            bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropManager.HasCrops();
             bool emptyTile = farmTilemap.GetTile(tilePos) is null;
 
             if (canFarm && emptyTile)
@@ -67,8 +70,8 @@ namespace World
                     farmTilemap.SetTile(tilePos, farmTile);
                     GameObject cropSprite = Instantiate(cropSpritePrefab, tilePos, Quaternion.identity);
                     cropSprite.transform.SetParent(cropsParent.transform);
-                    _farms[tilePos] = new FarmData(cropsData.GetBestAvailableCrop(), cropSprite, 0f);
-                    cropsData.RemoveCrop(_farms[tilePos].GetCrop());
+                    _farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
+                    cropManager.RemoveCrop(_farms[tilePos].GetCrop());
                 }
             }
 
@@ -92,8 +95,8 @@ namespace World
 
         private void HandleFarm(Vector3Int tilePos)
         {
-            _farms[tilePos].AddToProgress(Constants.FarmProgressIncreasePerSecond * 
-                                          GameData.GetProgressSpeedMultiplier * Time.deltaTime);
+            _farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
+                                          / CropsData.Instance.GetGrowthTime(_farms[tilePos].GetCrop()));
             Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
             if (!(cropSprite is null))
             {
@@ -101,31 +104,32 @@ namespace World
             }
                 
             // Check if farming is complete
-            if (_farms[tilePos].GetProgress() >= 100f)
+            if (_farms[tilePos].GetProgress() >= 1f)
             {
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
                 Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
+                
+                // Reward player with the crop sell price
+                playerData.AddCash(CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop()));
+                
                 _farms.Remove(tilePos);
-            
-                // Here you can add additional effects or rewards
-                // For example: SpawnReward(tilePos);
             }
         }
 
         private Sprite GetCropSprite(FarmData farmData)
         {
-            Sprite[] sprites = cropsData.GetCropSprites(farmData.GetCrop());
-            if (farmData.GetProgress() >= 80)
+            Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
+            if (farmData.GetProgress() >= .8f)
             {
                 return sprites[3];
-            } if (farmData.GetProgress() >= 60)
+            } if (farmData.GetProgress() >= .6f)
             {
                 return sprites[2];
-            } if (farmData.GetProgress() >= 40)
+            } if (farmData.GetProgress() >= .4f)
             {
                 return sprites[1];
-            } if (farmData.GetProgress() >= 20)
+            } if (farmData.GetProgress() >= .2f)
             {
                 return sprites[0];
             } 
