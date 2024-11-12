@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -20,6 +21,7 @@ namespace World
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
+        [SerializeField] private EffectsManager effectsManager;
         
         private Dictionary<Vector3Int, FarmData> _farms = new();
         
@@ -114,9 +116,10 @@ namespace World
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
                 Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
-                
                 // Reward player with the crop sell price
-                playerData.AddCash(CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop()));
+                int amount = CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop());
+                playerData.AddCash(amount);
+                effectsManager.CashRewardEffect(tilePos, amount.ToString());
                 
                 _farms.Remove(tilePos);
             }
