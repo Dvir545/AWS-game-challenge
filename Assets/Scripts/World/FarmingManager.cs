@@ -19,6 +19,7 @@ namespace World
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private ProgressBarBehavior progressBarBehavior;
         
         private Dictionary<Vector3Int, FarmData> _farms = new();
         
@@ -73,11 +74,13 @@ namespace World
                     _farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
                     cropManager.RemoveCrop(_farms[tilePos].GetCrop());
                 }
+                progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
             }
 
             // If we're on a tile that's being farmed, increase its progress
             if (_farms.ContainsKey(tilePos))
             {
+                progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
                 HandleFarm(tilePos);
             }
             else  // check if there's an adjacent tile to farm
@@ -97,6 +100,7 @@ namespace World
         {
             _farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
                                           / CropsData.Instance.GetGrowthTime(_farms[tilePos].GetCrop()));
+            progressBarBehavior.UpdateProgress(_farms[tilePos].GetProgress());
             Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
             if (!(cropSprite is null))
             {
@@ -106,6 +110,7 @@ namespace World
             // Check if farming is complete
             if (_farms[tilePos].GetProgress() >= 1f)
             {
+                progressBarBehavior.StopWork();
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
                 Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
@@ -120,16 +125,16 @@ namespace World
         private Sprite GetCropSprite(FarmData farmData)
         {
             Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
-            if (farmData.GetProgress() >= .8f)
+            if (farmData.GetProgress() >= .75f)
             {
                 return sprites[3];
-            } if (farmData.GetProgress() >= .6f)
+            } if (farmData.GetProgress() >= .5f)
             {
                 return sprites[2];
-            } if (farmData.GetProgress() >= .4f)
+            } if (farmData.GetProgress() >= .25f)
             {
                 return sprites[1];
-            } if (farmData.GetProgress() >= .2f)
+            } else
             {
                 return sprites[0];
             } 

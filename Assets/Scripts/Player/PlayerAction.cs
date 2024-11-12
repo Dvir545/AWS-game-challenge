@@ -18,6 +18,7 @@ namespace Player
         private bool _acting = false;
         [SerializeField] private FarmingManager farmingManager;
         private PlayerData _playerData;
+        [SerializeField] private ProgressBarBehavior progressBarBehavior;
         
         private void Start()
         {
@@ -71,6 +72,9 @@ namespace Player
                         farmingManager.Farm();
                         break;
                 }
+            } else if (progressBarBehavior.IsWorking)
+            {
+                progressBarBehavior.StopWork();
             }
         }
     }
