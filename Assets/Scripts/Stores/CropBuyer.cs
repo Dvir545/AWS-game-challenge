@@ -24,7 +24,7 @@ namespace Stores
 
         public void BuyCrop()
         {
-            if (playerData.GetCurCash < CropsData.Instance.GetPrice(crop))
+            if (playerData.CurCash < CropsData.Instance.GetPrice(crop))
             {
                 Debug.Log("Not enough cash");
             } else if (_amount <= 0)

@@ -5,6 +5,8 @@ namespace Utils
 {
     public class EventManager : Singleton<EventManager>
     {
+        public const string MaxHealthIncreased = "MaxHealthIncreased";
+        public const string HealthChanged = "HealthChanged";
         public const string CashChanged = "CashChanged";
 
         protected EventManager()

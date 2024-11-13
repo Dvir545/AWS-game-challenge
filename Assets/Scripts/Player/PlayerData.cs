@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
+using Utils;
 using Utils.Data;
 
-namespace Utils
+namespace Player
 {
-    
     public class PlayerData: MonoBehaviour
     {
         private HeldTool _curTool = HeldTool.Sword;
@@ -13,8 +11,6 @@ namespace Utils
         private int _curHoe = 0;
         private int _curHammer = 0;
 
-        private int _curCash = Constants.StartingCash;
-        
         private int[] _numCrops = {1, 1, 1, 1, 1};
         
         public void SwitchTool()
@@ -33,19 +29,50 @@ namespace Utils
         public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetTypeOfCurTool(), _curTool);
         public float GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetTypeOfCurTool(), _curTool);
 
-        public int GetCurCash => _curCash;
+        public int MaxHealth { get; private set; } = Constants.StartHealth;
 
-        public int AddCash(int amount)
+        public void IncMaxHealth()
         {
-            _curCash += amount;
-            EventManager.Instance.TriggerEvent(EventManager.CashChanged, _curCash);
-            return _curCash;
+            MaxHealth++;
+            CurHealth += 2;
+            EventManager.Instance.TriggerEvent(EventManager.MaxHealthIncreased, MaxHealth);
         }
-        public int SpendCash(int amount)
+        
+        public int CurHealth { get; private set; } = Constants.StartHealth;
+
+        public void AddHealth(int amount)
         {
-            _curCash -= amount;
-            EventManager.Instance.TriggerEvent(EventManager.CashChanged, _curCash);
-            return _curCash;
+            CurHealth += amount;
+            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
+        }
+
+        public void IncHealth()
+        {
+            AddHealth(1);
+        }
+
+        public void SubtractHealth(int amount)
+        {
+            CurHealth -= amount;
+            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
+        }
+
+        public void DecHealth()
+        {
+            SubtractHealth(1);
+        }
+
+        public int CurCash { get; private set; } = Constants.StartingCash;
+
+        public void AddCash(int amount)
+        {
+            CurCash += amount;
+            EventManager.Instance.TriggerEvent(EventManager.CashChanged, CurCash);
+        }
+        public void SpendCash(int amount)
+        {
+            CurCash -= amount;
+            EventManager.Instance.TriggerEvent(EventManager.CashChanged, CurCash);
         }
         
         public int GetNumCrops(Crop cropType) => _numCrops[(int)cropType];

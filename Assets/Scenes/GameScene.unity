@@ -7331,7 +7331,7 @@ Tilemap:
       - {fileID: -1463431206, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1273103084, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1528580299, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 1, y: 5, z: 0}
@@ -31396,6 +31396,8 @@ GameObject:
   - component: {fileID: 872980507}
   - component: {fileID: 872980508}
   - component: {fileID: 872980509}
+  - component: {fileID: 872980511}
+  - component: {fileID: 872980510}
   m_Layer: 6
   m_Name: MyPlayer
   m_TagString: Untagged
@@ -31526,7 +31528,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1845977481}
   toolAnimator: {fileID: 2132769349}
   minActTime: 0
-  farmingManager: {fileID: 1160739157}
+  farmingManager: {fileID: 1660424252}
   progressBarBehavior: {fileID: 272855406}
 --- !u!114 &872980509
 MonoBehaviour:
@@ -31540,6 +31542,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f32be56534c25a251cecb85a809ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &872980510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872980500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a835b4f416007849381cef67655f7cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartUIPrefab: {fileID: 5645719592329200415, guid: 825f314f465df992ea2e788783cfed02, type: 3}
+  heartsUIParent: {fileID: 2015800453}
+  fullHeartSprite: {fileID: 3980140487562858156, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  halfHeartSprite: {fileID: -2906203513720773286, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  emptyHeartSprite: {fileID: 7952763614370864699, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  playerData: {fileID: 872980509}
+--- !u!114 &872980511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872980500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d91b8dda9c2469f8a8653ae20588f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 872980509}
+  wheatSprites:
+  - {fileID: -5774877164156790999, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 1640555460866966840, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 2683288208970150335, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 8954413170907878631, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  carrotSprites:
+  - {fileID: -3087722540913972952, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 354162863218615001, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -8800576670314286437, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -1319403273844478748, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  tomatoSprites:
+  - {fileID: 3225213848598672445, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 5507455356034643388, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 4150229347420907923, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 4727212774405997460, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  cornSprites:
+  - {fileID: 568712722439862651, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -9177457062998269095, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 92264684534740810, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -2584793599262434737, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  pumpkinSprites:
+  - {fileID: 7113927244362079390, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -8963637610061471851, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: -8124274317607321232, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  - {fileID: 1524892664962734932, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
+  wheatUI: {fileID: 1112319427}
+  wheatAmount: {fileID: 407353524}
+  carrotUI: {fileID: 1544387355}
+  carrotAmount: {fileID: 1782851770}
+  tomatoUI: {fileID: 2032850623}
+  tomatoAmount: {fileID: 980141277}
+  cornUI: {fileID: 853557700}
+  cornAmount: {fileID: 759980438}
+  pumpkinUI: {fileID: 1456018131}
+  pumpkinAmount: {fileID: 1360293043}
 --- !u!1 &880501820
 GameObject:
   m_ObjectHideFlags: 0
@@ -31942,6 +32010,7 @@ RectTransform:
   - {fileID: 1320226996}
   - {fileID: 2323062952302435436}
   - {fileID: 1575210625}
+  - {fileID: 2015800454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -31958,7 +32027,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028083367}
-  - component: {fileID: 1028083368}
   m_Layer: 0
   m_Name: Crops
   m_TagString: Untagged
@@ -31981,54 +32049,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1160739156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1028083368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028083366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d91b8dda9c2469f8a8653ae20588f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 872980509}
-  wheatSprites:
-  - {fileID: -5774877164156790999, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 1640555460866966840, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 2683288208970150335, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 8954413170907878631, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  carrotSprites:
-  - {fileID: -3087722540913972952, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 354162863218615001, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -8800576670314286437, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -1319403273844478748, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  tomatoSprites:
-  - {fileID: 3225213848598672445, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 5507455356034643388, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 4150229347420907923, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 4727212774405997460, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  cornSprites:
-  - {fileID: 568712722439862651, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -9177457062998269095, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 92264684534740810, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -2584793599262434737, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  pumpkinSprites:
-  - {fileID: 7113927244362079390, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -8963637610061471851, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: -8124274317607321232, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  - {fileID: 1524892664962734932, guid: 3ba7a4fb90211b144920b5acc2170f11, type: 3}
-  wheatUI: {fileID: 1112319427}
-  wheatAmount: {fileID: 407353524}
-  carrotUI: {fileID: 1544387355}
-  carrotAmount: {fileID: 1782851770}
-  tomatoUI: {fileID: 2032850623}
-  tomatoAmount: {fileID: 980141277}
-  cornUI: {fileID: 853557700}
-  cornAmount: {fileID: 759980438}
-  pumpkinUI: {fileID: 1456018131}
-  pumpkinAmount: {fileID: 1360293043}
 --- !u!1 &1112319427 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2901235328733921312, guid: abd818c15eedc26cd9607bb82070c6e4, type: 3}
@@ -32048,7 +32068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1160739156}
-  - component: {fileID: 1160739157}
   m_Layer: 0
   m_Name: WorldObjects
   m_TagString: Untagged
@@ -32072,29 +32091,6 @@ Transform:
   - {fileID: 1028083367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160739157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160739155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbd3ad7bfc294a259025f119a33ea89a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canFarmTilemap: {fileID: 1909728574}
-  farmTilemap: {fileID: 887373266}
-  farmTile: {fileID: 11400000, guid: d20947ed19aa318c88f17cf2bdd717e8, type: 2}
-  cropManager: {fileID: 1028083368}
-  cropSpritePrefab: {fileID: 5522751877093800791, guid: 5adfcaf2a15abf9cab81af8f910e553f, type: 3}
-  cropsParent: {fileID: 1028083366}
-  playerTransform: {fileID: 872980502}
-  playerMovement: {fileID: 872980504}
-  playerData: {fileID: 872980509}
-  progressBarBehavior: {fileID: 272855406}
-  effectsManager: {fileID: 1660424250}
 --- !u!1 &1295446646
 GameObject:
   m_ObjectHideFlags: 0
@@ -32655,8 +32651,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1660424251}
   - component: {fileID: 1660424250}
+  - component: {fileID: 1660424252}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: General Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32690,6 +32687,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660424252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660424249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd3ad7bfc294a259025f119a33ea89a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canFarmTilemap: {fileID: 1909728574}
+  farmTilemap: {fileID: 887373266}
+  farmTile: {fileID: 11400000, guid: d20947ed19aa318c88f17cf2bdd717e8, type: 2}
+  cropManager: {fileID: 0}
+  cropSpritePrefab: {fileID: 5522751877093800791, guid: 5adfcaf2a15abf9cab81af8f910e553f, type: 3}
+  cropsParent: {fileID: 1028083366}
+  playerTransform: {fileID: 872980502}
+  playerMovement: {fileID: 872980504}
+  playerData: {fileID: 872980509}
+  progressBarBehavior: {fileID: 272855406}
+  effectsManager: {fileID: 1660424250}
 --- !u!1 &1674696104
 GameObject:
   m_ObjectHideFlags: 0
@@ -38552,6 +38572,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f06736680e412a86c80bbd780158133c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2015800453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015800454}
+  m_Layer: 5
+  m_Name: Hearts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2015800454
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015800453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1015984263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 16, y: -16}
+  m_SizeDelta: {x: 600, y: 100}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &2025049920
 GameObject:
   m_ObjectHideFlags: 0
@@ -38912,7 +38967,7 @@ PrefabInstance:
     - target: {fileID: 2077894362178608884, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: cropManager
       value: 
-      objectReference: {fileID: 1028083368}
+      objectReference: {fileID: 0}
     - target: {fileID: 2303958698268389802, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -39004,7 +39059,7 @@ PrefabInstance:
     - target: {fileID: 3290612157374262253, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: cropManager
       value: 
-      objectReference: {fileID: 1028083368}
+      objectReference: {fileID: 0}
     - target: {fileID: 3599531933784130780, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -39020,7 +39075,7 @@ PrefabInstance:
     - target: {fileID: 5624582076318111331, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: cropManager
       value: 
-      objectReference: {fileID: 1028083368}
+      objectReference: {fileID: 0}
     - target: {fileID: 7546646883340798315, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: crop
       value: 4
@@ -39032,7 +39087,7 @@ PrefabInstance:
     - target: {fileID: 7546646883340798315, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: cropManager
       value: 
-      objectReference: {fileID: 1028083368}
+      objectReference: {fileID: 0}
     - target: {fileID: 7837327670998225250, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: crop
       value: 2
@@ -39044,7 +39099,7 @@ PrefabInstance:
     - target: {fileID: 7837327670998225250, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: cropManager
       value: 
-      objectReference: {fileID: 1028083368}
+      objectReference: {fileID: 0}
     - target: {fileID: 8114719706286358099, guid: 830b271e52d43000da1128f820c96e41, type: 3}
       propertyPath: m_Sprite
       value: 
