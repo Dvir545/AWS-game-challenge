@@ -80,7 +80,7 @@ namespace Enemies
             Vector2 jumpForce = direction * forceMagnitude;
             _rb.AddForce(jumpForce, ForceMode2D.Impulse);
             yield return new WaitForSeconds(jumpDuration);
-            _rb.linearVelocity = Vector2.zero;
+            _rb.velocity = Vector2.zero;
             _isJumping = false;
             animator.SetBool(AnimationMoving, false);
         }

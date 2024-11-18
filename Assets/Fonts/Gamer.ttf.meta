@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: d2fdcb0f49058889496251bd5d87d994
+guid: 552984e98fe42984ba4c991e2352d4a1
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 8
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Fbfgamefont
+  - Gamer
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

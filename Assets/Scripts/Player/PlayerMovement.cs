@@ -106,7 +106,7 @@ namespace Player
 
         private void Move()
         {
-            _rb.linearVelocity = _movementDirection * movementSpeed;
+            _rb.velocity = _movementDirection * movementSpeed;
         }
 
         private void ChangeDirection(PlayerFacingDirection direction)

@@ -326,8 +326,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Crop store
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0920166255778ca12b28506117cb1902, type: 2}
-  m_sharedMaterial: {fileID: 8272210920055875329, guid: 0920166255778ca12b28506117cb1902, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
+  m_sharedMaterial: {fileID: 2713340834284964255, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -367,17 +367,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -601,10 +599,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1992388194, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item3
@@ -707,10 +701,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -922097348, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item5
@@ -915,10 +905,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -537088810, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item4
@@ -1021,10 +1007,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6744000694532776833, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -159688587, guid: 084b9fc5e7b4926e882fb5f53c498c53, type: 3}
     - target: {fileID: 8438018105773553175, guid: 6983fae9ebc5797d7957a4484924d607, type: 3}
       propertyPath: m_Name
       value: item2

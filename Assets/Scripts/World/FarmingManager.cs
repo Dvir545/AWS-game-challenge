@@ -82,24 +82,31 @@ namespace World
             // If we're on a tile that's being farmed, increase its progress
             if (_farms.ContainsKey(tilePos))
             {
-                progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
                 HandleFarm(tilePos);
             }
             else  // check if there's an adjacent tile to farm
             {
+                bool foundAdjacentFarm = false;
                 foreach (Vector3Int adjacentTilePos in tilePos.GetAdjacentTiles(playerMovement.GetFacingDirection()))
                 {
                     if (_farms.ContainsKey(adjacentTilePos))
                     {
                         HandleFarm(adjacentTilePos);
+                        foundAdjacentFarm = true;
                         break;
                     }
+                }
+                // If no adjacent farm tiles are found, stop the progress bar
+                if (!foundAdjacentFarm && progressBarBehavior.IsWorking)
+                {
+                    progressBarBehavior.StopWork();
                 }
             }
         }
 
         private void HandleFarm(Vector3Int tilePos)
         {
+            progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
             _farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
                                           / CropsData.Instance.GetGrowthTime(_farms[tilePos].GetCrop()));
             progressBarBehavior.UpdateProgress(_farms[tilePos].GetProgress());
@@ -129,20 +136,12 @@ namespace World
         {
             Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
             if (farmData.GetProgress() >= .75f)
-            {
                 return sprites[3];
-            } if (farmData.GetProgress() >= .5f)
-            {
+            if (farmData.GetProgress() >= .5f)
                 return sprites[2];
-            } if (farmData.GetProgress() >= .25f)
-            {
+            if (farmData.GetProgress() >= .25f)
                 return sprites[1];
-            } else
-            {
-                return sprites[0];
-            } 
-            // no sprite
-            return null;
+            return sprites[0];
         }
     }
 }
