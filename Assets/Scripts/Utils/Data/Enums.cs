@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace Utils
 {
-    public enum PlayerFacingDirection
+    public enum CharacterFacingDirection
     {
         Down = 0,
         Up = 1,

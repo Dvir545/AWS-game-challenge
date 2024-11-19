@@ -3,16 +3,16 @@ namespace Utils.Data
     struct Sword
     {
         private  float _animationSpeedMultiplier;
-        private float _damageMultiplier;
+        private int _damageMultiplier;
         
-        public  Sword(float animationSpeedMultiplier, float damageMultiplier)
+        public  Sword(float animationSpeedMultiplier, int damageMultiplier)
         {
             _animationSpeedMultiplier = animationSpeedMultiplier;
             _damageMultiplier = damageMultiplier;
         }
         
         public float GetAnimationSpeedMultiplier() => _animationSpeedMultiplier;
-        public float GetDamageMultiplier() => _damageMultiplier;
+        public int GetDamageMultiplier() => _damageMultiplier;
     }
     
     struct Hoe
@@ -49,7 +49,7 @@ namespace Utils.Data
     {
         private static Sword[] _swords =
         {
-            new(1f, 1f), // normal sword
+            new(1f, 1), // normal sword
         };
         private static Hoe[] _hoes =
         {
@@ -87,14 +87,13 @@ namespace Utils.Data
             return 0;
         }
         
-        public static float GetDamageMultiplier(int index, HeldTool tool)
+        public static int GetDamageMultiplier(int index, HeldTool tool)
         {
             switch (tool)
             {
                 case HeldTool.Sword:
                     return _swords[index].GetDamageMultiplier();
             }
-
             return 0;
         }
     }

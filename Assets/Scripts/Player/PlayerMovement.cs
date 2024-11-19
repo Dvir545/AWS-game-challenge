@@ -19,12 +19,12 @@ namespace Player
 
         private Vector2 _movementDirection;
         private bool _isMoving;
-        private PlayerFacingDirection _facing;
+        private CharacterFacingDirection _facing;
 
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
-            ChangeDirection(PlayerFacingDirection.Down);
+            ChangeDirection(CharacterFacingDirection.Down);
         }
 
         void Update()
@@ -80,28 +80,17 @@ namespace Player
         
         private void SetFacingDirection()
         {
-            // set facing direction based on direction angle
-            float angle = Vector2.SignedAngle(Vector2.up, _movementDirection);
-            if (angle is > -45 and < 45)
+            CharacterFacingDirection facingDirection = _movementDirection.GetFacingDirection();
+            if (facingDirection == CharacterFacingDirection.Right)
             {
-                ChangeDirection(PlayerFacingDirection.Up);
-            }
-            else if (angle is >= 45 and <= 135)
-            {
-                ChangeDirection(PlayerFacingDirection.Right);
                 bodySpriteRenderer.flipX = true;
                 toolSpriteRenderer.flipX = true;
-            }
-            else if (angle is > 135 or < -135)
+            } else if (facingDirection == CharacterFacingDirection.Left)
             {
-                ChangeDirection(PlayerFacingDirection.Down);
-            }
-            else if (angle is >= -135 and <= -45)
-            {
-                ChangeDirection(PlayerFacingDirection.Left);
                 bodySpriteRenderer.flipX = false;
                 toolSpriteRenderer.flipX = false;
             }
+            ChangeDirection(facingDirection);
         }
 
         private void Move()
@@ -109,14 +98,14 @@ namespace Player
             _rb.velocity = _movementDirection * movementSpeed;
         }
 
-        private void ChangeDirection(PlayerFacingDirection direction)
+        private void ChangeDirection(CharacterFacingDirection direction)
         {
             _facing = direction;
             playerAnimator.SetInteger(AnimationFacing, (int)direction);
             toolAnimator.SetInteger(AnimationFacing, (int)direction);
         }
         
-        public PlayerFacingDirection GetFacingDirection()
+        public CharacterFacingDirection GetFacingDirection()
         {
             return _facing;
         }

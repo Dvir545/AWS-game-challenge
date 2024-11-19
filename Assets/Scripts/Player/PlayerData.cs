@@ -27,7 +27,7 @@ namespace Player
         public HeldTool GetCurTool() => _curTool;
         public float GetAnimationSpeedMultiplier => ToolsData.GetAnimationSpeedMultiplier(GetTypeOfCurTool(), _curTool);
         public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetTypeOfCurTool(), _curTool);
-        public float GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetTypeOfCurTool(), _curTool);
+        public int GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetTypeOfCurTool(), _curTool);
 
         public int MaxHealth { get; private set; } = Constants.StartHealth;
 

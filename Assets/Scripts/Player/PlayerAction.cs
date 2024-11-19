@@ -17,20 +17,16 @@ namespace Player
         private float _actTime = 0;
         private bool _acting = false;
         [SerializeField] private FarmingManager farmingManager;
-        private PlayerData _playerData;
+        [SerializeField] private PlayerAttackManager playerAttackManager;
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
-        
-        private void Start()
-        {
-            _playerData = GetComponent<PlayerData>();
-        }
         
         public void StartActing()
         {
             _acting = true;
             playerAnimator.SetBool(AnimationActing, true);
             toolAnimator.SetBool(AnimationActing, true);
-            HeldTool curTool = _playerData.GetCurTool();
+            HeldTool curTool = playerData.GetCurTool();
             int curToolNum = (int)curTool;
             playerAnimator.SetInteger(AnimationActType, curToolNum);
             toolAnimator.SetInteger(AnimationActType, curToolNum);
@@ -65,11 +61,13 @@ namespace Player
         {
             if (_acting)
             {
-                HeldTool curTool = _playerData.GetCurTool();
+                HeldTool curTool = playerData.GetCurTool();
                 switch (curTool)
                 {
                     case HeldTool.Hoe:
                         farmingManager.Farm();
+                        break;
+                    case HeldTool.Sword:
                         break;
                 }
             } else if (progressBarBehavior.IsWorking)

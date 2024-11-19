@@ -8,13 +8,11 @@ using Random = UnityEngine.Random;
 
 namespace Enemies
 {
-    public class SlimeBehavior : MonoBehaviour
+    public class SlimeMovementManager : MonoBehaviour
     {
         [SerializeField] private Animator animator;
         private static readonly int AnimationMoving = Animator.StringToHash("moving");
         private static readonly int AnimationJumpSpeedMultiplier = Animator.StringToHash("jumpSpeedMultiplier");
-        private static readonly int AnimationGotHit = Animator.StringToHash("hit");
-        private static readonly int AnimationDeath = Animator.StringToHash("die");
         
         [SerializeField] private float jumpMinDistance;
         [SerializeField] private float jumpMaxDistance;
