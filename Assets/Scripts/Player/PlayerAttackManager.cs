@@ -60,6 +60,21 @@ namespace Player
                     downAttackCollider.enabled = false;
                     upAttackCollider.enabled = false;
                     rightAttackCollider.enabled = true;
+                    var transform1 = rightAttackCollider.transform;
+                    var position = transform1.localPosition;
+                    var scale = transform1.localScale;
+                    if (playerMovement.GetFacingDirection() == CharacterFacingDirection.Right)
+                    {
+                        position = new Vector2(-Mathf.Abs(position.x), position.y);
+                        scale = new Vector2(-Mathf.Abs(scale.x), scale.y);
+                    }
+                    if (playerMovement.GetFacingDirection() == CharacterFacingDirection.Left)
+                    {
+                        position = new Vector2(Mathf.Abs(position.x), position.y);
+                        scale = new Vector2(Mathf.Abs(scale.x), scale.y);
+                    }
+                    transform1.localPosition = position;
+                    transform1.localScale = scale;
                     break;
             }
             _facing = playerMovement.GetFacingDirection();

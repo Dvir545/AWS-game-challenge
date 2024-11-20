@@ -10,6 +10,7 @@ namespace Utils
         public const string CashChanged = "CashChanged";
         public const string PlayerDied = "PlayerDied";
         public const string PlayerGotHit  = "PlayerGotHit";
+        public const string PlayerHitEnemy = "PlayerHitEnemy";
 
         protected EventManager()
         {

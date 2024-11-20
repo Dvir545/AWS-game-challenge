@@ -13,6 +13,7 @@ namespace Player
             {
                 int damage = Constants.BasePlayerDamage * playerData.GetDamageMultiplier;
                 other.GetComponent<EnemyHealthManager>().TakeDamage(damage, (other.transform.position - transform.position).normalized);
+                EventManager.Instance.TriggerEvent(EventManager.PlayerHitEnemy, null);
             }
         }
     }
