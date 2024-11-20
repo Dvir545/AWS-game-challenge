@@ -7323,7 +7323,7 @@ Tilemap:
       - {fileID: -1463431206, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1273103084, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
       - {fileID: 1528580299, guid: 56e1451cb5933669cbd20d0e5a7dc491, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 0, y: 5, z: 0}
@@ -31742,6 +31742,7 @@ MonoBehaviour:
   playerMovement: {fileID: 872980504}
   playerAnimationManager: {fileID: 872980509}
   playerAction: {fileID: 872980508}
+  effectsManager: {fileID: 1660424250}
 --- !u!1 &880501820
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ namespace Player
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private PlayerAnimationManager playerAnimationManager;
         [SerializeField] private PlayerAction playerAction;
+        [SerializeField] private EffectsManager effectsManager;
 
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
@@ -99,6 +100,7 @@ namespace Player
             playerAnimationManager.GotHit();
             playerAction.GotHit(HitTime);
             playerMovement.Knockback(hitDirection, HitTime);
+            effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
             
             yield return new WaitForSeconds(HitTime);
             _canGetHit = true;
