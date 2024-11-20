@@ -1,14 +1,17 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data;
+using Vector2 = System.Numerics.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Player
 {
-    public class HealthManager : MonoBehaviour
+    public class PlayerHealthManager : MonoBehaviour
     {
         [SerializeField] private GameObject heartUIPrefab;
         [SerializeField] private GameObject heartsUIParent;
@@ -18,10 +21,15 @@ namespace Player
         [SerializeField] private Sprite emptyHeartSprite;
 
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private PlayerMovement playerMovement;
+        [SerializeField] private PlayerAnimationManager playerAnimationManager;
+        [SerializeField] private PlayerAction playerAction;
 
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
+        private bool _canGetHit = true;
         private const int XOffsetBetweenHearts = 100;
+        private const float HitTime = 0.25f;
 
         private void Start()
         {
@@ -75,6 +83,25 @@ namespace Player
                     _heartImages[i].sprite = sprite;
                 }
             }
+        }
+
+        public void GotHit(Enemy enemyType, Vector3 hitDirection)
+        {
+            if (!_canGetHit) return;
+            StartCoroutine(GotHitCoroutine(enemyType, hitDirection));
+        }
+
+        private IEnumerator GotHitCoroutine(Enemy enemyType, Vector3 hitDirection)
+        {
+            _canGetHit = false;
+            int damage = Constants.BaseEnemyDamage * EnemyData.GetDamageMultiplier(enemyType);
+            playerData.SubtractHealth(damage);
+            playerAnimationManager.GotHit();
+            playerAction.GotHit(HitTime);
+            playerMovement.Knockback(hitDirection, HitTime);
+            
+            yield return new WaitForSeconds(HitTime);
+            _canGetHit = true;
         }
     }
 }

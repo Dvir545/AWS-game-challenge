@@ -8189,7 +8189,6 @@ GameObject:
   - component: {fileID: 514296183}
   - component: {fileID: 514296182}
   - component: {fileID: 514296181}
-  - component: {fileID: 514296180}
   - component: {fileID: 514296184}
   m_Layer: 0
   m_Name: Local Managers
@@ -8198,24 +8197,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &514296180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514296179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a835b4f416007849381cef67655f7cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartUIPrefab: {fileID: 5645719592329200415, guid: 825f314f465df992ea2e788783cfed02, type: 3}
-  heartsUIParent: {fileID: 2015800453}
-  fullHeartSprite: {fileID: 3980140487562858156, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
-  halfHeartSprite: {fileID: -2906203513720773286, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
-  emptyHeartSprite: {fileID: 7952763614370864699, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
-  playerData: {fileID: 514296182}
 --- !u!114 &514296181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8307,7 +8288,6 @@ MonoBehaviour:
   upAttackCollider: {fileID: 1797639916}
   downAttackCollider: {fileID: 1786200345}
   rightAttackCollider: {fileID: 1443965618}
-  playerAnimator: {fileID: 1845977481}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -31538,10 +31518,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872980502}
-  - component: {fileID: 872980504}
   - component: {fileID: 872980505}
   - component: {fileID: 872980507}
+  - component: {fileID: 872980510}
+  - component: {fileID: 872980504}
   - component: {fileID: 872980508}
+  - component: {fileID: 872980509}
+  - component: {fileID: 872980511}
   m_Layer: 6
   m_Name: MyPlayer
   m_TagString: Player
@@ -31581,8 +31564,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
   movementSpeed: 5
-  playerAnimator: {fileID: 1845977481}
-  toolAnimator: {fileID: 2132769349}
   bodySpriteRenderer: {fileID: 1845977482}
   toolSpriteRenderer: {fileID: 2132769350}
 --- !u!50 &872980505
@@ -31669,13 +31650,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac770beec9548f98c9230ea77e21c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 1845977481}
-  toolAnimator: {fileID: 2132769349}
   minActTime: 0.2
   farmingManager: {fileID: 1660424252}
-  playerAttackManager: {fileID: 0}
+  playerAttackManager: {fileID: 514296184}
   playerData: {fileID: 514296182}
   progressBarBehavior: {fileID: 272855406}
+--- !u!114 &872980509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872980500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1c1936108646ebb365f59249bf8c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animators:
+  - {fileID: 1845977481}
+  - {fileID: 2132769349}
+  spriteRenderers:
+  - {fileID: 1845977482}
+  - {fileID: 2132769350}
+  playerMovement: {fileID: 872980504}
+  playerAction: {fileID: 872980508}
+  playerData: {fileID: 514296182}
+--- !u!61 &872980510
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872980500}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.032000005, y: 0.15685982}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.55, y: 0.31371963}
+  m_EdgeRadius: 0
+--- !u!114 &872980511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872980500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a835b4f416007849381cef67655f7cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartUIPrefab: {fileID: 5645719592329200415, guid: 825f314f465df992ea2e788783cfed02, type: 3}
+  heartsUIParent: {fileID: 2015800453}
+  fullHeartSprite: {fileID: 3980140487562858156, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  halfHeartSprite: {fileID: -2906203513720773286, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  emptyHeartSprite: {fileID: 7952763614370864699, guid: 6e73f5a6a389fc7309f3fc2bf5ee5a7e, type: 3}
+  playerData: {fileID: 514296182}
+  playerMovement: {fileID: 872980504}
+  playerAnimationManager: {fileID: 872980509}
+  playerAction: {fileID: 872980508}
 --- !u!1 &880501820
 GameObject:
   m_ObjectHideFlags: 0
@@ -31695,7 +31761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &880501821
 Transform:
   m_ObjectHideFlags: 0
@@ -31816,8 +31882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1834dcf19e74f7583addab8f04bafec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  animator: {fileID: 737343342}
+  enemyType: 0
+  effectsManager: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!1 &887373265
 GameObject:
   m_ObjectHideFlags: 0
@@ -32171,12 +32238,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1084388903}
+  - component: {fileID: 1084388905}
+  - component: {fileID: 1084388910}
+  - component: {fileID: 1084388909}
+  - component: {fileID: 1084388911}
   - component: {fileID: 1084388906}
   - component: {fileID: 1084388907}
-  - component: {fileID: 1084388905}
+  - component: {fileID: 1084388908}
   m_Layer: 7
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32250,6 +32321,138 @@ MonoBehaviour:
   - {fileID: 2027243163}
   spriteRenderers:
   - {fileID: 2027243162}
+--- !u!114 &1084388908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084388902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1834dcf19e74f7583addab8f04bafec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  effectsManager: {fileID: 1660424250}
+  playerData: {fileID: 514296182}
+--- !u!61 &1084388909
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084388902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07, y: 0.26}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.4}
+  m_EdgeRadius: 0
+--- !u!50 &1084388910
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084388902}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 2
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1084388911
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084388902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07, y: 0.26}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.4}
+  m_EdgeRadius: 0
 --- !u!1 &1112319427 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2901235328733921312, guid: abd818c15eedc26cd9607bb82070c6e4, type: 3}
@@ -32429,8 +32632,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: $$$$$
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 525e19f6fcfbd564da6e947e3fa1863e, type: 2}
-  m_sharedMaterial: {fileID: -8566058401942132458, guid: 525e19f6fcfbd564da6e947e3fa1863e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
+  m_sharedMaterial: {fileID: 2713340834284964255, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32454,8 +32657,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 144
-  m_fontSizeBase: 144
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Utils;
 using World;
 
@@ -9,27 +7,19 @@ namespace Player
 {
     public class PlayerAction : MonoBehaviour
     {
-        [SerializeField] private Animator playerAnimator;
-        [SerializeField] private Animator toolAnimator;
         [SerializeField] private float minActTime;
-        private static readonly int AnimationActing = Animator.StringToHash("acting");
-        private  static readonly int AnimationActType = Animator.StringToHash("act_type");
         private float _actTime = 0;
-        private bool _acting = false;
         [SerializeField] private FarmingManager farmingManager;
         [SerializeField] private PlayerAttackManager playerAttackManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
+        private bool _canAct = true;
+        private bool _isActing = false;
+        public bool IsActing => _canAct && _isActing;
         
         public void StartActing()
         {
-            _acting = true;
-            playerAnimator.SetBool(AnimationActing, true);
-            toolAnimator.SetBool(AnimationActing, true);
-            HeldTool curTool = playerData.GetCurTool();
-            int curToolNum = (int)curTool;
-            playerAnimator.SetInteger(AnimationActType, curToolNum);
-            toolAnimator.SetInteger(AnimationActType, curToolNum);
+            _isActing = true;
             _actTime = Time.time;
         }
         
@@ -41,7 +31,7 @@ namespace Player
 
         public void SwitchActing()
         {
-            if (!_acting) return;
+            if (!IsActing) return;
             StartActing();
         }
 
@@ -51,29 +41,55 @@ namespace Player
             {
                 yield return new WaitForSeconds(minActTime - _actTime);
             }
-            playerAnimator.SetBool(AnimationActing, false);
-            toolAnimator.SetBool(AnimationActing, false);
-            _acting = false;
+            _isActing = false;
+            DisableActions();
             _actTime = 0;
+        }
+
+        private void DisableActions()
+        {
+            playerAttackManager.StopAttack();
+            farmingManager.StopFarming();
         }
 
         private void Update()
         {
-            if (_acting)
+            if (IsActing)
             {
                 HeldTool curTool = playerData.GetCurTool();
-                switch (curTool)
+                if (curTool == HeldTool.Sword && !playerAttackManager.IsAttacking)
                 {
-                    case HeldTool.Hoe:
-                        farmingManager.Farm();
-                        break;
-                    case HeldTool.Sword:
-                        break;
+                    playerAttackManager.StartAttack();
+                }
+                else if (curTool != HeldTool.Sword && playerAttackManager.IsAttacking)
+                {
+                    playerAttackManager.StopAttack();
+                }
+                if (curTool == HeldTool.Hoe && !farmingManager.IsFarming)
+                {
+                    farmingManager.StartFarming();
+                }
+                else if (curTool != HeldTool.Hoe && farmingManager.IsFarming)
+                {
+                    farmingManager.StartFarming();
                 }
             } else if (progressBarBehavior.IsWorking)
             {
                 progressBarBehavior.StopWork();
             }
+        }
+        
+        public void GotHit(float hitTime)
+        {
+            StartCoroutine(GotHitCoroutine(hitTime));
+        }
+
+        private IEnumerator GotHitCoroutine(float hitTime)
+        {
+            _canAct = false;
+            DisableActions();
+            yield return new WaitForSeconds(hitTime);
+            _canAct = true;
         }
     }
 }

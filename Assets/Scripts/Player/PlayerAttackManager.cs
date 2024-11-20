@@ -1,6 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 
 namespace Player
@@ -13,57 +11,58 @@ namespace Player
         [SerializeField] private Collider2D upAttackCollider;
         [SerializeField] private Collider2D downAttackCollider;
         [SerializeField] private Collider2D rightAttackCollider;
-        public bool IsAttacking => upAttackCollider.enabled || downAttackCollider.enabled || rightAttackCollider.enabled;
-        [SerializeField] private Animator playerAnimator;
-        private PlayerAttackBehaviour[] _playerAttackBehaviors;
+        public bool IsAttacking { get; private set; }
 
         private void Start()
         {
             upAttackCollider.enabled = false;
             downAttackCollider.enabled = false;
             rightAttackCollider.enabled = false;
-            _playerAttackBehaviors = playerAnimator.GetBehaviours<PlayerAttackBehaviour>();
-            foreach (var playerAttackBehavior in _playerAttackBehaviors)
-            {
-                playerAttackBehavior.Init(this);
-            }
         }
 
         private void Update()
         {
-            if (IsAttacking)
+            if (IsAttacking && _facing != playerMovement.GetFacingDirection())
             {
-                // check for direction change
-                if (_facing != playerMovement.GetFacingDirection())
-                {
-                    StopAttack();
-                    StartAttack();
-                }
+                ChangeAttackDirection();
             }
         }
 
         public void StartAttack()
         {
-            switch (playerMovement.GetFacingDirection())
-            {
-                case CharacterFacingDirection.Up:
-                    upAttackCollider.enabled = true;
-                    break;
-                case CharacterFacingDirection.Down:
-                    downAttackCollider.enabled = true;
-                    break;
-                default:
-                    rightAttackCollider.enabled = true;
-                    break;
-            }
-            _facing = playerMovement.GetFacingDirection();
+            IsAttacking = true;
+            ChangeAttackDirection();
         }
         
         public void StopAttack()
         {
+            IsAttacking = false;
             upAttackCollider.enabled = false;
             downAttackCollider.enabled = false;
             rightAttackCollider.enabled = false;
+        }
+
+        private void ChangeAttackDirection()
+        {
+            switch (playerMovement.GetFacingDirection())
+            {
+                case CharacterFacingDirection.Down:
+                    downAttackCollider.enabled = true;
+                    upAttackCollider.enabled = false;
+                    rightAttackCollider.enabled = false;
+                    break;
+                case CharacterFacingDirection.Up:
+                    downAttackCollider.enabled = false;
+                    upAttackCollider.enabled = true;
+                    rightAttackCollider.enabled = false;
+                    break;
+                default:
+                    downAttackCollider.enabled = false;
+                    upAttackCollider.enabled = false;
+                    rightAttackCollider.enabled = true;
+                    break;
+            }
+            _facing = playerMovement.GetFacingDirection();
         }
         
     }

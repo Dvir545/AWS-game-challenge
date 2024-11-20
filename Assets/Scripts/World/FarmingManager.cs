@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Utils;
 using Utils.Data;
@@ -14,7 +12,7 @@ namespace World
         [SerializeField] private Tilemap canFarmTilemap;
         [SerializeField] private Tilemap farmTilemap;
         [SerializeField] private TileBase farmTile;
-        [FormerlySerializedAs("cropsData")] [SerializeField] private CropManager cropManager;
+        [SerializeField] private CropManager cropManager;
         [SerializeField] private GameObject cropSpritePrefab;
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
@@ -24,6 +22,8 @@ namespace World
         [SerializeField] private EffectsManager effectsManager;
         
         private Dictionary<Vector3Int, FarmData> _farms = new();
+        
+        public bool IsFarming { get; private set; }
         
         private class FarmData
         {
@@ -57,9 +57,26 @@ namespace World
                 return _cropSprite;
             }
         }
+
+        public void StartFarming()
+        {
+            IsFarming = true;
+        }
         
-        
-        public void Farm()
+        public void StopFarming()
+        {
+            IsFarming = false;
+        }
+
+        private void Update()
+        {
+            if (IsFarming)
+            {
+                Farm();
+            }
+        }
+
+        private void Farm()
         {
             Vector3Int tilePos = canFarmTilemap.WorldToCell(playerTransform.position);
             bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropManager.HasCrops();
@@ -126,7 +143,7 @@ namespace World
                 // Reward player with the crop sell price
                 int amount = CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop());
                 playerData.AddCash(amount);
-                effectsManager.CashRewardEffect(tilePos, amount.ToString());
+                effectsManager.FloatingTextEffect(tilePos, 1, 1, amount.ToString() + "$", Constants.CashColor);
                 
                 _farms.Remove(tilePos);
             }

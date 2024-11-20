@@ -10,18 +10,19 @@ namespace Utils
         [SerializeField] private GameObject cashRewardPrefab;
 
 
-        public void CashRewardEffect(Vector3Int pos, string amount)
+        public void FloatingTextEffect(Vector3 pos, float distance, float duration ,string inputText, Color color)
         {
-            Vector3 centeredPos = new Vector3(pos.x + 0.5f, pos.y + 0.5f, pos.z);
-            GameObject rewardEffect = Instantiate(cashRewardPrefab, centeredPos, Quaternion.identity);
-            float targetY = pos.y + 1;
-            TextMeshProUGUI text = rewardEffect.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = amount + "$";
-            rewardEffect.transform.DOMoveY(targetY, 1).SetEase(Ease.OutCubic);
+            var centeredPos = new Vector3(pos.x + 0.5f, pos.y + 0.5f, pos.z);
+            var floatingTextObj = Instantiate(cashRewardPrefab, centeredPos, Quaternion.identity);
+            var targetY = pos.y + distance;
+            var text = floatingTextObj.GetComponentInChildren<TextMeshProUGUI>();
+            text.text = inputText;
+            text.color = color;
+            floatingTextObj.transform.DOMoveY(targetY, duration).SetEase(Ease.OutCubic);
             // also fade out
-            text.DOFade(0, 1).SetEase(Ease.InCubic).OnComplete(() =>
+            text.DOFade(0, duration).SetEase(Ease.InCubic).OnComplete(() =>
             {
-                Destroy(rewardEffect);
+                Destroy(floatingTextObj);
             });
         }
     }

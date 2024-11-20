@@ -7,30 +7,47 @@ namespace Enemies
     {
         private  static readonly int AnimationWalking = Animator.StringToHash("walking");
         private  static readonly int AnimationFacing = Animator.StringToHash("facing");
+        private static readonly int AnimationGotHit = Animator.StringToHash("hit");
+        private static readonly int AnimationDeath = Animator.StringToHash("die");
 
-        private EnemyFollowPlayer _enemyFollowPlayer;
+        private EnemyMovementManager _enemyMovementManager;
+        private EnemyHealthManager _enemyHealthManager;
         [SerializeField] private Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
         
-        // Start is called before the first frame update
         void Start()
         {
-            foreach (var animator in animators)
-            {
-                animator.SetBool(AnimationWalking, true);
-            }
-            _enemyFollowPlayer = GetComponent<EnemyFollowPlayer>();
+            _enemyMovementManager = GetComponent<EnemyMovementManager>();
+            _enemyHealthManager = GetComponent<EnemyHealthManager>();
         }
 
-        // Update is called once per frame
         void Update()
         {
+            HandleWalking();
             SetFacingDirection();
         }
-        
+
+        private void HandleWalking()
+        {
+            if (_enemyMovementManager.IsMoving)
+            {
+                foreach (var animator in animators)
+                {
+                    animator.SetBool(AnimationWalking, true);
+                }
+            }
+            else
+            {
+                foreach (var animator in animators)
+                {
+                    animator.SetBool(AnimationWalking, false);
+                }
+            }
+        }
+
         private void SetFacingDirection()
         {
-            CharacterFacingDirection facingDirection = _enemyFollowPlayer.GetFacingDirection();
+            CharacterFacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
             if (facingDirection == CharacterFacingDirection.Right)
             {
                 foreach (var spriteRenderer in spriteRenderers)
@@ -55,6 +72,22 @@ namespace Enemies
                 {
                     animator.SetInteger(AnimationFacing, (int)direction);
                 }
+            }
+        }
+        
+        public void GotHit()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetTrigger(AnimationGotHit);
+            }
+        }
+
+        public void Die()
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetTrigger(AnimationDeath);
             }
         }
     }

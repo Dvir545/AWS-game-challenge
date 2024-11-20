@@ -1,7 +1,6 @@
-using System;
+using Enemies;
 using UnityEngine;
 using Utils;
-using World.Enemies;
 
 namespace Player
 {
@@ -13,7 +12,7 @@ namespace Player
             if (other.CompareTag("Enemy"))
             {
                 int damage = Constants.BasePlayerDamage * playerData.GetDamageMultiplier;
-                other.GetComponent<EnemyHealthManager>().TakeDamage(damage, other.transform.position - transform.position);
+                other.GetComponent<EnemyHealthManager>().TakeDamage(damage, (other.transform.position - transform.position).normalized);
             }
         }
     }

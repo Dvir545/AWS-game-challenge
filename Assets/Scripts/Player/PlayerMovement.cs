@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using Utils;
 
 namespace Player
@@ -9,19 +9,16 @@ namespace Player
     {
         [SerializeField] private Camera mainCamera;
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private Animator playerAnimator;
-        [SerializeField] private Animator toolAnimator;
         private Rigidbody2D _rb;
         [SerializeField] private SpriteRenderer bodySpriteRenderer;
         [SerializeField] private SpriteRenderer toolSpriteRenderer;
-        private static readonly int AnimationFacing = Animator.StringToHash("facing");
-        private static readonly int AnimationMoving = Animator.StringToHash("moving");
 
+        private bool _canMove = true;
         private Vector2 _movementDirection;
-        private bool _isMoving;
+        public bool IsMoving => _movementDirection.magnitude > 0;
         private CharacterFacingDirection _facing;
 
-        void Start()
+        void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             ChangeDirection(CharacterFacingDirection.Down);
@@ -29,8 +26,11 @@ namespace Player
 
         void Update()
         {
-            CheckInput();
-            Move();
+            if (_canMove)
+            {
+                CheckInput();
+                Move();
+            }
         }
 
         private void CheckInput()
@@ -39,7 +39,6 @@ namespace Player
             _movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             if (_movementDirection.magnitude > 0)
             {
-                playerAnimator.SetBool(AnimationMoving, true);
                 SetFacingDirection();
             }
             else  // if no keyboard input, check for mouse input
@@ -47,11 +46,7 @@ namespace Player
                 // Check if the mouse is over a UI element
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        playerAnimator.SetBool(AnimationMoving, true);
-                    }
-                    else if (Input.GetMouseButton(0))
+                    if (Input.GetMouseButton(0))
                     {
                         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
                         // get player position relative to middle of screen
@@ -64,32 +59,20 @@ namespace Player
                     }
                     else // no input
                     {
-                        playerAnimator.SetBool(AnimationMoving, false);
                         _movementDirection = Vector2.zero;
                     }
                 }
                 else
                 {
                     // Mouse is over a UI element, so we ignore mouse input
-                    playerAnimator.SetBool(AnimationMoving, false);
                     _movementDirection = Vector2.zero;
                 }
             }
         }
-
         
         private void SetFacingDirection()
         {
             CharacterFacingDirection facingDirection = _movementDirection.GetFacingDirection();
-            if (facingDirection == CharacterFacingDirection.Right)
-            {
-                bodySpriteRenderer.flipX = true;
-                toolSpriteRenderer.flipX = true;
-            } else if (facingDirection == CharacterFacingDirection.Left)
-            {
-                bodySpriteRenderer.flipX = false;
-                toolSpriteRenderer.flipX = false;
-            }
             ChangeDirection(facingDirection);
         }
 
@@ -101,13 +84,26 @@ namespace Player
         private void ChangeDirection(CharacterFacingDirection direction)
         {
             _facing = direction;
-            playerAnimator.SetInteger(AnimationFacing, (int)direction);
-            toolAnimator.SetInteger(AnimationFacing, (int)direction);
         }
-        
+
         public CharacterFacingDirection GetFacingDirection()
         {
             return _facing;
+        }
+        
+        public void Knockback(Vector2 hitDirection, float knockbackTime)
+        {
+            StartCoroutine(KnockbackCoroutine(hitDirection, knockbackTime));
+        }
+
+        private IEnumerator KnockbackCoroutine(Vector2 hitDirection, float knockbackTime)
+        {
+            _canMove = false;
+            _rb.velocity = Vector2.zero;
+            _rb.AddForce(hitDirection * Constants.KnockbackForce, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(knockbackTime);
+            _rb.velocity = Vector2.zero;
+            _canMove = true;
         }
     }
 }

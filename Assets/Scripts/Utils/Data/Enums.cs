@@ -26,4 +26,10 @@ namespace Utils
         Corn = 3,
         Pumpkin = 4
     }
+
+    public enum Enemy
+    {
+        Slime = 0,
+        Skeleton = 1
+    }
 }
