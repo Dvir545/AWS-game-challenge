@@ -1,6 +1,7 @@
 using System;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
 
@@ -10,7 +11,7 @@ namespace Clickables
     {
         [SerializeField] private Image actIcon;
         [SerializeField] private Sprite[] icons;
-        [SerializeField] private PlayerAction playerAction;
+        [FormerlySerializedAs("playerAction")] [SerializeField] private PlayerActionManager playerActionManager;
         [SerializeField] private PlayerData playerData;
         
         private Button _button;
@@ -43,7 +44,7 @@ namespace Clickables
         {
             playerData.SwitchTool();
             actIcon.sprite = playerData.GetCurTool().GetToolSprite(icons);
-            playerAction.SwitchActing();
+            playerActionManager.SwitchActing();
         }
     }
 }

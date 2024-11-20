@@ -5,7 +5,7 @@ using World;
 
 namespace Player
 {
-    public class PlayerAction : MonoBehaviour
+    public class PlayerActionManager : MonoBehaviour
     {
         [SerializeField] private float minActTime;
         private float _actTime = 0;
@@ -14,9 +14,21 @@ namespace Player
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         private bool _canAct = true;
-        private bool _isActing = false;
+        public bool _isActing = false;
         public bool IsActing => _canAct && _isActing;
         
+        private void Awake()
+        {
+            EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
+            EventManager.Instance.StartListening(EventManager.PlayerDied, Die);
+        }
+
+        private void Die(object arg0)
+        {
+            DisableActions();
+            _canAct = false;
+        }
+
         public void StartActing()
         {
             _isActing = true;
@@ -79,9 +91,12 @@ namespace Player
             }
         }
         
-        public void GotHit(float hitTime)
+        private void GotHit(object arg0)
         {
-            StartCoroutine(GotHitCoroutine(hitTime));
+            if (arg0 is (float hitTime, Vector2 hitDirection))
+            {
+                StartCoroutine(GotHitCoroutine(hitTime));
+            }
         }
 
         private IEnumerator GotHitCoroutine(float hitTime)

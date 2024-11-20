@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Player
@@ -15,14 +16,28 @@ namespace Player
         private static readonly int AnimationDeath = Animator.StringToHash("die");
 
         [SerializeField] private PlayerMovement playerMovement;
-        [SerializeField] private PlayerAction playerAction;
+        [FormerlySerializedAs("playerAction")] [SerializeField] private PlayerActionManager playerActionManager;
         [SerializeField] private PlayerData playerData;
         
+        private void Awake()
+        {
+            EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
+            EventManager.Instance.StartListening(EventManager.PlayerDied, Die);
+        }
+
+        private void Die(object arg0)
+        {
+            foreach (var animator in animators)
+            {
+                animator.SetTrigger(AnimationDeath);
+            }
+        }
+
         private void Update()
         {
             bool isMoving = playerMovement.IsMoving;
             int facing = (int)playerMovement.GetFacingDirection();
-            bool isActing =playerAction.IsActing;
+            bool isActing =playerActionManager.IsActing;
             int actType = (int)playerData.GetCurTool();
             foreach (var animator in animators)
             {
@@ -51,7 +66,7 @@ namespace Player
             }
         }
 
-        public void GotHit()
+        private void GotHit(object argo)
         {
             foreach (var animator in animators)
             {

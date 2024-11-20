@@ -64,6 +64,7 @@ namespace Enemies
         
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (_curHealth <= 0) return;
             if (other.CompareTag("Player"))
             {
                 var hitDirection = (other.transform.position - transform.position).normalized;

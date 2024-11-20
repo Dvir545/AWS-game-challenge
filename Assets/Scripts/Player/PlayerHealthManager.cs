@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Enemies;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
-using Vector2 = System.Numerics.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Player
@@ -21,9 +18,6 @@ namespace Player
         [SerializeField] private Sprite emptyHeartSprite;
 
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private PlayerMovement playerMovement;
-        [SerializeField] private PlayerAnimationManager playerAnimationManager;
-        [SerializeField] private PlayerAction playerAction;
         [SerializeField] private EffectsManager effectsManager;
 
         private List<GameObject> _heartPrefabs = new();
@@ -97,9 +91,12 @@ namespace Player
             _canGetHit = false;
             int damage = Constants.BaseEnemyDamage * EnemyData.GetDamageMultiplier(enemyType);
             playerData.SubtractHealth(damage);
-            playerAnimationManager.GotHit();
-            playerAction.GotHit(HitTime);
-            playerMovement.Knockback(hitDirection, HitTime);
+            if (playerData.CurHealth <= 0)
+            {
+                EventManager.Instance.TriggerEvent(EventManager.PlayerDied, null);
+                yield break;
+            }
+            EventManager.Instance.TriggerEvent(EventManager.PlayerGotHit, (HitTime, hitDirection));
             effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
             
             yield return new WaitForSeconds(HitTime);

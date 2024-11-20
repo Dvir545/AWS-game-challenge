@@ -20,7 +20,7 @@ namespace Utils.Data
             }},
             {Enemy.Skeleton, new EnemyInfo
             {
-                maxHealth = 2,  // todo 10
+                maxHealth = 10,
                 damageMultiplier = 1,
                 cashDrop = 10
             }}

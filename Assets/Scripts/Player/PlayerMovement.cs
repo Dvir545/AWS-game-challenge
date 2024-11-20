@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Utils;
 
@@ -22,6 +23,15 @@ namespace Player
         {
             _rb = GetComponent<Rigidbody2D>();
             ChangeDirection(CharacterFacingDirection.Down);
+            EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
+            EventManager.Instance.StartListening(EventManager.PlayerDied, Die);
+        }
+
+        private void Die(object arg0)
+        {
+            _canMove = false;
+            _rb.velocity = Vector2.zero;
+            _movementDirection = Vector2.zero;
         }
 
         void Update()
@@ -91,7 +101,15 @@ namespace Player
             return _facing;
         }
         
-        public void Knockback(Vector2 hitDirection, float knockbackTime)
+        private void GotHit(object arg0)
+        {
+            if (arg0 is (float hitTime, Vector2 hitDirection))
+            {
+                Knockback(hitTime, hitDirection);
+            }
+        }
+        
+        public void Knockback(float knockbackTime, Vector2 hitDirection)
         {
             StartCoroutine(KnockbackCoroutine(hitDirection, knockbackTime));
         }

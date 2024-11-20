@@ -8,6 +8,8 @@ namespace Utils
         public const string MaxHealthIncreased = "MaxHealthIncreased";
         public const string HealthChanged = "HealthChanged";
         public const string CashChanged = "CashChanged";
+        public const string PlayerDied = "PlayerDied";
+        public const string PlayerGotHit  = "PlayerGotHit";
 
         protected EventManager()
         {
