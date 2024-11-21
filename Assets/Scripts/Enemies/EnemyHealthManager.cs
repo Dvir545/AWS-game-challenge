@@ -14,6 +14,7 @@ namespace Enemies
         private int _curHealth;
         private EnemyAnimationManager _enemyAnimationManager;
         private EnemyMovementManager _enemyMovementManager;
+        private EnemySoundManager _enemySoundManager;
         [SerializeField] private EffectsManager effectsManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private GameObject healthBar;
@@ -22,13 +23,13 @@ namespace Enemies
         private const float HitTime = 0.25f;
         private Coroutine _currentHealthBarCoroutine;
 
-
         private void Start()
         {
             _maxHealth = EnemyData.GetMaxHealth(enemyType);
             _curHealth = _maxHealth;
             _enemyAnimationManager = GetComponent<EnemyAnimationManager>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
+            _enemySoundManager = GetComponent<EnemySoundManager>();
             healthBar.SetActive(false);
             healthBarFiller.fillAmount = 1;
         }
@@ -45,6 +46,7 @@ namespace Enemies
             _canGetHit = false;
             _curHealth -= damage;
             UpdateHealthBar();
+            _enemySoundManager.PlayHitSound();
             effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.EnemyDamageColor);
             if (_curHealth > 0)
             {
@@ -80,6 +82,7 @@ namespace Enemies
         {
             _enemyMovementManager.Die(hitDirection);
             _enemyAnimationManager.Die();
+            _enemySoundManager.PlayDeathSound();
             yield return new WaitForSeconds(1.5f);
             int cashDrop = EnemyData.GetCashDrop(enemyType);
             effectsManager.FloatingTextEffect(transform.position, 1, 1, 

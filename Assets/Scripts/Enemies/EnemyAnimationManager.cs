@@ -50,16 +50,18 @@ namespace Enemies
             CharacterFacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
             if (facingDirection == CharacterFacingDirection.Right)
             {
-                foreach (var spriteRenderer in spriteRenderers)
-                {
-                    spriteRenderer.flipX = true;
-                }
+                transform.localScale = new Vector3(-1, 1, 1);
+                // foreach (var spriteRenderer in spriteRenderers)
+                // {
+                //     spriteRenderer.flipX = true;
+                // }
             } else if (facingDirection == CharacterFacingDirection.Left)
             {
-                foreach (var spriteRenderer in spriteRenderers)
-                {
-                    spriteRenderer.flipX = false;
-                }
+                transform.localScale = new Vector3(1, 1, 1);
+                // foreach (var spriteRenderer in spriteRenderers)
+                // {
+                //     spriteRenderer.flipX = false;
+                // }
             }
             ChangeDirection(facingDirection);
         }
