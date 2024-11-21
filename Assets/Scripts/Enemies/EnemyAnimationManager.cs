@@ -11,14 +11,12 @@ namespace Enemies
         private static readonly int AnimationDeath = Animator.StringToHash("die");
 
         private EnemyMovementManager _enemyMovementManager;
-        private EnemyHealthManager _enemyHealthManager;
-        [SerializeField] private Animator[] animators;
+        [SerializeField] protected Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
         
-        void Start()
+        void Awake()
         {
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
-            _enemyHealthManager = GetComponent<EnemyHealthManager>();
         }
 
         void Update()
@@ -45,23 +43,15 @@ namespace Enemies
             }
         }
 
-        private void SetFacingDirection()
+        public void SetFacingDirection()
         {
             CharacterFacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
             if (facingDirection == CharacterFacingDirection.Right)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-                // foreach (var spriteRenderer in spriteRenderers)
-                // {
-                //     spriteRenderer.flipX = true;
-                // }
             } else if (facingDirection == CharacterFacingDirection.Left)
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                // foreach (var spriteRenderer in spriteRenderers)
-                // {
-                //     spriteRenderer.flipX = false;
-                // }
             }
             ChangeDirection(facingDirection);
         }
@@ -92,5 +82,6 @@ namespace Enemies
                 animator.SetTrigger(AnimationDeath);
             }
         }
+        
     }
 }

@@ -7,22 +7,26 @@ namespace Enemies
 {
     public class EnemyMovementManager : MonoBehaviour
     {
-        [SerializeField] private Transform[] targets;
+        private GameObject[] _targets;
         [SerializeField] private float secondsToUpdateTarget = 5f;
-        private Rigidbody2D _rb;
-        private NavMeshAgent _agent;
-        private Transform _currentTarget;
-        public bool IsMoving => _agent.velocity.magnitude > 0f;
+        protected Rigidbody2D Rb;
+        protected NavMeshAgent Agent;
+        protected Transform CurrentTarget;
+        private Coroutine _updatePathCR;
+        private Coroutine _kbCR;
+        public bool IsMoving { get; protected set; } = true;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _agent = GetComponent<NavMeshAgent>();
-            _agent.updateRotation = false;
-            _agent.updateUpAxis = false;
+            Rb = GetComponent<Rigidbody2D>();
+            Agent = GetComponent<NavMeshAgent>();
+            Agent.updateRotation = false;
+            Agent.updateUpAxis = false;
+
+            _targets = GameObject.FindGameObjectsWithTag("Player");
         
-            StartCoroutine(UpdatePath());
+            _updatePathCR = StartCoroutine(UpdatePath());
         }
 
         private IEnumerator UpdatePath()
@@ -34,51 +38,65 @@ namespace Enemies
             }
         }
 
+        protected void StopUpdatingPath()
+        {
+            StopCoroutine(_updatePathCR);
+        }
+
         void Update()
         {
-            _agent.SetDestination(_currentTarget.position);
+            Agent.SetDestination(CurrentTarget.position);
         }
     
-        private void FindClosestTarget()
+        protected void FindClosestTarget()
         {
             Transform closestTarget = null;
             float closestDistance = Mathf.Infinity;
-            foreach (Transform target in targets)
+            foreach (GameObject target in _targets)
             {
-                float distance = Vector3.Distance(transform.position, target.position);
+                float distance = Vector3.Distance(transform.position, target.transform.position);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestTarget = target;
+                    closestTarget = target.transform;
                 }
             }
-            _currentTarget = closestTarget;
+            CurrentTarget = closestTarget;
         }
     
         public CharacterFacingDirection GetFacingDirection()
         {
-            Vector2 direction = _currentTarget.position - transform.position;
+            Vector2 direction = CurrentTarget.position - transform.position;
             return direction.GetFacingDirection();
         }
 
-        public void Knockback(Vector2 hitDirection, float hitTime)
+        public virtual void Knockback(Vector2 hitDirection, float hitTime)
         {
-            StartCoroutine(KnockbackCoroutine(hitDirection, hitTime));
+            if (_kbCR != null)
+            {
+                StopCoroutine(_kbCR);
+                Rb.velocity = Vector2.zero;
+            }
+            _kbCR = StartCoroutine(KnockbackCoroutine(hitDirection, hitTime));
         }
 
-        private IEnumerator KnockbackCoroutine(Vector2 hitDirection, float hitTime, bool dead = false)
-        {
-           _agent.updatePosition = false;
-           _rb.AddForce(hitDirection * Constants.KnockbackForce, ForceMode2D.Impulse);
+        protected virtual IEnumerator KnockbackCoroutine(Vector2 hitDirection, float hitTime, bool dead = false)
+        { 
+           Agent.updatePosition = false;
+           IsMoving = false;
+           Rb.AddForce(hitDirection * Constants.KnockbackForce, ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
-           _rb.velocity = Vector2.zero;
            if (!dead)
-               _agent.updatePosition = true;
+           {
+               Agent.updatePosition = true;
+               IsMoving = true;
+           }
+           Rb.velocity = Vector2.zero;
         }
 
         public void Die(Vector2 hitDirection)
         {
-            _agent.isStopped = true;
+            Agent.isStopped = true;
             StartCoroutine(KnockbackCoroutine(hitDirection,  .25f, true));
         }
     }

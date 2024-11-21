@@ -12,24 +12,27 @@ namespace Enemies
         [SerializeField] private Enemy enemyType;
         private int _maxHealth;
         private int _curHealth;
+        public bool IsDead => _curHealth <= 0;
         private EnemyAnimationManager _enemyAnimationManager;
         private EnemyMovementManager _enemyMovementManager;
         private EnemySoundManager _enemySoundManager;
-        [SerializeField] private EffectsManager effectsManager;
-        [SerializeField] private PlayerData playerData;
+        private EffectsManager _effectsManager;
+        private PlayerData _playerData;
         [SerializeField] private GameObject healthBar;
         [SerializeField] private Image healthBarFiller;
         private bool _canGetHit = true;
         private const float HitTime = 0.25f;
         private Coroutine _currentHealthBarCoroutine;
 
-        private void Start()
+        private void Awake()
         {
             _maxHealth = EnemyData.GetMaxHealth(enemyType);
             _curHealth = _maxHealth;
             _enemyAnimationManager = GetComponent<EnemyAnimationManager>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
             _enemySoundManager = GetComponent<EnemySoundManager>();
+            _effectsManager = FindObjectOfType<EffectsManager>();
+            _playerData = FindObjectOfType<PlayerData>();
             healthBar.SetActive(false);
             healthBarFiller.fillAmount = 1;
         }
@@ -47,7 +50,7 @@ namespace Enemies
             _curHealth -= damage;
             UpdateHealthBar();
             _enemySoundManager.PlayHitSound();
-            effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.EnemyDamageColor);
+            _effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.EnemyDamageColor);
             if (_curHealth > 0)
             {
                 _enemyAnimationManager.GotHit();
@@ -85,9 +88,9 @@ namespace Enemies
             _enemySoundManager.PlayDeathSound();
             yield return new WaitForSeconds(1.5f);
             int cashDrop = EnemyData.GetCashDrop(enemyType);
-            effectsManager.FloatingTextEffect(transform.position, 1, 1, 
+            _effectsManager.FloatingTextEffect(transform.position, 1, 1, 
                 cashDrop.ToString() + "$", Constants.CashColor);
-            playerData.AddCash(cashDrop);
+            _playerData.AddCash(cashDrop);
             Destroy(gameObject);
         }
         
