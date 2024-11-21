@@ -23,6 +23,7 @@ namespace Player
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
         private bool _canGetHit = true;
+        private Coroutine _healCoroutine;
         private const int XOffsetBetweenHearts = 100;
         private const float HitTime = 0.25f;
 
@@ -101,6 +102,25 @@ namespace Player
             
             yield return new WaitForSeconds(HitTime);
             _canGetHit = true;
+        }
+        
+        public void StartHeal()
+        {
+            _healCoroutine = StartCoroutine(HealCoroutine());
+        }
+        
+        public void StopHeal()
+        {
+            StopCoroutine(_healCoroutine);
+        }
+
+        private IEnumerator HealCoroutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Constants.BaseSecondsPerHeal);
+                playerData.IncHealth();
+            }
         }
     }
 }
