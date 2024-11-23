@@ -14,14 +14,14 @@ namespace Enemies
         private EnemyMovementManager _enemyMovementManager;
         protected Coroutine WalkingCR;
 
-        private bool IsPlayingImportantSound => AudioSource.isPlaying && 
-                                                (AudioSource.clip == hitSound || AudioSource.clip == deathSound);
+        protected bool IsPlayingImportantSound => AudioSource.isPlaying && 
+                                                  (AudioSource.clip == hitSound || AudioSource.clip == deathSound);
         
-        private void Awake()
+        protected virtual void Awake()
         {
             AudioSource = GetComponent<AudioSource>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
-            WalkingCR = StartCoroutine(PlayWalkingSound());
+            WalkingCR = StartCoroutine(PlayWalkingSoundCR());
         }
         
         public void PlayHitSound()
@@ -37,8 +37,8 @@ namespace Enemies
             AudioSource.pitch = Random.Range(0.8f, 1.2f);
             AudioSource.Play();
         }
-        
-        private bool IsEnemyMoving
+
+        protected bool IsEnemyMoving
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Enemies
             }
         }
 
-        private IEnumerator PlayWalkingSound()
+        protected virtual IEnumerator PlayWalkingSoundCR()
         {
             while (true)
             {

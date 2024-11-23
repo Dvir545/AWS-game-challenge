@@ -30,6 +30,7 @@ namespace Utils
     public enum Enemy
     {
         Slime = 0,
-        Skeleton = 1
+        Skeleton = 1,
+        Chicken = 2
     }
 }

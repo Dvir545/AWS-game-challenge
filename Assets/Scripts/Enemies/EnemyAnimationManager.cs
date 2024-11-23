@@ -14,15 +14,18 @@ namespace Enemies
         [SerializeField] protected Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
         
-        void Awake()
+        protected virtual void Awake()
         {
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
         }
 
-        void Update()
+        protected virtual void Update()
         {
             HandleWalking();
-            SetFacingDirection();
+            if (_enemyMovementManager.Targeted)
+            {
+                SetFacingDirection();
+            }
         }
 
         private void HandleWalking()

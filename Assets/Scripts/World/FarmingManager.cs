@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
@@ -21,17 +22,18 @@ namespace World
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         [SerializeField] private EffectsManager effectsManager;
         
-        private Dictionary<Vector3Int, FarmData> _farms = new();
+        public Dictionary<Vector3Int, FarmData> Farms { get; private set; }= new();
         
         public bool IsFarming { get; private set; }
-        
-        private class FarmData
+
+        public class FarmData
         {
             private Crop _crop;
             private float _progress;
+            private float _destroyProgress;
             private SpriteRenderer _cropSprite;
             
-            public FarmData(Crop crop, GameObject  curSpriteObject, float progress)
+            public FarmData(Crop crop, GameObject curSpriteObject, float progress)
             {
                 _crop = crop;
                 _progress = progress;
@@ -50,6 +52,16 @@ namespace World
             public void AddToProgress(float progress)
             {
                 _progress += progress;
+            }
+            
+            public float GetDestroyProgress()
+            {
+                return _destroyProgress;
+            }
+            
+            public void AddToDestroyProgress(float progress)
+            {
+                _destroyProgress += progress;
             }
             
             public SpriteRenderer GetCropSpriteRenderer()
@@ -75,29 +87,35 @@ namespace World
                 Farm();
             }
         }
+        
+        public Tuple<bool, Vector3Int> IsStandingOnFarmTile(Transform t)
+        {
+            Vector3Int tilePos = canFarmTilemap.WorldToCell(t.position);
+            return new Tuple<bool, Vector3Int>(farmTilemap.GetTile(tilePos) != null, tilePos);
+        }
 
         private void Farm()
         {
-            Vector3Int tilePos = canFarmTilemap.WorldToCell(playerTransform.position);
-            bool canFarm = !(canFarmTilemap.GetTile(tilePos) is null) && cropManager.HasCrops();
-            bool emptyTile = farmTilemap.GetTile(tilePos) is null;
-
-            if (canFarm && emptyTile)
+            bool isStandingOnFarmTile;
+            Vector3Int tilePos;
+            (isStandingOnFarmTile, tilePos) = IsStandingOnFarmTile(playerTransform);
+            bool canFarm = canFarmTilemap.GetTile(tilePos) != null && cropManager.HasCrops();
+            if (canFarm && !isStandingOnFarmTile)
             {
                 // Start farming on this tile
-                if (!_farms.ContainsKey(tilePos))
+                if (!Farms.ContainsKey(tilePos))
                 {
                     farmTilemap.SetTile(tilePos, farmTile);
                     GameObject cropSprite = Instantiate(cropSpritePrefab, tilePos, Quaternion.identity);
                     cropSprite.transform.SetParent(cropsParent.transform);
-                    _farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
-                    cropManager.RemoveCrop(_farms[tilePos].GetCrop());
+                    Farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
+                    cropManager.RemoveCrop(Farms[tilePos].GetCrop());
                 }
-                progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
+                progressBarBehavior.StartWork(Farms[tilePos].GetProgress());
             }
 
             // If we're on a tile that's being farmed, increase its progress
-            if (_farms.ContainsKey(tilePos))
+            if (Farms.ContainsKey(tilePos))
             {
                 HandleFarm(tilePos);
             }
@@ -106,7 +124,7 @@ namespace World
                 bool foundAdjacentFarm = false;
                 foreach (Vector3Int adjacentTilePos in tilePos.GetAdjacentTiles(playerMovement.GetFacingDirection()))
                 {
-                    if (_farms.ContainsKey(adjacentTilePos))
+                    if (Farms.ContainsKey(adjacentTilePos))
                     {
                         HandleFarm(adjacentTilePos);
                         foundAdjacentFarm = true;
@@ -123,29 +141,29 @@ namespace World
 
         private void HandleFarm(Vector3Int tilePos)
         {
-            progressBarBehavior.StartWork(_farms[tilePos].GetProgress());
-            _farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
-                                          / CropsData.Instance.GetGrowthTime(_farms[tilePos].GetCrop()));
-            progressBarBehavior.UpdateProgress(_farms[tilePos].GetProgress());
-            Sprite  cropSprite = GetCropSprite(_farms[tilePos]);
-            if (!(cropSprite is null))
+            progressBarBehavior.StartWork(Farms[tilePos].GetProgress());
+            Farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
+                                          / CropsData.Instance.GetGrowthTime(Farms[tilePos].GetCrop()));
+            progressBarBehavior.UpdateProgress(Farms[tilePos].GetProgress());
+            Sprite  cropSprite = GetCropSprite(Farms[tilePos]);
+            if (cropSprite != null)
             {
-                _farms[tilePos].GetCropSpriteRenderer().sprite = cropSprite;
+                Farms[tilePos].GetCropSpriteRenderer().sprite = cropSprite;
             }
                 
             // Check if farming is complete
-            if (_farms[tilePos].GetProgress() >= 1f)
+            if (Farms[tilePos].GetProgress() >= 1f)
             {
                 progressBarBehavior.StopWork();
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
-                Destroy(_farms[tilePos].GetCropSpriteRenderer().gameObject);
+                Destroy(Farms[tilePos].GetCropSpriteRenderer().gameObject);
                 // Reward player with the crop sell price
-                int amount = CropsData.Instance.GetSellPrice(_farms[tilePos].GetCrop());
+                int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
                 playerData.AddCash(amount);
                 effectsManager.FloatingTextEffect(tilePos, 1, 1, amount.ToString() + "$", Constants.CashColor);
                 
-                _farms.Remove(tilePos);
+                Farms.Remove(tilePos);
             }
         }
 
@@ -159,6 +177,23 @@ namespace World
             if (farmData.GetProgress() >= .25f)
                 return sprites[1];
             return sprites[0];
+        }
+        
+        // Returns true if the crop was destroyed
+        public bool IncDestroyProgress(Vector3Int tilePos)
+        {
+            if (Farms.ContainsKey(tilePos))
+            {
+                Farms[tilePos].AddToDestroyProgress(Time.deltaTime / Constants.TimeToEatCrop);
+                if (Farms[tilePos].GetDestroyProgress() >= 1f)
+                {
+                    farmTilemap.SetTile(tilePos, null);
+                    Destroy(Farms[tilePos].GetCropSpriteRenderer().gameObject);
+                    Farms.Remove(tilePos);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

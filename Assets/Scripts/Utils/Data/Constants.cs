@@ -11,6 +11,7 @@ namespace Utils
         public const int BasePlayerDamage = 1;
         public const int BaseEnemyDamage = 1;
         public const int KnockbackForce = 7;
+        public const float TimeToEatCrop = 3f;
 
         public static readonly Color CashColor = new Color(1, 0.93f, 0, 1);
         public static readonly Color EnemyDamageColor = new Color(1, 1, 1, 1);

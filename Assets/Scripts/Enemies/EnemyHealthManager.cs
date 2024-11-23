@@ -9,7 +9,7 @@ namespace Enemies
 {
     public class EnemyHealthManager: MonoBehaviour
     {
-        [SerializeField] private Enemy enemyType;
+        [SerializeField] public Enemy enemyType;
         private int _maxHealth;
         private int _curHealth;
         public bool IsDead => _curHealth <= 0;

@@ -1,7 +1,9 @@
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
+using Utils.Data;
 
 namespace Enemies
 {
@@ -12,17 +14,25 @@ namespace Enemies
         protected Rigidbody2D Rb;
         protected NavMeshAgent Agent;
         protected Transform CurrentTarget;
+        protected Vector3 CurrentTargetPosition = Vector3.zero;
         private Coroutine _updatePathCR;
         private Coroutine _kbCR;
+        private EnemyHealthManager _enemyHealthManager;
+        private Enemy _enemyType;
+        
         public bool IsMoving { get; protected set; } = true;
+        public bool Targeted => !Agent.isStopped && CurrentTarget != null;
 
         // Start is called before the first frame update
-        void Awake()
+        protected virtual void Awake()
         {
+            _enemyHealthManager = GetComponent<EnemyHealthManager>();
+            _enemyType = _enemyHealthManager.enemyType;
             Rb = GetComponent<Rigidbody2D>();
             Agent = GetComponent<NavMeshAgent>();
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
+            Agent.speed *= EnemyData.GetSpeed(_enemyType) * Random.Range(0.8f, 1.2f);
 
             _targets = GameObject.FindGameObjectsWithTag("Player");
         
@@ -43,12 +53,16 @@ namespace Enemies
             StopCoroutine(_updatePathCR);
         }
 
-        void Update()
+        protected virtual void Update()
         {
-            Agent.SetDestination(CurrentTarget.position);
+            if (Targeted)
+            {
+                CurrentTargetPosition = CurrentTarget.position;
+                  Agent.SetDestination(CurrentTargetPosition);
+            }
         }
     
-        protected void FindClosestTarget()
+        protected virtual void FindClosestTarget()
         {
             Transform closestTarget = null;
             float closestDistance = Mathf.Infinity;
@@ -66,7 +80,7 @@ namespace Enemies
     
         public CharacterFacingDirection GetFacingDirection()
         {
-            Vector2 direction = CurrentTarget.position - transform.position;
+            Vector2 direction = CurrentTargetPosition - transform.position;
             return direction.GetFacingDirection();
         }
 
@@ -94,7 +108,7 @@ namespace Enemies
            Rb.velocity = Vector2.zero;
         }
 
-        public void Die(Vector2 hitDirection)
+        public virtual void Die(Vector2 hitDirection)
         {
             Agent.isStopped = true;
             StartCoroutine(KnockbackCoroutine(hitDirection,  .25f, true));
