@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 
@@ -18,7 +19,10 @@ namespace Player
         [SerializeField] private PlayerMovement playerMovement;
         [FormerlySerializedAs("playerAction")] [SerializeField] private PlayerActionManager playerActionManager;
         [SerializeField] private PlayerData playerData;
-        
+        private Coroutine _actStopCR;
+        private float _actTime;
+        [SerializeField] private float minActTime;
+
         private void Awake()
         {
             EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
@@ -37,7 +41,7 @@ namespace Player
         {
             bool isMoving = playerMovement.IsMoving;
             int facing = (int)playerMovement.GetFacingDirection();
-            bool isActing =playerActionManager.IsActing;
+            bool isActing = playerActionManager.IsActing;
             int actType = (int)playerData.GetCurTool();
             foreach (var animator in animators)
             {
@@ -49,7 +53,6 @@ namespace Player
         {
             animator.SetBool(AnimationMoving, isMoving);
             animator.SetInteger(AnimationFacing, facing);
-            animator.SetBool(AnimationActing, isActing);
             animator.SetInteger(AnimationActType, actType);
             if (facing == (int)CharacterFacingDirection.Right)
             {
@@ -63,6 +66,37 @@ namespace Player
                 {
                     spriteRenderer.flipX = false;
                 }
+            }
+
+            if (!isActing && animator.GetBool(AnimationActing) && _actStopCR == null)  // change to not acting
+            {
+                _actStopCR = StartCoroutine(StopActingCR());
+            }
+
+            if (isActing)
+            {
+                if (_actStopCR != null) // change to acting while coroutine to stop it is working
+                {
+                    StopCoroutine(_actStopCR);
+                    _actStopCR = null;
+                }
+
+                if (!animator.GetBool(AnimationActing))
+                {
+                    animator.SetBool(AnimationActing, true);
+                    _actTime = 0;
+                }
+                _actTime += Time.deltaTime;
+            }
+        }
+
+        private IEnumerator StopActingCR()
+        {
+            if (_actTime < minActTime)
+                yield return new WaitForSeconds(minActTime - _actTime);
+            foreach (var animator in animators)
+            {
+                animator.SetBool(AnimationActing, false);
             }
         }
 

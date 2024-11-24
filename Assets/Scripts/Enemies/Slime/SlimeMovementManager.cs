@@ -49,7 +49,7 @@ namespace Enemies.Slime
                     continue;
                 float jumpDistance = Random.Range(jumpMinDistance, jumpMaxDistance);
                 float jumpDuration = jumpDistance / jumpSpeed;
-                Vector2 direction = (Agent.nextPosition - transform.position).normalized;
+                Vector2 direction = (Agent.destination - transform.position).normalized;
                 float forceMagnitude = jumpDistance / jumpDuration;
                 Vector2 jumpForce = direction * forceMagnitude;
                 IsMoving = true;
@@ -74,6 +74,16 @@ namespace Enemies.Slime
             Rb.velocity = Vector2.zero;
             StopCoroutine(_jumpCoroutine);
             _jumpCoroutine = StartCoroutine(Jump());
+        }
+        
+        public override CharacterFacingDirection GetFacingDirection()
+        {
+            Vector2 direction = Agent.destination - transform.position;
+            if (direction.x > 0)
+                return CharacterFacingDirection.Left;
+            if (direction.x < 0)
+                return CharacterFacingDirection.Right;
+            return CurDirection;
         }
     }
 }

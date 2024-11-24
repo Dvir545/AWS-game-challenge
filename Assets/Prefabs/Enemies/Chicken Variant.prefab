@@ -257,6 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToUpdateTarget: 0.1
+  roamRadius: 6
+  roamSecondsToSwitchTarget: 3
+  roamingSpeed: 1
 --- !u!114 &6696381113802702910
 MonoBehaviour:
   m_ObjectHideFlags: 0

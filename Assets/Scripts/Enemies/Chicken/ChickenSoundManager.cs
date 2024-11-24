@@ -44,6 +44,7 @@ namespace Enemies.Chicken
         {
             while (true)
             {
+                if (ChickenHealthManager.IsDead) break;
                 if (!_chickenEatingManager.IsEating && !IsPlayingImportantSound)
                 {
                     AudioSource.clip = walkingSound;
@@ -55,6 +56,7 @@ namespace Enemies.Chicken
                     yield return null;
                 }
             }
+            yield return null;
         }
 
         private IEnumerator PlayEatingSoundCR()

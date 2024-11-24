@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 using World;
 
@@ -7,15 +8,13 @@ namespace Player
 {
     public class PlayerActionManager : MonoBehaviour
     {
-        [SerializeField] private float minActTime;
-        private float _actTime = 0;
         [SerializeField] private FarmingManager farmingManager;
         [SerializeField] private PlayerAttackManager playerAttackManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         private bool _canAct = true;
-        public bool _isActing = false;
-        public bool IsActing => _canAct && _isActing;
+        public bool isActing = false;
+        public bool IsActing => _canAct && isActing;
         
         private void Awake()
         {
@@ -31,31 +30,19 @@ namespace Player
 
         public void StartActing()
         {
-            _isActing = true;
-            _actTime = Time.time;
+            isActing = true;
         }
         
         public void StopActing()
         {
-            _actTime = Time.time - _actTime;
-            StartCoroutine(StopActingCoroutine());
+            isActing = false;
+            DisableActions();
         }
 
         public void SwitchActing()
         {
             if (!IsActing) return;
             StartActing();
-        }
-
-        private IEnumerator StopActingCoroutine()
-        {
-            if (_actTime < minActTime)
-            {
-                yield return new WaitForSeconds(minActTime - _actTime);
-            }
-            _isActing = false;
-            DisableActions();
-            _actTime = 0;
         }
 
         private void DisableActions()

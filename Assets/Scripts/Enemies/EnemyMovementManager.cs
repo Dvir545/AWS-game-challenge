@@ -17,8 +17,11 @@ namespace Enemies
         protected Vector3 CurrentTargetPosition = Vector3.zero;
         private Coroutine _updatePathCR;
         private Coroutine _kbCR;
-        private EnemyHealthManager _enemyHealthManager;
+        protected EnemyHealthManager EnemyHealthManager;
         private Enemy _enemyType;
+        protected float AgentOriginalSpeed;
+        protected float AgentSetSpeed;
+        protected CharacterFacingDirection CurDirection;
         
         public bool IsMoving { get; protected set; } = true;
         public bool Targeted => !Agent.isStopped && CurrentTarget != null;
@@ -26,14 +29,16 @@ namespace Enemies
         // Start is called before the first frame update
         protected virtual void Awake()
         {
-            _enemyHealthManager = GetComponent<EnemyHealthManager>();
-            _enemyType = _enemyHealthManager.enemyType;
+            EnemyHealthManager = GetComponent<EnemyHealthManager>();
+            _enemyType = EnemyHealthManager.enemyType;
             Rb = GetComponent<Rigidbody2D>();
             Agent = GetComponent<NavMeshAgent>();
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
-            Agent.speed *= EnemyData.GetSpeed(_enemyType) * Random.Range(0.8f, 1.2f);
-
+            AgentOriginalSpeed = Agent.speed;
+            AgentSetSpeed = AgentOriginalSpeed * EnemyData.GetSpeed(_enemyType) * Random.Range(0.8f, 1.2f);
+            Agent.speed = AgentSetSpeed;
+            
             _targets = GameObject.FindGameObjectsWithTag("Player");
         
             _updatePathCR = StartCoroutine(UpdatePath());
@@ -55,6 +60,15 @@ namespace Enemies
 
         protected virtual void Update()
         {
+            if (EnemyHealthManager.IsDead)
+            {
+                if (_updatePathCR != null)
+                {
+                    StopCoroutine(_updatePathCR);
+                    _updatePathCR = null;
+                }
+                return;
+            }
             if (Targeted)
             {
                 CurrentTargetPosition = CurrentTarget.position;
@@ -78,10 +92,11 @@ namespace Enemies
             CurrentTarget = closestTarget;
         }
     
-        public CharacterFacingDirection GetFacingDirection()
+        public virtual CharacterFacingDirection GetFacingDirection()
         {
-            Vector2 direction = CurrentTargetPosition - transform.position;
-            return direction.GetFacingDirection();
+            Vector2 direction = Agent.destination - transform.position;
+            CurDirection = direction.GetFacingDirection();
+            return CurDirection;
         }
 
         public virtual void Knockback(Vector2 hitDirection, float hitTime)

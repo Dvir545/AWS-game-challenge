@@ -9,7 +9,7 @@ namespace Enemies
         private  static readonly int AnimationFacing = Animator.StringToHash("facing");
         private static readonly int AnimationGotHit = Animator.StringToHash("hit");
         private static readonly int AnimationDeath = Animator.StringToHash("die");
-
+        
         private EnemyMovementManager _enemyMovementManager;
         [SerializeField] protected Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
