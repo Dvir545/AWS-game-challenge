@@ -33,4 +33,13 @@ namespace Utils
         Skeleton = 1,
         Chicken = 2
     }
+
+    public enum Tower
+    {
+        Wood = 0,
+        Stone = 1,
+        Steel = 2,
+        Gold = 3,
+        Diamond = 4
+    }
 }
