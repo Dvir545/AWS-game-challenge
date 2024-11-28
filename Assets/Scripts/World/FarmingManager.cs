@@ -22,6 +22,8 @@ namespace World
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         [SerializeField] private EffectsManager effectsManager;
         
+        private Vector2 _cropInstantiationOffset = new Vector2(0.5f, 0.4f);
+        
         public Dictionary<Vector3Int, FarmData> Farms { get; private set; }= new();
         
         public bool IsFarming { get; private set; }
@@ -106,7 +108,8 @@ namespace World
                 if (!Farms.ContainsKey(tilePos))
                 {
                     farmTilemap.SetTile(tilePos, farmTile);
-                    GameObject cropSprite = Instantiate(cropSpritePrefab, tilePos, Quaternion.identity);
+                    Vector3 cropPos = tilePos + new Vector3(_cropInstantiationOffset.x, _cropInstantiationOffset.y, 0f);
+                    GameObject cropSprite = Instantiate(cropSpritePrefab, cropPos, Quaternion.identity);
                     cropSprite.transform.SetParent(cropsParent.transform);
                     Farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
                     cropManager.RemoveCrop(Farms[tilePos].GetCrop());
@@ -169,14 +172,7 @@ namespace World
 
         private Sprite GetCropSprite(FarmData farmData)
         {
-            Sprite[] sprites = cropManager.GetCropSprites(farmData.GetCrop());
-            if (farmData.GetProgress() >= .75f)
-                return sprites[3];
-            if (farmData.GetProgress() >= .5f)
-                return sprites[2];
-            if (farmData.GetProgress() >= .25f)
-                return sprites[1];
-            return sprites[0];
+            return CropsData.Instance.GetSprite(farmData.GetCrop(), farmData.GetProgress());
         }
         
         // Returns true if the crop was destroyed

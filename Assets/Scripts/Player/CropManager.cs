@@ -8,12 +8,7 @@ namespace Player
     public class CropManager : MonoBehaviour
     {
         [SerializeField] private PlayerData  playerData;
-        [Header("Crop Sprites")]
-        [SerializeField] private Sprite[] wheatSprites;
-        [SerializeField] private Sprite[] carrotSprites;
-        [SerializeField] private Sprite[] tomatoSprites;
-        [SerializeField] private Sprite[] cornSprites;
-        [SerializeField] private Sprite[] pumpkinSprites;
+        
         [Header("Crop UI")] 
         [SerializeField] private GameObject wheatUI;
 
@@ -119,19 +114,6 @@ namespace Player
                 }
             }
             _uiCurOffset.x -= _uiXoffset;
-        }
-
-        public Sprite[] GetCropSprites(Crop crop)
-        {
-            return crop switch
-            {
-                Crop.Wheat => wheatSprites,
-                Crop.Carrot => carrotSprites,
-                Crop.Tomato => tomatoSprites,
-                Crop.Corn => cornSprites,
-                Crop.Pumpkin => pumpkinSprites,
-                _ => throw new KeyNotFoundException("Crop not found")
-            };
         }
 
         public Crop GetBestAvailableCrop()
