@@ -24,7 +24,7 @@ namespace Player
         private List<Image> _heartImages = new();
         private bool _canGetHit = true;
         private Coroutine _healCoroutine;
-        private const int XOffsetBetweenHearts = 100;
+        private const int XOffsetBetweenHearts = 128;
         private const float HitTime = 0.25f;
 
         private void Start()

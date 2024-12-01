@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Utils.Data
 {
+    public struct TowerSprites
+    {
+        public Sprite Center { get; private set; }
+        public Sprite Left { get; private set; }
+        public Sprite Right { get; private set; }
+    }
     public class SpriteData: Singleton<SpriteData>
     {
         [Header("Crop Sprites")]
@@ -12,11 +18,6 @@ namespace Utils.Data
         [SerializeField] private Sprite[] cornSprites;
         [SerializeField] private Sprite[] pumpkinSprites;
         
-        [Header("Tower Sprites")]
-        [SerializeField] private Sprite[] centerSprites;
-        [SerializeField] private Sprite[] leftSprites;
-        [SerializeField] private Sprite[] rightSprites;
-
         public Sprite GetCropSprite(Crop crop, float growth)
         {
             var sprites = crop switch

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Utils;
 
 namespace Clickables
 {
@@ -32,6 +33,14 @@ namespace Clickables
             {
                 _originalIconPosition = iconObject.transform.localPosition;
             }
+            
+            EventManager.Instance.StartListening(EventManager.TowerBuilt, ForciblyReleaseButton);
+            EventManager.Instance.StartListening(EventManager.CropHarvested, ForciblyReleaseButton);
+        }
+
+        private void ForciblyReleaseButton(object arg0)
+        {
+            ReleaseButton();
         }
 
         private void Update()
@@ -43,9 +52,7 @@ namespace Clickables
             }
             else if (Input.GetButtonUp("Attack"))
             {
-                ReleaseButton();
-                _buttonImage.sprite = _normalSprite;
-            }
+                ReleaseButton(); }
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -77,6 +84,7 @@ namespace Clickables
                 _isPressed = false;
                 iconObject.transform.localPosition = _originalIconPosition;
                 playerActionManager.StopActing();
+                _buttonImage.sprite = _normalSprite;
             }
         }
     }

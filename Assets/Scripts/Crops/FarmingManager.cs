@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 using Utils;
 using Utils.Data;
 
-namespace World
+namespace Crops
 {
     public class FarmingManager: MonoBehaviour
     {
@@ -161,6 +161,7 @@ namespace World
                 // Remove the tile and its progress
                 farmTilemap.SetTile(tilePos, null);
                 Destroy(Farms[tilePos].GetCropSpriteRenderer().gameObject);
+                EventManager.Instance.TriggerEvent(EventManager.CropHarvested, null);
                 // Reward player with the crop sell price
                 int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
                 playerData.AddCash(amount);

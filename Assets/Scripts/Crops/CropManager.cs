@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Player;
 using TMPro;
 using UnityEngine;
 using Utils;
 
-namespace Player
+namespace Crops
 {
     public class CropManager : MonoBehaviour
     {

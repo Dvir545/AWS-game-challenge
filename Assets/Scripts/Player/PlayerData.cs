@@ -12,6 +12,7 @@ namespace Player
         private int _curHammer = 0;
 
         private int[] _numCrops = {1, 1, 1, 1, 1};
+        private int[] _numMaterials = {1, 1, 1, 1, 1};
         
         public void SwitchTool()
         {
@@ -84,6 +85,17 @@ namespace Player
         public void RemoveCrop(Crop cropType)
         {
             _numCrops[(int)cropType]--;
+        }
+        
+        public int GetNumMaterials(TowerMaterial material) => _numMaterials[(int)material];
+        public int GetNumMaterialTypes() => _numMaterials.Length;
+        public void AddMaterial(TowerMaterial material)
+        {
+            _numMaterials[(int)material]++;
+        }
+        public void RemoveMaterial(TowerMaterial material)
+        {
+            _numMaterials[(int)material]--;
         }
     }
 }

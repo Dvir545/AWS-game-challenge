@@ -11,6 +11,13 @@ namespace Utils
         Right = 3
     }
 
+    public enum TowerShootingDirection
+    {
+        Down = 0,
+        Left = 1,
+        Right = 2
+    }
+
     public enum HeldTool
     {
         Sword = 0,
@@ -34,7 +41,7 @@ namespace Utils
         Chicken = 2
     }
 
-    public enum Tower
+    public enum TowerMaterial
     {
         Wood = 0,
         Stone = 1,

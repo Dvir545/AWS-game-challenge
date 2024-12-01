@@ -11,6 +11,8 @@ namespace Utils
         public const string PlayerDied = "PlayerDied";
         public const string PlayerGotHit  = "PlayerGotHit";
         public const string PlayerHitEnemy = "PlayerHitEnemy";
+        public const string TowerBuilt = "TowerBuilt";
+        public const string CropHarvested = "CropHarvested";
 
         protected EventManager()
         {

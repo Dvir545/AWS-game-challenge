@@ -123,10 +123,13 @@ namespace Enemies
            Rb.velocity = Vector2.zero;
         }
 
-        public virtual void Die(Vector2 hitDirection)
+        public virtual void Die(Vector2? hitDirection = null)
         {
             Agent.isStopped = true;
-            StartCoroutine(KnockbackCoroutine(hitDirection,  .25f, true));
+            if (hitDirection != null)
+            {
+                StartCoroutine(KnockbackCoroutine((Vector2)hitDirection, .25f, true));
+            }
         }
     }
 }

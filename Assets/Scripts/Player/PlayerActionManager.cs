@@ -1,4 +1,6 @@
 using System.Collections;
+using Crops;
+using Towers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -10,6 +12,7 @@ namespace Player
     {
         [SerializeField] private FarmingManager farmingManager;
         [SerializeField] private PlayerAttackManager playerAttackManager;
+        [SerializeField] private TowerBuildManager towerBuildManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         private bool _canAct = true;
@@ -49,6 +52,7 @@ namespace Player
         {
             playerAttackManager.StopAttack();
             farmingManager.StopFarming();
+            towerBuildManager.StopBuilding();
         }
 
         private void Update()
@@ -70,7 +74,15 @@ namespace Player
                 }
                 else if (curTool != HeldTool.Hoe && farmingManager.IsFarming)
                 {
-                    farmingManager.StartFarming();
+                    farmingManager.StopFarming();
+                }
+                if (curTool == HeldTool.Hammer && !towerBuildManager.IsBuilding)
+                {
+                    towerBuildManager.StartBuilding();
+                }
+                else if (curTool != HeldTool.Hammer && towerBuildManager.IsBuilding)
+                {
+                    towerBuildManager.StopBuilding();
                 }
             } else if (progressBarBehavior.IsWorking)
             {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Crops;
+using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 using World;
@@ -86,7 +87,7 @@ namespace Enemies.Chicken
                 base.FindClosestTarget();
         }
 
-        public override void Die(Vector2 hitDirection)
+        public override void Die(Vector2? hitDirection = null)
         {
             Agent.isStopped = true;
             Rb.velocity = Vector2.zero;

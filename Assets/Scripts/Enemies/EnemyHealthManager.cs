@@ -10,6 +10,7 @@ namespace Enemies
     public class EnemyHealthManager: MonoBehaviour
     {
         [SerializeField] public Enemy enemyType;
+        [SerializeField] private int _maxHealthOverride = 0;
         private int _maxHealth;
         private int _curHealth;
         public bool IsDead => _curHealth <= 0;
@@ -23,10 +24,12 @@ namespace Enemies
         private bool _canGetHit = true;
         private const float HitTime = 0.25f;
         private Coroutine _currentHealthBarCoroutine;
+        private const float TimeBetweenHits = 0.5f;  // used when staying in collider
+        private float _timeSinceLastHit = 0;
 
         private void Awake()
         {
-            _maxHealth = EnemyData.GetMaxHealth(enemyType);
+            _maxHealth = _maxHealthOverride == 0 ? EnemyData.GetMaxHealth(enemyType) : _maxHealthOverride;
             _curHealth = _maxHealth;
             _enemyAnimationManager = GetComponent<EnemyAnimationManager>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
@@ -37,14 +40,14 @@ namespace Enemies
             healthBarFiller.fillAmount = 1;
         }
         
-        public void TakeDamage(int damage, Vector2 hitDirection)
+        public void TakeDamage(int damage, Vector2? hitDirection = null)
         {
             if (_curHealth <= 0) return;
             if (!_canGetHit) return;
             StartCoroutine(TakeDamageCoroutine(damage, hitDirection));
         }
         
-        private IEnumerator TakeDamageCoroutine(int damage, Vector2 hitDirection)
+        private IEnumerator TakeDamageCoroutine(int damage, Vector2? hitDirection = null)
         {
             _canGetHit = false;
             _curHealth -= damage;
@@ -54,12 +57,14 @@ namespace Enemies
             if (_curHealth > 0)
             {
                 _enemyAnimationManager.GotHit();
-                _enemyMovementManager.Knockback(hitDirection, HitTime);
+                if (hitDirection != null)
+                    _enemyMovementManager.Knockback((Vector2)hitDirection, HitTime);
                 yield return new WaitForSeconds(HitTime);
                 _canGetHit = true;
             }
             else
             {
+                
                 StartCoroutine(Die(hitDirection));
             }
         }
@@ -81,7 +86,7 @@ namespace Enemies
             _currentHealthBarCoroutine = StartCoroutine(HealthBarCoroutine());
         }
 
-        private IEnumerator Die(Vector2 hitDirection)
+        private IEnumerator Die(Vector2? hitDirection = null)
         {
             _enemyMovementManager.Die(hitDirection);
             _enemyAnimationManager.Die();
@@ -94,13 +99,32 @@ namespace Enemies
             Destroy(gameObject);
         }
         
+        private void HitPlayer(Transform player)
+        {
+            var hitDirection = (player.position - transform.position).normalized;
+            player.GetComponent<PlayerHealthManager>().GotHit(enemyType, hitDirection);
+        }
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (_curHealth <= 0) return;
             if (other.CompareTag("Player"))
             {
-                var hitDirection = (other.transform.position - transform.position).normalized;
-                other.gameObject.GetComponent<PlayerHealthManager>().GotHit(enemyType, hitDirection);
+                HitPlayer(other.transform);
+            }
+        }
+        
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (_curHealth <= 0) return;
+            if (other.CompareTag("Player"))
+            {
+                _timeSinceLastHit += Time.deltaTime;
+                if (_timeSinceLastHit >= TimeBetweenHits)
+                {
+                    HitPlayer(other.transform);
+                    _timeSinceLastHit = 0;
+                }
             }
         }
     }
