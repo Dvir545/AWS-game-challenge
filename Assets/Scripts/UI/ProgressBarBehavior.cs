@@ -38,7 +38,7 @@ namespace Player
         public void UpdateProgress(float progress)
         {
             int i = (int)math.floor(progress / _changeSpriteInterval);
-            if (i > _curSprite && i < progressSprites.Length)
+            if (i < progressSprites.Length)
             {
                 _spriteRenderer.sprite = progressSprites[i];
                 _curSprite++;

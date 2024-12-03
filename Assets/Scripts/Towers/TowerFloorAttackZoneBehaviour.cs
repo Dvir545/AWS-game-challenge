@@ -55,7 +55,7 @@ namespace Towers
                     _attackTimer = 0;
                     foreach (var enemy in _enemiesInRange)
                     {
-                        enemy.TakeDamage(_damage);
+                        enemy.TakeDamage(_damage, tower: true);
                     }
                 }
             }

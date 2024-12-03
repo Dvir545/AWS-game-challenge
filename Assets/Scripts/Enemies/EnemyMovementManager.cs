@@ -15,13 +15,14 @@ namespace Enemies
         protected NavMeshAgent Agent;
         protected Transform CurrentTarget;
         protected Vector3 CurrentTargetPosition = Vector3.zero;
-        private Coroutine _updatePathCR;
+        protected Coroutine UpdatePathCR;
         private Coroutine _kbCR;
         protected EnemyHealthManager EnemyHealthManager;
         private Enemy _enemyType;
         protected float AgentOriginalSpeed;
         protected float AgentSetSpeed;
         protected CharacterFacingDirection CurDirection;
+
         
         public bool IsMoving { get; protected set; } = true;
         public bool Targeted => !Agent.isStopped && CurrentTarget != null;
@@ -41,7 +42,7 @@ namespace Enemies
             
             _targets = GameObject.FindGameObjectsWithTag("Player");
         
-            _updatePathCR = StartCoroutine(UpdatePath());
+            UpdatePathCR = StartCoroutine(UpdatePath());
         }
 
         private IEnumerator UpdatePath()
@@ -55,24 +56,25 @@ namespace Enemies
 
         protected void StopUpdatingPath()
         {
-            StopCoroutine(_updatePathCR);
+            StopCoroutine(UpdatePathCR);
         }
 
         protected virtual void Update()
         {
             if (EnemyHealthManager.IsDead)
             {
-                if (_updatePathCR != null)
+                if (UpdatePathCR != null)
                 {
-                    StopCoroutine(_updatePathCR);
-                    _updatePathCR = null;
+                    StopCoroutine(UpdatePathCR);
+                    UpdatePathCR = null;
                 }
                 return;
             }
+    
             if (Targeted)
             {
                 CurrentTargetPosition = CurrentTarget.position;
-                  Agent.SetDestination(CurrentTargetPosition);
+                Agent.SetDestination(CurrentTargetPosition);
             }
         }
     
@@ -113,7 +115,7 @@ namespace Enemies
         { 
            Agent.updatePosition = false;
            IsMoving = false;
-           Rb.AddForce(hitDirection * Constants.KnockbackForce, ForceMode2D.Impulse);
+           Rb.AddForce(hitDirection * Constants.KnockbackForce * EnemyData.GetKnockbackForceMultiplier(_enemyType), ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
            {

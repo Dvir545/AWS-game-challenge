@@ -345,7 +345,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 2
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &1713211437746961488
@@ -564,8 +564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c2cd394b206694b971ef9ebb0314b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
   secondsToUpdateTarget: 5
 --- !u!114 &1486797434681197276
 MonoBehaviour:
@@ -596,8 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
-  effectsManager: {fileID: 0}
-  playerData: {fileID: 0}
+  _maxHealthOverride: 0
   healthBar: {fileID: 2281016180077370653}
   healthBarFiller: {fileID: 783847057095644789}
 --- !u!114 &7564844226126082591

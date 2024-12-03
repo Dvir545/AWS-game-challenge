@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 4457667331386441760}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,6 +321,8 @@ MonoBehaviour:
   _leftAnimator: {fileID: 496836987158409805}
   _rightAnimator: {fileID: 5225493949845300613}
   _shootAnimation: {fileID: 7400000, guid: 192c9258a56ff3d41839ece87b5a1f6c, type: 2}
+  SecondsToAttackAnimation: 0
+  IsShooting: 0
 --- !u!1 &5542326478980941128
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +545,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6367383572553486516}
   - component: {fileID: 2247248909286532982}
-  m_Layer: 0
+  - component: {fileID: 7089700292064677945}
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,3 +630,19 @@ PolygonCollider2D:
       - {x: 0.7, y: 1}
       - {x: 0.7, y: 1.2}
   m_UseDelaunayMesh: 0
+--- !u!208 &7089700292064677945
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520799081174167405}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
+  m_TimeToStationary: 0.5

@@ -38,7 +38,8 @@ namespace Utils
     {
         Slime = 0,
         Skeleton = 1,
-        Chicken = 2
+        Chicken = 2,
+        Orc = 3,
     }
 
     public enum TowerMaterial

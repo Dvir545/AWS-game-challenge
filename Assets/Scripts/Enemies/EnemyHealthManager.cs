@@ -40,23 +40,26 @@ namespace Enemies
             healthBarFiller.fillAmount = 1;
         }
         
-        public void TakeDamage(int damage, Vector2? hitDirection = null)
+        public void TakeDamage(int damage, Vector2? hitDirection = null, bool tower = false)
         {
             if (_curHealth <= 0) return;
             if (!_canGetHit) return;
-            StartCoroutine(TakeDamageCoroutine(damage, hitDirection));
+            StartCoroutine(TakeDamageCoroutine(damage, hitDirection, tower));
         }
         
-        private IEnumerator TakeDamageCoroutine(int damage, Vector2? hitDirection = null)
+        private IEnumerator TakeDamageCoroutine(int damage, Vector2? hitDirection = null, bool tower = false)
         {
             _canGetHit = false;
+            if (tower)
+                damage = Mathf.FloorToInt(damage * EnemyData.GetTowerDamageMultiplier(enemyType));
             _curHealth -= damage;
             UpdateHealthBar();
             _enemySoundManager.PlayHitSound();
             _effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.EnemyDamageColor);
             if (_curHealth > 0)
             {
-                _enemyAnimationManager.GotHit();
+                if (!(enemyType == Enemy.Orc && tower))  // orcs destroy towers so we do not want hit anim from towers
+                    _enemyAnimationManager.GotHit();
                 if (hitDirection != null)
                     _enemyMovementManager.Knockback((Vector2)hitDirection, HitTime);
                 yield return new WaitForSeconds(HitTime);

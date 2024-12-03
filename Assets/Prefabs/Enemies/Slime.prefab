@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: enemyType
       value: 0
@@ -59,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -7282886668606283007, guid: adeccbf3f345591c68d27a70b7529518, type: 3}
+      objectReference: {fileID: 638495692, guid: 0a77b2522efcd754283706a60dd5d087, type: 3}
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -67,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Name
       value: Slime Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967811538055857793, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 7564844226126082591, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: hitSound
@@ -124,15 +136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c9115bca6d03c2ab6e8cd344180cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
   secondsToUpdateTarget: 5
-  jumpMinDistance: 1
-  jumpMaxDistance: 5
-  jumpSpeed: 3
-  jumpMinCooldown: 1
-  jumpMaxCooldown: 3
-  jumpStartDuration: 0.3
+  jumpMinDistance: 2
+  jumpMaxDistance: 4
+  jumpSpeed: 3.5
+  jumpMinCooldown: 0.5
+  jumpMaxCooldown: 2
+  jumpStartDuration: 0.5
 --- !u!114 &5501694768707374717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +159,38 @@ MonoBehaviour:
   - {fileID: 1538553052324328661}
   spriteRenderers:
   - {fileID: 4257816352752306037}
-  jumpStartAnimation: {fileID: 7400000, guid: 7d7b2681364276e4aa4e4f7a78e61b95, type: 2}
+  slimeAnimations:
+  - idle: {fileID: 7400000, guid: 2e35bdfff156b20468c2cbf24599b875, type: 2}
+    jumpstart: {fileID: 7400000, guid: f2683a535713ac845b98f7d62d6d75cc, type: 2}
+    jump: {fileID: 7400000, guid: b66ad0d9d9f402d4990709853e34171b, type: 2}
+    jumpend: {fileID: 7400000, guid: f49bbea434049f349b58b1ac74b48426, type: 2}
+    hit: {fileID: 7400000, guid: 91fea154b63a6ae4984776f4b1340611, type: 2}
+    die: {fileID: 7400000, guid: 875af3472281aa54e9a258cf7056aa5d, type: 2}
+  - idle: {fileID: 7400000, guid: ef851690042f308439bbde4e39d137be, type: 2}
+    jumpstart: {fileID: 7400000, guid: 0bd2d2198a646de40b7b07b4ace8d7b1, type: 2}
+    jump: {fileID: 7400000, guid: 57721242b6fe7b74a8625961664f02c2, type: 2}
+    jumpend: {fileID: 7400000, guid: c171b370185c05846b2e66568ac05e3a, type: 2}
+    hit: {fileID: 7400000, guid: e03350ab94af23141abbcf1d2f942593, type: 2}
+    die: {fileID: 7400000, guid: e62567082635a78449971474667a8084, type: 2}
+  - idle: {fileID: 7400000, guid: bf588bf80366f3b41bd954786e5556cc, type: 2}
+    jumpstart: {fileID: 7400000, guid: af216e457fadc4848a9347da0c3fb388, type: 2}
+    jump: {fileID: 7400000, guid: bbbb620b8bf67e641a70e238682a6b5e, type: 2}
+    jumpend: {fileID: 7400000, guid: 3a120da96ca558d4489d526c76ba71f8, type: 2}
+    hit: {fileID: 7400000, guid: 6c1ebe6d617708e43817675b7c48857a, type: 2}
+    die: {fileID: 7400000, guid: 12e3745553bd1fa4e9bc8bd4043d4c37, type: 2}
+  - idle: {fileID: 7400000, guid: 8b41456d6fcfaa147ab5b0c5dd69cd09, type: 2}
+    jumpstart: {fileID: 7400000, guid: 4989f974b6ba27e4297be784477aa406, type: 2}
+    jump: {fileID: 7400000, guid: 6bb6bb5fb610a0848be30d445dba8bd9, type: 2}
+    jumpend: {fileID: 7400000, guid: dceedc4ac9abb7f4aa76401f5cf86290, type: 2}
+    hit: {fileID: 7400000, guid: 12933873fe6cf0940ba5e6b6ba788add, type: 2}
+    die: {fileID: 7400000, guid: afde1e1ac62042b4c949719d9a7c44b5, type: 2}
+  - idle: {fileID: 7400000, guid: 82601f2362e1f21409527f6686173481, type: 2}
+    jumpstart: {fileID: 7400000, guid: 985a19e82893de74d804b24075c5c0ed, type: 2}
+    jump: {fileID: 7400000, guid: 09396455071a80a408834d1f8aab156c, type: 2}
+    jumpend: {fileID: 7400000, guid: 6dfcdd781cb9ac247b5a2f43d57a5219, type: 2}
+    hit: {fileID: 7400000, guid: 2c9c5fc05f8b72c45b64afbd5363faf5, type: 2}
+    die: {fileID: 7400000, guid: 9edd8555e06863a4691f864e8b8e0a6d, type: 2}
+  jumpAnimation: {fileID: 7400000, guid: b66ad0d9d9f402d4990709853e34171b, type: 2}
 --- !u!114 &4040784750190269939
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Amazon.GameLift.Model;
 using Player;
 using UnityEngine;
@@ -89,6 +90,19 @@ namespace Towers
                 }
             }
             return Tuple.Create(false, -1);
+        }
+
+        public Transform[] GetBuiltTowerTransforms()
+        {
+            if (_towerBuilds == null)
+                return Array.Empty<Transform>();
+            var transforms = new List<Transform>();
+            for (int i = 0; i < _towerBuilds.Length; i++)
+            {
+                if (_towerBuilds[i].IsBuilt)
+                    transforms.Add(_towerBuilds[i].transform);
+            }
+            return transforms.ToArray();
         }
     }
 }

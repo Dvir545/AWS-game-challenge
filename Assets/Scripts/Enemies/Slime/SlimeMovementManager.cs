@@ -43,7 +43,7 @@ namespace Enemies.Slime
                 }
                 // start jumping
                 FindClosestTarget();
-                _enemyAnimationManager.JumpStart();
+                _enemyAnimationManager.JumpStart(jumpStartDuration);
                 yield return new WaitForSeconds(jumpStartDuration);
                 if (_jumpCooldown > 0)   // because slime was hit
                     continue;

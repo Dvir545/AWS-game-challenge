@@ -12,7 +12,7 @@ namespace Enemies
         [SerializeField] protected AudioClip walkingSound;
         protected AudioSource AudioSource;
         private EnemyMovementManager _enemyMovementManager;
-        protected EnemyHealthManager ChickenHealthManager;
+        protected EnemyHealthManager EnemyHealthManager;
         protected Coroutine WalkingCR;
 
         protected bool IsPlayingImportantSound => AudioSource.isPlaying && 
@@ -22,10 +22,14 @@ namespace Enemies
         {
             AudioSource = GetComponent<AudioSource>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
-            ChickenHealthManager = GetComponent<EnemyHealthManager>();
+            EnemyHealthManager = GetComponent<EnemyHealthManager>();
+        }
+
+        private void Start()
+        {
             WalkingCR = StartCoroutine(PlayWalkingSoundCR());
         }
-        
+
         public void PlayHitSound()
         {
             AudioSource.clip = hitSound;
@@ -59,7 +63,7 @@ namespace Enemies
         {
             while (true)
             {
-                if (ChickenHealthManager.IsDead) break;
+                if (EnemyHealthManager.IsDead) break;
                 if (IsEnemyMoving && !IsPlayingImportantSound)
                 {
                     AudioSource.clip = walkingSound;
