@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Utils
 {
-    public enum CharacterFacingDirection
+    public enum FacingDirection
     {
         Down = 0,
         Up = 1,
@@ -40,6 +40,7 @@ namespace Utils
         Skeleton = 1,
         Chicken = 2,
         Orc = 3,
+        Goblin = 4
     }
 
     public enum TowerMaterial

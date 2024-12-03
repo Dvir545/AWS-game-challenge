@@ -43,7 +43,7 @@ namespace Utils.Data
                 knockbackForceMultiplier = 1,
                 towerDamageMultiplier = 1
             }},
-            { Enemy.Orc , new EnemyInfo
+            { Enemy.Orc, new EnemyInfo
             {
                 maxHealth = 25,
                 damageMultiplier = 1,
@@ -51,6 +51,15 @@ namespace Utils.Data
                 speed = 0.75f,
                 knockbackForceMultiplier = .5f,
                 towerDamageMultiplier = 1/3f
+            }},
+            { Enemy.Goblin, new EnemyInfo
+            {
+                maxHealth = 10,
+                damageMultiplier = 1,
+                cashDrop = 20,
+                speed = 1.5f,
+                knockbackForceMultiplier = 1,
+                towerDamageMultiplier = 1
             }}
         };
 

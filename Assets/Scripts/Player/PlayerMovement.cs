@@ -17,12 +17,12 @@ namespace Player
         private bool _canMove = true;
         private Vector2 _movementDirection;
         public bool IsMoving => _movementDirection.magnitude > 0;
-        private CharacterFacingDirection _facing;
+        private FacingDirection _facing;
 
         void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-            ChangeDirection(CharacterFacingDirection.Down);
+            ChangeDirection(FacingDirection.Down);
             EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
             EventManager.Instance.StartListening(EventManager.PlayerDied, Die);
         }
@@ -82,7 +82,7 @@ namespace Player
         
         private void SetFacingDirection()
         {
-            CharacterFacingDirection facingDirection = _movementDirection.GetFacingDirection();
+            FacingDirection facingDirection = _movementDirection.GetFacingDirection();
             ChangeDirection(facingDirection);
         }
 
@@ -91,12 +91,12 @@ namespace Player
             _rb.velocity = _movementDirection * movementSpeed;
         }
 
-        private void ChangeDirection(CharacterFacingDirection direction)
+        private void ChangeDirection(FacingDirection direction)
         {
             _facing = direction;
         }
 
-        public CharacterFacingDirection GetFacingDirection()
+        public FacingDirection GetFacingDirection()
         {
             return _facing;
         }

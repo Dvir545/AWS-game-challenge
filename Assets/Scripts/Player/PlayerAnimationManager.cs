@@ -54,13 +54,13 @@ namespace Player
             animator.SetBool(AnimationMoving, isMoving);
             animator.SetInteger(AnimationFacing, facing);
             animator.SetInteger(AnimationActType, actType);
-            if (facing == (int)CharacterFacingDirection.Right)
+            if (facing == (int)FacingDirection.Right)
             {
                 foreach (var spriteRenderer in spriteRenderers)
                 {
                     spriteRenderer.flipX = true;
                 }
-            } else if (facing == (int)CharacterFacingDirection.Left)
+            } else if (facing == (int)FacingDirection.Left)
             {
                 foreach (var spriteRenderer in spriteRenderers)
                 {

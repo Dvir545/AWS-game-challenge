@@ -93,13 +93,13 @@ namespace Enemies.Chicken
             Rb.velocity = Vector2.zero;
         }
         
-        public override CharacterFacingDirection GetFacingDirection()
+        public override FacingDirection GetFacingDirection()
         {
             Vector2 direction = Agent.destination - transform.position;
             if (direction.x > 0)
-                return CharacterFacingDirection.Left;
+                return FacingDirection.Left;
             if (direction.x < 0)
-                return CharacterFacingDirection.Right;
+                return FacingDirection.Right;
             return CurDirection;
         }
     }

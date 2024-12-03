@@ -48,18 +48,18 @@ namespace Enemies
 
         public void SetFacingDirection()
         {
-            CharacterFacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
-            if (facingDirection == CharacterFacingDirection.Right)
+            FacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
+            if (facingDirection == FacingDirection.Right)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-            } else if (facingDirection == CharacterFacingDirection.Left)
+            } else if (facingDirection == FacingDirection.Left)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
             ChangeDirection(facingDirection);
         }
         
-        private void ChangeDirection(CharacterFacingDirection direction)
+        private void ChangeDirection(FacingDirection direction)
         {
             foreach (var animator in animators)
             {

@@ -6,7 +6,7 @@ namespace Player
     public class PlayerAttackManager: MonoBehaviour
     {
         [SerializeField] private PlayerMovement playerMovement;
-        private CharacterFacingDirection _facing;
+        private FacingDirection _facing;
         
         [SerializeField] private Collider2D upAttackCollider;
         [SerializeField] private Collider2D downAttackCollider;
@@ -46,12 +46,12 @@ namespace Player
         {
             switch (playerMovement.GetFacingDirection())
             {
-                case CharacterFacingDirection.Down:
+                case FacingDirection.Down:
                     downAttackCollider.enabled = true;
                     upAttackCollider.enabled = false;
                     rightAttackCollider.enabled = false;
                     break;
-                case CharacterFacingDirection.Up:
+                case FacingDirection.Up:
                     downAttackCollider.enabled = false;
                     upAttackCollider.enabled = true;
                     rightAttackCollider.enabled = false;
@@ -63,12 +63,12 @@ namespace Player
                     var transform1 = rightAttackCollider.transform;
                     var position = transform1.localPosition;
                     var scale = transform1.localScale;
-                    if (playerMovement.GetFacingDirection() == CharacterFacingDirection.Right)
+                    if (playerMovement.GetFacingDirection() == FacingDirection.Right)
                     {
                         position = new Vector2(-Mathf.Abs(position.x), position.y);
                         scale = new Vector2(-Mathf.Abs(scale.x), scale.y);
                     }
-                    if (playerMovement.GetFacingDirection() == CharacterFacingDirection.Left)
+                    if (playerMovement.GetFacingDirection() == FacingDirection.Left)
                     {
                         position = new Vector2(Mathf.Abs(position.x), position.y);
                         scale = new Vector2(Mathf.Abs(scale.x), scale.y);

@@ -20,32 +20,32 @@ namespace Utils
 
     public static class TileExtensions
     {
-        public static Vector3Int[] GetAdjacentTiles(this Vector3Int tile, CharacterFacingDirection facingDirection)
+        public static Vector3Int[] GetAdjacentTiles(this Vector3Int tile, FacingDirection facingDirection)
         {
             switch (facingDirection)
             {
-                case CharacterFacingDirection.Down:
+                case FacingDirection.Down:
                     return new[]
                     {
                         tile + new Vector3Int(0, -1, 0),
                         tile + new Vector3Int(1, -1, 0),
                         tile + new Vector3Int(-1, -1, 0)
                     };
-                case CharacterFacingDirection.Up:
+                case FacingDirection.Up:
                     return new[]
                     {
                         tile + new Vector3Int(0, 1, 0),
                         tile + new Vector3Int(1, 1, 0),
                         tile + new Vector3Int(-1, 1, 0)
                     };
-                case  CharacterFacingDirection.Left:
+                case  FacingDirection.Left:
                     return new[]
                     {
                         tile + new Vector3Int(1, 0, 0),
                         tile + new Vector3Int(1, 1, 0),
                         tile + new Vector3Int(1, -1, 0)
                     };
-                case CharacterFacingDirection.Right:
+                case FacingDirection.Right:
                     return new[]
                     {
                         tile + new Vector3Int(-1, 0, 0),
@@ -60,24 +60,24 @@ namespace Utils
 
     public static class Vector2Extensions
     {
-        public static CharacterFacingDirection GetFacingDirection(this Vector2 direction)
+        public static FacingDirection GetFacingDirection(this Vector2 direction)
         {
             float angle = Vector2.SignedAngle(Vector2.up, direction);
             if (angle is > -45 and < 45)
             {
-                return CharacterFacingDirection.Up;
+                return FacingDirection.Up;
             }
             else if (angle is >= 45 and <= 135)
             {
-                return CharacterFacingDirection.Right;
+                return FacingDirection.Right;
             }
             else if (angle is > 135 or < -135)
             {
-                return CharacterFacingDirection.Down;
+                return FacingDirection.Down;
             }
             else
             {
-               return CharacterFacingDirection.Left;
+               return FacingDirection.Left;
             }
         }
     }

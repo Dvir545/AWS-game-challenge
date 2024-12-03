@@ -21,7 +21,7 @@ namespace Enemies
         private Enemy _enemyType;
         protected float AgentOriginalSpeed;
         protected float AgentSetSpeed;
-        protected CharacterFacingDirection CurDirection;
+        protected FacingDirection CurDirection;
 
         
         public bool IsMoving { get; protected set; } = true;
@@ -94,7 +94,7 @@ namespace Enemies
             CurrentTarget = closestTarget;
         }
     
-        public virtual CharacterFacingDirection GetFacingDirection()
+        public virtual FacingDirection GetFacingDirection()
         {
             Vector2 direction = Agent.destination - transform.position;
             CurDirection = direction.GetFacingDirection();
@@ -119,6 +119,7 @@ namespace Enemies
            yield return new WaitForSeconds(hitTime);
            if (!dead)
            {
+               Agent.Warp(transform.position);
                Agent.updatePosition = true;
                IsMoving = true;
            }
