@@ -40,7 +40,9 @@ namespace Utils
         Skeleton = 1,
         Chicken = 2,
         Orc = 3,
-        Goblin = 4
+        Goblin = 4,
+        Demon = 5,
+        EvilBall = 6
     }
 
     public enum TowerMaterial

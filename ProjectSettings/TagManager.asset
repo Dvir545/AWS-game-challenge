@@ -8,6 +8,7 @@ TagManager:
   - Heal
   - Tower
   - Arrow
+  - Sword
   layers:
   - Default
   - TransparentFX

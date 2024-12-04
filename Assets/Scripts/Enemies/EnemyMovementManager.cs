@@ -112,10 +112,10 @@ namespace Enemies
         }
 
         protected virtual IEnumerator KnockbackCoroutine(Vector2 hitDirection, float hitTime, bool dead = false)
-        { 
+        {
            Agent.updatePosition = false;
            IsMoving = false;
-           Rb.AddForce(hitDirection * Constants.KnockbackForce * EnemyData.GetKnockbackForceMultiplier(_enemyType), ForceMode2D.Impulse);
+           Rb.AddForce(hitDirection * (Constants.KnockbackForce * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
            {
@@ -133,6 +133,11 @@ namespace Enemies
             {
                 StartCoroutine(KnockbackCoroutine((Vector2)hitDirection, .25f, true));
             }
+        }
+
+        public Vector3 GetCurrentTargetPosition()
+        {
+            return CurrentTargetPosition;
         }
     }
 }

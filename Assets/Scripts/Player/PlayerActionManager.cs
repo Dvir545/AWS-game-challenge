@@ -92,7 +92,7 @@ namespace Player
         
         private void GotHit(object arg0)
         {
-            if (arg0 is (float hitTime, Vector3 hitDirection))
+            if (arg0 is (float hitTime, Vector3 hitDirection, float pushForceMultiplier))
             {
                 StartCoroutine(GotHitCoroutine(hitTime));
             }

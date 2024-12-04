@@ -9,7 +9,7 @@ namespace Enemies.Goblin
         
         private GoblinAttackManager _attackManager;
         
-        private void Awake()
+        protected override void Awake()
         {
             _attackManager = GetComponent<GoblinAttackManager>();
             base.Awake();

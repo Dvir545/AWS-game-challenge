@@ -93,8 +93,8 @@ namespace Enemies
         {
             _enemyMovementManager.Die(hitDirection);
             _enemyAnimationManager.Die();
-            _enemySoundManager.PlayDeathSound();
-            yield return new WaitForSeconds(1.5f);
+            var soundLength = _enemySoundManager.PlayDeathSound();
+            yield return new WaitForSeconds(Mathf.Max(1.5f, soundLength));
             int cashDrop = EnemyData.GetCashDrop(enemyType);
             _effectsManager.FloatingTextEffect(transform.position, 1, 1, 
                 cashDrop.ToString() + "$", Constants.CashColor);

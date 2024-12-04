@@ -10,19 +10,19 @@ namespace Enemies
         private static readonly int AnimationGotHit = Animator.StringToHash("hit");
         private static readonly int AnimationDeath = Animator.StringToHash("die");
         
-        private EnemyMovementManager _enemyMovementManager;
+        protected EnemyMovementManager EnemyMovementManager;
         [SerializeField] protected Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
         
         protected virtual void Awake()
         {
-            _enemyMovementManager = GetComponent<EnemyMovementManager>();
+            EnemyMovementManager = GetComponent<EnemyMovementManager>();
         }
 
         protected virtual void Update()
         {
             HandleWalking();
-            if (_enemyMovementManager.Targeted)
+            if (EnemyMovementManager.Targeted)
             {
                 SetFacingDirection();
             }
@@ -30,7 +30,7 @@ namespace Enemies
 
         private void HandleWalking()
         {
-            if (_enemyMovementManager.IsMoving)
+            if (EnemyMovementManager.IsMoving)
             {
                 foreach (var animator in animators)
                 {
@@ -46,9 +46,9 @@ namespace Enemies
             }
         }
 
-        public void SetFacingDirection()
+        public virtual void SetFacingDirection()
         {
-            FacingDirection facingDirection = _enemyMovementManager.GetFacingDirection();
+            FacingDirection facingDirection = EnemyMovementManager.GetFacingDirection();
             if (facingDirection == FacingDirection.Right)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -59,7 +59,7 @@ namespace Enemies
             ChangeDirection(facingDirection);
         }
         
-        private void ChangeDirection(FacingDirection direction)
+        protected void ChangeDirection(FacingDirection direction)
         {
             foreach (var animator in animators)
             {

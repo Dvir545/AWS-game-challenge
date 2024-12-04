@@ -32,16 +32,21 @@ namespace Enemies
 
         public void PlayHitSound()
         {
-            AudioSource.clip = hitSound;
+            // AudioSource.clip = hitSound;
             AudioSource.pitch = Random.Range(0.8f, 1.2f);
-            AudioSource.Play();
+            AudioSource.PlayOneShot(hitSound);
         }
         
-        public void PlayDeathSound()
+        public virtual float PlayDeathSound()
         {
+            if (AudioSource.isPlaying)
+            {
+                AudioSource.Stop();
+            }
             AudioSource.clip = deathSound;
             AudioSource.pitch = Random.Range(0.8f, 1.2f);
             AudioSource.Play();
+            return deathSound.length;
         }
 
         protected bool IsEnemyMoving

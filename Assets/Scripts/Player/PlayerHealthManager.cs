@@ -97,7 +97,9 @@ namespace Player
                 EventManager.Instance.TriggerEvent(EventManager.PlayerDied, null);
                 yield break;
             }
-            EventManager.Instance.TriggerEvent(EventManager.PlayerGotHit, (HitTime, hitDirection));
+
+            var pushForceMultiplier = EnemyData.GetPushForceMultiplier(enemyType);
+            EventManager.Instance.TriggerEvent(EventManager.PlayerGotHit, (HitTime, hitDirection, pushForceMultiplier));
             effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
             
             yield return new WaitForSeconds(HitTime);

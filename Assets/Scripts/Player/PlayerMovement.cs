@@ -103,22 +103,22 @@ namespace Player
         
         private void GotHit(object arg0)
         {
-            if (arg0 is (float hitTime, Vector3 hitDirection))
+            if (arg0 is (float hitTime, Vector3 hitDirection, float pushForceMultiplier))
             {
-                Knockback(hitTime, hitDirection);
+                Knockback(hitTime, hitDirection, pushForceMultiplier);
             }
         }
         
-        public void Knockback(float knockbackTime, Vector2 hitDirection)
+        public void Knockback(float knockbackTime, Vector2 hitDirection, float pushForceMultiplier)
         {
-            StartCoroutine(KnockbackCoroutine(hitDirection, knockbackTime));
+            StartCoroutine(KnockbackCoroutine(hitDirection, knockbackTime, pushForceMultiplier));
         }
 
-        private IEnumerator KnockbackCoroutine(Vector2 hitDirection, float knockbackTime)
+        private IEnumerator KnockbackCoroutine(Vector2 hitDirection, float knockbackTime, float pushForceMultiplier)
         {
             _canMove = false;
             _rb.velocity = Vector2.zero;
-            _rb.AddForce(hitDirection * Constants.KnockbackForce, ForceMode2D.Impulse);
+            _rb.AddForce(hitDirection * (Constants.KnockbackForce * pushForceMultiplier), ForceMode2D.Impulse);
             yield return new WaitForSeconds(knockbackTime);
             _rb.velocity = Vector2.zero;
             _canMove = true;
