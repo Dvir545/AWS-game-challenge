@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 2303958698268389802}
   - component: {fileID: 7271934532499026074}
   m_Layer: 5
-  m_Name: Store
+  m_Name: CropStoreUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
