@@ -55,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -197,8 +197,8 @@ TextureImporter:
       name: Bridge_Wood_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -218,8 +218,8 @@ TextureImporter:
       name: Bridge_Wood_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 64
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -239,8 +239,8 @@ TextureImporter:
       name: Bridge_Wood_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -260,7 +260,7 @@ TextureImporter:
       name: Bridge_Wood_6
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 32
         width: 16
         height: 16
@@ -281,7 +281,7 @@ TextureImporter:
       name: Bridge_Wood_7
       rect:
         serializedVersion: 2
-        x: 64
+        x: 16
         y: 32
         width: 16
         height: 16
@@ -302,7 +302,7 @@ TextureImporter:
       name: Bridge_Wood_8
       rect:
         serializedVersion: 2
-        x: 80
+        x: 32
         y: 32
         width: 16
         height: 16
@@ -323,7 +323,7 @@ TextureImporter:
       name: Bridge_Wood_9
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 32
         width: 16
         height: 16
@@ -344,7 +344,7 @@ TextureImporter:
       name: Bridge_Wood_10
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 32
         width: 16
         height: 16
@@ -365,7 +365,7 @@ TextureImporter:
       name: Bridge_Wood_11
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 32
         width: 16
         height: 16
@@ -386,8 +386,8 @@ TextureImporter:
       name: Bridge_Wood_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 96
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -407,8 +407,8 @@ TextureImporter:
       name: Bridge_Wood_13
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 112
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -428,8 +428,8 @@ TextureImporter:
       name: Bridge_Wood_14
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 128
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -449,7 +449,7 @@ TextureImporter:
       name: Bridge_Wood_15
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -470,7 +470,7 @@ TextureImporter:
       name: Bridge_Wood_16
       rect:
         serializedVersion: 2
-        x: 64
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -491,7 +491,7 @@ TextureImporter:
       name: Bridge_Wood_17
       rect:
         serializedVersion: 2
-        x: 80
+        x: 32
         y: 16
         width: 16
         height: 16
@@ -512,7 +512,7 @@ TextureImporter:
       name: Bridge_Wood_18
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 16
         width: 16
         height: 16
@@ -533,7 +533,7 @@ TextureImporter:
       name: Bridge_Wood_19
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 16
         width: 16
         height: 16
@@ -554,7 +554,7 @@ TextureImporter:
       name: Bridge_Wood_20
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 16
         width: 16
         height: 16
@@ -575,8 +575,8 @@ TextureImporter:
       name: Bridge_Wood_21
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -596,8 +596,8 @@ TextureImporter:
       name: Bridge_Wood_22
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 112
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -617,8 +617,8 @@ TextureImporter:
       name: Bridge_Wood_23
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 128
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -638,7 +638,7 @@ TextureImporter:
       name: Bridge_Wood_24
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -659,7 +659,7 @@ TextureImporter:
       name: Bridge_Wood_25
       rect:
         serializedVersion: 2
-        x: 64
+        x: 16
         y: 0
         width: 16
         height: 16
@@ -680,7 +680,7 @@ TextureImporter:
       name: Bridge_Wood_26
       rect:
         serializedVersion: 2
-        x: 80
+        x: 32
         y: 0
         width: 16
         height: 16
@@ -701,7 +701,7 @@ TextureImporter:
       name: Bridge_Wood_27
       rect:
         serializedVersion: 2
-        x: 96
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -722,7 +722,7 @@ TextureImporter:
       name: Bridge_Wood_28
       rect:
         serializedVersion: 2
-        x: 112
+        x: 64
         y: 0
         width: 16
         height: 16
@@ -743,7 +743,7 @@ TextureImporter:
       name: Bridge_Wood_29
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 0
         width: 16
         height: 16
@@ -756,6 +756,132 @@ TextureImporter:
       bones: []
       spriteID: 9fd641f772c5b3642afe09235aab7109
       internalID: 1445499133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceba1854e919961498929b2fb1c64b42
+      internalID: 1801808716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_31
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b3030cdbf73424da45380687bcb2f1
+      internalID: -1344750281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_32
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e513938e0dc2f841b2ad56e544f3afb
+      internalID: 74547397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e02de499ac58541ab52c6f9e2e2398
+      internalID: -1540249151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_34
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10793374ddf093841b9ffc6fa1f8a671
+      internalID: 1691182263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bridge_Wood_35
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c757a47c669c3084187624e5b471d3c1
+      internalID: -1891781236
       vertices: []
       indices: 
       edges: []
@@ -795,6 +921,12 @@ TextureImporter:
       Bridge_Wood_28: 343806302
       Bridge_Wood_29: 1445499133
       Bridge_Wood_3: -9142544502833899335
+      Bridge_Wood_30: 1801808716
+      Bridge_Wood_31: -1344750281
+      Bridge_Wood_32: 74547397
+      Bridge_Wood_33: -1540249151
+      Bridge_Wood_34: 1691182263
+      Bridge_Wood_35: -1891781236
       Bridge_Wood_4: 4920015224640609776
       Bridge_Wood_5: -4785640308677409631
       Bridge_Wood_6: 3783615309959501221

@@ -75,6 +75,12 @@ TagManager:
   - name: stores
     uniqueID: 2810670123
     locked: 0
+  - name: land
+    uniqueID: 3110307691
+    locked: 0
+  - name: objects
+    uniqueID: 590681561
+    locked: 0
   - name: player
     uniqueID: 1823353283
     locked: 0
