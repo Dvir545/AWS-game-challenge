@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Heal
-  - Tower
-  - Arrow
-  - Sword
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Enemy
-  - Tower
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,15 +41,33 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: TopGround
-    uniqueID: 3098082359
+  - name: sea
+    uniqueID: 3895920055
     locked: 0
-  - name: Objects
-    uniqueID: 875212919
+  - name: sand
+    uniqueID: 1399811215
     locked: 0
-  - name: WithPlayer
-    uniqueID: 3697737061
+  - name: grass
+    uniqueID: 2411128889
     locked: 0
-  - name: InFrontOfEverything
-    uniqueID: 2763632167
+  - name: river
+    uniqueID: 2005416759
+    locked: 0
+  - name: farm_edge
+    uniqueID: 1307788389
+    locked: 0
+  - name: Crops_land
+    uniqueID: 2221617613
+    locked: 0
+  - name: road
+    uniqueID: 297470331
+    locked: 0
+  - name: bridge
+    uniqueID: 443221571
+    locked: 0
+  - name: decoration
+    uniqueID: 1659305351
+    locked: 0
+  - name: stores
+    uniqueID: 2810670123
     locked: 0
