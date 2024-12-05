@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Sword
+  - Heal
+  - Tower
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -70,4 +74,7 @@ TagManager:
     locked: 0
   - name: stores
     uniqueID: 2810670123
+    locked: 0
+  - name: player
+    uniqueID: 1823353283
     locked: 0
