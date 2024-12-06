@@ -329,12 +329,12 @@ TextureImporter:
       name: Lanter_Posts_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 528
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -350,12 +350,12 @@ TextureImporter:
       name: Lanter_Posts_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 528
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -371,12 +371,12 @@ TextureImporter:
       name: Lanter_Posts_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 528
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -392,12 +392,12 @@ TextureImporter:
       name: Lanter_Posts_3
       rect:
         serializedVersion: 2
-        x: 51
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -413,12 +413,12 @@ TextureImporter:
       name: Lanter_Posts_4
       rect:
         serializedVersion: 2
-        x: 67
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -434,12 +434,12 @@ TextureImporter:
       name: Lanter_Posts_5
       rect:
         serializedVersion: 2
-        x: 83
-        y: 527
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -455,12 +455,12 @@ TextureImporter:
       name: Lanter_Posts_6
       rect:
         serializedVersion: 2
-        x: 3
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -476,12 +476,12 @@ TextureImporter:
       name: Lanter_Posts_7
       rect:
         serializedVersion: 2
-        x: 19
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -497,12 +497,12 @@ TextureImporter:
       name: Lanter_Posts_8
       rect:
         serializedVersion: 2
-        x: 35
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -518,12 +518,12 @@ TextureImporter:
       name: Lanter_Posts_9
       rect:
         serializedVersion: 2
-        x: 51
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -539,12 +539,12 @@ TextureImporter:
       name: Lanter_Posts_10
       rect:
         serializedVersion: 2
-        x: 67
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -560,12 +560,12 @@ TextureImporter:
       name: Lanter_Posts_11
       rect:
         serializedVersion: 2
-        x: 83
-        y: 479
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -581,12 +581,12 @@ TextureImporter:
       name: Lanter_Posts_12
       rect:
         serializedVersion: 2
-        x: 2
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -602,12 +602,12 @@ TextureImporter:
       name: Lanter_Posts_13
       rect:
         serializedVersion: 2
-        x: 18
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -623,12 +623,12 @@ TextureImporter:
       name: Lanter_Posts_14
       rect:
         serializedVersion: 2
-        x: 34
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -644,12 +644,12 @@ TextureImporter:
       name: Lanter_Posts_15
       rect:
         serializedVersion: 2
-        x: 50
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -665,12 +665,12 @@ TextureImporter:
       name: Lanter_Posts_16
       rect:
         serializedVersion: 2
-        x: 66
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -686,12 +686,12 @@ TextureImporter:
       name: Lanter_Posts_17
       rect:
         serializedVersion: 2
-        x: 82
-        y: 431
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -707,12 +707,12 @@ TextureImporter:
       name: Lanter_Posts_18
       rect:
         serializedVersion: 2
-        x: 3
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -728,12 +728,12 @@ TextureImporter:
       name: Lanter_Posts_19
       rect:
         serializedVersion: 2
-        x: 19
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -749,12 +749,12 @@ TextureImporter:
       name: Lanter_Posts_20
       rect:
         serializedVersion: 2
-        x: 35
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -770,12 +770,12 @@ TextureImporter:
       name: Lanter_Posts_21
       rect:
         serializedVersion: 2
-        x: 51
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -791,12 +791,12 @@ TextureImporter:
       name: Lanter_Posts_22
       rect:
         serializedVersion: 2
-        x: 67
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -812,12 +812,12 @@ TextureImporter:
       name: Lanter_Posts_23
       rect:
         serializedVersion: 2
-        x: 83
-        y: 383
-        width: 12
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -833,12 +833,12 @@ TextureImporter:
       name: Lanter_Posts_24
       rect:
         serializedVersion: 2
-        x: 3
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -854,12 +854,12 @@ TextureImporter:
       name: Lanter_Posts_25
       rect:
         serializedVersion: 2
-        x: 19
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -875,12 +875,12 @@ TextureImporter:
       name: Lanter_Posts_26
       rect:
         serializedVersion: 2
-        x: 35
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -896,12 +896,12 @@ TextureImporter:
       name: Lanter_Posts_27
       rect:
         serializedVersion: 2
-        x: 51
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -917,12 +917,12 @@ TextureImporter:
       name: Lanter_Posts_28
       rect:
         serializedVersion: 2
-        x: 67
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -938,12 +938,12 @@ TextureImporter:
       name: Lanter_Posts_29
       rect:
         serializedVersion: 2
-        x: 83
-        y: 335
-        width: 12
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -959,12 +959,12 @@ TextureImporter:
       name: Lanter_Posts_30
       rect:
         serializedVersion: 2
-        x: 2
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -980,12 +980,12 @@ TextureImporter:
       name: Lanter_Posts_31
       rect:
         serializedVersion: 2
-        x: 18
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1001,12 +1001,12 @@ TextureImporter:
       name: Lanter_Posts_32
       rect:
         serializedVersion: 2
-        x: 34
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1022,12 +1022,12 @@ TextureImporter:
       name: Lanter_Posts_33
       rect:
         serializedVersion: 2
-        x: 50
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1043,12 +1043,12 @@ TextureImporter:
       name: Lanter_Posts_34
       rect:
         serializedVersion: 2
-        x: 66
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1064,12 +1064,12 @@ TextureImporter:
       name: Lanter_Posts_35
       rect:
         serializedVersion: 2
-        x: 82
-        y: 287
-        width: 13
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1085,12 +1085,12 @@ TextureImporter:
       name: Lanter_Posts_36
       rect:
         serializedVersion: 2
-        x: 3
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1106,12 +1106,12 @@ TextureImporter:
       name: Lanter_Posts_37
       rect:
         serializedVersion: 2
-        x: 35
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1127,12 +1127,12 @@ TextureImporter:
       name: Lanter_Posts_38
       rect:
         serializedVersion: 2
-        x: 67
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1148,12 +1148,12 @@ TextureImporter:
       name: Lanter_Posts_39
       rect:
         serializedVersion: 2
-        x: 99
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1169,12 +1169,12 @@ TextureImporter:
       name: Lanter_Posts_40
       rect:
         serializedVersion: 2
-        x: 131
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1190,12 +1190,12 @@ TextureImporter:
       name: Lanter_Posts_41
       rect:
         serializedVersion: 2
-        x: 163
-        y: 239
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1211,12 +1211,12 @@ TextureImporter:
       name: Lanter_Posts_42
       rect:
         serializedVersion: 2
-        x: 3
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1232,12 +1232,12 @@ TextureImporter:
       name: Lanter_Posts_43
       rect:
         serializedVersion: 2
-        x: 35
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1253,12 +1253,12 @@ TextureImporter:
       name: Lanter_Posts_44
       rect:
         serializedVersion: 2
-        x: 67
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1274,12 +1274,12 @@ TextureImporter:
       name: Lanter_Posts_45
       rect:
         serializedVersion: 2
-        x: 99
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1295,12 +1295,12 @@ TextureImporter:
       name: Lanter_Posts_46
       rect:
         serializedVersion: 2
-        x: 131
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1316,12 +1316,12 @@ TextureImporter:
       name: Lanter_Posts_47
       rect:
         serializedVersion: 2
-        x: 163
-        y: 191
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1337,12 +1337,12 @@ TextureImporter:
       name: Lanter_Posts_48
       rect:
         serializedVersion: 2
-        x: 2
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1358,12 +1358,12 @@ TextureImporter:
       name: Lanter_Posts_49
       rect:
         serializedVersion: 2
-        x: 34
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1379,12 +1379,12 @@ TextureImporter:
       name: Lanter_Posts_50
       rect:
         serializedVersion: 2
-        x: 66
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1400,12 +1400,12 @@ TextureImporter:
       name: Lanter_Posts_51
       rect:
         serializedVersion: 2
-        x: 98
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1421,12 +1421,12 @@ TextureImporter:
       name: Lanter_Posts_52
       rect:
         serializedVersion: 2
-        x: 130
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1442,12 +1442,12 @@ TextureImporter:
       name: Lanter_Posts_53
       rect:
         serializedVersion: 2
-        x: 162
-        y: 143
-        width: 21
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.025}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1459,388 +1459,10 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_54
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 857003f5b8b826c70800000000000000
-      internalID: 8962879639134406488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_55
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 98ec76f75def8d0a0800000000000000
-      internalID: -6856450239752581495
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_56
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 120c0d71d39745e70800000000000000
-      internalID: 9103034050122137633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_57
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 807e890bcdbab6bf0800000000000000
-      internalID: -329981183337634040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_58
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b5c636b13ce836210800000000000000
-      internalID: 1325059684006325339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_59
-      rect:
-        serializedVersion: 2
-        x: 163
-        y: 95
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 68d392e6f7de62d90800000000000000
-      internalID: -7122744629075034746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_60
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a47da38f4feaef0a0800000000000000
-      internalID: -6845842016396716214
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_61
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b8d1bab4dbbf0d5e0800000000000000
-      internalID: -1886731453431341685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_62
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9704a8893ac7ba710800000000000000
-      internalID: 1705593925970575481
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_63
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a99b3b23b51a5b440800000000000000
-      internalID: 4951040778428463514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_64
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1c446ad450916a0c0800000000000000
-      internalID: -4564933661725145919
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_65
-      rect:
-        serializedVersion: 2
-        x: 163
-        y: 47
-        width: 20
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89560e48af552d8a0800000000000000
-      internalID: -6281863995768937064
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_66
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 01472b831fd64bc20800000000000000
-      internalID: 3221320516282512400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_67
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 364cbceb4195d9f00800000000000000
-      internalID: 1125153427547735139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_68
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 28f5bd9651b13b9e0800000000000000
-      internalID: -1606910863256887422
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_69
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ec8fdf34c1903660800000000000000
-      internalID: 7363545662821993699
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_70
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 068e012305d8daa20800000000000000
-      internalID: 3075269496140785760
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lanter_Posts_71
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 0
-        width: 21
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0311c73c5d29c1a40800000000000000
-      internalID: 5340304704959942960
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 191f77fd943994c4aab71c716dbca1da
     internalID: 0
     vertices: []
     indices: 
@@ -1898,26 +1520,8 @@ TextureImporter:
       Lanter_Posts_51: 6745051526137088458
       Lanter_Posts_52: -9085165107359402288
       Lanter_Posts_53: 291486259402788974
-      Lanter_Posts_54: 8962879639134406488
-      Lanter_Posts_55: -6856450239752581495
-      Lanter_Posts_56: 9103034050122137633
-      Lanter_Posts_57: -329981183337634040
-      Lanter_Posts_58: 1325059684006325339
-      Lanter_Posts_59: -7122744629075034746
       Lanter_Posts_6: -8062206263365766258
-      Lanter_Posts_60: -6845842016396716214
-      Lanter_Posts_61: -1886731453431341685
-      Lanter_Posts_62: 1705593925970575481
-      Lanter_Posts_63: 4951040778428463514
-      Lanter_Posts_64: -4564933661725145919
-      Lanter_Posts_65: -6281863995768937064
-      Lanter_Posts_66: 3221320516282512400
-      Lanter_Posts_67: 1125153427547735139
-      Lanter_Posts_68: -1606910863256887422
-      Lanter_Posts_69: 7363545662821993699
       Lanter_Posts_7: -6852520874384543127
-      Lanter_Posts_70: 3075269496140785760
-      Lanter_Posts_71: 5340304704959942960
       Lanter_Posts_8: -2694682557127748604
       Lanter_Posts_9: 2282986336010961777
   mipmapLimitGroupName: 

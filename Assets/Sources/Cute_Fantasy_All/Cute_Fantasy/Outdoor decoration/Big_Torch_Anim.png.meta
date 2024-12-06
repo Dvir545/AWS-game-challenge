@@ -137,16 +137,20 @@ TextureImporter:
       name: Big_Torch_Anim_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 12
-        width: 10
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 6d3d240568a2cb140800000000000000
       internalID: 4736707664447460310
@@ -158,16 +162,20 @@ TextureImporter:
       name: Big_Torch_Anim_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 12
-        width: 11
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 16
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: b627eb8d7cbf40a70800000000000000
       internalID: 8792429208287474283
@@ -179,16 +187,20 @@ TextureImporter:
       name: Big_Torch_Anim_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 12
-        width: 11
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 4386fda0b3308b9e0800000000000000
       internalID: -1605529715037214668
@@ -200,16 +212,20 @@ TextureImporter:
       name: Big_Torch_Anim_3
       rect:
         serializedVersion: 2
-        x: 51
-        y: 12
-        width: 11
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 48
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 68c86cbdd49c93350800000000000000
       internalID: 5997045715057413254
@@ -221,16 +237,20 @@ TextureImporter:
       name: Big_Torch_Anim_4
       rect:
         serializedVersion: 2
-        x: 68
-        y: 12
-        width: 10
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 93e7da0125df2bfa0800000000000000
       internalID: -5786284042308714951
@@ -242,16 +262,20 @@ TextureImporter:
       name: Big_Torch_Anim_5
       rect:
         serializedVersion: 2
-        x: 83
-        y: 12
-        width: 11
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 80
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 9ec962b48735cdcd0800000000000000
       internalID: -2532057114367058711
@@ -263,16 +287,20 @@ TextureImporter:
       name: Big_Torch_Anim_6
       rect:
         serializedVersion: 2
-        x: 99
-        y: 12
-        width: 11
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 65f699bdddb269530800000000000000
       internalID: 3861321962388811606
@@ -284,16 +312,20 @@ TextureImporter:
       name: Big_Torch_Anim_7
       rect:
         serializedVersion: 2
-        x: 115
-        y: 12
-        width: 11
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 112
+        y: 0
+        width: 16
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: -3, y: 9}
+        - {x: -3, y: -10}
+        - {x: 5, y: -10}
+        - {x: 5, y: 9}
+      tessellationDetail: 0
       bones: []
       spriteID: 40a4a8e383f452c30800000000000000
       internalID: 4333957319399983620
@@ -304,7 +336,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2cab3d0872c7895488576cdff350be17
     internalID: 0
     vertices: []
     indices: 
