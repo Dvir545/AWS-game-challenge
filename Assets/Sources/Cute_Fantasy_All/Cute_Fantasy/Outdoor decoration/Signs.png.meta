@@ -121,7 +121,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,7 +135,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -154,12 +154,12 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -167,7 +167,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -180,7 +180,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -201,13 +201,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 511
-        width: 96
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -222,14 +221,13 @@ TextureImporter:
       name: Signs_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 479
-        width: 96
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -244,14 +242,13 @@ TextureImporter:
       name: Signs_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 447
-        width: 96
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 480
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -267,13 +264,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 415
-        width: 96
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -288,14 +284,13 @@ TextureImporter:
       name: Signs_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 383
-        width: 96
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -310,14 +305,13 @@ TextureImporter:
       name: Signs_5
       rect:
         serializedVersion: 2
-        x: 1
-        y: 335
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 432
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -332,14 +326,13 @@ TextureImporter:
       name: Signs_6
       rect:
         serializedVersion: 2
-        x: 33
-        y: 335
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -354,14 +347,13 @@ TextureImporter:
       name: Signs_7
       rect:
         serializedVersion: 2
-        x: 65
-        y: 335
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -376,14 +368,13 @@ TextureImporter:
       name: Signs_8
       rect:
         serializedVersion: 2
-        x: 1
-        y: 287
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 384
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -398,14 +389,13 @@ TextureImporter:
       name: Signs_9
       rect:
         serializedVersion: 2
-        x: 33
-        y: 287
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -420,14 +410,13 @@ TextureImporter:
       name: Signs_10
       rect:
         serializedVersion: 2
-        x: 65
-        y: 287
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -442,14 +431,13 @@ TextureImporter:
       name: Signs_11
       rect:
         serializedVersion: 2
-        x: 1
-        y: 239
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 336
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -464,14 +452,13 @@ TextureImporter:
       name: Signs_12
       rect:
         serializedVersion: 2
-        x: 33
-        y: 239
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -486,14 +473,13 @@ TextureImporter:
       name: Signs_13
       rect:
         serializedVersion: 2
-        x: 65
-        y: 239
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -508,14 +494,13 @@ TextureImporter:
       name: Signs_14
       rect:
         serializedVersion: 2
-        x: 1
-        y: 191
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 288
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -530,14 +515,13 @@ TextureImporter:
       name: Signs_15
       rect:
         serializedVersion: 2
-        x: 33
-        y: 191
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -552,14 +536,13 @@ TextureImporter:
       name: Signs_16
       rect:
         serializedVersion: 2
-        x: 65
-        y: 191
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -574,14 +557,13 @@ TextureImporter:
       name: Signs_17
       rect:
         serializedVersion: 2
-        x: 1
-        y: 143
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 240
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -596,14 +578,13 @@ TextureImporter:
       name: Signs_18
       rect:
         serializedVersion: 2
-        x: 33
-        y: 143
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -618,14 +599,13 @@ TextureImporter:
       name: Signs_19
       rect:
         serializedVersion: 2
-        x: 65
-        y: 143
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -640,14 +620,13 @@ TextureImporter:
       name: Signs_20
       rect:
         serializedVersion: 2
-        x: 1
-        y: 95
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 192
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -662,14 +641,13 @@ TextureImporter:
       name: Signs_21
       rect:
         serializedVersion: 2
-        x: 33
-        y: 95
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -684,14 +662,13 @@ TextureImporter:
       name: Signs_22
       rect:
         serializedVersion: 2
-        x: 65
-        y: 95
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -706,14 +683,13 @@ TextureImporter:
       name: Signs_23
       rect:
         serializedVersion: 2
-        x: 1
-        y: 47
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 144
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -728,14 +704,13 @@ TextureImporter:
       name: Signs_24
       rect:
         serializedVersion: 2
-        x: 33
-        y: 47
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -750,14 +725,13 @@ TextureImporter:
       name: Signs_25
       rect:
         serializedVersion: 2
-        x: 65
-        y: 47
-        width: 29
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -772,14 +746,13 @@ TextureImporter:
       name: Signs_26
       rect:
         serializedVersion: 2
-        x: 1
-        y: 0
-        width: 29
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 96
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -794,14 +767,13 @@ TextureImporter:
       name: Signs_27
       rect:
         serializedVersion: 2
-        x: 33
-        y: 0
-        width: 29
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -816,14 +788,13 @@ TextureImporter:
       name: Signs_28
       rect:
         serializedVersion: 2
-        x: 65
-        y: 0
-        width: 29
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
@@ -834,19 +805,100 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Signs_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29221e8e3bcdec74e8531fb9672f82d1
+      internalID: -1510735751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5155be4944445854ea3bcf3321933115
+      internalID: -587593119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c1134ed1417cb4a88c186468a2f84a
+      internalID: -1473729924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Signs_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecdb4509ce1386040975d35cf5cf7b54
+      internalID: 1070732805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
-    customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7df6767061046704d97680d7a0f29cf6
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
     nameFileIdTable:
       Signs_0: 1714756807398554617
       Signs_1: 8051134168378353487
@@ -870,7 +922,11 @@ TextureImporter:
       Signs_26: 6723719915890970251
       Signs_27: 641293113695392133
       Signs_28: -3665307597008977235
+      Signs_29: -1510735751
       Signs_3: -2742302684088697420
+      Signs_30: -587593119
+      Signs_31: -1473729924
+      Signs_32: 1070732805
       Signs_4: 8814233360100005479
       Signs_5: -8967832436468776462
       Signs_6: -1180436918578810845

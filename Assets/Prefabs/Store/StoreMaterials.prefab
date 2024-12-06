@@ -113,9 +113,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: 6399128345816689074, guid: d6948aeaa16423b49ab9bba919b508d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -277,9 +277,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1684879420, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -361,9 +361,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -419776802, guid: 47fa3ddea7264de449ac6132a45e81c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -447,9 +447,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2418499289439650795, guid: 30ef7dce9c62b3d43a3bf26af2c0db60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -590,9 +590,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1714776858, guid: a1eddc3ac85a2ed42b1039209d3e1c5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -674,9 +674,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -780550405, guid: d1dd9b333e94bbf4985ec6904e0dcd96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -758,9 +758,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1684879420, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -842,9 +842,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -259800559, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -926,9 +926,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1684879420, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1010,9 +1010,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1484297173
-  m_SortingLayer: 10
-  m_SortingOrder: 6
+  m_SortingLayerID: 1823353283
+  m_SortingLayer: 13
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1684879420, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
