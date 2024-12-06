@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Name
-      value: Slime Variant
+      value: Slime
       objectReference: {fileID: 0}
     - target: {fileID: 6967811538055857793, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_AnchoredPosition.y
