@@ -1,0 +1,2002 @@
+fileFormatVersion: 2
+guid: 8af92940a5c18858898e811daf396487
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6479451247799455209
+    second: Player_Torch_Lantern_Anim_0
+  - first:
+      213: 8732206642320415195
+    second: Player_Torch_Lantern_Anim_1
+  - first:
+      213: -5644497325003569704
+    second: Player_Torch_Lantern_Anim_2
+  - first:
+      213: 3925384835907204813
+    second: Player_Torch_Lantern_Anim_3
+  - first:
+      213: -8992973721342414709
+    second: Player_Torch_Lantern_Anim_4
+  - first:
+      213: -340145418995345933
+    second: Player_Torch_Lantern_Anim_5
+  - first:
+      213: 7560938394161864746
+    second: Player_Torch_Lantern_Anim_6
+  - first:
+      213: 4288896822584463189
+    second: Player_Torch_Lantern_Anim_7
+  - first:
+      213: -5624357841165966376
+    second: Player_Torch_Lantern_Anim_8
+  - first:
+      213: -7738462612407151145
+    second: Player_Torch_Lantern_Anim_9
+  - first:
+      213: 6378009858835920404
+    second: Player_Torch_Lantern_Anim_10
+  - first:
+      213: -57769337797284718
+    second: Player_Torch_Lantern_Anim_11
+  - first:
+      213: 1475300050276318894
+    second: Player_Torch_Lantern_Anim_12
+  - first:
+      213: 7293169310528159086
+    second: Player_Torch_Lantern_Anim_13
+  - first:
+      213: 1040972331794319083
+    second: Player_Torch_Lantern_Anim_14
+  - first:
+      213: -8987059755518898273
+    second: Player_Torch_Lantern_Anim_15
+  - first:
+      213: 366148894642381872
+    second: Player_Torch_Lantern_Anim_16
+  - first:
+      213: 3201851557257137214
+    second: Player_Torch_Lantern_Anim_17
+  - first:
+      213: 2098913901934631067
+    second: Player_Torch_Lantern_Anim_18
+  - first:
+      213: -4751421671137615710
+    second: Player_Torch_Lantern_Anim_19
+  - first:
+      213: 7628341647040348950
+    second: Player_Torch_Lantern_Anim_20
+  - first:
+      213: -577737015894501987
+    second: Player_Torch_Lantern_Anim_21
+  - first:
+      213: 9188648752595155800
+    second: Player_Torch_Lantern_Anim_22
+  - first:
+      213: 3418648769198575363
+    second: Player_Torch_Lantern_Anim_23
+  - first:
+      213: 7875066957735331862
+    second: Player_Torch_Lantern_Anim_24
+  - first:
+      213: 2584761135075496518
+    second: Player_Torch_Lantern_Anim_25
+  - first:
+      213: -3619165425287677692
+    second: Player_Torch_Lantern_Anim_26
+  - first:
+      213: -7630618364248214415
+    second: Player_Torch_Lantern_Anim_27
+  - first:
+      213: -4006875682201724839
+    second: Player_Torch_Lantern_Anim_28
+  - first:
+      213: -6968921180965406487
+    second: Player_Torch_Lantern_Anim_29
+  - first:
+      213: -7710378699380549036
+    second: Player_Torch_Lantern_Anim_30
+  - first:
+      213: 720405823004956561
+    second: Player_Torch_Lantern_Anim_31
+  - first:
+      213: 7879933975913589657
+    second: Player_Torch_Lantern_Anim_32
+  - first:
+      213: -4871946733916191660
+    second: Player_Torch_Lantern_Anim_33
+  - first:
+      213: 5078048894298929475
+    second: Player_Torch_Lantern_Anim_34
+  - first:
+      213: 6203779357322640671
+    second: Player_Torch_Lantern_Anim_35
+  - first:
+      213: -7198400103315225038
+    second: Player_Torch_Lantern_Anim_36
+  - first:
+      213: -3137723889229307843
+    second: Player_Torch_Lantern_Anim_37
+  - first:
+      213: -7028731453885457429
+    second: Player_Torch_Lantern_Anim_38
+  - first:
+      213: 7218545606399149826
+    second: Player_Torch_Lantern_Anim_39
+  - first:
+      213: 5133447206397318592
+    second: Player_Torch_Lantern_Anim_40
+  - first:
+      213: 1648245044382024701
+    second: Player_Torch_Lantern_Anim_41
+  - first:
+      213: -3050565612861259209
+    second: Player_Torch_Lantern_Anim_42
+  - first:
+      213: 3737000965349435314
+    second: Player_Torch_Lantern_Anim_43
+  - first:
+      213: -4979780497506309159
+    second: Player_Torch_Lantern_Anim_44
+  - first:
+      213: -5776188689958236689
+    second: Player_Torch_Lantern_Anim_45
+  - first:
+      213: 4503398961036111260
+    second: Player_Torch_Lantern_Anim_46
+  - first:
+      213: 5954944009051305244
+    second: Player_Torch_Lantern_Anim_47
+  - first:
+      213: -5591617723581902248
+    second: Player_Torch_Lantern_Anim_48
+  - first:
+      213: 530212519254418311
+    second: Player_Torch_Lantern_Anim_49
+  - first:
+      213: -8194224763400130598
+    second: Player_Torch_Lantern_Anim_50
+  - first:
+      213: -8066432248960652279
+    second: Player_Torch_Lantern_Anim_51
+  - first:
+      213: 3095749067952856354
+    second: Player_Torch_Lantern_Anim_52
+  - first:
+      213: 8719959248196175290
+    second: Player_Torch_Lantern_Anim_53
+  - first:
+      213: 6687421995931995517
+    second: Player_Torch_Lantern_Anim_54
+  - first:
+      213: 5455483796740169957
+    second: Player_Torch_Lantern_Anim_55
+  - first:
+      213: 4119836804432913702
+    second: Player_Torch_Lantern_Anim_56
+  - first:
+      213: 3306334143346800270
+    second: Player_Torch_Lantern_Anim_57
+  - first:
+      213: 3438608227514922400
+    second: Player_Torch_Lantern_Anim_58
+  - first:
+      213: 3333915629266226122
+    second: Player_Torch_Lantern_Anim_59
+  - first:
+      213: 4076007146486204922
+    second: Player_Torch_Lantern_Anim_60
+  - first:
+      213: -2955149925106680692
+    second: Player_Torch_Lantern_Anim_61
+  - first:
+      213: -4835361736600233759
+    second: Player_Torch_Lantern_Anim_62
+  - first:
+      213: 2231093052212550483
+    second: Player_Torch_Lantern_Anim_63
+  - first:
+      213: 8209445677379043436
+    second: Player_Torch_Lantern_Anim_64
+  - first:
+      213: -9011894134431077433
+    second: Player_Torch_Lantern_Anim_65
+  - first:
+      213: -1107161596496304942
+    second: Player_Torch_Lantern_Anim_66
+  - first:
+      213: 8143101419639207660
+    second: Player_Torch_Lantern_Anim_67
+  - first:
+      213: 4764531843386490745
+    second: Player_Torch_Lantern_Anim_68
+  - first:
+      213: 9091189134518415587
+    second: Player_Torch_Lantern_Anim_69
+  - first:
+      213: 2710450315758282071
+    second: Player_Torch_Lantern_Anim_70
+  - first:
+      213: -273492563382694959
+    second: Player_Torch_Lantern_Anim_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ed4c8c8492abe950800000000000000
+      internalID: 6479451247799455209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd990dc0da70f2970800000000000000
+      internalID: 8732206642320415195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 358
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d50587b697baa1b0800000000000000
+      internalID: -5644497325003569704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 358
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc634fee5b4c97630800000000000000
+      internalID: 3925384835907204813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8076f81c0a823380800000000000000
+      internalID: -8992973721342414709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 358
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f55ec82b8f874bf0800000000000000
+      internalID: -340145418995345933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_6
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2061a0f869dde860800000000000000
+      internalID: 7560938394161864746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_7
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fc274cfe8358b30800000000000000
+      internalID: 4288896822584463189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_8
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 326
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3ae93b75442f1b0800000000000000
+      internalID: -5624357841165966376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_9
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 326
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d594df01457b9490800000000000000
+      internalID: -7738462612407151145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_10
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 416bad9ac2e338850800000000000000
+      internalID: 6378009858835920404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_11
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 326
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29ceea5e713c23ff0800000000000000
+      internalID: -57769337797284718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaef5d94491597410800000000000000
+      internalID: 1475300050276318894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_13
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6dbfc8d8da863560800000000000000
+      internalID: 7293169310528159086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_14
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 294
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be64c9902d6427e00800000000000000
+      internalID: 1040972331794319083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 294
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9f461194cc874380800000000000000
+      internalID: -8987059755518898273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_16
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 034af00da72d41500800000000000000
+      internalID: 366148894642381872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_17
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 294
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3cc7d5f6034f6c20800000000000000
+      internalID: 3201851557257137214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 262
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9851f2c217d02d10800000000000000
+      internalID: 2098913901934631067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_19
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 262
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0efb90a2f8f0eb0800000000000000
+      internalID: -4751421671137615710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_20
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 262
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6138821bf405dd960800000000000000
+      internalID: 7628341647040348950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_21
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 262
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d95930abe377bf7f0800000000000000
+      internalID: -577737015894501987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_22
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 262
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85b35406b53a48f70800000000000000
+      internalID: 9188648752595155800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_23
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 262
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30f48eb51fa717f20800000000000000
+      internalID: 3418648769198575363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_24
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 230
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6180b369cabd94d60800000000000000
+      internalID: 7875066957735331862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_25
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 230
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6421965ce8aeed320800000000000000
+      internalID: 2584761135075496518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_26
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 230
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4093a5a883426cdc0800000000000000
+      internalID: -3619165425287677692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_27
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 230
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 174b966c6099a1690800000000000000
+      internalID: -7630618364248214415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_28
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 230
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 958173fdbc7b468c0800000000000000
+      internalID: -4006875682201724839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_29
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 230
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e87cdcdb1b694f90800000000000000
+      internalID: -6968921180965406487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_30
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 198
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45a1fab9c6b3ff490800000000000000
+      internalID: -7710378699380549036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_31
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 198
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197555677456ff900800000000000000
+      internalID: 720405823004956561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_32
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 198
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99b6cdf83362b5d60800000000000000
+      internalID: 7879933975913589657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_33
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 198
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4540d48124e536cb0800000000000000
+      internalID: -4871946733916191660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_34
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 198
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349b0c0909ad87640800000000000000
+      internalID: 5078048894298929475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_35
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 198
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1dfd1ad470481650800000000000000
+      internalID: 6203779357322640671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_36
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 236c2caae352a1c90800000000000000
+      internalID: -7198400103315225038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_37
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30ea334fb09474d0800000000000000
+      internalID: -3137723889229307843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_38
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 166
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bebda858bfde47e90800000000000000
+      internalID: -7028731453885457429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_39
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 166
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207c068cbfc6d2460800000000000000
+      internalID: 7218545606399149826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_40
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c5988a390bad3740800000000000000
+      internalID: 5133447206397318592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_41
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 166
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df34035922ebfd610800000000000000
+      internalID: 1648245044382024701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_42
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7320269dcb63aa5d0800000000000000
+      internalID: -3050565612861259209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_43
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7e1f8149e7cd330800000000000000
+      internalID: 3737000965349435314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_44
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 134
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dbe7b2850444eab0800000000000000
+      internalID: -4979780497506309159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_45
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 134
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fed09637dfad6dfa0800000000000000
+      internalID: -5776188689958236689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_46
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9dab6abe794f7e30800000000000000
+      internalID: 4503398961036111260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_47
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 134
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c15f7dc860634a250800000000000000
+      internalID: 5954944009051305244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_48
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8525f1a5e459662b0800000000000000
+      internalID: -5591617723581902248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_49
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 783ef912a71bb5700800000000000000
+      internalID: 530212519254418311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_50
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 102
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf63d71ef3484e80800000000000000
+      internalID: -8194224763400130598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_51
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 102
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ce1fb7b964e0090800000000000000
+      internalID: -8066432248960652279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_52
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22d9315106f46fa20800000000000000
+      internalID: 3095749067952856354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_53
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 102
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab58d946cb4830970800000000000000
+      internalID: 8719959248196175290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_54
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 70
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7d09a2bfde7ecc50800000000000000
+      internalID: 6687421995931995517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_55
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 70
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e0e896db95c5bb40800000000000000
+      internalID: 5455483796740169957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_56
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 625edcceeb99c2930800000000000000
+      internalID: 4119836804432913702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_57
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 70
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e867eeab26572ed20800000000000000
+      internalID: 3306334143346800270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_58
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 70
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a533c2e6f368bf20800000000000000
+      internalID: 3438608227514922400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_59
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 70
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acb4989d992744e20800000000000000
+      internalID: 3333915629266226122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_60
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 38
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af9834477e2e09830800000000000000
+      internalID: 4076007146486204922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_61
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 38
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c7ef7dcc23df6d0800000000000000
+      internalID: -2955149925106680692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_62
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e85d619e1855ecb0800000000000000
+      internalID: -4835361736600233759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_63
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 38
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b98f56f4f66fe10800000000000000
+      internalID: 2231093052212550483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_64
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 38
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c604b0b195fcde170800000000000000
+      internalID: 8209445677379043436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_65
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 38
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb2fc328025fe280800000000000000
+      internalID: -9011894134431077433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_66
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 6
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d422ebd46292a0f0800000000000000
+      internalID: -1107161596496304942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_67
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 6
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6f29fd89b120170800000000000000
+      internalID: 8143101419639207660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_68
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 6
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97fb61ec7740f1240800000000000000
+      internalID: 4764531843386490745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_69
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 6
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e07cd4c9546a2e70800000000000000
+      internalID: 9091189134518415587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_70
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 6
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7552e1c93347d9520800000000000000
+      internalID: 2710450315758282071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Torch_Lantern_Anim_71
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 6
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db0dde66fb543cf0800000000000000
+      internalID: -273492563382694959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Torch_Lantern_Anim_0: 6479451247799455209
+      Player_Torch_Lantern_Anim_1: 8732206642320415195
+      Player_Torch_Lantern_Anim_10: 6378009858835920404
+      Player_Torch_Lantern_Anim_11: -57769337797284718
+      Player_Torch_Lantern_Anim_12: 1475300050276318894
+      Player_Torch_Lantern_Anim_13: 7293169310528159086
+      Player_Torch_Lantern_Anim_14: 1040972331794319083
+      Player_Torch_Lantern_Anim_15: -8987059755518898273
+      Player_Torch_Lantern_Anim_16: 366148894642381872
+      Player_Torch_Lantern_Anim_17: 3201851557257137214
+      Player_Torch_Lantern_Anim_18: 2098913901934631067
+      Player_Torch_Lantern_Anim_19: -4751421671137615710
+      Player_Torch_Lantern_Anim_2: -5644497325003569704
+      Player_Torch_Lantern_Anim_20: 7628341647040348950
+      Player_Torch_Lantern_Anim_21: -577737015894501987
+      Player_Torch_Lantern_Anim_22: 9188648752595155800
+      Player_Torch_Lantern_Anim_23: 3418648769198575363
+      Player_Torch_Lantern_Anim_24: 7875066957735331862
+      Player_Torch_Lantern_Anim_25: 2584761135075496518
+      Player_Torch_Lantern_Anim_26: -3619165425287677692
+      Player_Torch_Lantern_Anim_27: -7630618364248214415
+      Player_Torch_Lantern_Anim_28: -4006875682201724839
+      Player_Torch_Lantern_Anim_29: -6968921180965406487
+      Player_Torch_Lantern_Anim_3: 3925384835907204813
+      Player_Torch_Lantern_Anim_30: -7710378699380549036
+      Player_Torch_Lantern_Anim_31: 720405823004956561
+      Player_Torch_Lantern_Anim_32: 7879933975913589657
+      Player_Torch_Lantern_Anim_33: -4871946733916191660
+      Player_Torch_Lantern_Anim_34: 5078048894298929475
+      Player_Torch_Lantern_Anim_35: 6203779357322640671
+      Player_Torch_Lantern_Anim_36: -7198400103315225038
+      Player_Torch_Lantern_Anim_37: -3137723889229307843
+      Player_Torch_Lantern_Anim_38: -7028731453885457429
+      Player_Torch_Lantern_Anim_39: 7218545606399149826
+      Player_Torch_Lantern_Anim_4: -8992973721342414709
+      Player_Torch_Lantern_Anim_40: 5133447206397318592
+      Player_Torch_Lantern_Anim_41: 1648245044382024701
+      Player_Torch_Lantern_Anim_42: -3050565612861259209
+      Player_Torch_Lantern_Anim_43: 3737000965349435314
+      Player_Torch_Lantern_Anim_44: -4979780497506309159
+      Player_Torch_Lantern_Anim_45: -5776188689958236689
+      Player_Torch_Lantern_Anim_46: 4503398961036111260
+      Player_Torch_Lantern_Anim_47: 5954944009051305244
+      Player_Torch_Lantern_Anim_48: -5591617723581902248
+      Player_Torch_Lantern_Anim_49: 530212519254418311
+      Player_Torch_Lantern_Anim_5: -340145418995345933
+      Player_Torch_Lantern_Anim_50: -8194224763400130598
+      Player_Torch_Lantern_Anim_51: -8066432248960652279
+      Player_Torch_Lantern_Anim_52: 3095749067952856354
+      Player_Torch_Lantern_Anim_53: 8719959248196175290
+      Player_Torch_Lantern_Anim_54: 6687421995931995517
+      Player_Torch_Lantern_Anim_55: 5455483796740169957
+      Player_Torch_Lantern_Anim_56: 4119836804432913702
+      Player_Torch_Lantern_Anim_57: 3306334143346800270
+      Player_Torch_Lantern_Anim_58: 3438608227514922400
+      Player_Torch_Lantern_Anim_59: 3333915629266226122
+      Player_Torch_Lantern_Anim_6: 7560938394161864746
+      Player_Torch_Lantern_Anim_60: 4076007146486204922
+      Player_Torch_Lantern_Anim_61: -2955149925106680692
+      Player_Torch_Lantern_Anim_62: -4835361736600233759
+      Player_Torch_Lantern_Anim_63: 2231093052212550483
+      Player_Torch_Lantern_Anim_64: 8209445677379043436
+      Player_Torch_Lantern_Anim_65: -9011894134431077433
+      Player_Torch_Lantern_Anim_66: -1107161596496304942
+      Player_Torch_Lantern_Anim_67: 8143101419639207660
+      Player_Torch_Lantern_Anim_68: 4764531843386490745
+      Player_Torch_Lantern_Anim_69: 9091189134518415587
+      Player_Torch_Lantern_Anim_7: 4288896822584463189
+      Player_Torch_Lantern_Anim_70: 2710450315758282071
+      Player_Torch_Lantern_Anim_71: -273492563382694959
+      Player_Torch_Lantern_Anim_8: -5624357841165966376
+      Player_Torch_Lantern_Anim_9: -7738462612407151145
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

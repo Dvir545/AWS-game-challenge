@@ -1,0 +1,1066 @@
+fileFormatVersion: 2
+guid: 981e11fe583b27e73b835725c083f77b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8512988407831894603
+    second: Player_Riding_Horse_0
+  - first:
+      213: 4748538928957265437
+    second: Player_Riding_Horse_1
+  - first:
+      213: 320399769394766313
+    second: Player_Riding_Horse_2
+  - first:
+      213: 5866234252626851862
+    second: Player_Riding_Horse_3
+  - first:
+      213: -899651535462682524
+    second: Player_Riding_Horse_4
+  - first:
+      213: -3545704586325392024
+    second: Player_Riding_Horse_5
+  - first:
+      213: 2957383158684864467
+    second: Player_Riding_Horse_6
+  - first:
+      213: -4375695410866883517
+    second: Player_Riding_Horse_7
+  - first:
+      213: 410332532635479147
+    second: Player_Riding_Horse_8
+  - first:
+      213: -1344184538663134405
+    second: Player_Riding_Horse_9
+  - first:
+      213: 6279203353350229404
+    second: Player_Riding_Horse_10
+  - first:
+      213: -4806260711977805039
+    second: Player_Riding_Horse_11
+  - first:
+      213: -4202162351884871305
+    second: Player_Riding_Horse_12
+  - first:
+      213: -4304280520358547479
+    second: Player_Riding_Horse_13
+  - first:
+      213: 8389615381717410043
+    second: Player_Riding_Horse_14
+  - first:
+      213: -4496616171169688113
+    second: Player_Riding_Horse_15
+  - first:
+      213: -774492816181848753
+    second: Player_Riding_Horse_16
+  - first:
+      213: 4297263933040045078
+    second: Player_Riding_Horse_17
+  - first:
+      213: -3599796128613339601
+    second: Player_Riding_Horse_18
+  - first:
+      213: -4073148801425339914
+    second: Player_Riding_Horse_19
+  - first:
+      213: -4663343934626774017
+    second: Player_Riding_Horse_20
+  - first:
+      213: 4118881554691012916
+    second: Player_Riding_Horse_21
+  - first:
+      213: -6132524643040634816
+    second: Player_Riding_Horse_22
+  - first:
+      213: 2407442444097896472
+    second: Player_Riding_Horse_23
+  - first:
+      213: 6870271393418125685
+    second: Player_Riding_Horse_24
+  - first:
+      213: 5378437349588364740
+    second: Player_Riding_Horse_25
+  - first:
+      213: -972413914435474830
+    second: Player_Riding_Horse_26
+  - first:
+      213: 3976941690569776131
+    second: Player_Riding_Horse_27
+  - first:
+      213: 1065549261753082701
+    second: Player_Riding_Horse_28
+  - first:
+      213: -1319333627388276237
+    second: Player_Riding_Horse_29
+  - first:
+      213: 3894969568739553718
+    second: Player_Riding_Horse_30
+  - first:
+      213: 8219619977082998148
+    second: Player_Riding_Horse_31
+  - first:
+      213: -7024424781579012438
+    second: Player_Riding_Horse_32
+  - first:
+      213: -1116211184121180679
+    second: Player_Riding_Horse_33
+  - first:
+      213: -2625619541464700537
+    second: Player_Riding_Horse_34
+  - first:
+      213: -2986270379077359951
+    second: Player_Riding_Horse_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Riding_Horse_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 384
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4a96d96ad5342670800000000000000
+      internalID: 8512988407831894603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 384
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d169c9e3ff236e140800000000000000
+      internalID: 4748538928957265437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 336
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e164e884e9427400800000000000000
+      internalID: 320399769394766313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_3
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 336
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6187d0dd8fc096150800000000000000
+      internalID: 5866234252626851862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 460bc1fe1bbc383f0800000000000000
+      internalID: -899651535462682524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 32
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8650a95f6702bcec0800000000000000
+      internalID: -3545704586325392024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3df422e505cba0920800000000000000
+      internalID: 2957383158684864467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 344f8fd05386643c0800000000000000
+      internalID: -4375695410866883517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 240
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6c268fa34bc1b500800000000000000
+      internalID: 410332532635479147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 240
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b596ca84f785de0800000000000000
+      internalID: -1344184538663134405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 240
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9dc1e46e26342750800000000000000
+      internalID: 6279203353350229404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 240
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b95acd85bbc4db0800000000000000
+      internalID: -4806260711977805039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 192
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 779d16fda9beea5c0800000000000000
+      internalID: -4202162351884871305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_13
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 192
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ef256afbaf1444c0800000000000000
+      internalID: -4304280520358547479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_14
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 192
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf06b655db6ed6470800000000000000
+      internalID: 8389615381717410043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 192
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc5572a9a6fc891c0800000000000000
+      internalID: -4496616171169688113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_16
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 192
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45936a13e27045f0800000000000000
+      internalID: -774492816181848753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_17
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 192
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61c23fa77c2f2ab30800000000000000
+      internalID: 4297263933040045078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 144
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2eec2a5e74fa0ec0800000000000000
+      internalID: -3599796128613339601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_19
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 144
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f90cbddeb44977c0800000000000000
+      internalID: -4073148801425339914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_20
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 144
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff3491f1669784fb0800000000000000
+      internalID: -4663343934626774017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_21
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 144
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 439344383f4392930800000000000000
+      internalID: 4118881554691012916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_22
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 144
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 048db332455e4eaa0800000000000000
+      internalID: -6132524643040634816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_23
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 144
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81047a1d524f86120800000000000000
+      internalID: 2407442444097896472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_24
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 96
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 571273b9e6b185f50800000000000000
+      internalID: 6870271393418125685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_25
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 96
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cd68e4f54c04aa40800000000000000
+      internalID: 5378437349588364740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_26
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 96
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a2d6762ba4182f0800000000000000
+      internalID: -972413914435474830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_27
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 96
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30c5ad6956fe03730800000000000000
+      internalID: 3976941690569776131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_28
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 48
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d43e875786799ce00800000000000000
+      internalID: 1065549261753082701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_29
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 48
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f15b475e09c0bde0800000000000000
+      internalID: -1319333627388276237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_30
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 48
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b17da3bf26bd0630800000000000000
+      internalID: 3894969568739553718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_31
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 48
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48d8cbad1d4f11270800000000000000
+      internalID: 8219619977082998148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa6388ec0ea348e90800000000000000
+      internalID: -7024424781579012438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_33
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd832c87db6280f0800000000000000
+      internalID: -1116211184121180679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7892cab20fcef8bd0800000000000000
+      internalID: -2625619541464700537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Riding_Horse_35
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6a2d389e2ae86d0800000000000000
+      internalID: -2986270379077359951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Riding_Horse_0: 8512988407831894603
+      Player_Riding_Horse_1: 4748538928957265437
+      Player_Riding_Horse_10: 6279203353350229404
+      Player_Riding_Horse_11: -4806260711977805039
+      Player_Riding_Horse_12: -4202162351884871305
+      Player_Riding_Horse_13: -4304280520358547479
+      Player_Riding_Horse_14: 8389615381717410043
+      Player_Riding_Horse_15: -4496616171169688113
+      Player_Riding_Horse_16: -774492816181848753
+      Player_Riding_Horse_17: 4297263933040045078
+      Player_Riding_Horse_18: -3599796128613339601
+      Player_Riding_Horse_19: -4073148801425339914
+      Player_Riding_Horse_2: 320399769394766313
+      Player_Riding_Horse_20: -4663343934626774017
+      Player_Riding_Horse_21: 4118881554691012916
+      Player_Riding_Horse_22: -6132524643040634816
+      Player_Riding_Horse_23: 2407442444097896472
+      Player_Riding_Horse_24: 6870271393418125685
+      Player_Riding_Horse_25: 5378437349588364740
+      Player_Riding_Horse_26: -972413914435474830
+      Player_Riding_Horse_27: 3976941690569776131
+      Player_Riding_Horse_28: 1065549261753082701
+      Player_Riding_Horse_29: -1319333627388276237
+      Player_Riding_Horse_3: 5866234252626851862
+      Player_Riding_Horse_30: 3894969568739553718
+      Player_Riding_Horse_31: 8219619977082998148
+      Player_Riding_Horse_32: -7024424781579012438
+      Player_Riding_Horse_33: -1116211184121180679
+      Player_Riding_Horse_34: -2625619541464700537
+      Player_Riding_Horse_35: -2986270379077359951
+      Player_Riding_Horse_4: -899651535462682524
+      Player_Riding_Horse_5: -3545704586325392024
+      Player_Riding_Horse_6: 2957383158684864467
+      Player_Riding_Horse_7: -4375695410866883517
+      Player_Riding_Horse_8: 410332532635479147
+      Player_Riding_Horse_9: -1344184538663134405
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

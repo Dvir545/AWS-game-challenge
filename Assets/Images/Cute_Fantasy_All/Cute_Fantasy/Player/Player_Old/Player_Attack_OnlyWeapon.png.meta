@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: 32a4cac4ce2f8ee5b96fa2fb42634d5b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3614327276305291807
+    second: Player_Attack_OnlyWeapon_0
+  - first:
+      213: 786892261180665361
+    second: Player_Attack_OnlyWeapon_1
+  - first:
+      213: -2046997279836365195
+    second: Player_Attack_OnlyWeapon_2
+  - first:
+      213: -2537592875155306717
+    second: Player_Attack_OnlyWeapon_3
+  - first:
+      213: -4449854569315941377
+    second: Player_Attack_OnlyWeapon_4
+  - first:
+      213: -9133617781726530810
+    second: Player_Attack_OnlyWeapon_5
+  - first:
+      213: 4472946194132782667
+    second: Player_Attack_OnlyWeapon_6
+  - first:
+      213: 5004213674372290947
+    second: Player_Attack_OnlyWeapon_7
+  - first:
+      213: -8762836935709104251
+    second: Player_Attack_OnlyWeapon_8
+  - first:
+      213: -7385634517104662991
+    second: Player_Attack_OnlyWeapon_9
+  - first:
+      213: 1436435854385053879
+    second: Player_Attack_OnlyWeapon_10
+  - first:
+      213: 505679069296213764
+    second: Player_Attack_OnlyWeapon_11
+  - first:
+      213: 6586183873407104605
+    second: Player_Attack_OnlyWeapon_12
+  - first:
+      213: 2045149346132234864
+    second: Player_Attack_OnlyWeapon_13
+  - first:
+      213: -7777720004552600019
+    second: Player_Attack_OnlyWeapon_14
+  - first:
+      213: 662439115396336331
+    second: Player_Attack_OnlyWeapon_15
+  - first:
+      213: -3052803974693495459
+    second: Player_Attack_OnlyWeapon_16
+  - first:
+      213: 6242228399442283039
+    second: Player_Attack_OnlyWeapon_17
+  - first:
+      213: 5133869279970048410
+    second: Player_Attack_OnlyWeapon_18
+  - first:
+      213: -7898046054638922917
+    second: Player_Attack_OnlyWeapon_19
+  - first:
+      213: -5078115447041570278
+    second: Player_Attack_OnlyWeapon_20
+  - first:
+      213: 8990121016606570894
+    second: Player_Attack_OnlyWeapon_21
+  - first:
+      213: 3766877171237401177
+    second: Player_Attack_OnlyWeapon_22
+  - first:
+      213: -2586407034298938395
+    second: Player_Attack_OnlyWeapon_23
+  - first:
+      213: -1872050657213536624
+    second: Player_Attack_OnlyWeapon_24
+  - first:
+      213: -5404693239990910970
+    second: Player_Attack_OnlyWeapon_25
+  - first:
+      213: 725441839988557514
+    second: Player_Attack_OnlyWeapon_26
+  - first:
+      213: -2530343260177023084
+    second: Player_Attack_OnlyWeapon_27
+  - first:
+      213: -8782475470980090222
+    second: Player_Attack_OnlyWeapon_28
+  - first:
+      213: -7415415680878664454
+    second: Player_Attack_OnlyWeapon_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 269
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a9e2e128ba82230800000000000000
+      internalID: 3614327276305291807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 255
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11e6d28a75a9bea00800000000000000
+      internalID: 786892261180665361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 270
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57e9927c1da9793e0800000000000000
+      internalID: -2046997279836365195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_3
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 262
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3274ecb89b8a8ccd0800000000000000
+      internalID: -2537592875155306717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 237
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff346c578d0fe32c0800000000000000
+      internalID: -4449854569315941377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_5
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 223
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 603bffdf40fde3180800000000000000
+      internalID: -9133617781726530810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 230
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e48b86dd8131e30800000000000000
+      internalID: 4472946194132782667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_7
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 238
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 389dc19c2d9827540800000000000000
+      internalID: 5004213674372290947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 201
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587e2660c36246680800000000000000
+      internalID: -8762836935709104251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_9
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 192
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 136ec179984f08990800000000000000
+      internalID: -7385634517104662991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_10
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 193
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b0814b8cce3fe310800000000000000
+      internalID: 1436435854385053879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_11
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 170
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40f30cf2f68840700800000000000000
+      internalID: 505679069296213764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_12
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 161
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5636d77653d66b50800000000000000
+      internalID: 6586183873407104605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_13
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 164
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07295d0ae74d16c10800000000000000
+      internalID: 2045149346132234864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_14
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 129
+        width: 60
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d26513e2ddcff0490800000000000000
+      internalID: -7777720004552600019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_15
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 134
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcac58e9dd4713900800000000000000
+      internalID: 662439115396336331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_16
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 101
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d5e7f95f242a5d0800000000000000
+      internalID: -3052803974693495459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_17
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 103
+        width: 20
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1acc9318a9d0a650800000000000000
+      internalID: 6242228399442283039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_18
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 104
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a99b7e3e8ea2f3740800000000000000
+      internalID: 5133869279970048410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_19
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 73
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b53529d75f0846290800000000000000
+      internalID: -7898046054638922917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_20
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 74
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1ac9aae7e8e689b0800000000000000
+      internalID: -5078115447041570278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_21
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 75
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e89bb92de6353cc70800000000000000
+      internalID: 8990121016606570894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_22
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 71
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952322854d2a64430800000000000000
+      internalID: 3766877171237401177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_23
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 41
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb4a04718c3b1cd0800000000000000
+      internalID: -2586407034298938395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_24
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 43
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096204788d32506e0800000000000000
+      internalID: -1872050657213536624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_25
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 42
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600036e222caef4b0800000000000000
+      internalID: -5404693239990910970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_26
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 23
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac649b98289411a00800000000000000
+      internalID: 725441839988557514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_27
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 39
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f3851163a62ecd0800000000000000
+      internalID: -2530343260177023084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_28
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 11
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29676a737116e1680800000000000000
+      internalID: -8782475470980090222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_OnlyWeapon_29
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 13
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af4ad5f0ab6271990800000000000000
+      internalID: -7415415680878664454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Player_Attack_OnlyWeapon_0: 3614327276305291807
+      Player_Attack_OnlyWeapon_1: 786892261180665361
+      Player_Attack_OnlyWeapon_10: 1436435854385053879
+      Player_Attack_OnlyWeapon_11: 505679069296213764
+      Player_Attack_OnlyWeapon_12: 6586183873407104605
+      Player_Attack_OnlyWeapon_13: 2045149346132234864
+      Player_Attack_OnlyWeapon_14: -7777720004552600019
+      Player_Attack_OnlyWeapon_15: 662439115396336331
+      Player_Attack_OnlyWeapon_16: -3052803974693495459
+      Player_Attack_OnlyWeapon_17: 6242228399442283039
+      Player_Attack_OnlyWeapon_18: 5133869279970048410
+      Player_Attack_OnlyWeapon_19: -7898046054638922917
+      Player_Attack_OnlyWeapon_2: -2046997279836365195
+      Player_Attack_OnlyWeapon_20: -5078115447041570278
+      Player_Attack_OnlyWeapon_21: 8990121016606570894
+      Player_Attack_OnlyWeapon_22: 3766877171237401177
+      Player_Attack_OnlyWeapon_23: -2586407034298938395
+      Player_Attack_OnlyWeapon_24: -1872050657213536624
+      Player_Attack_OnlyWeapon_25: -5404693239990910970
+      Player_Attack_OnlyWeapon_26: 725441839988557514
+      Player_Attack_OnlyWeapon_27: -2530343260177023084
+      Player_Attack_OnlyWeapon_28: -8782475470980090222
+      Player_Attack_OnlyWeapon_29: -7415415680878664454
+      Player_Attack_OnlyWeapon_3: -2537592875155306717
+      Player_Attack_OnlyWeapon_4: -4449854569315941377
+      Player_Attack_OnlyWeapon_5: -9133617781726530810
+      Player_Attack_OnlyWeapon_6: 4472946194132782667
+      Player_Attack_OnlyWeapon_7: 5004213674372290947
+      Player_Attack_OnlyWeapon_8: -8762836935709104251
+      Player_Attack_OnlyWeapon_9: -7385634517104662991
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
