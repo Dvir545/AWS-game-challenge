@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -137,10 +137,10 @@ TextureImporter:
       name: Grass_1_Anim_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 5
-        width: 11
-        height: 6
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,10 +158,10 @@ TextureImporter:
       name: Grass_1_Anim_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 5
-        width: 12
-        height: 6
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: Grass_1_Anim_2
       rect:
         serializedVersion: 2
-        x: 33
-        y: 5
-        width: 12
-        height: 7
+        x: 32
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,9 +201,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 5
-        width: 12
-        height: 7
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,9 +222,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 5
-        width: 12
-        height: 7
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,9 +243,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 80
-        y: 5
-        width: 12
-        height: 7
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,10 +263,10 @@ TextureImporter:
       name: Grass_1_Anim_6
       rect:
         serializedVersion: 2
-        x: 97
-        y: 5
-        width: 12
-        height: 7
+        x: 96
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,10 +284,10 @@ TextureImporter:
       name: Grass_1_Anim_7
       rect:
         serializedVersion: 2
-        x: 114
-        y: 5
-        width: 11
-        height: 6
+        x: 112
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,7 +304,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 94651d2de48341e48baea44fe8dbdf21
     internalID: 0
     vertices: []
     indices: 
