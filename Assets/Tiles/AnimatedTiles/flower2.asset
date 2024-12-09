@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: flower2
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   - {fileID: -6010652177031837625, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   - {fileID: 3233910172504916489, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   - {fileID: 8423998160535783081, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
@@ -21,6 +20,21 @@ MonoBehaviour:
   - {fileID: -6765538765342848586, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   - {fileID: -628378911740909492, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   - {fileID: -110447768908603862, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
+  - {fileID: 4913509958916858431, guid: 9604371ccc1fa9efab842e576c7dc69b, type: 3}
   m_MinSpeed: 5
   m_MaxSpeed: 8
   m_AnimationStartTime: 0

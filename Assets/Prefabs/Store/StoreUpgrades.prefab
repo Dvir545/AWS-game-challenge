@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -8382220142040987137, guid: ce463cb06ddde894fb1cce952e1754ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -378855277
-  m_SortingLayer: 15
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 5982315299529934869, guid: 4d9a4579b9ebd10f2b6a6d5e60b1c2e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -299,7 +299,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 621266246945384593, guid: f861101a507d3c94fa9877f49bfef979, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 8877473712045067596}
   - component: {fileID: 763881484978012356}
   - component: {fileID: 4622563551119967041}
-  - component: {fileID: 668026810532986859}
+  - component: {fileID: 3900410222266266075}
   m_Layer: 0
   m_Name: StoreUpgrades
   m_TagString: Untagged
@@ -387,7 +387,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 6399128345816689074, guid: f8614770cd7cf4247a1a8fc39835211c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -463,7 +463,7 @@ PolygonCollider2D:
       - {x: -3.389533, y: -3.2264705}
       - {x: -4.253302, y: -3.233846}
   m_UseDelaunayMesh: 0
---- !u!114 &668026810532986859
+--- !u!114 &3900410222266266075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,12 +472,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3480136485983360744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 1
+  m_Size: {x: 7, y: 7, z: 4}
+  m_Center: {x: 2, y: 2, z: 0}
   m_Area: 1
-  m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
 --- !u!1 &3744161583502962645
 GameObject:
@@ -550,7 +550,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 5373044996918418005, guid: ce463cb06ddde894fb1cce952e1754ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -634,7 +634,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1498090333, guid: 7b5fcc1afa540524ab3733159a20d0b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -720,7 +720,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 590681561
-  m_SortingLayer: 13
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 3076555489334943983, guid: 30ef7dce9c62b3d43a3bf26af2c0db60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -790,8 +790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7156ee0394cfb202aaaf4d04d16ad3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalStoreManager: {fileID: 0}
-  myPlayer: {fileID: 0}
 --- !u!1 &5371684399774530973
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +861,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 63808960, guid: 7b5fcc1afa540524ab3733159a20d0b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -947,7 +945,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1616378356, guid: fc92edd430cddfb4abfa936d6d61a94d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

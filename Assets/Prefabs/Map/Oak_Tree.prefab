@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1045972379254806163}
   - component: {fileID: 5629690981047025039}
-  - component: {fileID: 2197553702461338849}
+  - component: {fileID: 2603525388639199056}
+  - component: {fileID: 934646482407404545}
   m_Layer: 0
   m_Name: Oak_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1045972379254806163
 Transform:
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1270636369893658673, guid: 2776ee16865590079b9c71a673b66f0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!61 &2197553702461338849
+--- !u!61 &2603525388639199056
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0235386, y: 0.79415894}
   m_EdgeRadius: 0
+--- !u!114 &934646482407404545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279332361236210438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.023539, y: 0.7941589, z: 4}
+  m_Center: {x: -0.002706528, y: 0.3942604, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 857362439167543788}
   - component: {fileID: 4826801612508537005}
   - component: {fileID: 5613601908004139732}
+  - component: {fileID: 7852144381477744162}
   m_Layer: 0
   m_Name: Big_Fruit_Tree
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 621266246945384593, guid: 2e4ba280e9e6a7f44a89874690d35625, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67579556, y: 0.79415894}
   m_EdgeRadius: 0
+--- !u!114 &7852144381477744162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148998586341300762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.6757956, y: 0.7941589, z: 4}
+  m_Center: {x: -0.001868725, y: 0.3942604, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

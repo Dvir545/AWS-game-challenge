@@ -4,30 +4,30 @@ namespace Stores
 {
     public class StoreOpener : MonoBehaviour
     {
-        [SerializeField] private GeneralStoreManager generalStoreManager;
-        [SerializeField] private Collider2D myPlayer;
-        private Collider2D  _collider;
+       private GeneralStoreManager _generalStoreManager;
+        private Collider2D _myPlayer;
         
         private bool _isPlayerInTrigger;
-        void Start()
+        void Awake()
         {
-            _collider = GetComponent<Collider2D>();
+            _generalStoreManager = FindObjectOfType<GeneralStoreManager>();
+            _myPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
         }
     
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!_isPlayerInTrigger && other == myPlayer)
+            if (!_isPlayerInTrigger && other == _myPlayer)
             {
-                generalStoreManager.OpenStore();
+                _generalStoreManager.OpenStore();
                 _isPlayerInTrigger = true;
             }
         }
     
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (_isPlayerInTrigger && other == myPlayer)
+            if (_isPlayerInTrigger && other == _myPlayer)
             {
-                generalStoreManager.CloseStore();
+                _generalStoreManager.CloseStore();
                 _isPlayerInTrigger = false;
             }
         }

@@ -12,7 +12,7 @@ namespace Utils
 
         public void FloatingTextEffect(Vector3 pos, float distance, float duration, string inputText, Color color, float sizeMultiplier=1f)
         {
-            var centeredPos = new Vector3(pos.x + 0.5f, pos.y + 0.5f, pos.z);
+            var centeredPos = new Vector3(pos.x, pos.y + 0.5f, pos.z);
             var floatingTextObj = Instantiate(cashRewardPrefab, centeredPos, Quaternion.identity);
             floatingTextObj.transform.localScale *= sizeMultiplier;
             var targetY = pos.y + distance;

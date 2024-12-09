@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: flower3
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   - {fileID: -4956846675511439603, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   - {fileID: -3540998754278378998, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   - {fileID: 8327931536474725848, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
@@ -21,6 +20,21 @@ MonoBehaviour:
   - {fileID: 5429093431899604917, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   - {fileID: 5100693388119963563, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   - {fileID: -8547287944948550908, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
+  - {fileID: 5356322961184756107, guid: 03049ecabeaf586bcbded7ad25f6b300, type: 3}
   m_MinSpeed: 5
   m_MaxSpeed: 8
   m_AnimationStartTime: 0

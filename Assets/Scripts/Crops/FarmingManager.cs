@@ -10,8 +10,8 @@ namespace Crops
 {
     public class FarmingManager: MonoBehaviour
     {
-        [SerializeField] private Tilemap canFarmTilemap;
-        [SerializeField] private Tilemap farmTilemap;
+        private Tilemap canFarmTilemap;
+        private Tilemap farmTilemap;
         [SerializeField] private TileBase farmTile;
         [SerializeField] private CropManager cropManager;
         [SerializeField] private GameObject cropSpritePrefab;
@@ -22,11 +22,17 @@ namespace Crops
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         [SerializeField] private EffectsManager effectsManager;
         
-        private Vector2 _cropInstantiationOffset = new Vector2(0.5f, 0.4f);
+        private Vector2 _cropInstantiationOffset = new Vector2(0f, 0.4f);
         
         public Dictionary<Vector3Int, FarmData> Farms { get; private set; }= new();
         
         public bool IsFarming { get; private set; }
+        
+        private void Awake()
+        {
+            canFarmTilemap = GameObject.FindGameObjectWithTag("canFarmTilemap").GetComponent<Tilemap>();
+            farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
+        }
 
         public class FarmData
         {

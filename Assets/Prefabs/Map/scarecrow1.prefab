@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7840828552427188975}
   - component: {fileID: 2998078337989547032}
   - component: {fileID: 5031656595063535004}
+  - component: {fileID: -4963182865162469668}
   m_Layer: 0
   m_Name: scarecrow1
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 2129503028, guid: 373ac27b589bd1d499dff6bfad38d830, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9842199, y: 1.0071282}
   m_EdgeRadius: 0
+--- !u!114 &-4963182865162469668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915158812780872340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.9842199, y: 1.007128, z: 4}
+  m_Center: {x: -0.0001969934, y: 0.353564, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

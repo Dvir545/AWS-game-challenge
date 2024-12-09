@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: heartflower0
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 2165228976696570442, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  - {fileID: -3654958183945754466, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  - {fileID: 6712921816411080603, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  - {fileID: -6175682230824706940, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  - {fileID: -5988199410598797782, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  - {fileID: -2365273065728547797, guid: e4d33915f0aab2eac97ecf2f105e56f3, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 8
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

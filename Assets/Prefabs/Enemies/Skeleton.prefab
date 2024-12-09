@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bc076a45003a6984599cbdd32bec355b, type: 2}
     - target: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17
+      value: 17.89
       objectReference: {fileID: 0}
     - target: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -65,6 +65,14 @@ PrefabInstance:
       value: Skeleton
       objectReference: {fileID: 0}
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: avoidancePriority
       value: 49
       objectReference: {fileID: 0}
@@ -80,6 +88,10 @@ PrefabInstance:
       propertyPath: walkingSound
       value: 
       objectReference: {fileID: 8300000, guid: a104d2d0a3aa3984ebf44b2bfb3de582, type: 3}
+    - target: {fileID: 8052125787769978278, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: MaxDistance
+      value: 27.769802
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

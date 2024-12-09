@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135972a230013d946858267e603bb04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorPrefab: {fileID: 0}
+  floorPrefab: {fileID: 5343346920017203117, guid: 87c86b8743db896488b3bda0b3405938, type: 3}
 --- !u!1 &8733900449144418652
 GameObject:
   m_ObjectHideFlags: 0

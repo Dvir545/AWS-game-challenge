@@ -9,6 +9,8 @@ TagManager:
   - Tower
   - Arrow
   - Enemy
+  - canFarmTilemap
+  - farmTilemap
   layers:
   - Default
   - TransparentFX
@@ -47,34 +49,7 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: sea
-    uniqueID: 3895920055
-    locked: 0
-  - name: sand
-    uniqueID: 1399811215
-    locked: 0
-  - name: grass
-    uniqueID: 2411128889
-    locked: 0
-  - name: river
-    uniqueID: 2005416759
-    locked: 0
-  - name: farm_edge
-    uniqueID: 1307788389
-    locked: 0
-  - name: Crops_land
-    uniqueID: 2221617613
-    locked: 0
-  - name: road
-    uniqueID: 297470331
-    locked: 0
-  - name: bridge
-    uniqueID: 443221571
-    locked: 0
-  - name: decoration
-    uniqueID: 1659305351
-    locked: 0
-  - name: stores
-    uniqueID: 2810670123
+    uniqueID: 274382209
     locked: 0
   - name: land
     uniqueID: 3110307691

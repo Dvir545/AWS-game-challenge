@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9170723709768651898}
   - component: {fileID: 1454332207583615814}
   - component: {fileID: -3646805286664613400}
+  - component: {fileID: 4488275266513513806}
   m_Layer: 0
   m_Name: Big_Torch
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 4736707664447460310, guid: 52970c7412dfdd3e9b8ef3ec7a8f01f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &1454332207583615814
 Animator:
   serializedVersion: 5
@@ -152,3 +153,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3968625, y: 0.6893883}
   m_EdgeRadius: 0
+--- !u!114 &4488275266513513806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452595147957133859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.3968625, y: 0.6893883, z: 4}
+  m_Center: {x: 0.05521703, y: 0.3026786, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

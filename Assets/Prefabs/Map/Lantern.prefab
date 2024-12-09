@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8285004161044809735}
   - component: {fileID: 4708433671739954486}
   - component: {fileID: 4495075726331356221}
+  - component: {fileID: -8884931731275496082}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2686811100745311587, guid: 975170e95e2957d6c9ff01c8b1b08735, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4708433671739954486
 Animator:
   serializedVersion: 5
@@ -152,3 +153,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5872009, y: 0.85837746}
   m_EdgeRadius: 0
+--- !u!114 &-8884931731275496082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617223419952805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.5872009, y: 0.8583775, z: 4}
+  m_Center: {x: 0.02242553, y: 0.4102507, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

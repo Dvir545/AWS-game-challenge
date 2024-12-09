@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8950039386679023517}
   - component: {fileID: 7288358301492704173}
   - component: {fileID: 6897660407729087245}
+  - component: {fileID: 7811311059539861950}
   m_Layer: 0
   m_Name: Oak_Tree_Small
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1823353283
-  m_SortingLayer: 14
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 6451065752358906750, guid: cad5132b79cf9a88ab4b52c5a13c99f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4793129, y: 0.79415894}
   m_EdgeRadius: 0
+--- !u!114 &7811311059539861950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977096964377969982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.4793129, y: 0.7941589, z: 4}
+  m_Center: {x: -0.007038116, y: 0.3942604, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
