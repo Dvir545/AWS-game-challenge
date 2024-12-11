@@ -1,16 +1,16 @@
 using UnityEngine;
+using Utils;
 
 namespace Stores
 {
     public class StoreOpener : MonoBehaviour
     {
-       private GeneralStoreManager _generalStoreManager;
+        [SerializeField] private StoreType storeType;
         private Collider2D _myPlayer;
         
         private bool _isPlayerInTrigger;
         void Awake()
         {
-            _generalStoreManager = FindObjectOfType<GeneralStoreManager>();
             _myPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
         }
     
@@ -18,7 +18,7 @@ namespace Stores
         {
             if (!_isPlayerInTrigger && other == _myPlayer)
             {
-                _generalStoreManager.OpenStore();
+                GeneralStoreManager.Instance.OpenStore(storeType);
                 _isPlayerInTrigger = true;
             }
         }
@@ -27,7 +27,7 @@ namespace Stores
         {
             if (_isPlayerInTrigger && other == _myPlayer)
             {
-                _generalStoreManager.CloseStore();
+                GeneralStoreManager.Instance.CloseStore();
                 _isPlayerInTrigger = false;
             }
         }

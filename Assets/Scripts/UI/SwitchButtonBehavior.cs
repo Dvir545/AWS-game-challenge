@@ -1,17 +1,15 @@
-using System;
 using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data;
 
-namespace Clickables
+namespace UI
 {
     public class SwitchButtonBehavior : MonoBehaviour
     {
         [SerializeField] private Image actIcon;
-        [SerializeField] private Sprite[] icons;
-        [FormerlySerializedAs("playerAction")] [SerializeField] private PlayerActionManager playerActionManager;
+        [SerializeField] private PlayerActionManager playerActionManager;
         [SerializeField] private PlayerData playerData;
         
         private Button _button;
@@ -42,9 +40,7 @@ namespace Clickables
         
         private void OnClick()
         {
-            playerData.SwitchTool();
-            actIcon.sprite = playerData.GetCurTool().GetToolSprite(icons);
-            playerActionManager.SwitchActing();
+            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, true);
         }
     }
 }

@@ -251,12 +251,12 @@ AnimatorStateMachine:
   - first: {fileID: -3625392326640950818}
     second:
     - {fileID: -761363914047157525}
-  - first: {fileID: 991755433401883923}
-    second:
-    - {fileID: -66948175565357327}
   - first: {fileID: 2376188397445934377}
     second:
     - {fileID: 3627858780616025077}
+  - first: {fileID: 991755433401883923}
+    second:
+    - {fileID: -66948175565357327}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 20, y: 30, z: 0}
   m_EntryPosition: {x: -30, y: 130, z: 0}
@@ -564,7 +564,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HitRight
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8706225848932254771}
@@ -933,7 +933,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HitDown
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2832897192068192002}
@@ -1091,7 +1091,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HitUp
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3139004284017580321}

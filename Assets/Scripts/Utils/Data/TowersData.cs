@@ -5,15 +5,17 @@ namespace Utils.Data
     public struct TowerData
     {
         public TowerMaterial TowerMaterial { get; private set; }
+        public int Price { get; private set; }
         public int Damage { get; private set; }
         public int Range { get; private set; }
         public float SecondsToAttack { get; private set; }
         public int SecondsToBuild { get; private set; }
         public int SecondsToDestroy { get; private set; }
         
-        public TowerData(TowerMaterial tower, int damage, int range, float secondsToAttack, int secondsToBuild, int secondsToDestroy)
+        public TowerData(TowerMaterial tower, int price, int damage, int range, float secondsToAttack, int secondsToBuild, int secondsToDestroy)
         {
             TowerMaterial = tower;
+            Price = price;
             Damage = damage;
             Range = range;
             SecondsToAttack = secondsToAttack;
@@ -29,12 +31,11 @@ namespace Utils.Data
     public class TowersData: Singleton<TowersData>
     {
         private TowerData[] _towersData = {
-            new TowerData(TowerMaterial.Wood, 1, 3, 3, 1, 5),
-            new TowerData(TowerMaterial.Stone, 2, 4, 2, 1, 7),
-            new TowerData(TowerMaterial.Steel, 3, 5, 1.5f, 1, 9),
-            new TowerData(TowerMaterial.Gold, 4, 6, 1f, 1, 9),
-            new TowerData(TowerMaterial.Diamond, 5, 7, 1f, 1, 12)
-            // todo change times to build: 10, 15, 20, 25, 30
+            new(TowerMaterial.Wood, 20, 1, 3, 3, 10, 5),
+            new(TowerMaterial.Stone, 50, 2, 4, 2, 15, 7),
+            new(TowerMaterial.Steel, 100, 3, 5, 1.5f, 20, 9),
+            new(TowerMaterial.Gold, 250, 4, 6, 1f, 25, 9),
+            new(TowerMaterial.Diamond, 500, 5, 7, 1f, 30, 12)
         };
         
         public TowerData GetTowerData(TowerMaterial tower)

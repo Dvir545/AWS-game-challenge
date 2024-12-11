@@ -22,7 +22,7 @@ namespace Crops
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         [SerializeField] private EffectsManager effectsManager;
         
-        private Vector2 _cropInstantiationOffset = new Vector2(0f, 0.4f);
+        private Vector2 _cropInstantiationOffset = new Vector2(.5f, 0.4f);
         
         public Dictionary<Vector3Int, FarmData> Farms { get; private set; }= new();
         

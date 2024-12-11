@@ -1,29 +1,32 @@
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
+using Utils.Data;
 
-namespace Clickables
+namespace UI
 {
     public class ActButtonBehavior : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField] private GameObject iconObject;
-        [FormerlySerializedAs("playerAction")] [SerializeField] private PlayerActionManager playerActionManager;
+        [SerializeField] private PlayerActionManager playerActionManager;
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private float pressedOffset = 2f;
         
         private Button _button;
         private Vector3 _originalIconPosition;
-        private bool _isPressed = false;
+        private bool _isPressed;
         private Sprite _normalSprite;
         private Sprite _pressedSprite;
         private Image _buttonImage;
+        private Image _iconImage;
 
         private void Start()
         {
             _button = GetComponent<Button>();
             _buttonImage = GetComponent<Image>();
+            _iconImage = iconObject.GetComponent<Image>();
             
             // Cache the button sprites
             _normalSprite = _buttonImage.sprite; // Changed this line
@@ -36,6 +39,22 @@ namespace Clickables
             
             EventManager.Instance.StartListening(EventManager.TowerBuilt, ForciblyReleaseButton);
             EventManager.Instance.StartListening(EventManager.CropHarvested, ForciblyReleaseButton);
+            EventManager.Instance.StartListening(EventManager.ActiveToolChanged, ChangeToolIcon);
+        }
+
+        private void ChangeToolIcon(object arg0)
+        {
+            if (arg0 is bool switched)
+            {
+                if (switched)
+                {
+                    playerData.SwitchTool();
+                    playerActionManager.SwitchActing();
+                }
+                var tool = playerData.GetCurTool();
+                var level = playerData.GetToolLevel(tool);
+                _iconImage.sprite = SpriteData.Instance.GetToolSprite(tool, level, outline: false);
+            }
         }
 
         private void ForciblyReleaseButton(object arg0)

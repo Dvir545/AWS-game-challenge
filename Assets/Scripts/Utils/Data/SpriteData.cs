@@ -17,7 +17,6 @@ namespace Utils.Data
         [SerializeField] private Sprite[] tomatoSprites;
         [SerializeField] private Sprite[] cornSprites;
         [SerializeField] private Sprite[] pumpkinSprites;
-        
         public Sprite GetCropSprite(Crop crop, float growth)
         {
             var sprites = crop switch
@@ -31,5 +30,22 @@ namespace Utils.Data
             };
             return sprites[Mathf.Min(sprites.Length - 1, Mathf.FloorToInt(growth * sprites.Length))];
         }
+        
+        [Header("Tool Sprites")] 
+        [SerializeField] private Sprite[] swordSprites;
+        [SerializeField] private Sprite[] swordSpritesOutline;
+        [SerializeField] private Sprite[] hoeSprites;
+        [SerializeField] private Sprite[] hoeSpritesOutline;
+        [SerializeField] private Sprite[] hammerSprites;
+        [SerializeField] private Sprite[] hammerSpritesOutline;
+        public Sprite GetToolSprite(HeldTool tool, int level, bool outline=true) 
+        => tool switch
+            {
+                HeldTool.Sword => outline? swordSpritesOutline[level] : swordSprites[level],
+                HeldTool.Hoe => outline? hoeSpritesOutline[level] : hoeSprites[level],
+                HeldTool.Hammer => outline? hammerSpritesOutline[level] : hammerSprites[level],
+                _ => throw new ArgumentOutOfRangeException(nameof(tool), tool, null)
+            };
+        
     }
 }

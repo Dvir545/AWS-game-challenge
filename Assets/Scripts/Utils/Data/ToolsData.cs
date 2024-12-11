@@ -1,78 +1,74 @@
 namespace Utils.Data
 {
-    struct Sword
+    readonly struct Sword
     {
-        private  float _animationSpeedMultiplier;
-        private int _damageMultiplier;
+        private readonly int _damageMultiplier;
+        private readonly int _price;
         
-        public  Sword(float animationSpeedMultiplier, int damageMultiplier)
+        public  Sword(int damageMultiplier, int price)
         {
-            _animationSpeedMultiplier = animationSpeedMultiplier;
             _damageMultiplier = damageMultiplier;
+            _price = price;
         }
         
-        public float GetAnimationSpeedMultiplier() => _animationSpeedMultiplier;
         public int GetDamageMultiplier() => _damageMultiplier;
+        public int GetPrice() => _price;
     }
-    
-    struct Hoe
+
+    readonly struct Hoe
     {
-        private float _animationSpeedMultiplier;
-        private float _progressSpeedMultiplier;
+        private readonly float _progressSpeedMultiplier;
+        private readonly int _price;
         
-        public Hoe(float animationSpeedMultiplier, float progressSpeedMultiplier)
+        public Hoe(float progressSpeedMultiplier, int price)
         {
-            _animationSpeedMultiplier = animationSpeedMultiplier;
             _progressSpeedMultiplier = progressSpeedMultiplier;
+            _price = price;
         }
         
-        public float GetAnimationSpeedMultiplier() => _animationSpeedMultiplier;
         public float GetProgressSpeedMultiplier() => _progressSpeedMultiplier;
+        public int GetPrice() => _price;
     }
 
-    struct Hammer
+    readonly struct Hammer
     {
-        private float _animationSpeedMultiplier;
-        private float _progressSpeedMultiplier;
+        private readonly float _progressSpeedMultiplier;
+        private readonly int _price;
 
-        public Hammer(float animationSpeedMultiplier, float damageMultiplier)
+        public Hammer(float progressSpeedMultiplier, int price)
         {
-            _animationSpeedMultiplier = animationSpeedMultiplier;
-            _progressSpeedMultiplier = damageMultiplier;
+            _progressSpeedMultiplier = progressSpeedMultiplier;
+            _price = price;
         }
 
-        public float GetAnimationSpeedMultiplier() => _animationSpeedMultiplier;
         public float GetProgressMultiplier() => _progressSpeedMultiplier;
+        public int GetPrice() => _price;
     }
 
     public static class ToolsData
     {
         private static Sword[] _swords =
         {
-            new(1f, 1), // normal sword
+            new(1, 0),
+            new(2, 100),
+            new(3, 500),
+            new(5, 2000)
+            
         };
         private static Hoe[] _hoes =
         {
-            new(1f, 1f)  // normal hoe
+            new(1, 0),
+            new(2f, 100),
+            new(3f, 500),
+            new(4f, 2000)
         };
         private static Hammer[] _hammers =
         {
-            new(1f, 1f)  // normal hammer
+            new(1, 0),
+            new(2f, 100),
+            new(3f, 500),
+            new(4f, 2000)
         };
-        
-        public static float GetAnimationSpeedMultiplier(int index, HeldTool tool)
-        {
-            switch (tool)
-            {
-                case HeldTool.Sword:
-                    return _swords[index].GetAnimationSpeedMultiplier();
-                case HeldTool.Hoe:
-                    return _hoes[index].GetAnimationSpeedMultiplier();
-                case HeldTool.Hammer:
-                    return _hammers[index].GetAnimationSpeedMultiplier();
-            }
-            return 1;
-        }
         
         public static float GetProgressSpeedMultiplier(int index, HeldTool tool)
         {
@@ -94,6 +90,21 @@ namespace Utils.Data
                 case HeldTool.Sword:
                     return _swords[index].GetDamageMultiplier();
             }
+            return 0;
+        }
+        
+        public static int GetPrice(HeldTool tool, int level)
+        {
+            switch (tool)
+            {
+                case HeldTool.Sword:
+                    return _swords[level].GetPrice();
+                case HeldTool.Hoe:
+                    return _hoes[level].GetPrice();
+                case HeldTool.Hammer:
+                    return _hammers[level].GetPrice();
+            }
+
             return 0;
         }
     }

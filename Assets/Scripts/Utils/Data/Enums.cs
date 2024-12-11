@@ -53,4 +53,12 @@ namespace Utils
         Gold = 3,
         Diamond = 4
     }
+
+    public enum StoreType
+    {
+        Crops = 0,
+        Materials = 1,
+        Tools = 2,
+        Utilities = 3
+    }
 }

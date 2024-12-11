@@ -13,6 +13,7 @@ namespace Utils
         public const string PlayerHitEnemy = "PlayerHitEnemy";
         public const string TowerBuilt = "TowerBuilt";
         public const string CropHarvested = "CropHarvested";
+        public const string ActiveToolChanged = "ActiveToolChanged";
 
         protected EventManager()
         {

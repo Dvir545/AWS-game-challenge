@@ -5,6 +5,7 @@ namespace Utils
     public static class Constants
     {
         public const int NumTools = 3;
+        public const int MaxUpgradeLevel = 3;
         public const int StartHealth = 6;
         public const int StartingCash = 100;
         public const float BaseSecondsPerHeal = 2;  // per heart
@@ -12,6 +13,7 @@ namespace Utils
         public const int BaseEnemyDamage = 1;
         public const int KnockbackForce = 7;
         public const float TimeToEatCrop = 3f;
+        public const int MaxTowerLevels = 3;
 
         public static readonly Color CashColor = new Color(1, 0.93f, 0, 1);
         public static readonly Color EnemyDamageColor = new Color(1, 1, 1, 1);

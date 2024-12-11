@@ -61,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -161,9 +161,9 @@ TextureImporter:
       name: Tool_Icons_Outline_1
       rect:
         serializedVersion: 2
-        x: 15
+        x: 16
         y: 0
-        width: 18
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,9 +182,9 @@ TextureImporter:
       name: Tool_Icons_Outline_2
       rect:
         serializedVersion: 2
-        x: 31
+        x: 32
         y: 0
-        width: 18
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,9 +203,9 @@ TextureImporter:
       name: Tool_Icons_Outline_3
       rect:
         serializedVersion: 2
-        x: 47
+        x: 48
         y: 0
-        width: 18
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -224,9 +224,9 @@ TextureImporter:
       name: Tool_Icons_Outline_4
       rect:
         serializedVersion: 2
-        x: 63
+        x: 64
         y: 0
-        width: 18
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -245,9 +245,9 @@ TextureImporter:
       name: Tool_Icons_Outline_5
       rect:
         serializedVersion: 2
-        x: 79
+        x: 80
         y: 0
-        width: 18
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -269,7 +269,7 @@ TextureImporter:
         x: 96
         y: 0
         width: 16
-        height: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,9 +287,9 @@ TextureImporter:
       name: Tool_Icons_Outline_7
       rect:
         serializedVersion: 2
-        x: 111
+        x: 112
         y: 0
-        width: 34
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -308,9 +308,9 @@ TextureImporter:
       name: Tool_Icons_Outline_8
       rect:
         serializedVersion: 2
-        x: 143
+        x: 128
         y: 0
-        width: 17
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -325,10 +325,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Tool_Icons_Outline_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 608e8e0358dd10241852a11a1f54541a
+      internalID: 798296583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a2c20a9a51a97d04a877d33d5480d441
     internalID: 0
     vertices: []
     indices: 
@@ -345,6 +366,7 @@ TextureImporter:
       Tool_Icons_Outline_6: -316856746276887859
       Tool_Icons_Outline_7: 3643827116389314855
       Tool_Icons_Outline_8: 2641508823780970378
+      Tool_Icons_Outline_9: 798296583
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

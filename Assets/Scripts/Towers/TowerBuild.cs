@@ -51,7 +51,7 @@ namespace Towers
 
         public bool CanBuild()
         {
-            return !_isUnderAttack;  // && _currentLevel < MaxLevel;
+            return !_isUnderAttack && _currentLevel < Constants.MaxTowerLevels;
         }
     
         public bool IsInProgress()

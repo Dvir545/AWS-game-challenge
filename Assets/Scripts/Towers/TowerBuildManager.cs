@@ -61,7 +61,7 @@ namespace Towers
             {
                 if (_towerBuilds[i].IsInProgress())
                 {
-                    _towerBuilds[i].AddToProgress(Time.deltaTime);
+                    _towerBuilds[i].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime);
                     if (progressBarBehavior.IsWorking)
                         progressBarBehavior.UpdateProgress(_towerBuilds[i].GetProgress());
                     else

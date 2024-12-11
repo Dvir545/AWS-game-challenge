@@ -18,17 +18,40 @@ namespace Player
         {
             _curTool = (HeldTool)(((int)_curTool + 1) % Constants.NumTools);
         }
-        private int GetTypeOfCurTool() => _curTool switch
+        private int GetCurToolLevel() => _curTool switch
         {
             HeldTool.Sword => _curSword,
             HeldTool.Hoe => _curHoe,
             HeldTool.Hammer => _curHammer,
             _ => 0
         };
+        public int GetToolLevel(HeldTool tool) => tool switch
+            {
+                HeldTool.Sword => _curSword,
+                HeldTool.Hoe => _curHoe,
+                HeldTool.Hammer => _curHammer,
+                _ => 0
+            };
         public HeldTool GetCurTool() => _curTool;
-        public float GetAnimationSpeedMultiplier => ToolsData.GetAnimationSpeedMultiplier(GetTypeOfCurTool(), _curTool);
-        public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetTypeOfCurTool(), _curTool);
-        public int GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetTypeOfCurTool(), _curTool);
+
+        public void UpgradeTool(HeldTool tool)
+        {
+            switch (tool)
+            {
+                case HeldTool.Sword:
+                    _curSword++;
+                    break;
+                case HeldTool.Hoe:
+                    _curHoe++;
+                    break;
+                case HeldTool.Hammer:
+                    _curHammer++;
+                    break;
+            }
+            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, false);
+        }
+        public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetCurToolLevel(), _curTool);
+        public int GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetCurToolLevel(), _curTool);
 
         public int MaxHealth { get; private set; } = Constants.StartHealth;
 
@@ -56,11 +79,6 @@ namespace Player
         {
             CurHealth -= amount;
             EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
-        }
-
-        public void DecHealth()
-        {
-            SubtractHealth(1);
         }
 
         public int CurCash { get; private set; } = Constants.StartingCash;

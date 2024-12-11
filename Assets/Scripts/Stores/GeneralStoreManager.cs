@@ -1,30 +1,67 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Stores
 {
-    public class GeneralStoreManager : MonoBehaviour
+    public class GeneralStoreManager : Singleton<GeneralStoreManager>
     {
-        [SerializeField] private GameObject windowCanvas;
-        [SerializeField] private GameObject darkOverlay;
+        [SerializeField] private GameObject cropsStore;
+        [SerializeField] private GameObject materialsStore;
+        [SerializeField] private GameObject toolsStore;
+        [SerializeField] private GameObject utilitiesStore;
+        private int _darkOverlayOrder = 0;
+        private int _windowCanvasOrder = 1;
+        private Dictionary<StoreType, GameObject> _storesDarkOverlays;
+        private Dictionary<StoreType, GameObject> _storesWindowCanvases;
+        private StoreType? _activeStore;
         
-        private void Start()
+        private void Awake()
         {
-            if (darkOverlay != null)
-                darkOverlay.SetActive(false);
+            _storesDarkOverlays = new Dictionary<StoreType, GameObject>
+            {
+                [StoreType.Crops] = cropsStore.transform.GetChild(_darkOverlayOrder).gameObject,
+                [StoreType.Materials] = materialsStore.transform.GetChild(_darkOverlayOrder).gameObject,
+                [StoreType.Tools] = toolsStore.transform.GetChild(_darkOverlayOrder).gameObject,
+                [StoreType.Utilities] = utilitiesStore.transform.GetChild(_darkOverlayOrder).gameObject
+            };
+            _storesWindowCanvases = new Dictionary<StoreType, GameObject>
+            {
+                [StoreType.Crops] = cropsStore.transform.GetChild(_windowCanvasOrder).gameObject,
+                [StoreType.Materials] = materialsStore.transform.GetChild(_windowCanvasOrder).gameObject,
+                [StoreType.Tools] = toolsStore.transform.GetChild(_windowCanvasOrder).gameObject,
+                [StoreType.Utilities] = utilitiesStore.transform.GetChild(_windowCanvasOrder).gameObject
+            };
+
         }
 
-        public void OpenStore()
+        private void Start()
         {
-            if (darkOverlay != null)
-                darkOverlay.SetActive(true);
-            windowCanvas.SetActive(true);
+            foreach (var darkOverlay in _storesDarkOverlays.Values)
+            {
+                darkOverlay.SetActive(false);
+            }
+
+            foreach (var windowCanvas in _storesWindowCanvases.Values)
+            {
+                windowCanvas.SetActive(false);
+            }
+        }
+
+        public void OpenStore(StoreType storeType)
+        {
+            _storesDarkOverlays[storeType].SetActive(true);
+            _storesWindowCanvases[storeType].SetActive(true);
+            _activeStore = storeType;
         }
         
         public void CloseStore()
         {
-            if (darkOverlay != null)
-                darkOverlay.SetActive(false);
-            windowCanvas.SetActive(false);
+            if (_activeStore == null) return;
+            StoreType activeStore = (StoreType)_activeStore;
+            _storesDarkOverlays[activeStore].SetActive(false);
+            _storesWindowCanvases[activeStore].SetActive(false);
+            _activeStore = null;
         }
     }
 }
