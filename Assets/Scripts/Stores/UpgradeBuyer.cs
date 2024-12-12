@@ -1,4 +1,3 @@
-using System;
 using Player;
 using TMPro;
 using UnityEngine;
@@ -8,10 +7,10 @@ using Utils.Data;
 
 namespace Stores
 {
-    public class UtilityBuyer : MonoBehaviour
+    public class UpgradeBuyer : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private HeldTool tool;
+        [SerializeField] private Upgrade upgradeType;
         [SerializeField] private TextMeshProUGUI priceText;
         [SerializeField] private TextMeshProUGUI levelText;
         private Image _iconImage;
@@ -34,14 +33,14 @@ namespace Stores
             {
                 Debug.Log("Max upgrade level reached");
             }
-            else if (playerData.CurCash < ToolsData.GetPrice(tool, _curLevel))
+            else if (playerData.CurCash < UpgradesData.GetPrice(upgradeType, _curLevel))
             {
                 Debug.Log("Not enough cash");
             }
             else
             {
                 playerData.SpendCash(_curPrice);
-                playerData.UpgradeTool(tool);
+                playerData.UpgradeUpgrade(upgradeType);
                 UpdateLevel();
             }
         }
@@ -49,19 +48,19 @@ namespace Stores
         private void UpdateLevel()
         {
             Sprite sprite;
-            _curLevel = playerData.GetToolLevel(tool) + 1;
+            _curLevel = playerData.GetUpgradeLevel(upgradeType) + 1;
             if (_curLevel > Constants.MaxUpgradeLevel)
             {
                 levelText.text = "Max";
                 priceText.text = "Level";
-                sprite = SpriteData.Instance.GetToolSprite(tool, Constants.MaxUpgradeLevel);
+                sprite = SpriteData.Instance.GetUpgradeSprite(upgradeType, Constants.MaxUpgradeLevel);
             }
             else
             {
-                _curPrice = ToolsData.GetPrice(tool, _curLevel);
+                _curPrice = UpgradesData.GetPrice(upgradeType, _curLevel);
                 priceText.text = _curPrice + " $";
                 levelText.text = "level " + _curLevel;
-                sprite = SpriteData.Instance.GetToolSprite(tool, _curLevel);
+                sprite = SpriteData.Instance.GetUpgradeSprite(upgradeType, _curLevel);
             }
             _iconImage.sprite = sprite;
         }

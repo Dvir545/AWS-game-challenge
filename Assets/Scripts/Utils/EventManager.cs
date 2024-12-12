@@ -14,6 +14,7 @@ namespace Utils
         public const string TowerBuilt = "TowerBuilt";
         public const string CropHarvested = "CropHarvested";
         public const string ActiveToolChanged = "ActiveToolChanged";
+        public const string AbilityUpgraded = "AbilityUpgraded";
 
         protected EventManager()
         {

@@ -23,10 +23,21 @@ namespace Player
         private float _actTime;
         [SerializeField] private float minActTime;
 
+        bool IsMoving => playerMovement.IsMoving;
+        int Facing => (int)playerMovement.GetFacingDirection();
+        bool IsActing => playerActionManager.IsActing;
+        int ActType => (int)playerData.GetCurTool();
+
         private void Awake()
         {
             EventManager.Instance.StartListening(EventManager.PlayerGotHit, GotHit);
             EventManager.Instance.StartListening(EventManager.PlayerDied, Die);
+            EventManager.Instance.StartListening(EventManager.ActiveToolChanged, ChangeToolColor);
+        }
+
+        private void Start()
+        {
+            ChangeToolColor(null);
         }
 
         private void Die(object arg0)
@@ -39,28 +50,24 @@ namespace Player
 
         private void Update()
         {
-            bool isMoving = playerMovement.IsMoving;
-            int facing = (int)playerMovement.GetFacingDirection();
-            bool isActing = playerActionManager.IsActing;
-            int actType = (int)playerData.GetCurTool();
             foreach (var animator in animators)
             {
-                UpdateAnimator(animator, isMoving, facing, isActing, actType);
+                UpdateAnimator(animator);
             }
         }
 
-        private void UpdateAnimator(Animator animator, bool isMoving, int facing, bool isActing, int actType)
+        private void UpdateAnimator(Animator animator)
         {
-            animator.SetBool(AnimationMoving, isMoving);
-            animator.SetInteger(AnimationFacing, facing);
-            animator.SetInteger(AnimationActType, actType);
-            if (facing == (int)FacingDirection.Right)
+            animator.SetBool(AnimationMoving, IsMoving);
+            animator.SetInteger(AnimationFacing, Facing);
+            animator.SetInteger(AnimationActType, ActType);
+            if (Facing == (int)FacingDirection.Right)
             {
                 foreach (var spriteRenderer in spriteRenderers)
                 {
                     spriteRenderer.flipX = true;
                 }
-            } else if (facing == (int)FacingDirection.Left)
+            } else if (Facing == (int)FacingDirection.Left)
             {
                 foreach (var spriteRenderer in spriteRenderers)
                 {
@@ -68,12 +75,12 @@ namespace Player
                 }
             }
 
-            if (!isActing && animator.GetBool(AnimationActing) && _actStopCR == null)  // change to not acting
+            if (!IsActing && animator.GetBool(AnimationActing) && _actStopCR == null)  // change to not acting
             {
                 _actStopCR = StartCoroutine(StopActingCR());
             }
 
-            if (isActing)
+            if (IsActing)
             {
                 if (_actStopCR != null) // change to acting while coroutine to stop it is working
                 {
@@ -106,6 +113,11 @@ namespace Player
             {
                 animator.SetTrigger(AnimationGotHit);
             }
+        }
+
+        public void ChangeToolColor(object arg0)
+        {
+            animators[1].GetComponent<SpriteRenderer>().color = playerData.GetCurToolColor();
         }
     }
 }

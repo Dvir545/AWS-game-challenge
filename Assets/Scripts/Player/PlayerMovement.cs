@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Utils;
 
@@ -9,10 +8,11 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private float movementSpeed = 5f;
+        [SerializeField] private float baseMovementSpeed = 5f;
         private Rigidbody2D _rb;
         [SerializeField] private SpriteRenderer bodySpriteRenderer;
         [SerializeField] private SpriteRenderer toolSpriteRenderer;
+        [SerializeField] private PlayerData playerData;
 
         private bool _canMove = true;
         private Vector2 _movementDirection;
@@ -88,7 +88,7 @@ namespace Player
 
         private void Move()
         {
-            _rb.velocity = _movementDirection * movementSpeed;
+            _rb.velocity = _movementDirection * (baseMovementSpeed * playerData.SpeedMultiplier);
         }
 
         private void ChangeDirection(FacingDirection direction)

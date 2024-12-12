@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.Pool;
+using Utils;
 
 namespace World
 {
@@ -9,6 +10,7 @@ namespace World
     {
         [SerializeField] private GameObject healEffectPrefab;
         private Dictionary<GameObject, GameObject> _playerHealEffects = new Dictionary<GameObject, GameObject>();
+        [SerializeField] private PlayerData playerData;
         
         void Start()
         {

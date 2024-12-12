@@ -44,17 +44,9 @@ namespace UI
 
         private void ChangeToolIcon(object arg0)
         {
-            if (arg0 is bool switched)
-            {
-                if (switched)
-                {
-                    playerData.SwitchTool();
-                    playerActionManager.SwitchActing();
-                }
-                var tool = playerData.GetCurTool();
-                var level = playerData.GetToolLevel(tool);
-                _iconImage.sprite = SpriteData.Instance.GetToolSprite(tool, level, outline: false);
-            }
+            var tool = playerData.GetCurTool();
+            var level = playerData.GetToolLevel(tool);
+            _iconImage.sprite = SpriteData.Instance.GetToolSprite(tool, level, outline: false);
         }
 
         private void ForciblyReleaseButton(object arg0)

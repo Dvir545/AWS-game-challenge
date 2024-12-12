@@ -120,7 +120,7 @@ namespace Player
         {
             while (true)
             {
-                yield return new WaitForSeconds(Constants.BaseSecondsPerHeal);
+                yield return new WaitForSeconds(Constants.BaseSecondsPerHeal / playerData.RegenSpeedMultiplier);
                 playerData.IncHealth();
             }
         }

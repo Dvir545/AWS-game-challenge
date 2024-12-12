@@ -46,6 +46,22 @@ namespace Utils.Data
                 HeldTool.Hammer => outline? hammerSpritesOutline[level] : hammerSprites[level],
                 _ => throw new ArgumentOutOfRangeException(nameof(tool), tool, null)
             };
-        
+
+        [Header("Upgrade Sprites")] 
+        [SerializeField] private Sprite healthSprite;
+
+        [SerializeField] private Sprite healthSpriteOutline;
+        [SerializeField] private Sprite[] regenSprites;
+        [SerializeField] private Sprite[] regenSpritesOutline;
+        [SerializeField] private Sprite[] speedSprites;
+        [SerializeField] private Sprite[] speedSpritesOutline;
+
+        public Sprite GetUpgradeSprite(Upgrade upgradeType, int level, bool outline=true) => upgradeType switch
+        {
+            Upgrade.Health => outline? healthSpriteOutline : healthSprite,
+            Upgrade.Regen => outline? regenSpritesOutline[level] : regenSprites[level],
+            Upgrade.Speed => outline? speedSpritesOutline[level] : speedSprites[level],
+            _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
+        };
     }
 }

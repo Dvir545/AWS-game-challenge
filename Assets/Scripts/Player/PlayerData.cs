@@ -11,6 +11,12 @@ namespace Player
         private int _curHoe = 0;
         private int _curHammer = 0;
 
+        private int _curHealthUpgradeLevel = 0;
+        private int _curRegenUpgradeLevel = 0;
+        private int _curSpeedUpgradeLevel = 0;
+        public float RegenSpeedMultiplier { get; private set; } = 1;
+        public float SpeedMultiplier { get; private set; } = 1;
+
         private int[] _numCrops = {1, 1, 1, 1, 1};
         private int[] _numMaterials = {1, 1, 1, 1, 1};
         
@@ -48,7 +54,7 @@ namespace Player
                     _curHammer++;
                     break;
             }
-            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, false);
+            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, null);
         }
         public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetCurToolLevel(), _curTool);
         public int GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetCurToolLevel(), _curTool);
@@ -57,7 +63,7 @@ namespace Player
 
         public void IncMaxHealth()
         {
-            MaxHealth++;
+            MaxHealth += 2;
             CurHealth += 2;
             EventManager.Instance.TriggerEvent(EventManager.MaxHealthIncreased, MaxHealth);
         }
@@ -66,6 +72,7 @@ namespace Player
 
         public void AddHealth(int amount)
         {
+            if (CurHealth >= MaxHealth) return;
             CurHealth += amount;
             EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
         }
@@ -114,6 +121,51 @@ namespace Player
         public void RemoveMaterial(TowerMaterial material)
         {
             _numMaterials[(int)material]--;
+        }
+
+        public int GetUpgradeLevel(Upgrade upgradeType) => upgradeType switch
+        {
+            Upgrade.Health => _curHealthUpgradeLevel,
+            Upgrade.Regen => _curRegenUpgradeLevel,
+            Upgrade.Speed => _curSpeedUpgradeLevel,
+            _ => 0
+        };
+
+        public void UpgradeUpgrade(Upgrade upgradeType)
+        {
+            switch (upgradeType)
+            {
+                case Upgrade.Health: 
+                    _curHealthUpgradeLevel++;
+                    IncMaxHealth();
+                    break;
+                case Upgrade.Regen: 
+                    _curRegenUpgradeLevel++;
+                    RegenSpeedMultiplier = UpgradesData.GetRegenSpeedMultiplier(_curRegenUpgradeLevel);
+                    break;
+                case Upgrade.Speed: 
+                    _curSpeedUpgradeLevel++;
+                    SpeedMultiplier = UpgradesData.GetSpeedMultiplier(_curSpeedUpgradeLevel);
+                    break;
+            }
+            EventManager.Instance.TriggerEvent(EventManager.AbilityUpgraded, (upgradeType, GetUpgradeLevel(upgradeType)));
+        }
+
+        public Color GetCurToolColor()
+        {
+            var curTool = GetCurTool();
+            return ToolsData.GetColor(curTool, GetToolLevel(curTool));
+        }
+
+        public Color GetUpgradeColor(Upgrade upgradeType)
+        {
+            switch (upgradeType)
+            {
+                case Upgrade.Regen:
+                    return UpgradesData.GetColor(upgradeType, GetUpgradeLevel(upgradeType));
+                default:
+                    return Color.white;
+            }
         }
     }
 }

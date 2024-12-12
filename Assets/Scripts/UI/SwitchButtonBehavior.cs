@@ -40,7 +40,9 @@ namespace UI
         
         private void OnClick()
         {
-            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, true);
+            playerData.SwitchTool();
+            playerActionManager.SwitchActing();
+            EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, null);
         }
     }
 }

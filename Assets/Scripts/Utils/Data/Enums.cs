@@ -25,6 +25,13 @@ namespace Utils
         Hammer = 2
     }
 
+    public enum Upgrade
+    {
+        Health = 0,
+        Regen = 1,
+        Speed = 2
+    }
+
     public enum Crop
     {
         Wheat = 0,
@@ -59,6 +66,6 @@ namespace Utils
         Crops = 0,
         Materials = 1,
         Tools = 2,
-        Utilities = 3
+        Upgrades = 3
     }
 }

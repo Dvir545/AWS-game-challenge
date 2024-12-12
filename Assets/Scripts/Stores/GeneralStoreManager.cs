@@ -9,7 +9,7 @@ namespace Stores
         [SerializeField] private GameObject cropsStore;
         [SerializeField] private GameObject materialsStore;
         [SerializeField] private GameObject toolsStore;
-        [SerializeField] private GameObject utilitiesStore;
+        [SerializeField] private GameObject upgradesStore;
         private int _darkOverlayOrder = 0;
         private int _windowCanvasOrder = 1;
         private Dictionary<StoreType, GameObject> _storesDarkOverlays;
@@ -23,14 +23,14 @@ namespace Stores
                 [StoreType.Crops] = cropsStore.transform.GetChild(_darkOverlayOrder).gameObject,
                 [StoreType.Materials] = materialsStore.transform.GetChild(_darkOverlayOrder).gameObject,
                 [StoreType.Tools] = toolsStore.transform.GetChild(_darkOverlayOrder).gameObject,
-                [StoreType.Utilities] = utilitiesStore.transform.GetChild(_darkOverlayOrder).gameObject
+                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_darkOverlayOrder).gameObject
             };
             _storesWindowCanvases = new Dictionary<StoreType, GameObject>
             {
                 [StoreType.Crops] = cropsStore.transform.GetChild(_windowCanvasOrder).gameObject,
                 [StoreType.Materials] = materialsStore.transform.GetChild(_windowCanvasOrder).gameObject,
                 [StoreType.Tools] = toolsStore.transform.GetChild(_windowCanvasOrder).gameObject,
-                [StoreType.Utilities] = utilitiesStore.transform.GetChild(_windowCanvasOrder).gameObject
+                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_windowCanvasOrder).gameObject
             };
 
         }
