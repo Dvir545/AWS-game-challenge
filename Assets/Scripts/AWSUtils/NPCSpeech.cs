@@ -17,7 +17,7 @@ namespace AWSUtils
         [SerializeField] private SpeechBubbleBehaviour speechBubbleBehaviour;
 
         // AWS API Gateway endpoint configuration
-        private const string API_URL = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/startnpc"; // API Gateway URL
+        private const string API_URL = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/startnpc"; // API Gateway URL /storenpc for the other npc
         private const string ALGORITHM = "AWS4-HMAC-SHA256"; // AWS authentication algorithm
         private const string SERVICE_NAME = "execute-api";     // AWS service being accessed
         private const string REGION_NAME = "us-east-1";       // AWS region
