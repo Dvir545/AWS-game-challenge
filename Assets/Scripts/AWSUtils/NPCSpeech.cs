@@ -12,51 +12,95 @@ using Utils;
 
 namespace AWSUtils
 {
-    // Handles NPC speech functionality by communicating with AWS API Gateway
-    // and displaying the response in a speech bubble
+    // This class manages NPC dialogue by interacting with AWS API Gateway to fetch and display
+    // contextual responses based on the game state and player interactions
     public class NPCSpeech : MonoBehaviour
     {
+        // Reference to the UI component that displays the NPC's speech
         [SerializeField] private SpeechBubbleBehaviour speechBubbleBehaviour;
+        // Determines the type of NPC (Start or Mid) which affects the API endpoint and behavior
         [SerializeField] private NPCType npcType;
 
-        // AWS API Gateway endpoint configuration
-        private const string API_URL_PREFIX = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/"; // API Gateway URL /storenpc for the other npc
-        private const string ALGORITHM = "AWS4-HMAC-SHA256"; // AWS authentication algorithm
-        private const string SERVICE_NAME = "execute-api";     // AWS service being accessed
-        private const string REGION_NAME = "us-east-1";       // AWS region
-        private const string CANONICAL_URI = "/dev/startnpc"; 
+        // AWS API Gateway configuration constants
+        private const string API_URL_PREFIX = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/"; // Base URL for API endpoints
+        private const string ALGORITHM = "AWS4-HMAC-SHA256"; // AWS Signature Version 4 algorithm
+        private const string SERVICE_NAME = "execute-api";   // AWS service identifier
+        private const string REGION_NAME = "us-east-1";     // AWS region identifier
         private const string HOST = "creolt9mzl.execute-api.us-east-1.amazonaws.com";
         
-        private string _apiURL;
-        private List<string> _previousResponses = new List<string>();
+        // Instance variables for API communication
+        private string _apiURL;          // Complete API endpoint URL
+        private string _canonicalUri;    // Canonical URI for AWS request signing
+        private List<string> _previousResponses = new List<string>(); // Stores previous NPC responses for context
+        private bool _isWaitingForResponse = false; // Tracks if we're waiting for an API response
 
+        // Auto-refresh timer variables
+        private const float REFRESH_INTERVAL = 10f; // Time in seconds between auto-refresh
+        private float _timeSinceLastRefresh = 0f;   // Tracks time since last refresh
+
+        // Set default message for NPC when waiting for response
+        private const string DEFAULT_MESSAGE = "...";
+
+        // Initializes NPC-specific endpoints based on the NPC type
         private void Awake()
         {
             var urlPostfix = "";
+            // Configure endpoints based on NPC type
             if (npcType == NPCType.Start)
-                urlPostfix = Constants.StartNPCAPIURL;
+            {
+                urlPostfix = "startnpc";
+                _canonicalUri = "/dev/startnpc";
+            }
             else if (npcType == NPCType.Mid)
-                urlPostfix = Constants.MidNPCAPIURL;
+            {
+                urlPostfix = "storenpc";
+                _canonicalUri = "/dev/storenpc";
+            }
             _apiURL = API_URL_PREFIX + urlPostfix;
+            Debug.Log($"Initialized {npcType} NPC with URL: {_apiURL} and canonical URI: {_canonicalUri}");
         }
 
-        // Public method to trigger NPC speech from other scripts
-        public void TriggerNPCSpeech() => SendNPCRequest();
+        // Update is called once per frame
+        private void Update()
+        {
+            // Only auto-refresh for Mid NPC
+            if (npcType == NPCType.Mid)
+            {
+                _timeSinceLastRefresh += Time.deltaTime;
+                
+                // Check if it's time to refresh and we're not already waiting for a response
+                if (_timeSinceLastRefresh >= REFRESH_INTERVAL && !_isWaitingForResponse)
+                {
+                    _timeSinceLastRefresh = 0f;
+                    SendNPCRequest();
+                }
+            }
+        }
 
-        // Called when the script instance is being loaded
+        // External interface to trigger NPC dialogue
+        public void TriggerNPCSpeech()
+        {
+            if (!_isWaitingForResponse)
+            {
+                _timeSinceLastRefresh = 0f; // Reset timer when manually triggered
+                SendNPCRequest();
+            }
+        }
+
+        // Automatically triggers NPC dialogue when the object is initialized
         private void Start() => SendNPCRequest();
 
-        // Displays the given text in the speech bubble
+        // Updates the speech bubble UI with new text and stores the response for Mid NPCs
         private void Speak(string text)
         { 
             speechBubbleBehaviour.SetText(text);
-            if (npcType == NPCType.Mid)
+            if (npcType == NPCType.Mid && !_isWaitingForResponse)
             {
                 _previousResponses.Add(text);
             }
         }
 
-        /// Gets the JSON request body with player statistics
+        // Creates the request payload for Start NPCs with initial game statistics
         private object GetStartNPCRequest()
         {
             return new {
@@ -68,6 +112,7 @@ namespace AWSUtils
             };
         }
 
+        // Creates the request payload for Mid NPCs with comprehensive game state information
         private object GetMidNPCRequest()
         {
             return new
@@ -99,7 +144,7 @@ namespace AWSUtils
                     {
                         daysSurvived = 14,
                         availableTowerSpots = 3,
-                        existingTowers = 4,
+                        existingTowers = 3,
                         shops = new
                         {
                             seedShopAvailableSeeds = new
@@ -138,7 +183,7 @@ namespace AWSUtils
                         cropsPlanted = 20,
                         cropsHarvested = 12,
                         cropsDestroyed = 4,
-                        towersBuilt = 2,
+                        towersBuilt = 8,
                         towersDestroyed = 2
                     },
                     nextRoundEnemies = new
@@ -155,38 +200,54 @@ namespace AWSUtils
             };
         }
 
+        // Generates the appropriate JSON request body based on NPC type
         private string GetNPCRequestJson()
         {
-            object requestData;
-            if (npcType == NPCType.Start)
-                requestData = GetStartNPCRequest();
-            else if (npcType == NPCType.Mid)
-                requestData = GetMidNPCRequest();
-            else
-                throw new Exception("Invalid NPC type");
+            try
+            {
+                object requestData;
+                if (npcType == NPCType.Start)
+                    requestData = GetStartNPCRequest();
+                else if (npcType == NPCType.Mid)
+                    requestData = GetMidNPCRequest();
+                else
+                    throw new Exception("Invalid NPC type");
 
-            return JsonConvert.SerializeObject(requestData);
+                var json = JsonConvert.SerializeObject(requestData);
+                Debug.Log($"Generated JSON for {npcType}: {json}");
+                return json;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to generate NPC request JSON: {ex.Message}");
+                throw;
+            }
         }
 
-        // Initiates the NPC request process by getting AWS credentials
+        // Initiates the API request process by first obtaining AWS credentials
         private async void SendNPCRequest()
         {
             try
             {
+                _isWaitingForResponse = true;
+                // Set default message while waiting for response
+                Speak(DEFAULT_MESSAGE);
                 var credentials = await AWSCredentialsManager.Instance.GetTemporaryCredentialsAsync();
                 StartCoroutine(SendNPCRequestCoroutine(credentials));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.LogError($"Failed to get credentials: {ex.Message}");
                 Speak("Sorry, I don't want to talk with you right now...");
+                _isWaitingForResponse = false;
             }
         }
 
-        // Returns the required signed headers string based on whether we have a session token
+        // Determines which headers need to be signed based on the presence of a session token
         private string GetSignedHeaders(bool hasSessionToken) =>
             hasSessionToken ? "content-type;host;x-amz-date;x-amz-security-token" : "content-type;host;x-amz-date";
 
-        // Creates the signature key using a series of HMAC-SHA256 operations
+        // Generates the AWS Signature Version 4 signing key through multiple HMAC operations
         private string CalculateSignature(string stringToSign, string dateStamp, ImmutableCredentials credentials)
         {
             byte[] kSecret = Encoding.UTF8.GetBytes($"AWS4{credentials.SecretKey}");
@@ -238,17 +299,14 @@ namespace AWSUtils
             string signedHeaders = GetSignedHeaders(hasSessionToken);
             string payloadHash = Hash(jsonBody);
 
-            // Create the canonical request string
-            string canonicalRequest = $"POST\n{CANONICAL_URI}\n\n{canonicalHeaders}\n{signedHeaders}\n{payloadHash}";
+            // Use the dynamic canonical URI
+            string canonicalRequest = $"POST\n{_canonicalUri}\n\n{canonicalHeaders}\n{signedHeaders}\n{payloadHash}";
 
-            // Create the string to sign for AWS authentication
             string credentialScope = $"{dateStamp}/{REGION_NAME}/{SERVICE_NAME}/aws4_request";
             string stringToSign = $"{ALGORITHM}\n{amzDate}\n{credentialScope}\n{Hash(canonicalRequest)}";
 
-            // Calculate the signature
             string signature = CalculateSignature(stringToSign, dateStamp, credentials);
 
-            // Create the authorization header
             string authorization = $"{ALGORITHM} " +
                                  $"Credential={credentials.AccessKey}/{dateStamp}/{REGION_NAME}/{SERVICE_NAME}/aws4_request, " +
                                  $"SignedHeaders={signedHeaders}, " +
@@ -260,7 +318,6 @@ namespace AWSUtils
                 downloadHandler = new DownloadHandlerBuffer()
             };
 
-            // Set required headers
             request.SetRequestHeader("Host", HOST);
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("X-Amz-Date", amzDate);
@@ -273,8 +330,11 @@ namespace AWSUtils
 
             yield return request.SendWebRequest();
 
+            _isWaitingForResponse = false;
+
             if (request.result != UnityWebRequest.Result.Success)
             {
+                Debug.LogError($"API request failed for {npcType}: {request.error}\nResponse: {request.downloadHandler.text}");
                 Speak("Sorry, I'm not feeling well...");
                 yield break;
             }
@@ -284,8 +344,9 @@ namespace AWSUtils
                 var response = JsonConvert.DeserializeObject<NPCResponse>(request.downloadHandler.text);
                 Speak(response.response);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.LogError($"Failed to process {npcType} response: {ex.Message}\nResponse: {request.downloadHandler.text}");
                 Speak("WHO AM I?! WHERE AM I?!");
             }
         }
