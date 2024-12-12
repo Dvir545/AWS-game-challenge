@@ -15,6 +15,10 @@ namespace Utils
         public const float TimeToEatCrop = 3f;
         public const int MaxTowerLevels = 3;
 
+        public const string StartNPCAPIURL = "startnpc";
+        public const string MidNPCAPIURL = "storenpc";
+            
+
         public static readonly Color CashColor = new Color(1, 0.93f, 0, 1);
         public static readonly Color EnemyDamageColor = new Color(1, 1, 1, 1);
         public static readonly Color PlayerDamageColor = new Color(.7f, .25f, 0, 1);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using Amazon.Runtime;
+using Utils;
 
 namespace AWSUtils
 {
@@ -15,14 +17,28 @@ namespace AWSUtils
     public class NPCSpeech : MonoBehaviour
     {
         [SerializeField] private SpeechBubbleBehaviour speechBubbleBehaviour;
+        [SerializeField] private NPCType npcType;
 
         // AWS API Gateway endpoint configuration
-        private const string API_URL = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/startnpc"; // API Gateway URL /storenpc for the other npc
+        private const string API_URL_PREFIX = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/"; // API Gateway URL /storenpc for the other npc
         private const string ALGORITHM = "AWS4-HMAC-SHA256"; // AWS authentication algorithm
         private const string SERVICE_NAME = "execute-api";     // AWS service being accessed
         private const string REGION_NAME = "us-east-1";       // AWS region
         private const string CANONICAL_URI = "/dev/startnpc"; 
-        private const string HOST = "creolt9mzl.execute-api.us-east-1.amazonaws.com"; 
+        private const string HOST = "creolt9mzl.execute-api.us-east-1.amazonaws.com";
+        
+        private string _apiURL;
+        private List<string> _previousResponses = new List<string>();
+
+        private void Awake()
+        {
+            var urlPostfix = "";
+            if (npcType == NPCType.Start)
+                urlPostfix = Constants.StartNPCAPIURL;
+            else if (npcType == NPCType.Mid)
+                urlPostfix = Constants.MidNPCAPIURL;
+            _apiURL = API_URL_PREFIX + urlPostfix;
+        }
 
         // Public method to trigger NPC speech from other scripts
         public void TriggerNPCSpeech() => SendNPCRequest();
@@ -31,20 +47,123 @@ namespace AWSUtils
         private void Start() => SendNPCRequest();
 
         // Displays the given text in the speech bubble
-        private void Speak(string text) => speechBubbleBehaviour.SetText(text);
+        private void Speak(string text)
+        { 
+            speechBubbleBehaviour.SetText(text);
+            if (npcType == NPCType.Mid)
+            {
+                _previousResponses.Add(text);
+            }
+        }
 
         /// Gets the JSON request body with player statistics
-        private string GetNPCRequestJson()
+        private object GetStartNPCRequest()
         {
-            // For now its a static JSON
-            var requestData = new
-            {
+            return new {
                 totalGamesPlayed = 0,
                 consecutiveGamesPlayed = 0,
                 killedLastGameBy = "none",
                 daysSurvivedLastGame = 0,
                 daysSurvivedHighScore = 0
             };
+        }
+
+        private object GetMidNPCRequest()
+        {
+            return new
+            {
+                playerStatus = new
+                {
+                    health = 4,
+                    money = 1200,
+                    inventory = new
+                    {
+                        crops = new
+                        {
+                            wheat = 10,
+                            carrot = 5,
+                            tomato = 3,
+                            corn = 4,
+                            pumpkin = 0
+                        },
+                        towerMaterials = new
+                        {
+                            wood = 3,
+                            stone = 2,
+                            iron = 1,
+                            gold = 0,
+                            diamond = 0
+                        }
+                    },
+                    worldStatus = new
+                    {
+                        daysSurvived = 14,
+                        availableTowerSpots = 3,
+                        existingTowers = 4,
+                        shops = new
+                        {
+                            seedShopAvailableSeeds = new
+                            {
+                                wheat = 100,
+                                carrot = 75,
+                                tomato = 50,
+                                corn = 40,
+                                pumpkin = 25
+                            },
+                            resourcesShopAvailableMaterials = new
+                            {
+                                wood = 200,
+                                stone = 150,
+                                iron = 100,
+                                gold = 50,
+                                diamond = 20
+                            },
+                            toolShopAvailableUpgradeLevel = new
+                            {
+                                hoe = 2,
+                                hammer = 3,
+                                sword = 3
+                            },
+                            utilityShopAvailableUpgradeLevels = new
+                            {
+                                health = 2,
+                                speed = 1,
+                                healthRegen = 3
+                            }
+                        }
+                    },
+                    lastRoundActivity = new
+                    {
+                        damageTaken = 3,
+                        cropsPlanted = 20,
+                        cropsHarvested = 12,
+                        cropsDestroyed = 4,
+                        towersBuilt = 2,
+                        towersDestroyed = 2
+                    },
+                    nextRoundEnemies = new
+                    {
+                        slime = 4,
+                        skeleton = 2,
+                        goblinArcher = 1,
+                        chicken = 3,
+                        orc = 1,
+                        demon = 0
+                    },
+                    previousResponses = _previousResponses
+                }
+            };
+        }
+
+        private string GetNPCRequestJson()
+        {
+            object requestData;
+            if (npcType == NPCType.Start)
+                requestData = GetStartNPCRequest();
+            else if (npcType == NPCType.Mid)
+                requestData = GetMidNPCRequest();
+            else
+                throw new Exception("Invalid NPC type");
 
             return JsonConvert.SerializeObject(requestData);
         }
@@ -135,7 +254,7 @@ namespace AWSUtils
                                  $"SignedHeaders={signedHeaders}, " +
                                  $"Signature={signature}";
 
-            using var request = new UnityWebRequest(API_URL, "POST")
+            using var request = new UnityWebRequest(_apiURL, "POST")
             {
                 uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody)),
                 downloadHandler = new DownloadHandlerBuffer()

@@ -68,4 +68,10 @@ namespace Utils
         Tools = 2,
         Upgrades = 3
     }
+
+    public enum NPCType
+    {
+        Start = 0,
+        Mid = 1
+    }
 }
