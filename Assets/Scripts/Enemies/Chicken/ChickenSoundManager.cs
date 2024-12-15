@@ -10,7 +10,7 @@ namespace Enemies.Chicken
         [SerializeField] private AudioClip eatingSound;
         
         private ChickenEatingManager _chickenEatingManager;
-        private Coroutine _eatingCR;
+        private IEnumerator _eatingCR;
 
         protected override void Awake()
         {
@@ -26,7 +26,8 @@ namespace Enemies.Chicken
                 {
                     StopCoroutine(_eatingCR);
                     _eatingCR = null;
-                    WalkingCR = StartCoroutine(PlayWalkingSoundCR());
+                    WalkingCR = PlayWalkingSoundCR();
+                    StartCoroutine(WalkingCR);
                 }
             }
             else
@@ -35,7 +36,8 @@ namespace Enemies.Chicken
                 {
                     StopCoroutine(WalkingCR);
                     WalkingCR = null;
-                    _eatingCR = StartCoroutine(PlayEatingSoundCR());
+                    _eatingCR = PlayEatingSoundCR();
+                    StartCoroutine(_eatingCR);
                 }
             }
         }

@@ -66,10 +66,5 @@ namespace Enemies.Chicken
                 progressBarBehavior.StopWork();
             }
         }
-    
-    
-    // todo - make the crop disappear after a certain amount of time (3 seconds)
-    // add evil loading screen
-
     }
 }

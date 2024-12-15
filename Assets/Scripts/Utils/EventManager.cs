@@ -15,6 +15,10 @@ namespace Utils
         public const string CropHarvested = "CropHarvested";
         public const string ActiveToolChanged = "ActiveToolChanged";
         public const string AbilityUpgraded = "AbilityUpgraded";
+        public const string CropBeingDestroyed = "CropBeingDestroyed";
+        public const string CropStoppedBeingDestroyed = "CropStoppedBeingDestroyed";
+        public const string TowerUnderAttack = "TowerUnderAttack";
+        public const string TowerStoppedBeingUnderAttack = "TowerStoppedBeingUnderAttack";
 
         protected EventManager()
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Enemies
 {
@@ -99,7 +100,7 @@ namespace Enemies
             _effectsManager.FloatingTextEffect(transform.position, 1, 1, 
                 cashDrop.ToString() + "$", Constants.CashColor);
             _playerData.AddCash(cashDrop);
-            Destroy(gameObject);
+            EnemyPool.Instance.ReleaseEnemy(gameObject, enemyType);
         }
         
         private void HitPlayer(Transform player)

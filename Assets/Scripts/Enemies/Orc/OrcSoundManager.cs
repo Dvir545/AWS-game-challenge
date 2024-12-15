@@ -9,7 +9,7 @@ namespace Enemies.Orc
         [SerializeField] private AudioSource attackAudioSource;
         
         private OrcAttackManager _orcAttackManager;
-        private Coroutine _attackCR;
+        private IEnumerator _attackCR;
 
         protected override void Awake()
         {
@@ -31,7 +31,8 @@ namespace Enemies.Orc
                 {
                     StopCoroutine(_attackCR);
                     _attackCR = null;
-                    WalkingCR = StartCoroutine(PlayWalkingSoundCR());
+                    WalkingCR = PlayWalkingSoundCR();
+                    StartCoroutine(WalkingCR);
                 }
             }
             else
@@ -40,7 +41,8 @@ namespace Enemies.Orc
                 {
                     StopCoroutine(WalkingCR);
                     WalkingCR = null;
-                    _attackCR = StartCoroutine(PlayAttackSoundCR());
+                    _attackCR = PlayAttackSoundCR();
+                    StartCoroutine(_attackCR);
                 }
             }
         }

@@ -318,7 +318,7 @@ namespace AWSUtils
                 downloadHandler = new DownloadHandlerBuffer()
             };
 
-            request.SetRequestHeader("Host", HOST);
+            // request.SetRequestHeader("Host", HOST);
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("X-Amz-Date", amzDate);
             request.SetRequestHeader("Authorization", authorization);

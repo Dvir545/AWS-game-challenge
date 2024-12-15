@@ -29,7 +29,34 @@ namespace Utils.Data
                     return null;
             }
         }
-
-
+    
+        [Header("Enemies")]
+        [SerializeField] private GameObject slimePrefab;
+        [SerializeField] private GameObject skeletonPrefab;
+        [SerializeField] private GameObject goblinPrefab;
+        [SerializeField] private GameObject chickenPrefab;
+        [SerializeField] private GameObject orcPrefab;
+        [SerializeField] private GameObject demonPrefab;
+        
+        public GameObject GetEnemyPrefab(Enemy enemy)
+        {
+            switch (enemy)
+            {
+                case Enemy.Slime:
+                    return slimePrefab;
+                case Enemy.Skeleton:
+                    return skeletonPrefab;
+                case Enemy.Goblin:
+                    return goblinPrefab;
+                case Enemy.Chicken:
+                    return chickenPrefab;
+                case Enemy.Orc:
+                    return orcPrefab;
+                case Enemy.Demon:
+                    return demonPrefab;
+                default:
+                    return null;
+            }
+        }
     }
 }

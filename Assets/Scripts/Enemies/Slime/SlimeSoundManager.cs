@@ -6,7 +6,8 @@ namespace Enemies.Slime
     {
         private void Start()
         {
-            StopCoroutine(WalkingCR);
+            if (WalkingCR != null)
+                StopCoroutine(WalkingCR);
         }
         
         public void PlayJumpSound()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -9,7 +10,7 @@ using Utils.Data;
 
 namespace Towers
 {
-    public class TowerBuild : MonoBehaviour
+    public class TowerBuild : MonoBehaviour, IWarnable
     {
         [Serializable]
         private struct TowerSpriteRenderers
@@ -30,6 +31,7 @@ namespace Towers
         private List<GameObject> _floors = new();
         private List<float> _floorsHealth = new();
         private GameObject _newFloor;
+        private SpriteRenderer _towerBaseSpriteRenderer;
         private Transform _newFloorBody;
         private GameObject _topConstruction;
         private bool _isUnderAttack;  // can't build while tower is under attack
@@ -42,11 +44,13 @@ namespace Towers
         private float _curBuildTime = 0;  // The current build time of the tower
         private TowerFloorAnimationManager _newFloorAnimationManager;
         private Collider2D _newFloorAttackZone;
+        private WarningSignBehaviour _warningSign;
         public bool IsBuilt { get; private set; }
 
         private void Awake()
         {
             _topConstruction = transform.GetChild(0).gameObject;
+            _towerBaseSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
         }
 
         public bool CanBuild()
@@ -117,6 +121,16 @@ namespace Towers
         
         public void SetUnderAttack(bool isUnderAttack)
         {
+            switch (isUnderAttack)
+            {
+                case true when !_isUnderAttack:
+                    EventManager.Instance.TriggerEvent(EventManager.TowerUnderAttack, transform);
+                    break;
+                case false when _isUnderAttack:
+                    EventManager.Instance.TriggerEvent(EventManager.TowerStoppedBeingUnderAttack, transform);
+                    break;
+            }
+
             _isUnderAttack = isUnderAttack;
         }
 
@@ -167,7 +181,31 @@ namespace Towers
             {
                 _floorsHealth[_currentLevel - 1] = newHealth;
             }
+        }
+        
+        public void SetWarningSign(WarningSignBehaviour warningSign)
+        {
+            _warningSign = warningSign;
+        }
 
+        public bool IsVisible()
+        {
+            if (_towerBaseSpriteRenderer == null) return false;
+            return _towerBaseSpriteRenderer.isVisible;
+        }
+
+        public void ShowWarningSign()
+        {
+            if (_warningSign == null)
+                return;
+            _warningSign.SetVisibility(false);
+        }
+        
+        public void HideWarningSign()
+        {
+            if (_warningSign == null)
+                return;
+            _warningSign.SetVisibility(true);
         }
     }
 }

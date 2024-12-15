@@ -13,7 +13,7 @@ namespace Enemies
         protected AudioSource AudioSource;
         private EnemyMovementManager _enemyMovementManager;
         protected EnemyHealthManager EnemyHealthManager;
-        protected Coroutine WalkingCR;
+        protected IEnumerator WalkingCR;
 
         protected bool IsPlayingImportantSound => AudioSource.isPlaying && 
                                                   (AudioSource.clip == hitSound || AudioSource.clip == deathSound);
@@ -27,7 +27,8 @@ namespace Enemies
 
         private void Start()
         {
-            WalkingCR = StartCoroutine(PlayWalkingSoundCR());
+            WalkingCR = PlayWalkingSoundCR();
+            StartCoroutine(WalkingCR);
         }
 
         public void PlayHitSound()

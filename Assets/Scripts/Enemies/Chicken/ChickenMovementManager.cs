@@ -1,8 +1,8 @@
-﻿using Crops;
+﻿using System.Collections;
+using Crops;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
-using World;
 
 namespace Enemies.Chicken
 {
@@ -30,29 +30,32 @@ namespace Enemies.Chicken
             {
                 if (_roamCR != null)
                 {
-                    StopCoroutine(_roamCR);
+                    StopCoroutine(_roamCR);//RoamingAgent.Instance.StopRoam(Agent);
                     _roamCR = null;
                 }
                 return;
             }
             if (Targeted)
             {
-                if (_roamCR is not null)
+                if (_roamCR != null)
                 {
-                    StopCoroutine(_roamCR);
+                    StopCoroutine(_roamCR);//RoamingAgent.Instance.StopRoam(Agent);
                     _roamCR = null;
                     Agent.speed = AgentSetSpeed;
                 }
                 CurrentTargetPosition = CurrentTarget.position;
-                if (_foundCrop)
-                    CurrentTargetPosition += new Vector3(0.5f, 0.5f, 0);
+                // if (_foundCrop)
+                //     CurrentTargetPosition += new Vector3(0.5f, 0.5f, 0);
                 Agent.SetDestination(CurrentTargetPosition);
             }
             else {
-                if (_roamCR is null)
+                if (_roamCR == null)
                 {
-                    Agent.speed = AgentOriginalSpeed * roamingSpeed * Random.Range(0.8f, 1.2f);
-                    _roamCR = RoamingAgent.Instance.Roam(Agent, roamRadius, roamSecondsToSwitchTarget);
+                    FindClosestTarget();
+                    if (CurrentTarget == null) {
+                        Agent.speed = AgentOriginalSpeed * roamingSpeed * Random.Range(0.8f, 1.2f);
+                        _roamCR = StartCoroutine(RoamTowardsPlayerCoroutine());//RoamingAgent.Instance.Roam(Agent, roamRadius, roamSecondsToSwitchTarget);
+                    }
                 }
                 _enemyAnimationManager.SetFacingDirection();
             }
@@ -67,7 +70,7 @@ namespace Enemies.Chicken
 
             foreach (Vector3Int crop in _farmingManager.Farms.Keys)
             {
-                Vector3 cropCenter = _farmingManager.Farms[crop].GetCropSpriteRenderer().transform.position 
+                Vector3 cropCenter = _farmingManager.Farms[crop].transform.position 
                                      + new Vector3(0.5f, 0.5f, 0);
                 float distance = Vector3.Distance(transform.position, cropCenter);
                 if (distance < closestDistance)
@@ -81,10 +84,8 @@ namespace Enemies.Chicken
             if (closestCrop != null)
             {
                 Agent.isStopped = false;
-                CurrentTarget = _farmingManager.Farms[closestCrop.Value].GetCropSpriteRenderer().transform;
+                CurrentTarget = _farmingManager.Farms[closestCrop.Value].transform;
             }
-            else if (!_foundCrop)
-                base.FindClosestTarget();
         }
 
         public override void Die(Vector2? hitDirection = null)
@@ -101,6 +102,19 @@ namespace Enemies.Chicken
             if (direction.x < 0)
                 return FacingDirection.Right;
             return CurDirection;
+        }
+        
+        private IEnumerator RoamTowardsPlayerCoroutine()
+        {
+            var target = GetClosestTarget();
+            while (true)
+            {
+                var position = Agent.transform.position;
+                var direction = (target.position - position).normalized;
+                Vector3 newPos = position + direction * (roamRadius + Random.Range(-1, 2)); //RandomNavSphere(agent.transform.position, radius, -1);
+                Agent.SetDestination(newPos);
+                yield return new WaitForSeconds(roamSecondsToSwitchTarget + Random.Range(-1, 2));
+            }
         }
     }
 }

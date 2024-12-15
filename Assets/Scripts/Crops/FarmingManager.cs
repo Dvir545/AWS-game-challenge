@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Player;
+using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
@@ -10,11 +11,10 @@ namespace Crops
 {
     public class FarmingManager: MonoBehaviour
     {
-        private Tilemap canFarmTilemap;
-        private Tilemap farmTilemap;
+        private Tilemap _canFarmTilemap;
+        private Tilemap _farmTilemap;
         [SerializeField] private TileBase farmTile;
         [SerializeField] private CropManager cropManager;
-        [SerializeField] private GameObject cropSpritePrefab;
         [SerializeField] private GameObject cropsParent;
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerMovement playerMovement;
@@ -22,60 +22,23 @@ namespace Crops
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         [SerializeField] private EffectsManager effectsManager;
         
+        [Header("Crop Prefabs")]
+        [SerializeField] private GameObject wheatPrefab;
+        [SerializeField] private GameObject carrotPrefab;
+        [SerializeField] private GameObject tomatoPrefab;
+        [SerializeField] private GameObject cornPrefab;
+        [SerializeField] private GameObject pumpkinPrefab;
+        
         private Vector2 _cropInstantiationOffset = new Vector2(.5f, 0.4f);
         
-        public Dictionary<Vector3Int, FarmData> Farms { get; private set; }= new();
+        public Dictionary<Vector3Int, CropBehaviour> Farms { get; private set; }= new();
         
         public bool IsFarming { get; private set; }
         
         private void Awake()
         {
-            canFarmTilemap = GameObject.FindGameObjectWithTag("canFarmTilemap").GetComponent<Tilemap>();
-            farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
-        }
-
-        public class FarmData
-        {
-            private Crop _crop;
-            private float _progress;
-            private float _destroyProgress;
-            private SpriteRenderer _cropSprite;
-            
-            public FarmData(Crop crop, GameObject curSpriteObject, float progress)
-            {
-                _crop = crop;
-                _progress = progress;
-                _cropSprite = curSpriteObject.GetComponent<SpriteRenderer>();
-            }
-            
-            public Crop GetCrop()
-            {
-                return _crop;
-            }
-            
-            public float GetProgress()
-            {
-                return _progress;
-            }
-            public void AddToProgress(float progress)
-            {
-                _progress += progress;
-            }
-            
-            public float GetDestroyProgress()
-            {
-                return _destroyProgress;
-            }
-            
-            public void AddToDestroyProgress(float progress)
-            {
-                _destroyProgress += progress;
-            }
-            
-            public SpriteRenderer GetCropSpriteRenderer()
-            {
-                return _cropSprite;
-            }
+            _canFarmTilemap = GameObject.FindGameObjectWithTag("canFarmTilemap").GetComponent<Tilemap>();
+            _farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
         }
 
         public void StartFarming()
@@ -98,8 +61,8 @@ namespace Crops
         
         public Tuple<bool, Vector3Int> IsStandingOnFarmTile(Transform t)
         {
-            Vector3Int tilePos = canFarmTilemap.WorldToCell(t.position);
-            return new Tuple<bool, Vector3Int>(farmTilemap.GetTile(tilePos) != null, tilePos);
+            Vector3Int tilePos = _canFarmTilemap.WorldToCell(t.position);
+            return new Tuple<bool, Vector3Int>(_farmTilemap.GetTile(tilePos) != null, tilePos);
         }
 
         private void Farm()
@@ -107,17 +70,27 @@ namespace Crops
             bool isStandingOnFarmTile;
             Vector3Int tilePos;
             (isStandingOnFarmTile, tilePos) = IsStandingOnFarmTile(playerTransform);
-            bool canFarm = canFarmTilemap.GetTile(tilePos) != null && cropManager.HasCrops();
+            bool canFarm = _canFarmTilemap.GetTile(tilePos) != null && cropManager.HasCrops();
             if (canFarm && !isStandingOnFarmTile)
             {
                 // Start farming on this tile
                 if (!Farms.ContainsKey(tilePos))
                 {
-                    farmTilemap.SetTile(tilePos, farmTile);
+                    _farmTilemap.SetTile(tilePos, farmTile);
                     Vector3 cropPos = tilePos + new Vector3(_cropInstantiationOffset.x, _cropInstantiationOffset.y, 0f);
-                    GameObject cropSprite = Instantiate(cropSpritePrefab, cropPos, Quaternion.identity);
-                    cropSprite.transform.SetParent(cropsParent.transform);
-                    Farms[tilePos] = new FarmData(cropManager.GetBestAvailableCrop(), cropSprite, 0f);
+                    var bestAvailableCrop = cropManager.GetBestAvailableCrop();
+                    GameObject cropSpritePrefab = bestAvailableCrop switch
+                    {
+                        Crop.Wheat => wheatPrefab,
+                        Crop.Carrot => carrotPrefab,
+                        Crop.Tomato => tomatoPrefab,
+                        Crop.Corn => cornPrefab,
+                        Crop.Pumpkin => pumpkinPrefab,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+                    GameObject crop = Instantiate(cropSpritePrefab, cropPos, Quaternion.identity);
+                    crop.transform.SetParent(cropsParent.transform);
+                    Farms[tilePos] = crop.GetComponent<CropBehaviour>();
                     cropManager.RemoveCrop(Farms[tilePos].GetCrop());
                 }
                 progressBarBehavior.StartWork(Farms[tilePos].GetProgress());
@@ -154,20 +127,16 @@ namespace Crops
             Farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
                                           / CropsData.Instance.GetGrowthTime(Farms[tilePos].GetCrop()));
             progressBarBehavior.UpdateProgress(Farms[tilePos].GetProgress());
-            Sprite  cropSprite = GetCropSprite(Farms[tilePos]);
-            if (cropSprite != null)
-            {
-                Farms[tilePos].GetCropSpriteRenderer().sprite = cropSprite;
-            }
                 
             // Check if farming is complete
             if (Farms[tilePos].GetProgress() >= 1f)
             {
                 progressBarBehavior.StopWork();
                 // Remove the tile and its progress
-                farmTilemap.SetTile(tilePos, null);
-                Destroy(Farms[tilePos].GetCropSpriteRenderer().gameObject);
-                EventManager.Instance.TriggerEvent(EventManager.CropHarvested, null);
+                _farmTilemap.SetTile(tilePos, null);
+                var cropTransform = Farms[tilePos].transform;
+                EventManager.Instance.TriggerEvent(EventManager.CropHarvested, cropTransform);
+                Destroy(cropTransform.gameObject);
                 // Reward player with the crop sell price
                 int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
                 playerData.AddCash(amount);
@@ -175,11 +144,6 @@ namespace Crops
                 
                 Farms.Remove(tilePos);
             }
-        }
-
-        private Sprite GetCropSprite(FarmData farmData)
-        {
-            return CropsData.Instance.GetSprite(farmData.GetCrop(), farmData.GetProgress());
         }
         
         // Returns true if the crop was destroyed
@@ -190,8 +154,9 @@ namespace Crops
                 Farms[tilePos].AddToDestroyProgress(Time.deltaTime / Constants.TimeToEatCrop);
                 if (Farms[tilePos].GetDestroyProgress() >= 1f)
                 {
-                    farmTilemap.SetTile(tilePos, null);
-                    Destroy(Farms[tilePos].GetCropSpriteRenderer().gameObject);
+                    _farmTilemap.SetTile(tilePos, null);
+                    WarningSignPool.Instance.ReleaseWarningSign(Farms[tilePos].transform);
+                    Destroy(Farms[tilePos].gameObject);
                     Farms.Remove(tilePos);
                     return true;
                 }

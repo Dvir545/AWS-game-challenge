@@ -77,8 +77,8 @@ namespace Enemies
                 Agent.SetDestination(CurrentTargetPosition);
             }
         }
-    
-        protected virtual void FindClosestTarget()
+
+        protected Transform GetClosestTarget()
         {
             Transform closestTarget = null;
             float closestDistance = Mathf.Infinity;
@@ -91,7 +91,13 @@ namespace Enemies
                     closestTarget = target.transform;
                 }
             }
-            CurrentTarget = closestTarget;
+
+            return closestTarget;
+        }
+    
+        protected virtual void FindClosestTarget()
+        {
+            CurrentTarget = GetClosestTarget();
         }
     
         public virtual FacingDirection GetFacingDirection()
