@@ -160,7 +160,7 @@ namespace AWSUtils
         private List<string> _previousResponses = new List<string>();
         private bool _isWaitingForResponse = false;
 
-        private const float REFRESH_INTERVAL = 10f;
+        private const float REFRESH_INTERVAL = 60f;
         private float _timeSinceLastRefresh = 0f;
         private const string DEFAULT_MESSAGE = "...";
 
@@ -183,7 +183,7 @@ namespace AWSUtils
                 }
             }
         }
-
+        
         public void TriggerNPCSpeech()
         {
             if (!_isWaitingForResponse)
