@@ -124,7 +124,7 @@ namespace Towers
             switch (isUnderAttack)
             {
                 case true when !_isUnderAttack:
-                    EventManager.Instance.TriggerEvent(EventManager.TowerUnderAttack, transform);
+                    EventManager.Instance.TriggerEvent(EventManager.TowerUnderAttack, (transform, false));
                     break;
                 case false when _isUnderAttack:
                     EventManager.Instance.TriggerEvent(EventManager.TowerStoppedBeingUnderAttack, transform);

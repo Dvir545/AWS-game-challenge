@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using UI;
 using UnityEngine;
 
 namespace Utils.Data
@@ -37,7 +37,7 @@ namespace Utils.Data
             for (int i = 0; i < NumPredefinedCycles; i++)
             {
                 dayDurations[i] = Mathf.Max(Constants.FirstDayDurationInSeconds - Constants.DaySecondsReductionPerCycle * i, Constants.MinDayDurationInSeconds);
-                daySpawnDurations[i] = dayDurations[i] - Constants.Day2NightTransitionInSeconds;
+                daySpawnDurations[i] = dayDurations[i] * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration);
                 nightSpawnDurations[i] = Constants.FirstNightDurationInSeconds - Constants.NightSecondsReductionPerCycle * i;
             }
             var daySpawns = new List<EnemySpawns>()
@@ -101,7 +101,7 @@ namespace Utils.Data
                 DayWave = new DayWave()
                 {
                     DurationInSeconds = Constants.MinDayDurationInSeconds,
-                    SpawnDurationInSeconds = Constants.MinDayDurationInSeconds - Constants.Day2NightTransitionInSeconds,
+                    SpawnDurationInSeconds = Constants.MinDayDurationInSeconds * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
                     EnemySpawns = dayEnemySpawns
                 },
                 NightWave = new NightWave()

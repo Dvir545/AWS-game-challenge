@@ -12,7 +12,8 @@ public class GameStarter : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Game Started");
-            DayNightManager.Instance.StartDayNightCycle();
+            DayNightManager.Instance.StartGame();
+            gameObject.SetActive(false);
         }
     }
 }

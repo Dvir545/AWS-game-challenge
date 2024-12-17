@@ -57,7 +57,7 @@ namespace Crops
             if (!_isBeingDestroyed)
             {
                 _isBeingDestroyed = true;
-                EventManager.Instance.TriggerEvent(EventManager.CropBeingDestroyed, transform);
+                EventManager.Instance.TriggerEvent(EventManager.CropBeingDestroyed, (transform, false));
             }
         }
 

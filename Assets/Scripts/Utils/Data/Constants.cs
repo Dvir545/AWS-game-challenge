@@ -15,8 +15,7 @@ namespace Utils
         public const float TimeToEatCrop = 3f;
         public const int MaxTowerLevels = 3;
 
-        public const int Day2NightTransitionInSeconds = 5;
-        public const int FirstDayDurationInSeconds = 120;
+        public const int FirstDayDurationInSeconds = 30;//120;
         public const int DaySecondsReductionPerCycle = 10;
         public const int MinDayDurationInSeconds = 30;
         public const float FirstNightDurationInSeconds = 10;

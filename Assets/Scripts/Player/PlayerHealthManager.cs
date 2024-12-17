@@ -26,6 +26,8 @@ namespace Player
         private Coroutine _healCoroutine;
         private const int XOffsetBetweenHearts = 128;
         private const float HitTime = 0.25f;
+        
+        public bool IsDead => playerData.CurHealth <= 0;
 
         private void Start()
         {

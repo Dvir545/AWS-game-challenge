@@ -19,6 +19,8 @@ namespace Utils
         public const string CropStoppedBeingDestroyed = "CropStoppedBeingDestroyed";
         public const string TowerUnderAttack = "TowerUnderAttack";
         public const string TowerStoppedBeingUnderAttack = "TowerStoppedBeingUnderAttack";
+        public const string EnemySpawned = "EnemySpawned";
+        public const string EnemyKilled = "EnemyKilled";
 
         protected EventManager()
         {

@@ -95,7 +95,11 @@ namespace Enemies
             _enemyMovementManager.Die(hitDirection);
             _enemyAnimationManager.Die();
             var soundLength = _enemySoundManager.PlayDeathSound();
-            yield return new WaitForSeconds(Mathf.Max(1.5f, soundLength));
+            var waitTime = Mathf.Max(1.5f, soundLength);
+            DayNightManager.Instance.EnemyDied(waitTime);
+            var body = transform.GetChild(0);
+            EventManager.Instance.TriggerEvent(EventManager.EnemyKilled, body.transform);
+            yield return new WaitForSeconds(waitTime);
             int cashDrop = EnemyData.GetCashDrop(enemyType);
             _effectsManager.FloatingTextEffect(transform.position, 1, 1, 
                 cashDrop.ToString() + "$", Constants.CashColor);
@@ -130,6 +134,13 @@ namespace Enemies
                     _timeSinceLastHit = 0;
                 }
             }
+        }
+
+        public void Reset()
+        {
+            _curHealth = _maxHealth;
+            UpdateHealthBar();
+            _canGetHit = true;
         }
     }
 }

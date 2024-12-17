@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 using Utils.Data;
+using Random = UnityEngine.Random;
 
 namespace Enemies
 {
@@ -139,6 +141,15 @@ namespace Enemies
             {
                 StartCoroutine(KnockbackCoroutine((Vector2)hitDirection, .25f, true));
             }
+        }
+
+        public void Reset()
+        {
+            Agent.isStopped = false;
+            Agent.SetDestination(CurrentTargetPosition);
+            Agent.speed = AgentSetSpeed;
+            Agent.updatePosition = true;
+            IsMoving = true;
         }
 
         public Vector3 GetCurrentTargetPosition()

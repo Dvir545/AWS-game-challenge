@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 using Utils;
 using Utils.Data;
 
-namespace World
+namespace Enemies
 {
     public class EnemyPool: Singleton<EnemyPool>
     {
@@ -42,9 +42,14 @@ namespace World
         {
             GameObject enemy = _enemyPools[type].Get();
             enemy.transform.position = spawnPosition;
+            enemy.GetComponent<EnemyHealthManager>().Reset();
+            enemy.GetComponent<EnemyMovementManager>().Reset();
             // fade in
-            var sr = enemy.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            var body = enemy.transform.GetChild(0);
+            var sr = body.GetComponent<SpriteRenderer>();
+            sr.color = new Color(1, 1, 1, 0);
             sr.DOFade(1, 0.5f);
+            EventManager.Instance.TriggerEvent(EventManager.EnemySpawned, (body.transform, true));
             EnemyCount++;
             return enemy;
         }

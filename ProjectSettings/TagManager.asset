@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - canFarmTilemap
   - farmTilemap
+  - GlobalLight
   layers:
   - Default
   - TransparentFX

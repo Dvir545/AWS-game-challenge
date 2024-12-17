@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using Utils;
 using Random = UnityEngine.Random;
 
@@ -18,7 +19,10 @@ namespace Enemies.Slime
         private SlimeSoundManager _enemySoundManager;
         private EnemyHealthManager _enemyHealthManager;
         private Coroutine _jumpCoroutine;
-        
+        private Vector2 _nextDirection;
+        private Vector2 _preJumpPosition = Vector2.zero;
+        private Vector2 _postJumpPosition = Vector2.zero;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -36,6 +40,15 @@ namespace Enemies.Slime
         {
             while (!_enemyHealthManager.IsDead)
             {
+                var nextDirection = ((Vector2)(Agent.nextPosition - transform.position)).normalized;
+                if (Vector2.Angle(nextDirection, _nextDirection) > 2)
+                {
+                    _nextDirection = nextDirection;
+                }
+                else
+                {
+                    _nextDirection = Random.insideUnitCircle.normalized;
+                }
                 while (_jumpCooldown > 0)
                 {
                     _jumpCooldown -= Time.deltaTime;
@@ -49,19 +62,30 @@ namespace Enemies.Slime
                     continue;
                 float jumpDistance = Random.Range(jumpMinDistance, jumpMaxDistance);
                 float jumpDuration = jumpDistance / jumpSpeed;
-                Vector2 direction = (Agent.destination - transform.position).normalized;
                 float forceMagnitude = jumpDistance / jumpDuration;
+                Vector2 direction;
+                var distanceFromTarget = Vector2.Distance(transform.position, Agent.destination);
+                var isStuck = Mathf.Abs(_postJumpPosition.x - _preJumpPosition.x) < 0.5f &&
+                              Mathf.Abs(_postJumpPosition.y - _preJumpPosition.y) < 0.5f;
+                if (distanceFromTarget > 10 || isStuck)
+                    direction = _nextDirection;
+                else
+                    direction = ((Vector2)(Agent.destination - transform.position)).normalized;
                 Vector2 jumpForce = direction * forceMagnitude;
                 IsMoving = true;
                 _enemyAnimationManager.SetJumpDuration(jumpDuration);
                 _enemySoundManager.PlayJumpSound();
+                _preJumpPosition = transform.position;
                 Rb.AddForce(jumpForce, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(jumpDuration);
                 if (_jumpCooldown > 0)  // because slime was hit
                     continue;
+                _postJumpPosition = transform.position;
                 _enemySoundManager.PlayLandSound();
+                Agent.Warp(transform.position);
                 Rb.velocity = Vector2.zero;
                 _jumpCooldown = Random.Range(jumpMinCooldown, jumpMaxCooldown);
+                yield return new WaitForSeconds(0.2f);  // to let agent advance a bit
             }
         }
 
