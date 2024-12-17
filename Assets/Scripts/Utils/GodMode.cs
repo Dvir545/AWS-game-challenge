@@ -1,5 +1,6 @@
 using Player;
 using UnityEngine;
+using Utils.Data;
 
 namespace Utils
 {
@@ -10,7 +11,7 @@ namespace Utils
 
         public void InfiniteCash()
         {
-            playerData.AddCash(99999 - playerData.CurCash);
+            playerData.AddCash(99999 - GameData.Instance.cash);
         }
     }
 }

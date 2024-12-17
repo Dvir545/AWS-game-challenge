@@ -45,12 +45,19 @@ namespace Towers
         private TowerFloorAnimationManager _newFloorAnimationManager;
         private Collider2D _newFloorAttackZone;
         private WarningSignBehaviour _warningSign;
+        private int _towerIndex;
+        
         public bool IsBuilt { get; private set; }
 
         private void Awake()
         {
             _topConstruction = transform.GetChild(0).gameObject;
             _towerBaseSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        }
+
+        public void Init(int index)
+        {
+            _towerIndex = index;
         }
 
         public bool CanBuild()
@@ -77,6 +84,12 @@ namespace Towers
             {
                 OnBuildCompleted();
             }
+        }
+        
+        public void AddFloor(TowerMaterial material)  // instantly
+        {
+            StartBuild(material);
+            OnBuildCompleted();
         }
 
         public void StartBuild(TowerMaterial material)
@@ -117,6 +130,7 @@ namespace Towers
             _currentLevel++;
             EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
             IsBuilt = true;
+            GameData.Instance.towerLevels[_towerIndex][_currentLevel - 1] = (int)_towerDatas[_currentLevel - 1].TowerMaterial;
         }
         
         public void SetUnderAttack(bool isUnderAttack)
@@ -142,13 +156,31 @@ namespace Towers
             var curHealth = _floorsHealth[_currentLevel - 1];
             return 1 - curHealth / maxHealth;
         }
-
-        private void DestroyTopFloor()
+        
+        private int GetWorstFloor()
         {
-            Destroy(_floors[_currentLevel - 1]);
-            _floors.RemoveAt(_currentLevel - 1);
-            _floorsHealth.RemoveAt(_currentLevel - 1);
-            _towerDatas.RemoveAt(_currentLevel - 1);
+            var worstFloor = 0;
+            for (int i = 1; i < _currentLevel; i++)
+            {
+                if (_towerDatas[i].TowerMaterial < _towerDatas[worstFloor].TowerMaterial)
+                    worstFloor = i;
+            }
+            return worstFloor;
+        }
+
+        private void DestroyWorstFloor()
+        {
+            var worstFloor = GetWorstFloor();
+            // move down all the floors above the worst one
+            for (int i = worstFloor + 1; i < _currentLevel; i++)
+            {
+                _floors[i].transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
+                _floors[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+            }
+            Destroy(_floors[worstFloor]);
+            _floors.RemoveAt(worstFloor);
+            _floorsHealth.RemoveAt(worstFloor);
+            _towerDatas.RemoveAt(worstFloor);
             _currentLevel--;
             if (_currentLevel == 0)
             {
@@ -168,18 +200,18 @@ namespace Towers
             }
         }
 
-        public void DecTopFloorHealth(float health)
+        public void DecWorstFloorHealth(float health)
         {
             if (_currentLevel == 0)
                 return;
-            var newHealth = _floorsHealth[_currentLevel - 1] - health;
+            var newHealth = _floorsHealth[GetWorstFloor()] - health;
             if (newHealth <= 0)
             {
-                DestroyTopFloor();
+                DestroyWorstFloor();
             }
             else
             {
-                _floorsHealth[_currentLevel - 1] = newHealth;
+                _floorsHealth[GetWorstFloor()] = newHealth;
             }
         }
         

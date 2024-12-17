@@ -34,7 +34,7 @@ namespace Stores
             {
                 Debug.Log("Max upgrade level reached");
             }
-            else if (playerData.CurCash < ToolsData.GetPrice(tool, _curLevel))
+            else if (GameData.Instance.cash < ToolsData.GetPrice(tool, _curLevel))
             {
                 Debug.Log("Not enough cash");
             }

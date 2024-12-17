@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using Utils.Data;
+using World;
 
 namespace Stores
 {
@@ -32,7 +34,6 @@ namespace Stores
                 [StoreType.Tools] = toolsStore.transform.GetChild(_windowCanvasOrder).gameObject,
                 [StoreType.Upgrades] = upgradesStore.transform.GetChild(_windowCanvasOrder).gameObject
             };
-
         }
 
         private void Start()
@@ -46,10 +47,17 @@ namespace Stores
             {
                 windowCanvas.SetActive(false);
             }
+            EventManager.Instance.StartListening(EventManager.DayEnded, CloseStore);
+        }
+
+        private void CloseStore(object arg0)
+        {
+            CloseStore();
         }
 
         public void OpenStore(StoreType storeType)
         {
+            if (!DayNightManager.Instance.DayTime) return;
             _storesDarkOverlays[storeType].SetActive(true);
             _storesWindowCanvases[storeType].SetActive(true);
             _activeStore = storeType;
@@ -62,6 +70,18 @@ namespace Stores
             _storesDarkOverlays[activeStore].SetActive(false);
             _storesWindowCanvases[activeStore].SetActive(false);
             _activeStore = null;
+        }
+
+        public void UpdateStock(int[] newCrops, int[] newMaterials)
+        {
+            for (int i = 0; i < newCrops.Length; i++)
+            {
+                GameData.Instance.cropsInStore[i] = Mathf.Min(GameData.Instance.cropsInStore[i] + newCrops[i], Constants.MaxCropsInStore);
+            }
+            for (int i = 0; i < newMaterials.Length; i++)
+            {
+                GameData.Instance.materialsInStore[i] = Mathf.Min(GameData.Instance.materialsInStore[i] + newMaterials[i], Constants.MaxMaterialsInStore);
+            }
         }
     }
 }

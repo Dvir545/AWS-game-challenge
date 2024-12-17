@@ -33,7 +33,7 @@ namespace Stores
             {
                 Debug.Log("Max upgrade level reached");
             }
-            else if (playerData.CurCash < UpgradesData.GetPrice(upgradeType, _curLevel))
+            else if (GameData.Instance.cash < UpgradesData.GetPrice(upgradeType, _curLevel))
             {
                 Debug.Log("Not enough cash");
             }

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Crops
 {
@@ -67,6 +68,7 @@ namespace Crops
 
         private void Farm()
         {
+            if (DayNightManager.Instance.NightTime) return;
             bool isStandingOnFarmTile;
             Vector3Int tilePos;
             (isStandingOnFarmTile, tilePos) = IsStandingOnFarmTile(playerTransform);

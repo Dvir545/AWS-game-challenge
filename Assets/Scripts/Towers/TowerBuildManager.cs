@@ -4,6 +4,8 @@ using Amazon.GameLift.Model;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
+using Utils.Data;
 
 namespace Towers
 {
@@ -31,7 +33,22 @@ namespace Towers
             }
             _playerCollider = playerTransform.GetComponent<Collider2D>();
         }
-        
+
+        private void Start()
+        {
+            // load existing tower levels
+            for (int i = 0; i < _towerBuilds.Length; i++)
+            {
+                _towerBuilds[i].Init(i);
+                var towerLevels = GameData.Instance.towerLevels[i];
+                for (int j = 0; j < towerLevels.Length; j++)
+                {
+                    if (towerLevels[j] > -1)
+                        _towerBuilds[i].AddFloor((TowerMaterial)towerLevels[j]);
+                }
+            }
+        }
+
         public bool IsBuilding { get; private  set; }
         
         public void StartBuilding()

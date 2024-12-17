@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Utils.Data
@@ -78,34 +79,50 @@ namespace Utils.Data
     
     public class EnemySpawns
     {
-        public Dictionary<Enemy, int> SpawnAmounts { get; private set; }
-        public Dictionary<Enemy, Vector2[]> SpawnPositions { get; private set; }
+        public int[] SpawnAmounts { get; private set; }
+        public Vector2[][] SpawnPositions { get; private set; }
             
 
-        public EnemySpawns(int slimes=0, int skeletons=0, int goblins=0, int chickens=0, int orcs=0, int demons=0)
+        public EnemySpawns(int slimes=0, int skeletons=0, int chickens=0, int orcs=0, int goblins=0, int demons=0)
         {
-            SpawnAmounts = new Dictionary<Enemy, int>
-            {
-                { Enemy.Slime, slimes },
-                { Enemy.Skeleton, skeletons },
-                { Enemy.Goblin, goblins },
-                { Enemy.Chicken, chickens },
-                { Enemy.Orc, orcs },
-                { Enemy.Demon, demons }
-            };
+            SpawnAmounts = new[] {slimes, skeletons, chickens, orcs, goblins, demons};
 
-            SpawnPositions = EnemySpawnData.Instance.EnemySpawnPositions;
+            var spawnPositionsDict = EnemySpawnData.Instance.EnemySpawnPositions;
+            SpawnPositions = new[]
+            {
+                spawnPositionsDict[(Enemy)0],
+                spawnPositionsDict[(Enemy)1],
+                spawnPositionsDict[(Enemy)2],
+                spawnPositionsDict[(Enemy)3],
+                spawnPositionsDict[(Enemy)4],
+                spawnPositionsDict[(Enemy)5]
+            };
+        }
+
+        public EnemySpawns(int[] amounts)
+        {
+            SpawnAmounts = amounts.ToArray();
+            var spawnPositionsDict = EnemySpawnData.Instance.EnemySpawnPositions;
+            SpawnPositions = new[]
+            {
+                spawnPositionsDict[(Enemy)0],
+                spawnPositionsDict[(Enemy)1],
+                spawnPositionsDict[(Enemy)2],
+                spawnPositionsDict[(Enemy)3],
+                spawnPositionsDict[(Enemy)4],
+                spawnPositionsDict[(Enemy)5]
+            };
         }
             
         public void AddEnemy(Enemy enemy, int amount=1)
         {
-            SpawnAmounts[enemy] = amount;
+            SpawnAmounts[(int)enemy] = amount;
         }
             
         public int TotalSpawnsAmount()
         {
             int total = 0;
-            foreach (var amount in SpawnAmounts.Values)
+            foreach (var amount in SpawnAmounts)
             {
                 total += amount;
             }

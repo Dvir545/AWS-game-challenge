@@ -11,8 +11,8 @@ namespace Crops
         [SerializeField] private PlayerData  playerData;
         
         [Header("Crop UI")] 
+        [SerializeField] private Transform cropUIParent;
         [SerializeField] private GameObject wheatUI;
-
         [SerializeField] private TextMeshProUGUI wheatAmount;
         [SerializeField] private GameObject carrotUI;
         [SerializeField] private TextMeshProUGUI carrotAmount;
@@ -24,13 +24,16 @@ namespace Crops
         [SerializeField] private TextMeshProUGUI pumpkinAmount;
         private Dictionary<Crop, GameObject> _cropUI = new Dictionary<Crop, GameObject>();
         private Dictionary<Crop, TextMeshProUGUI> _cropAmount = new Dictionary<Crop, TextMeshProUGUI>();
+        private float _uiParentStartX;
         private Vector2 _uiStartPos = new(0, 50);
-        private int _uiXoffset = 100;
+        private int _uiXoffset = -128;
 
         private Vector2 _uiCurOffset;
 
         private void Awake()
         {
+            _uiParentStartX = cropUIParent.localPosition.x;
+            
             _cropUI.Add(Crop.Wheat, wheatUI);
             _cropUI.Add(Crop.Carrot, carrotUI);
             _cropUI.Add(Crop.Tomato, tomatoUI);
@@ -49,16 +52,30 @@ namespace Crops
                     DisableCropUI((Crop)i);
                 _cropAmount[(Crop)i].text = playerData.GetNumCrops((Crop)i).ToString();
             }
+            
+            SetCropUIParentPosition();
 
-            _uiCurOffset = new Vector2(_cropUI.Count * 100, 0);
+            _uiCurOffset = new Vector2(_cropUI.Count * 128, 0);
         }
-        
+
+        private void SetCropUIParentPosition()
+        {
+            var numActiveCrops = 0;
+            foreach (var cropUI in _cropUI)
+            {
+                if (cropUI.Value.activeSelf)
+                    numActiveCrops++;
+            }
+            cropUIParent.localPosition = new Vector2(_uiParentStartX + (5-numActiveCrops) * 64, 0);
+        }
+
         public void AddCrop(Crop crop)
         {
             if (playerData.GetNumCrops(crop) == 0)
                 EnableCropUI(crop);
             playerData.AddCrop(crop);
             _cropAmount[crop].text = playerData.GetNumCrops(crop).ToString();
+            SetCropUIParentPosition();
         }
 
         public void AddCrop(int cropN)

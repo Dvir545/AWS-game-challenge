@@ -14,29 +14,38 @@ namespace Stores
         [SerializeField] private Crop crop;
         [SerializeField] private TextMeshProUGUI priceText;
         [SerializeField] private TextMeshProUGUI amount;
-        private int _amount = 10;
-        
+        private int Amount
+        {
+            get => GameData.Instance.cropsInStore[(int)crop];
+            set => GameData.Instance.cropsInStore[(int)crop] = value;
+        }
+
         private void Start()
         {
-            amount.text = _amount.ToString();
+            amount.text = Amount.ToString();
             priceText.text = CropsData.Instance.GetPrice(crop) + " $";
+            EventManager.Instance.StartListening(EventManager.DayStarted, (arg0 => amount.text = Amount.ToString()));
         }
 
         public void BuyCrop()
         {
-            if (playerData.CurCash < CropsData.Instance.GetPrice(crop))
+            if (GameData.Instance.cash < CropsData.Instance.GetPrice(crop))
             {
                 Debug.Log("Not enough cash");
-            } else if (_amount <= 0)
+            } else if (Amount <= 0)
             {
                 Debug.Log("No more crops");
+            }
+            else if (Amount >= Constants.MaxCrops)
+            {
+                Debug.Log("Too many crops");
             }
             else
             {
                 playerData.SpendCash(CropsData.Instance.GetPrice(crop));
                 cropManager.AddCrop(crop);
-                _amount--;
-                amount.text = _amount.ToString();
+                Amount--;
+                amount.text = Amount.ToString();
             }
         }
     }

@@ -27,12 +27,12 @@ namespace Player
         private const int XOffsetBetweenHearts = 128;
         private const float HitTime = 0.25f;
         
-        public bool IsDead => playerData.CurHealth <= 0;
+        public bool IsDead => GameData.Instance.curHealth <= 0;
 
         private void Start()
         {
             AddUIHealth(playerData.MaxHealth);
-            UpdateUIHealth(playerData.CurHealth);
+            UpdateUIHealth(GameData.Instance.curHealth);
             EventManager.Instance.StartListening(EventManager.MaxHealthIncreased, AddUIHealth);
             EventManager.Instance.StartListening(EventManager.HealthChanged, UpdateUIHealth);
         }
@@ -52,7 +52,7 @@ namespace Player
                     _heartPrefabs.Add(newPrefab);
                     _heartImages.Add(newPrefab.GetComponent<Image>());
                 }
-                UpdateUIHealth(playerData.CurHealth);
+                UpdateUIHealth(GameData.Instance.curHealth);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Player
             _canGetHit = false;
             int damage = Constants.BaseEnemyDamage * EnemyData.GetDamageMultiplier(enemyType);
             playerData.SubtractHealth(damage);
-            if (playerData.CurHealth <= 0)
+            if (GameData.Instance.curHealth <= 0)
             {
                 EventManager.Instance.TriggerEvent(EventManager.PlayerDied, null);
                 yield break;
@@ -115,7 +115,8 @@ namespace Player
         
         public void StopHeal()
         {
-            StopCoroutine(_healCoroutine);
+            if (_healCoroutine != null)
+                StopCoroutine(_healCoroutine);
         }
 
         private IEnumerator HealCoroutine()

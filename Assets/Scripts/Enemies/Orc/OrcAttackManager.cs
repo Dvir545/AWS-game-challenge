@@ -39,8 +39,9 @@ namespace Enemies.Orc
                 }
                 else
                 {
-                    _curTarget.DecTopFloorHealth(Time.deltaTime);
+                    _curTarget.DecWorstFloorHealth(Time.deltaTime);
                     var destroyProgress = _curTarget.GetDestroyProgress();
+                    
                     if (!progressBarBehavior.IsWorking)
                         progressBarBehavior.StartWork(destroyProgress);
                     else

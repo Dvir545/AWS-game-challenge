@@ -7,35 +7,32 @@ namespace Player
     public class PlayerData: MonoBehaviour
     {
         private HeldTool _curTool = HeldTool.Sword;
-        private int _curSword = 0;
-        private int _curHoe = 0;
-        private int _curHammer = 0;
 
-        private int _curHealthUpgradeLevel = 0;
-        private int _curRegenUpgradeLevel = 0;
-        private int _curSpeedUpgradeLevel = 0;
-        public float RegenSpeedMultiplier { get; private set; } = 1;
-        public float SpeedMultiplier { get; private set; } = 1;
+        public float RegenSpeedMultiplier { get; private set; } 
+        public float SpeedMultiplier { get; private set; }
 
-        private int[] _numCrops = {1, 1, 1, 1, 1};
-        private int[] _numMaterials = {1, 1, 1, 1, 1};
-        
+        private void Start()
+        {
+            RegenSpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.regenUpgradeLevel);
+            SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);
+        }
+
         public void SwitchTool()
         {
             _curTool = (HeldTool)(((int)_curTool + 1) % Constants.NumTools);
         }
         private int GetCurToolLevel() => _curTool switch
         {
-            HeldTool.Sword => _curSword,
-            HeldTool.Hoe => _curHoe,
-            HeldTool.Hammer => _curHammer,
+            HeldTool.Sword => GameData.Instance.swordLevel,
+            HeldTool.Hoe => GameData.Instance.hoeLevel,
+            HeldTool.Hammer => GameData.Instance.hammerLevel,
             _ => 0
         };
         public int GetToolLevel(HeldTool tool) => tool switch
             {
-                HeldTool.Sword => _curSword,
-                HeldTool.Hoe => _curHoe,
-                HeldTool.Hammer => _curHammer,
+                HeldTool.Sword => GameData.Instance.swordLevel,
+                HeldTool.Hoe => GameData.Instance.hoeLevel,
+                HeldTool.Hammer => GameData.Instance.hammerLevel,
                 _ => 0
             };
         public HeldTool GetCurTool() => _curTool;
@@ -45,13 +42,13 @@ namespace Player
             switch (tool)
             {
                 case HeldTool.Sword:
-                    _curSword++;
+                    GameData.Instance.swordLevel++;
                     break;
                 case HeldTool.Hoe:
-                    _curHoe++;
+                    GameData.Instance.hoeLevel++;
                     break;
                 case HeldTool.Hammer:
-                    _curHammer++;
+                    GameData.Instance.hammerLevel++;
                     break;
             }
             EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, null);
@@ -59,22 +56,19 @@ namespace Player
         public float GetProgressSpeedMultiplier => ToolsData.GetProgressSpeedMultiplier(GetCurToolLevel(), _curTool);
         public int GetDamageMultiplier => ToolsData.GetDamageMultiplier(GetCurToolLevel(), _curTool);
 
-        public int MaxHealth { get; private set; } = Constants.StartHealth;
+        public int MaxHealth => Constants.StartHealth + GameData.Instance.healthUpgradeLevel * 2;
 
         public void IncMaxHealth()
         {
-            MaxHealth += 2;
-            CurHealth += 2;
+            GameData.Instance.curHealth += 2;
             EventManager.Instance.TriggerEvent(EventManager.MaxHealthIncreased, MaxHealth);
         }
         
-        public int CurHealth { get; private set; } = Constants.StartHealth;
-
         public void AddHealth(int amount)
         {
-            if (CurHealth >= MaxHealth) return;
-            CurHealth += amount;
-            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
+            if (GameData.Instance.curHealth >= MaxHealth) return;
+            GameData.Instance.curHealth += amount;
+            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, GameData.Instance.curHealth);
         }
 
         public void IncHealth()
@@ -84,50 +78,48 @@ namespace Player
 
         public void SubtractHealth(int amount)
         {
-            CurHealth -= amount;
-            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, CurHealth);
+            GameData.Instance.curHealth -= amount;
+            EventManager.Instance.TriggerEvent(EventManager.HealthChanged, GameData.Instance.curHealth);
         }
-
-        public int CurCash { get; private set; } = Constants.StartingCash;
-
+        
         public void AddCash(int amount)
         {
-            CurCash += amount;
-            EventManager.Instance.TriggerEvent(EventManager.CashChanged, CurCash);
+            GameData.Instance.cash += amount;
+            EventManager.Instance.TriggerEvent(EventManager.CashChanged, GameData.Instance.cash);
         }
         public void SpendCash(int amount)
         {
-            CurCash -= amount;
-            EventManager.Instance.TriggerEvent(EventManager.CashChanged, CurCash);
+            GameData.Instance.cash -= amount;
+            EventManager.Instance.TriggerEvent(EventManager.CashChanged, GameData.Instance.cash);
         }
         
-        public int GetNumCrops(Crop cropType) => _numCrops[(int)cropType];
-        public int GetNumCropTypes() => _numCrops.Length;
+        public int GetNumCrops(Crop cropType) => GameData.Instance.crops[(int)cropType];
+        public int GetNumCropTypes() => GameData.Instance.crops.Length;
         public void AddCrop(Crop cropType)
         {
-            _numCrops[(int)cropType]++;
+            GameData.Instance.crops[(int)cropType]++;
         }
         public void RemoveCrop(Crop cropType)
         {
-            _numCrops[(int)cropType]--;
+            GameData.Instance.crops[(int)cropType]--;
         }
         
-        public int GetNumMaterials(TowerMaterial material) => _numMaterials[(int)material];
-        public int GetNumMaterialTypes() => _numMaterials.Length;
+        public int GetNumMaterials(TowerMaterial material) => GameData.Instance.materials[(int)material];
+        public int GetNumMaterialTypes() => GameData.Instance.materials.Length;
         public void AddMaterial(TowerMaterial material)
         {
-            _numMaterials[(int)material]++;
+            GameData.Instance.materials[(int)material]++;
         }
         public void RemoveMaterial(TowerMaterial material)
         {
-            _numMaterials[(int)material]--;
+            GameData.Instance.materials[(int)material]--;
         }
 
         public int GetUpgradeLevel(Upgrade upgradeType) => upgradeType switch
         {
-            Upgrade.Health => _curHealthUpgradeLevel,
-            Upgrade.Regen => _curRegenUpgradeLevel,
-            Upgrade.Speed => _curSpeedUpgradeLevel,
+            Upgrade.Health => GameData.Instance.healthUpgradeLevel,
+            Upgrade.Regen => GameData.Instance.regenUpgradeLevel,
+            Upgrade.Speed => GameData.Instance.speedUpgradeLevel,
             _ => 0
         };
 
@@ -136,16 +128,16 @@ namespace Player
             switch (upgradeType)
             {
                 case Upgrade.Health: 
-                    _curHealthUpgradeLevel++;
+                    GameData.Instance.healthUpgradeLevel++;
                     IncMaxHealth();
                     break;
                 case Upgrade.Regen: 
-                    _curRegenUpgradeLevel++;
-                    RegenSpeedMultiplier = UpgradesData.GetRegenSpeedMultiplier(_curRegenUpgradeLevel);
+                    GameData.Instance.regenUpgradeLevel++;
+                    RegenSpeedMultiplier = UpgradesData.GetRegenSpeedMultiplier(GameData.Instance.regenUpgradeLevel);
                     break;
                 case Upgrade.Speed: 
-                    _curSpeedUpgradeLevel++;
-                    SpeedMultiplier = UpgradesData.GetSpeedMultiplier(_curSpeedUpgradeLevel);
+                    GameData.Instance.speedUpgradeLevel++;
+                    SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);
                     break;
             }
             EventManager.Instance.TriggerEvent(EventManager.AbilityUpgraded, (upgradeType, GetUpgradeLevel(upgradeType)));

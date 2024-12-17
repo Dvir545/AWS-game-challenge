@@ -32,7 +32,7 @@ namespace Enemies.Orc
                     {
                         Agent.isStopped = true;
                         IsMoving = false;
-                        if (!_orcAttackManager.IsAttacking())
+                        if (!_orcAttackManager.IsAttacking() )
                             _orcAttackManager.StartAttacking(CurrentTarget);
                     }
                     else
@@ -42,6 +42,7 @@ namespace Enemies.Orc
                         if (Math.Abs(Agent.speed - AgentSetSpeed) > 0.01f)
                             Agent.speed = AgentSetSpeed;
                         _orcAttackManager.SetAttacking(false);
+                        FindClosestTarget();
                     }
                 }
                 else
@@ -75,6 +76,7 @@ namespace Enemies.Orc
             else if (!foundTower)
                 base.FindClosestTarget();
             _foundTower = foundTower;
+            CurrentTargetPosition = CurrentTarget.position;
         }
     }
 }

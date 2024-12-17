@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using Utils;
+using Utils.Data;
 using RectTransform = UnityEngine.RectTransform;
 
 namespace UI
@@ -16,7 +17,7 @@ namespace UI
             _cashText = GetComponent<TextMeshProUGUI>();
             EventManager.Instance.StartListening(EventManager.CashChanged, OnCashChanged);
             _digitWidth = (int)(4*_cashText.fontSize/5);
-            SetText(Constants.StartingCash);
+            SetText(GameData.Instance.cash);
         }
 
         private void SetText(int amount)

@@ -11,8 +11,8 @@ namespace Towers
         [SerializeField] private PlayerData  playerData;
         
         [Header("Material UI")] 
+        [SerializeField] private Transform materialUIParent;
         [SerializeField] private GameObject woodUI;
-
         [SerializeField] private TextMeshProUGUI woodAmount;
         [SerializeField] private GameObject stoneUI;
         [SerializeField] private TextMeshProUGUI stoneAmount;
@@ -24,13 +24,16 @@ namespace Towers
         [SerializeField] private TextMeshProUGUI diamondAmount;
         private Dictionary<TowerMaterial, GameObject> _materialUI = new Dictionary<TowerMaterial, GameObject>();
         private Dictionary<TowerMaterial, TextMeshProUGUI> _materialAmount = new Dictionary<TowerMaterial, TextMeshProUGUI>();
+        private float _uiParentStartX;
         private Vector2 _uiStartPos = new(0, 50);
-        private int _uiXoffset = 100;
+        private int _uiXoffset = 128;
 
         private Vector2 _uiCurOffset;
 
         private void Awake()
         {
+            _uiParentStartX = materialUIParent.localPosition.x;
+
             _materialUI.Add(TowerMaterial.Wood, woodUI);
             _materialUI.Add(TowerMaterial.Stone, stoneUI);
             _materialUI.Add(TowerMaterial.Steel, steelUI);
@@ -50,7 +53,20 @@ namespace Towers
                 _materialAmount[(TowerMaterial)i].text = playerData.GetNumMaterials((TowerMaterial)i).ToString();
             }
 
-            _uiCurOffset = new Vector2(_materialUI.Count * 100, 0);
+            SetMaterialUIParentPosition();
+
+            _uiCurOffset = new Vector2(_materialUI.Count * 128, 0);
+        }
+        
+        private void SetMaterialUIParentPosition()
+        {
+            var numActiveMaterials = 0;
+            foreach (var materialUI in _materialUI)
+            {
+                if (materialUI.Value.activeSelf)
+                    numActiveMaterials++;
+            }
+            materialUIParent.localPosition = new Vector2(_uiParentStartX + (5-numActiveMaterials) * 64, 0);
         }
         
         public void AddMaterial(TowerMaterial towerMaterial)
@@ -59,6 +75,7 @@ namespace Towers
                 EnableMaterialUI(towerMaterial);
             playerData.AddMaterial(towerMaterial);
             _materialAmount[towerMaterial].text = playerData.GetNumMaterials(towerMaterial).ToString();
+            SetMaterialUIParentPosition();
         }
 
         public void AddMaterial(int materialN)

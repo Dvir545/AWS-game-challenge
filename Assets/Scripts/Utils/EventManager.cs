@@ -21,6 +21,9 @@ namespace Utils
         public const string TowerStoppedBeingUnderAttack = "TowerStoppedBeingUnderAttack";
         public const string EnemySpawned = "EnemySpawned";
         public const string EnemyKilled = "EnemyKilled";
+        public const string DayStarted = "DayStarted";
+        public const string DayEnded = "DayEnded";
+        public const string NightStarted = "NightStarted";
 
         protected EventManager()
         {

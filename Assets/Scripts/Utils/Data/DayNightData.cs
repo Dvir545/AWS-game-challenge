@@ -25,6 +25,8 @@ namespace Utils.Data
         {
             public DayWave DayWave;
             public NightWave NightWave;
+            public int[] NewCrops;
+            public int[] NewMaterials;
         }
 
         private const int NumPredefinedCycles = 10;
@@ -42,21 +44,53 @@ namespace Utils.Data
             }
             var daySpawns = new List<EnemySpawns>()
             {
-                new(), new(), new(), new(), new(chickens:1),
+                new(Constants.FirstDayEnemies), new(), new(), new(), new(chickens:1),
                 new(), new(chickens:2), new(chickens:0), new(chickens:1), new(chickens:3)
             };
             var nightSpawns = new List<EnemySpawns>()
             {
-                new(5), 
+                new(Constants.FirstNightEnemies), 
                 new(8, 1), 
                 new(5, 4), 
-                new(6, 5, 2), 
-                new(5, 6, 5), 
-                new(0, 8, 5, 0, 2), 
+                new(6, 5, 0, 0, 2), 
+                new(5, 6, 0, 0, 5), 
+                new(0, 8, 0, 2, 5), 
                 new(30),
-                new(0, 15, 3),
+                new(0, 15, 0, 0, 3),
                 new(10, 10, 10, 10, 10), 
                 new(demons:1)
+            };
+
+            var w = Constants.StoreWheatAmountPerCycle;
+            var c = Constants.StoreCarrotAmountPerCycle;
+            var t = Constants.StoreTomatoAmountPerCycle;
+            var o = Constants.StoreCornAmountPerCycle;
+            var p = Constants.StorePumpkinAmountPerCycle;
+            var newCrops = new List<int[]>()
+            {
+                new []{w, 0, 0, 0, 0},
+                new []{w, c, 0, 0, 0},
+                new []{w, c, 0, 0, 0},
+                new []{w, c, t, 0, 0},
+                new []{w, c, t, 0, 0},
+                new []{w, c, t, o, 0},
+                new []{w, c, t, o, 0},
+                new []{w, c, t, o, 0},
+                new []{w, c, t, o, p},
+                new []{w, c, t, o, p},
+            };
+            var newMaterials = new List<int[]>()
+            {
+                new [] { 1, 0, 0, 0, 0 },
+                new [] { 1, 1, 0, 0, 0 },
+                new [] { 1, 1, 0, 0, 0 },
+                new [] { 1, 1, 1, 0, 0 },
+                new [] { 1, 1, 1, 0, 0 },
+                new [] { 1, 1, 1, 1, 0 },
+                new [] { 1, 1, 1, 1, 0 },
+                new [] { 1, 1, 1, 1, 0 },
+                new [] { 1, 1, 1, 1, 1 },
+                new [] { 1, 1, 1, 1, 1 },
             };
             var cycles = new List<Cycle>();
             for (int i = 0; i < NumPredefinedCycles; i++)
@@ -73,7 +107,9 @@ namespace Utils.Data
                     {
                         SpawnDurationInSeconds = nightSpawnDurations[i],
                         EnemySpawns = nightSpawns[i]
-                    }
+                    },
+                    NewCrops = newCrops[i],
+                    NewMaterials = newMaterials[i]
                 });
             }
             return cycles;
@@ -81,34 +117,87 @@ namespace Utils.Data
 
         private static readonly List<Cycle> FirstCycles = DefineCycles();
 
-        public static Cycle GetCycle(int cycleNum, EnemySpawnData spawnData) // should be called in coroutine to avoid lag
+        public static void WarmupCycle(int cycleNum, EnemySpawnData spawnData) // should be called in coroutine to avoid lag
         {
+            Cycle cycle;
             if (cycleNum < FirstCycles.Count)
-                return FirstCycles[cycleNum];
-
-            var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, cycleNum));
-            var nightEnemySpawns = new EnemySpawns();
-            var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 4);
-            while (enemyPowerPoints > 0)
+                cycle = FirstCycles[cycleNum];
+            else
             {
-                var (enemy, points) = spawnData.GetRandomEnemy(enemyPowerPoints);
-                enemyPowerPoints -= points;
-                nightEnemySpawns.AddEnemy(enemy);
+                var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum/2)));
+                var nightEnemySpawns = new EnemySpawns();
+                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 4);
+                while (enemyPowerPoints > 0)
+                {
+                    var (enemy, points) = spawnData.GetRandomEnemy(enemyPowerPoints);
+                    enemyPowerPoints -= points;
+                    nightEnemySpawns.AddEnemy(enemy);
+                }
+
+                cycle = new Cycle()
+                {
+                    DayWave = new DayWave()
+                    {
+                        DurationInSeconds = Constants.MinDayDurationInSeconds,
+                        SpawnDurationInSeconds = Constants.MinDayDurationInSeconds *
+                                                 (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
+                        EnemySpawns = dayEnemySpawns
+                    },
+                    NightWave = new NightWave()
+                    {
+                        SpawnDurationInSeconds = Constants.MinNightDurationInSeconds,
+                        EnemySpawns = nightEnemySpawns
+                    },
+                    NewCrops = new [] {
+                        Constants.StoreWheatAmountPerCycle, 
+                        Constants.StoreCarrotAmountPerCycle, 
+                        Constants.StoreTomatoAmountPerCycle, 
+                        Constants.StoreCornAmountPerCycle, 
+                        Constants.StorePumpkinAmountPerCycle
+                    },
+                    NewMaterials = new [] {1, 1, 1, 1, 1}
+                };
             }
 
+            GameData.Instance.thisDayEnemies = cycle.DayWave.EnemySpawns.SpawnAmounts;
+            GameData.Instance.thisNightEnemies = cycle.NightWave.EnemySpawns.SpawnAmounts;
+        }
+        
+        public static Cycle GetCycle(int day, int[] dayEnemies, int[] nightEnemies)
+        {
+            if (day < FirstCycles.Count)
+                return FirstCycles[day];
+            var dayEnemySpawns = new EnemySpawns(dayEnemies);
+            var nightEnemySpawns = new EnemySpawns(nightEnemies);
+            for (int i = 0; i < dayEnemies.Length; i++)
+            {
+                dayEnemySpawns.AddEnemy((Enemy) i, dayEnemies[i]);
+            }
+            for (int i = 0; i < nightEnemies.Length; i++)
+            {
+                nightEnemySpawns.AddEnemy((Enemy) i, nightEnemies[i]);
+            }
             return new Cycle()
             {
                 DayWave = new DayWave()
                 {
-                    DurationInSeconds = Constants.MinDayDurationInSeconds,
-                    SpawnDurationInSeconds = Constants.MinDayDurationInSeconds * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
+                    DurationInSeconds = Constants.FirstDayDurationInSeconds - Constants.DaySecondsReductionPerCycle * (day - NumPredefinedCycles),
+                    SpawnDurationInSeconds = Constants.FirstDayDurationInSeconds * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
                     EnemySpawns = dayEnemySpawns
                 },
                 NightWave = new NightWave()
                 {
-                    SpawnDurationInSeconds = Constants.MinNightDurationInSeconds,
+                    SpawnDurationInSeconds = Constants.FirstNightDurationInSeconds - Constants.NightSecondsReductionPerCycle * (day - NumPredefinedCycles),
                     EnemySpawns = nightEnemySpawns
-                }
+                },
+                NewCrops = new [] {
+                    Constants.StoreWheatAmountPerCycle, 
+                    Constants.StoreCarrotAmountPerCycle, 
+                    Constants.StoreTomatoAmountPerCycle, 
+                    Constants.StoreCornAmountPerCycle, 
+                    Constants.StorePumpkinAmountPerCycle
+                },
+                NewMaterials = new [] {1, 1, 1, 1, 1}
             };
         }
     }

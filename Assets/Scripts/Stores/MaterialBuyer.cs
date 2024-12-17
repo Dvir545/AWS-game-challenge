@@ -14,29 +14,38 @@ namespace Stores
         [SerializeField] private TowerMaterial material;
         [SerializeField] private TextMeshProUGUI priceText;
         [SerializeField] private TextMeshProUGUI amount;
-        private int _amount = 10;
-        
+        private int Amount
+        {
+            get => GameData.Instance.materialsInStore[(int)material];
+            set => GameData.Instance.materialsInStore[(int)material] = value;
+        }
+
         private void Start()
         {
-            amount.text = _amount.ToString();
+            amount.text = Amount.ToString();
             priceText.text = TowersData.Instance.GetTowerData(material).Price + " $";
+            EventManager.Instance.StartListening(EventManager.DayStarted, (arg0 => amount.text = Amount.ToString()));
         }
 
         public void BuyMaterial()
         {
-            if (playerData.CurCash < TowersData.Instance.GetTowerData(material).Price)
+            if (GameData.Instance.cash < TowersData.Instance.GetTowerData(material).Price)
             {
                 Debug.Log("Not enough cash");
-            } else if (_amount <= 0)
+            } else if (Amount <= 0)
             {
                 Debug.Log("No more materials");
+            }
+            else if (Amount >= Constants.MaxMaterials)
+            {
+                Debug.Log("Too many materials");
             }
             else
             {
                 playerData.SpendCash(TowersData.Instance.GetTowerData(material).Price);
                 materialManager.AddMaterial(material);
-                _amount--;
-                amount.text = _amount.ToString();
+                Amount--;
+                amount.text = Amount.ToString();
             }
         }
     }

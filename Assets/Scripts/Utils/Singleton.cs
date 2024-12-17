@@ -63,6 +63,7 @@ namespace Utils
                     return _instance;
                 }
             }
+            set => _instance = value;
         }
 
         private static bool applicationIsQuitting = false;

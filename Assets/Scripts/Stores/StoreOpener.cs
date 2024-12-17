@@ -1,5 +1,6 @@
 using UnityEngine;
 using Utils;
+using World;
 
 namespace Stores
 {
@@ -16,6 +17,7 @@ namespace Stores
     
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!DayNightManager.Instance.DayTime) return;
             if (!_isPlayerInTrigger && other == _myPlayer)
             {
                 GeneralStoreManager.Instance.OpenStore(storeType);

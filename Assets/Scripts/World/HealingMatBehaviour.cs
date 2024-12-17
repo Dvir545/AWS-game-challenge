@@ -15,10 +15,24 @@ namespace World
         void Start()
         {
             _playerHealEffects = new Dictionary<GameObject, GameObject>();
+            EventManager.Instance.StartListening(EventManager.NightStarted, StopHeal);
+        }
+
+        private void StopHeal(object arg0)
+        {
+            foreach (var healEffect in _playerHealEffects.Values)
+            {
+                if (healEffect != null)
+                {
+                    Destroy(healEffect);
+                }
+            }
+            _playerHealEffects.Clear();   
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (DayNightManager.Instance.NightTime) return;
             if (other.CompareTag("Player") && !_playerHealEffects.ContainsKey(other.gameObject))
             {
                 var healEffect = Instantiate(healEffectPrefab, other.transform.position, Quaternion.identity);
