@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7288358301492704173}
   - component: {fileID: 6897660407729087245}
   - component: {fileID: 7811311059539861950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Oak_Tree_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}

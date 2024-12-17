@@ -23,6 +23,7 @@ namespace Enemies
         private Enemy _enemyType;
         protected float AgentOriginalSpeed;
         protected float AgentSetSpeed;
+        public float SpeedMultiplier { get; private set; } = 1;
         protected FacingDirection CurDirection;
 
         
@@ -39,13 +40,15 @@ namespace Enemies
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
             AgentOriginalSpeed = Agent.speed;
-            AgentSetSpeed = AgentOriginalSpeed * EnemyData.GetSpeed(_enemyType) * Random.Range(0.8f, 1.2f);
+            SpeedMultiplier = Random.Range(0.8f, 1.2f);
+            AgentSetSpeed = AgentOriginalSpeed * EnemyData.GetSpeed(_enemyType) * SpeedMultiplier;
             Agent.speed = AgentSetSpeed;
             
             _targets = GameObject.FindGameObjectsWithTag("Player");
         
             UpdatePathCR = StartCoroutine(UpdatePath());
         }
+
 
         private IEnumerator UpdatePath()
         {
@@ -149,6 +152,7 @@ namespace Enemies
             Agent.SetDestination(CurrentTargetPosition);
             Agent.speed = AgentSetSpeed;
             Agent.updatePosition = true;
+            Agent.Warp(transform.position);
             IsMoving = true;
         }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2998078337989547032}
   - component: {fileID: 5031656595063535004}
   - component: {fileID: -5533471516422868148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: scarecrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

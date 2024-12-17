@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 402232745198333018}
   - component: {fileID: 239253739108455254}
   - component: {fileID: 4412705307041985752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: npcBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubbleBehaviour: {fileID: 7604879548155446504}
+  npcType: 0
 --- !u!1 &5376688888504379059
 GameObject:
   m_ObjectHideFlags: 0

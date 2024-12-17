@@ -9,7 +9,8 @@ namespace Enemies
         private  static readonly int AnimationFacing = Animator.StringToHash("facing");
         private static readonly int AnimationGotHit = Animator.StringToHash("hit");
         private static readonly int AnimationDeath = Animator.StringToHash("die");
-        
+        private static readonly int AnimationWalkSpeed = Animator.StringToHash("walkspeed");
+
         protected EnemyMovementManager EnemyMovementManager;
         [SerializeField] protected Animator[] animators;
         [SerializeField] private SpriteRenderer[] spriteRenderers;
@@ -17,6 +18,10 @@ namespace Enemies
         protected virtual void Awake()
         {
             EnemyMovementManager = GetComponent<EnemyMovementManager>();
+            foreach (var animator in animators)
+            {
+                animator.SetFloat(AnimationWalkSpeed, EnemyMovementManager.SpeedMultiplier);
+            }
         }
 
         protected virtual void Update()

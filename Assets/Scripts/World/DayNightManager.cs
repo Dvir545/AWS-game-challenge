@@ -254,7 +254,7 @@ namespace World
         {
             await Task.Run(() =>
             {
-                _nextCycle = DayNightData.GetCycle(_currentCycleIndex, spawnData);
+                _nextCycle = DayNightData.GetCycle(_currentCycleIndex + 1, spawnData);
             });
         }
 

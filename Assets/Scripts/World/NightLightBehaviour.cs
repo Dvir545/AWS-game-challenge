@@ -26,5 +26,13 @@ public class NightLightBehaviour : MonoBehaviour
         {
             _light.intensity = 1 - _globalLight2D.intensity;
         }
+        else if (DayNightManager.Instance.NightTime && Math.Abs(_light.intensity - _intensity) > 0.01f)
+        {
+            _light.intensity = _intensity;
+        }
+        else if (DayNightManager.Instance.DayTime && _light.intensity != 0f)
+        {
+            _light.intensity = 0f;
+        }
     }
 }

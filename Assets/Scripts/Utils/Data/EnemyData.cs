@@ -23,7 +23,7 @@ namespace Utils.Data
                 damageMultiplier = 1,
                 cashDrop = 5,
                 speed = 1,
-                knockbackForceMultiplier = .3f,
+                knockbackForceMultiplier = .5f,
                 towerDamageMultiplier = 1,
                 pushForceMultiplier = 1
             }},
