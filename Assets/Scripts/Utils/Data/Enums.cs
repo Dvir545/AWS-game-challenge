@@ -74,4 +74,12 @@ namespace Utils
         Start = 0,
         Mid = 1
     }
+
+    public enum DayPhase
+    {
+        Day = 0,
+        DayEnd = 1,
+        Night = 2,
+        NightEnd = 3
+    }
 }

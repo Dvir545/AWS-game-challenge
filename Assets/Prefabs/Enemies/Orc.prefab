@@ -355,6 +355,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc
       objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Height
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6967811538055857793, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.03

@@ -43,6 +43,7 @@ namespace Enemies
             SpeedMultiplier = Random.Range(0.8f, 1.2f);
             AgentSetSpeed = AgentOriginalSpeed * EnemyData.GetSpeed(_enemyType) * SpeedMultiplier;
             Agent.speed = AgentSetSpeed;
+            Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             
             _targets = GameObject.FindGameObjectsWithTag("Player");
         
@@ -146,7 +147,7 @@ namespace Enemies
             }
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             Agent.isStopped = false;
             Agent.SetDestination(CurrentTargetPosition);

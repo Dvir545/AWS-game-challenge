@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Utils;
+using Utils.Data;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GameOverUI : MonoBehaviour
     {
         darkOverlay.SetActive(true);
         window.SetActive(true);
+        gameOverText.text = "GAME OVER\n\nyou survived " + GameData.Instance.day + " days";
         gameOverText.DOColor(new Color(1, 1, 1, 1), 3f).OnComplete(() =>
         {
             restartButton.SetActive(true);

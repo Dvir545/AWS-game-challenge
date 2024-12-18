@@ -26,7 +26,7 @@ public class EvilBallManager : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void Start()
+    public void Init()
     {
         SpawnBalls();
     }

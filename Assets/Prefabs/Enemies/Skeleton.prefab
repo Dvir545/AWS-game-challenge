@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -66,11 +70,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Height
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: avoidancePriority

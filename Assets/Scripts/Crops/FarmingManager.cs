@@ -114,8 +114,8 @@ namespace Crops
             int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
             playerData.AddCash(amount);
             effectsManager.FloatingTextEffect(tilePos, 1, 1, amount.ToString() + "$", Constants.CashColor);
-                
             Farms.Remove(tilePos);
+            PlantedCrops.Remove(tilePos);
         }
 
         private void DestroyCrop(Vector2Int tilePos)
@@ -123,8 +123,8 @@ namespace Crops
             _farmTilemap.SetTile((Vector3Int)tilePos, null);
             WarningSignPool.Instance.ReleaseWarningSign(Farms[tilePos].transform);
             Destroy(Farms[tilePos].gameObject);
-            GameData.Instance.plantedCrops.Remove(tilePos);
             Farms.Remove(tilePos);
+            PlantedCrops.Remove(tilePos);
         }
 
         private void Farm()

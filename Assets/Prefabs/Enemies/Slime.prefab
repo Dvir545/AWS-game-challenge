@@ -57,11 +57,19 @@ PrefabInstance:
       value: 0.5216716
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Offset.y
       value: 0.2608358
       objectReference: {fileID: 0}
     - target: {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: enemyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480796997248486343, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -79,6 +87,18 @@ PrefabInstance:
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Speed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Height
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Acceleration

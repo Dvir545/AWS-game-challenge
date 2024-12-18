@@ -274,7 +274,7 @@ MonoBehaviour:
   verticalRadius: 1
   rotationSpeed: 2
   distanceToSendBall: 6
-  enemyMovementManager: {fileID: 450507167862218799}
+  enemyMovementManager: {fileID: 6351192737160943745}
 --- !u!1 &8306847627159078975
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +410,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Size.y
-      value: 1.0468192
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Offset.y
@@ -465,6 +473,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Height
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_BaseOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6967811538055857793, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.977
@@ -472,6 +496,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7564844226126082591, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     - {fileID: 1486797434681197276, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+    - {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+    - {fileID: 3491961778700133702, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -490,18 +516,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3604010350234500917}
+    - targetCorrespondingSourceObject: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6351192737160943745}
   m_SourcePrefab: {fileID: 100100000, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
---- !u!114 &450507167862218799 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3491961778700133702, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
-  m_PrefabInstance: {fileID: 3906157295475115369}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8222977079772989281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c2cd394b206694b971ef9ebb0314b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &822622157820182251 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -557,3 +575,17 @@ MonoBehaviour:
   spriteRenderers:
   - {fileID: 822622157820182251}
   ballsManager: {fileID: 4198975519800286952}
+--- !u!114 &6351192737160943745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222977079772989281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b8103ad8ab4abca4ebfef171009a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsToUpdateTarget: 5
+  evilBallManager: {fileID: 5876366269386063838}

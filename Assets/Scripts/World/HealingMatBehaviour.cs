@@ -27,6 +27,10 @@ namespace World
                     Destroy(healEffect);
                 }
             }
+            foreach (var player in _playerHealEffects.Keys)
+            {
+                player.GetComponent<PlayerHealthManager>().StopHeal();
+            }
             _playerHealEffects.Clear();   
         }
 
@@ -65,6 +69,10 @@ namespace World
                 {
                     Destroy(healEffect);
                 }
+            }
+            foreach (var player in _playerHealEffects.Keys)
+            {
+                player.GetComponent<PlayerHealthManager>().StopHeal();
             }
             _playerHealEffects.Clear();
         }
