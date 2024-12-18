@@ -3,165 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Utils;
+using Utils.Data;
+using Player;
 
 namespace AWSUtils
 {
-    public enum NPCType
-    {
-        Start,
-        Mid
-    }
-
-    [Serializable]
-    public class NPCResponse
-    {
-        public string response;
-    }
-
-    [Serializable]
-    public class StartNPCRequest
-    {
-        public int totalGamesPlayed;
-        public int consecutiveGamesPlayed;
-        public string killedLastGameBy;
-        public int daysSurvivedLastGame;
-        public int daysSurvivedHighScore;
-    }
-
-    [Serializable]
-    public class MidNPCRequest
-    {
-        public PlayerStatus playerStatus;
-    }
-
-    [Serializable]
-    public class PlayerStatus
-    {
-        public int health;
-        public int money;
-        public Inventory inventory;
-        public WorldStatus worldStatus;
-        public LastRoundActivity lastRoundActivity;
-        public NextRoundEnemies nextRoundEnemies;
-        public List<string> previousResponses;
-    }
-
-    [Serializable]
-    public class Inventory
-    {
-        public Crops crops;
-        public TowerMaterials towerMaterials;
-    }
-
-    [Serializable]
-    public class Crops
-    {
-        public int wheat;
-        public int carrot;
-        public int tomato;
-        public int corn;
-        public int pumpkin;
-    }
-
-    [Serializable]
-    public class TowerMaterials
-    {
-        public int wood;
-        public int stone;
-        public int iron;
-        public int gold;
-        public int diamond;
-    }
-
-    [Serializable]
-    public class WorldStatus
-    {
-        public int daysSurvived;
-        public int availableTowerSpots;
-        public int existingTowers;
-        public Shops shops;
-    }
-
-    [Serializable]
-    public class Shops
-    {
-        public SeedShop seedShopAvailableSeeds;
-        public ResourcesShop resourcesShopAvailableMaterials;
-        public ToolShop toolShopAvailableUpgradeLevel;
-        public UtilityShop utilityShopAvailableUpgradeLevels;
-    }
-
-    [Serializable]
-    public class SeedShop
-    {
-        public int wheat;
-        public int carrot;
-        public int tomato;
-        public int corn;
-        public int pumpkin;
-    }
-
-    [Serializable]
-    public class ResourcesShop
-    {
-        public int wood;
-        public int stone;
-        public int iron;
-        public int gold;
-        public int diamond;
-    }
-
-    [Serializable]
-    public class ToolShop
-    {
-        public int hoe;
-        public int hammer;
-        public int sword;
-    }
-
-    [Serializable]
-    public class UtilityShop
-    {
-        public int health;
-        public int speed;
-        public int healthRegen;
-    }
-
-    [Serializable]
-    public class LastRoundActivity
-    {
-        public int damageTaken;
-        public int cropsPlanted;
-        public int cropsHarvested;
-        public int cropsDestroyed;
-        public int towersBuilt;
-        public int towersDestroyed;
-    }
-
-    [Serializable]
-    public class NextRoundEnemies
-    {
-        public int slime;
-        public int skeleton;
-        public int goblinArcher;
-        public int chicken;
-        public int orc;
-        public int demon;
-    }
-
     public class NPCSpeech : MonoBehaviour
     {
         [SerializeField] private SpeechBubbleBehaviour speechBubbleBehaviour;
         [SerializeField] private NPCType npcType;
-        [SerializeField] private string apiKey = "your-api-key-here";
-
+        [SerializeField] private string apiKey = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
+        
+        private PlayerData playerData;
         private const string API_URL_PREFIX = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/";
         private string _apiURL;
         private List<string> _previousResponses = new List<string>();
         private bool _isWaitingForResponse = false;
-
-        private const float REFRESH_INTERVAL = 60f;
-        private float _timeSinceLastRefresh = 0f;
+        private string _lastDayResponse = "";
+        private string _currentText = "";
+        private bool _isNightTime = false;
+        private const string NIGHT_MESSAGE_STORE = "Z Z Z...";
+        private const string NIGHT_MESSAGE_START = "Slay these monsters!";
         private const string DEFAULT_MESSAGE = "...";
 
         private void Awake()
@@ -169,26 +32,23 @@ namespace AWSUtils
             var urlPostfix = npcType == NPCType.Start ? "startnpc" : "storenpc";
             _apiURL = API_URL_PREFIX + urlPostfix;
             Debug.Log($"Initialized {npcType} NPC with URL: {_apiURL}");
-        }
-
-        private void Update()
-        {
-            if (npcType == NPCType.Mid)
+            
+            playerData = FindObjectOfType<PlayerData>();
+            if (playerData == null)
             {
-                _timeSinceLastRefresh += Time.deltaTime;
-                if (_timeSinceLastRefresh >= REFRESH_INTERVAL && !_isWaitingForResponse)
-                {
-                    _timeSinceLastRefresh = 0f;
-                    SendNPCRequest();
-                }
+                Debug.LogError("Could not find PlayerData component!");
+            }
+
+            if (npcType == NPCType.Start)
+            {
+                GameStatistics.Initialize();
             }
         }
-        
+
         public void TriggerNPCSpeech()
         {
-            if (!_isWaitingForResponse)
+            if (!_isWaitingForResponse && !_isNightTime)
             {
-                _timeSinceLastRefresh = 0f;
                 SendNPCRequest();
             }
         }
@@ -197,8 +57,9 @@ namespace AWSUtils
 
         private void Speak(string text)
         {
+            _currentText = text;
             speechBubbleBehaviour.SetText(text);
-            if (npcType == NPCType.Mid && !_isWaitingForResponse)
+            if (npcType == NPCType.Mid && !_isWaitingForResponse && !_isNightTime)
             {
                 _previousResponses.Add(text);
                 if (_previousResponses.Count > 5)
@@ -214,11 +75,11 @@ namespace AWSUtils
             {
                 var request = new StartNPCRequest
                 {
-                    totalGamesPlayed = 0,
-                    consecutiveGamesPlayed = 0,
-                    killedLastGameBy = "none",
-                    daysSurvivedLastGame = 0,
-                    daysSurvivedHighScore = 0
+                    totalGamesPlayed = GameStatistics.Instance.totalGamesPlayed,
+                    consecutiveGamesPlayed = GameStatistics.Instance.consecutiveGamesPlayed,
+                    killedLastGameBy = GameStatistics.Instance.killedLastGameBy,
+                    daysSurvivedLastGame = GameStatistics.Instance.daysSurvivedLastGame,
+                    daysSurvivedHighScore = GameStatistics.Instance.daysSurvivedHighScore
                 };
                 return JsonUtility.ToJson(request);
             }
@@ -228,48 +89,133 @@ namespace AWSUtils
                 {
                     playerStatus = new PlayerStatus
                     {
-                        health = 4,
-                        money = 1200,
+                        health = GameData.Instance.curHealth,
+                        money = GameData.Instance.cash,
                         inventory = new Inventory
                         {
-                            crops = new Crops { wheat = 10, carrot = 5, tomato = 3, corn = 4, pumpkin = 0 },
-                            towerMaterials = new TowerMaterials { wood = 3, stone = 2, iron = 1, gold = 0, diamond = 0 }
+                            crops = new Crops 
+                            { 
+                                wheat = GameData.Instance.crops[0],
+                                carrot = GameData.Instance.crops[1],
+                                tomato = GameData.Instance.crops[2],
+                                corn = GameData.Instance.crops[3],
+                                pumpkin = GameData.Instance.crops[4]
+                            },
+                            towerMaterials = new TowerMaterials 
+                            { 
+                                wood = GameData.Instance.materials[0],
+                                stone = GameData.Instance.materials[1],
+                                iron = GameData.Instance.materials[2],
+                                gold = GameData.Instance.materials[3],
+                                diamond = GameData.Instance.materials[4]
+                            }
                         },
                         worldStatus = new WorldStatus
                         {
-                            daysSurvived = 14,
-                            availableTowerSpots = 3,
-                            existingTowers = 3,
+                            daysSurvived = GameData.Instance.day,
+                            availableTowerSpots = Constants.TowerCount - GetExistingTowersCount(),
+                            existingTowers = GetExistingTowersCount(),
                             shops = new Shops
                             {
-                                seedShopAvailableSeeds = new SeedShop { wheat = 100, carrot = 75, tomato = 50, corn = 40, pumpkin = 25 },
-                                resourcesShopAvailableMaterials = new ResourcesShop { wood = 200, stone = 150, iron = 100, gold = 50, diamond = 20 },
-                                toolShopAvailableUpgradeLevel = new ToolShop { hoe = 2, hammer = 3, sword = 3 },
-                                utilityShopAvailableUpgradeLevels = new UtilityShop { health = 2, speed = 1, healthRegen = 3 }
+                                seedShopAvailableSeeds = new SeedShop 
+                                { 
+                                    wheat = GameData.Instance.cropsInStore[0],
+                                    carrot = GameData.Instance.cropsInStore[1],
+                                    tomato = GameData.Instance.cropsInStore[2],
+                                    corn = GameData.Instance.cropsInStore[3],
+                                    pumpkin = GameData.Instance.cropsInStore[4]
+                                },
+                                resourcesShopAvailableMaterials = new ResourcesShop
+                                {
+                                    wood = GameData.Instance.materialsInStore[0],
+                                    stone = GameData.Instance.materialsInStore[1],
+                                    iron = GameData.Instance.materialsInStore[2],
+                                    gold = GameData.Instance.materialsInStore[3],
+                                    diamond = GameData.Instance.materialsInStore[4]
+                                },
+                                toolShopAvailableUpgradeLevel = new ToolShop
+                                {
+                                    hoe = playerData.GetToolLevel(HeldTool.Hoe),
+                                    hammer = playerData.GetToolLevel(HeldTool.Hammer),
+                                    sword = playerData.GetToolLevel(HeldTool.Sword)
+                                },
+                                utilityShopAvailableUpgradeLevels = new UtilityShop
+                                {
+                                    health = playerData.GetUpgradeLevel(Upgrade.Health),
+                                    speed = playerData.GetUpgradeLevel(Upgrade.Speed),
+                                    healthRegen = playerData.GetUpgradeLevel(Upgrade.Regen)
+                                }
                             }
                         },
-                        lastRoundActivity = new LastRoundActivity
-                        {
-                            damageTaken = 3,
-                            cropsPlanted = 20,
-                            cropsHarvested = 12,
-                            cropsDestroyed = 4,
-                            towersBuilt = 8,
-                            towersDestroyed = 2
-                        },
+                        lastRoundActivity = ActivityTracker.Instance.CurrentActivity,
                         nextRoundEnemies = new NextRoundEnemies
                         {
-                            slime = 4,
-                            skeleton = 2,
-                            goblinArcher = 1,
-                            chicken = 3,
-                            orc = 1,
-                            demon = 0
+                            slime = GameData.Instance.thisDayEnemies[0],
+                            skeleton = GameData.Instance.thisDayEnemies[1],
+                            goblinArcher = GameData.Instance.thisDayEnemies[2],
+                            chicken = GameData.Instance.thisDayEnemies[3],
+                            orc = GameData.Instance.thisDayEnemies[4],
+                            demon = GameData.Instance.thisDayEnemies[5]
                         },
                         previousResponses = _previousResponses
                     }
                 };
                 return JsonUtility.ToJson(request);
+            }
+        }
+
+        private int GetExistingTowersCount()
+        {
+            int count = 0;
+            foreach (var towerList in GameData.Instance.towers)
+            {
+                if (towerList.Count > 0)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private void OnEnable()
+        {
+            EventManager.Instance.StartListening(EventManager.DayStarted, OnDayStarted);
+            EventManager.Instance.StartListening(EventManager.NightStarted, OnNightStarted);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Instance.StopListening(EventManager.DayStarted, OnDayStarted);
+            EventManager.Instance.StopListening(EventManager.NightStarted, OnNightStarted);
+        }
+
+        private void OnDayStarted(object _)
+        {
+            _isNightTime = false;
+            if (npcType == NPCType.Mid)
+            {
+                TriggerNPCSpeech();
+            }
+            else if (npcType == NPCType.Start && !string.IsNullOrEmpty(_lastDayResponse))
+            {
+                Speak(_lastDayResponse);
+            }
+        }
+
+        private void OnNightStarted(object _)
+        {
+            _isNightTime = true;
+            if (npcType == NPCType.Mid)
+            {
+                Speak(NIGHT_MESSAGE_STORE);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(_currentText))
+                {
+                    _lastDayResponse = _currentText;
+                }
+                Speak(NIGHT_MESSAGE_START);
             }
         }
 
@@ -310,19 +256,23 @@ namespace AWSUtils
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"API request failed for {npcType}: {request.error}\nResponse: {request.downloadHandler.text}");
-                Speak("Sorry, I'm not feeling well...");
+                Speak("?");
                 yield break;
             }
 
             try
             {
                 var response = JsonUtility.FromJson<NPCResponse>(request.downloadHandler.text);
+                if (npcType == NPCType.Start)
+                {
+                    _lastDayResponse = response.response;
+                }
                 Speak(response.response);
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Failed to process {npcType} response: {ex.Message}\nResponse: {request.downloadHandler.text}");
-                Speak("WHO AM I?! WHERE AM I?!");
+                Speak("Keep going, warior!");
             }
         }
     }
