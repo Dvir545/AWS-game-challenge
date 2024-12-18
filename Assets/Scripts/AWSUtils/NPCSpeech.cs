@@ -26,6 +26,8 @@ namespace AWSUtils
         private const string NIGHT_MESSAGE_STORE = "Z Z Z...";
         private const string NIGHT_MESSAGE_START = "Slay these monsters!";
         private const string DEFAULT_MESSAGE = "...";
+        private const int MAX_RETRIES = 3;
+        private const float RETRY_DELAY = 2f;
 
         private void Awake()
         {
@@ -59,14 +61,6 @@ namespace AWSUtils
         {
             _currentText = text;
             speechBubbleBehaviour.SetText(text);
-            if (npcType == NPCType.Mid && !_isWaitingForResponse && !_isNightTime)
-            {
-                _previousResponses.Add(text);
-                if (_previousResponses.Count > 5)
-                {
-                    _previousResponses.RemoveAt(0);
-                }
-            }
         }
 
         private string GetRequestJson()
@@ -225,7 +219,7 @@ namespace AWSUtils
             {
                 _isWaitingForResponse = true;
                 Speak(DEFAULT_MESSAGE);
-                StartCoroutine(SendNPCRequestCoroutine());
+                StartCoroutine(SendNPCRequestWithRetry(0));
             }
             catch (Exception ex)
             {
@@ -235,27 +229,33 @@ namespace AWSUtils
             }
         }
 
-        private IEnumerator SendNPCRequestCoroutine()
+        private IEnumerator SendNPCRequestWithRetry(int retryCount)
         {
             string jsonBody = GetRequestJson();
-            Debug.Log($"Sending request: {jsonBody}");
+            Debug.Log($"Sending request (attempt {retryCount + 1}/{MAX_RETRIES}): {jsonBody}");
 
-            using var request = new UnityWebRequest(_apiURL, "POST")
-            {
-                uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonBody)),
-                downloadHandler = new DownloadHandlerBuffer()
-            };
-
+            using var request = new UnityWebRequest(_apiURL, "POST");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonBody);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("x-api-key", apiKey);
 
             yield return request.SendWebRequest();
 
-            _isWaitingForResponse = false;
-
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"API request failed for {npcType}: {request.error}\nResponse: {request.downloadHandler.text}");
+                
+                if (retryCount < MAX_RETRIES - 1)
+                {
+                    Debug.Log($"Retrying request in {RETRY_DELAY} seconds...");
+                    yield return new WaitForSeconds(RETRY_DELAY);
+                    yield return StartCoroutine(SendNPCRequestWithRetry(retryCount + 1));
+                    yield break;
+                }
+                
+                _isWaitingForResponse = false;
                 Speak("?");
                 yield break;
             }
@@ -267,12 +267,20 @@ namespace AWSUtils
                 {
                     _lastDayResponse = response.response;
                 }
+                else if (npcType == NPCType.Mid && !string.IsNullOrEmpty(response.response))
+                {
+                    _previousResponses = new List<string> { response.response };
+                }
                 Speak(response.response);
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Failed to process {npcType} response: {ex.Message}\nResponse: {request.downloadHandler.text}");
-                Speak("Keep going, warior!");
+                Speak("Keep going, warrior!");
+            }
+            finally
+            {
+                _isWaitingForResponse = false;
             }
         }
     }
