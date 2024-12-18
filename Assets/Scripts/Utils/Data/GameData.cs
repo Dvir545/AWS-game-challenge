@@ -1,26 +1,61 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Serialization.Json;
+using UnityEngine;
 
 namespace Utils.Data
 {
+    [Serializable]
+    public class TowerLevelInfo
+    {
+        public int material;
+        public float progress;
+        public float health;
+        
+        public TowerLevelInfo(int material, float progress, float health)
+        {
+            this.material = material;
+            this.progress = progress;
+            this.health = health;
+        }
+    }
+    
+    [Serializable]
+    public class PlantedCropInfo
+    {
+        public int cropType;
+        public float growthProgress;
+        public float destroyProgress;
+        
+        public PlantedCropInfo(int cropType, float growth, float destroyProgress)
+        {
+            this.cropType = cropType;
+            this.growthProgress = growth;
+            this.destroyProgress = destroyProgress;
+        }
+    }
+    
     class SerializableGameData
     {
-        public int healthUpgradeLevel;
-        public int regenUpgradeLevel;
-        public int speedUpgradeLevel;
-        public int swordLevel;
-        public int hoeLevel;
-        public int hammerLevel;
-        public int cash;
-        public int day;
-        public int curHealth;
-        public int[] crops;
-        public int[] materials;
-        public int[] cropsInStore;
-        public int[] materialsInStore;
-        public int[] thisDayEnemies;
-        public int[] thisNightEnemies;
-        public int[][] towerLevels;
+        public int HealthUpgradeLevel;
+        public int RegenUpgradeLevel;
+        public int SpeedUpgradeLevel;
+        public int SwordLevel;
+        public int HoeLevel;
+        public int HammerLevel;
+        public int Cash;
+        public int Day;
+        public int CurHealth;
+        public float SecondsSinceGameStarted;
+        public int[] InventoryCrops;
+        public int[] InventoryMaterials;
+        public int[] CropsInStore;
+        public int[] MaterialsInStore;
+        public int[] ThisDayEnemies;
+        public int[] ThisNightEnemies;
+        public List<TowerLevelInfo>[] Towers;
+        public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops;  //
     }
     
     public class GameData: Singleton<GameData>
@@ -34,13 +69,15 @@ namespace Utils.Data
         public int cash;
         public int day;
         public int curHealth;
+        public float secondsSinceGameStarted;
         public int[] crops;
         public int[] materials;
         public int[] cropsInStore;
         public int[] materialsInStore;
         public int[] thisDayEnemies;
         public int[] thisNightEnemies;
-        public int[][] towerLevels;
+        public List<TowerLevelInfo>[] towers;
+        public Dictionary<Vector2Int, PlantedCropInfo> plantedCrops;  //
         
         public GameData()
         {
@@ -58,60 +95,62 @@ namespace Utils.Data
             cash = Constants.StartCash;
             day = Constants.StartDay;
             curHealth = Constants.StartHealth;
+            secondsSinceGameStarted = 0;
             crops = Constants.StartCrops.ToArray();
             materials = Constants.StartMaterials.ToArray();
             cropsInStore = Constants.StartCropsInStore.ToArray();
             materialsInStore = Constants.StartMaterialsInStore.ToArray();
             thisDayEnemies = Constants.FirstDayEnemies.ToArray();
             thisNightEnemies = Constants.FirstNightEnemies.ToArray();
-            towerLevels = new int[Constants.TowerCount][];
-            for (int i = 0; i < Constants.TowerCount; i++)
-            {
-                towerLevels[i] = new [] {-1, -1, -1};
-            }
+            towers = Constants.StartTowers.Select(towerList => new List<TowerLevelInfo>(towerList)).ToArray();
+            plantedCrops = new Dictionary<Vector2Int, PlantedCropInfo>();
         }
         
         public void LoadFromJson(string json)
         {
             var data = JsonSerialization.FromJson<SerializableGameData>(json);
-            healthUpgradeLevel = data.healthUpgradeLevel;
-            regenUpgradeLevel = data.regenUpgradeLevel;
-            speedUpgradeLevel = data.speedUpgradeLevel;
-            swordLevel = data.swordLevel;
-            hoeLevel = data.hoeLevel;
-            hammerLevel = data.hammerLevel;
-            cash = data.cash;
-            day = data.day;
-            curHealth = data.curHealth;
-            crops = data.crops;
-            materials = data.materials;
-            cropsInStore = data.cropsInStore;
-            materialsInStore = data.materialsInStore;
-            thisDayEnemies = data.thisDayEnemies;
-            thisNightEnemies = data.thisNightEnemies;
-            towerLevels = data.towerLevels;
+            healthUpgradeLevel = data.HealthUpgradeLevel;
+            regenUpgradeLevel = data.RegenUpgradeLevel;
+            speedUpgradeLevel = data.SpeedUpgradeLevel;
+            swordLevel = data.SwordLevel;
+            hoeLevel = data.HoeLevel;
+            hammerLevel = data.HammerLevel;
+            cash = data.Cash;
+            day = data.Day;
+            curHealth = data.CurHealth;
+            secondsSinceGameStarted = data.SecondsSinceGameStarted;
+            crops = data.InventoryCrops.ToArray();
+            materials = data.InventoryMaterials.ToArray();
+            cropsInStore = data.CropsInStore.ToArray();
+            materialsInStore = data.MaterialsInStore.ToArray();
+            thisDayEnemies = data.ThisDayEnemies.ToArray();
+            thisNightEnemies = data.ThisNightEnemies.ToArray();
+            towers = data.Towers.Select(towerList => new List<TowerLevelInfo>(towerList)).ToArray();
+            plantedCrops = data.PlantedCrops;
         }
         
         public void SaveToJson()
         {
             var serializableData = new SerializableGameData
             {
-                healthUpgradeLevel = healthUpgradeLevel,
-                regenUpgradeLevel = regenUpgradeLevel,
-                speedUpgradeLevel = speedUpgradeLevel,
-                swordLevel = swordLevel,
-                hoeLevel = hoeLevel,
-                hammerLevel = hammerLevel,
-                cash = cash,
-                day = day,
-                curHealth = curHealth,
-                crops = crops,
-                materials = materials,
-                cropsInStore = cropsInStore,
-                materialsInStore = materialsInStore,
-                thisDayEnemies = thisDayEnemies,
-                thisNightEnemies = thisNightEnemies,
-                towerLevels = towerLevels
+                HealthUpgradeLevel = healthUpgradeLevel,
+                RegenUpgradeLevel = regenUpgradeLevel,
+                SpeedUpgradeLevel = speedUpgradeLevel,
+                SwordLevel = swordLevel,
+                HoeLevel = hoeLevel,
+                HammerLevel = hammerLevel,
+                Cash = cash,
+                Day = day,
+                CurHealth = curHealth,
+                SecondsSinceGameStarted = secondsSinceGameStarted,
+                InventoryCrops = crops,
+                InventoryMaterials = materials,
+                CropsInStore = cropsInStore,
+                MaterialsInStore = materialsInStore,
+                ThisDayEnemies = thisDayEnemies,
+                ThisNightEnemies = thisNightEnemies,
+                Towers = towers,
+                PlantedCrops = plantedCrops
             };
             var json = JsonSerialization.ToJson(serializableData);
             // DVIR - upload json to aws

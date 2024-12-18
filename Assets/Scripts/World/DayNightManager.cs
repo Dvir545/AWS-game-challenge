@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using DG.Tweening;
@@ -10,6 +11,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Utils;
 using Utils.Data;
+using Random = UnityEngine.Random;
 
 namespace World
 {
@@ -41,8 +43,14 @@ namespace World
         {
             _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
         }
-        
-        
+
+        private void Update()
+        {
+            if (GameStarted && !playerHealthManager.IsDead)
+                GameData.Instance.secondsSinceGameStarted += Time.deltaTime;
+        }
+
+
         public void StartGame()
         {
             GameStarted = true;

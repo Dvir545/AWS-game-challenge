@@ -1,42 +1,40 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Utils
 {
     public static class TileExtensions
     {
-        public static Vector3Int[] GetAdjacentTiles(this Vector3Int tile, FacingDirection facingDirection)
+        public static Vector2Int[] GetAdjacentTiles(this Vector2Int tile, FacingDirection facingDirection)
         {
             switch (facingDirection)
             {
                 case FacingDirection.Down:
                     return new[]
                     {
-                        tile + new Vector3Int(0, -1, 0),
-                        tile + new Vector3Int(1, -1, 0),
-                        tile + new Vector3Int(-1, -1, 0)
+                        tile + new Vector2Int(0, -1),
+                        tile + new Vector2Int(1, -1),
+                        tile + new Vector2Int(-1, -1)
                     };
                 case FacingDirection.Up:
                     return new[]
                     {
-                        tile + new Vector3Int(0, 1, 0),
-                        tile + new Vector3Int(1, 1, 0),
-                        tile + new Vector3Int(-1, 1, 0)
+                        tile + new Vector2Int(0, 1),
+                        tile + new Vector2Int(1, 1),
+                        tile + new Vector2Int(-1, 1)
                     };
                 case  FacingDirection.Left:
                     return new[]
                     {
-                        tile + new Vector3Int(1, 0, 0),
-                        tile + new Vector3Int(1, 1, 0),
-                        tile + new Vector3Int(1, -1, 0)
+                        tile + new Vector2Int(1, 0),
+                        tile + new Vector2Int(1, 1),
+                        tile + new Vector2Int(1, -1)
                     };
                 case FacingDirection.Right:
                     return new[]
                     {
-                        tile + new Vector3Int(-1, 0, 0),
-                        tile + new Vector3Int(-1, 1, 0),
-                        tile + new Vector3Int(-1, -1, 0)
+                        tile + new Vector2Int(-1, 0),
+                        tile + new Vector2Int(-1, 1),
+                        tile + new Vector2Int(-1, -1)
                     };
                 default:
                     return null;

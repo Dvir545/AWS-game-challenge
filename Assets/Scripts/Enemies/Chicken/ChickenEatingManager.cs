@@ -14,7 +14,7 @@ namespace Enemies.Chicken
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         public bool IsEating { get; private set; }
         private bool _isStandingOnFarmTile;
-        private Vector3Int _farmCellPos;
+        private Vector2Int _farmCellPos;
 
         private void Awake()
         {

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Utils.Data;
 
 namespace Utils
 {
@@ -56,5 +58,12 @@ namespace Utils
         public static readonly int[] StartMaterialsInStore = {3, 0, 0, 0, 0};
         public static readonly int[] FirstDayEnemies = { 0, 0, 0, 0, 0, 0 };
         public static readonly int[] FirstNightEnemies = { 5, 0, 0, 0, 0, 0 };
+        public static readonly List<TowerLevelInfo>[] StartTowers = new List<TowerLevelInfo>[]
+        {
+            new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
+            new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
+            new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
+        };
+        
     }
 }

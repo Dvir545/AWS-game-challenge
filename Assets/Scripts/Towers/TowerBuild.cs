@@ -29,7 +29,6 @@ namespace Towers
 
         [SerializeField] private GameObject floorPrefab;
         private List<GameObject> _floors = new();
-        private List<float> _floorsHealth = new();
         private GameObject _newFloor;
         private SpriteRenderer _towerBaseSpriteRenderer;
         private Transform _newFloorBody;
@@ -39,13 +38,18 @@ namespace Towers
         // private const int MaxLevel = 3;  // The maximum level of the tower
         private const float YOffsetBetweenFloors = 0.9375f;  // The offset between the floors
         
+        private int _towerIndex;
         private List<TowerData> _towerDatas = new();
-        private int _currentLevel = 0;  // The current level of the tower
-        private float _curBuildTime = 0;  // The current build time of the tower
+        private int CurrentLevel => GameData.Instance.towers[_towerIndex].Count;
+        private float CurBuildProgress
+        {
+            get => GameData.Instance.towers[_towerIndex][CurrentLevel - 1].progress;
+            set => GameData.Instance.towers[_towerIndex][CurrentLevel - 1].progress = value;
+        }
+
         private TowerFloorAnimationManager _newFloorAnimationManager;
         private Collider2D _newFloorAttackZone;
         private WarningSignBehaviour _warningSign;
-        private int _towerIndex;
         
         public bool IsBuilt { get; private set; }
 
@@ -62,43 +66,49 @@ namespace Towers
 
         public bool CanBuild()
         {
-            return !_isUnderAttack && _currentLevel < Constants.MaxTowerLevels;
+            return !_isUnderAttack && (CurrentLevel < Constants.MaxTowerLevels || (CurrentLevel == Constants.MaxTowerLevels && CurBuildProgress is >= 0 and < 1));
         }
     
         public bool IsInProgress()
         {
-            return _curBuildTime > 0;
+            return CurrentLevel != 0 && CurBuildProgress is > 0 and < 1;
         }
     
         public float GetProgress()
         {
-            if (_curBuildTime == 0)
-                return 0;
-            return _curBuildTime / TowersData.Instance.GetTowerData(_towerDatas[_currentLevel].TowerMaterial).SecondsToBuild;
+            return CurBuildProgress;
         }
 
         public void AddToProgress(float time)  // Returns true if the tower has been built
         {
-            _curBuildTime += time;
-            if (_curBuildTime >=_towerDatas[_currentLevel].SecondsToBuild)
+            CurBuildProgress += time / TowersData.Instance.GetTowerData(_towerDatas[CurrentLevel-1].TowerMaterial).SecondsToBuild;
+            if (CurBuildProgress >= 1f)
             {
                 OnBuildCompleted();
             }
         }
         
-        public void AddFloor(TowerMaterial material)  // instantly
+        public void AddFloor(TowerLevelInfo towerLevelInfo)  // instantly
         {
-            StartBuild(material);
-            OnBuildCompleted();
+            StartBuild((TowerMaterial)towerLevelInfo.material, towerLevelInfo.health, addToGameData:false);
+            CurBuildProgress = towerLevelInfo.progress;
+            if (CurBuildProgress >= 1f)
+            {
+                OnBuildCompleted();
+            }
         }
 
-        public void StartBuild(TowerMaterial material)
+        public void StartBuild(TowerMaterial material, float health = 0, bool addToGameData = true)
         {
             _topConstruction.SetActive(true);
             var towerData = TowersData.Instance.GetTowerData(material);
             _towerDatas.Add(towerData);
-            _floorsHealth.Add(towerData.SecondsToDestroy);
-            var towerHeight = YOffsetBetweenFloors * _currentLevel;
+            if (addToGameData)
+                GameData.Instance.towers[_towerIndex].Add(new TowerLevelInfo(
+                    (int)material, 
+                    0,
+                    health == 0 ? towerData.SecondsToDestroy: health));
+            var towerHeight = YOffsetBetweenFloors * (CurrentLevel-1);
             _newFloor = Instantiate(towerData.GetFloorPrefab(),
                 transform.position + new Vector3(0, towerHeight, 0), Quaternion.identity);
             _newFloor.transform.SetParent(transform);
@@ -106,7 +116,7 @@ namespace Towers
             _newFloorAttackZone = _newFloor.transform.GetChild(2).GetComponent<Collider2D>();
             _newFloorAttackZone.transform.position -= new Vector3(0, towerHeight, 0);
             _newFloorAnimationManager = _newFloor.GetComponent<TowerFloorAnimationManager>();
-            _newFloorAnimationManager.Init(material, _currentLevel, towerData.SecondsToAttack);
+            _newFloorAnimationManager.Init(material, CurrentLevel-1, towerData.SecondsToAttack);
             _newFloorAttackZone.GetComponent<TowerFloorAttackZoneBehaviour>().Init(towerData.Range, towerData.Damage, towerData.SecondsToAttack);
             _floors.Add(_newFloor);
             
@@ -118,19 +128,16 @@ namespace Towers
             _topConstruction.SetActive(false);
             _newFloorBody.gameObject.SetActive(true);
             _newFloorAttackZone.enabled = true;
-            if (_currentLevel == 0)
+            if (CurrentLevel == 1)  // first floor
             {
                 _newFloorBody.GetComponent<Collider2D>().enabled = true;
                 _newFloorBody.GetComponent<NavMeshObstacle>().enabled = true;
             }
             _newFloorAnimationManager.StartTower();
-            _topConstruction = _floors[_currentLevel].transform.GetChild(1).gameObject;
-            _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = _currentLevel+1;
-            _curBuildTime = 0;
-            _currentLevel++;
+            _topConstruction = _floors[CurrentLevel-1].transform.GetChild(1).gameObject;
+            _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = CurrentLevel;
             EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
             IsBuilt = true;
-            GameData.Instance.towerLevels[_towerIndex][_currentLevel - 1] = (int)_towerDatas[_currentLevel - 1].TowerMaterial;
         }
         
         public void SetUnderAttack(bool isUnderAttack)
@@ -150,19 +157,20 @@ namespace Towers
 
         public float GetDestroyProgress()
         {
-            if (_currentLevel == 0)
+            if (CurrentLevel == 0)
                 return 0;
-            var maxHealth = _towerDatas[_currentLevel - 1].SecondsToDestroy;
-            var curHealth = _floorsHealth[_currentLevel - 1];
+            var maxHealth = _towerDatas[CurrentLevel - 1].SecondsToDestroy;
+            var curHealth = GameData.Instance.towers[_towerIndex][CurrentLevel - 1].health;
             return 1 - curHealth / maxHealth;
         }
         
         private int GetWorstFloor()
         {
             var worstFloor = 0;
-            for (int i = 1; i < _currentLevel; i++)
+            for (int i = 1; i < CurrentLevel; i++)
             {
-                if (_towerDatas[i].TowerMaterial < _towerDatas[worstFloor].TowerMaterial)
+                if (GameData.Instance.towers[_towerIndex][i].progress >= 1f
+                    && _towerDatas[i].TowerMaterial < _towerDatas[worstFloor].TowerMaterial)
                     worstFloor = i;
             }
             return worstFloor;
@@ -172,46 +180,41 @@ namespace Towers
         {
             var worstFloor = GetWorstFloor();
             // move down all the floors above the worst one
-            for (int i = worstFloor + 1; i < _currentLevel; i++)
+            for (int i = worstFloor + 1; i < CurrentLevel; i++)
             {
                 _floors[i].transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
                 _floors[i].GetComponent<SpriteRenderer>().sortingOrder = i;
             }
             Destroy(_floors[worstFloor]);
             _floors.RemoveAt(worstFloor);
-            _floorsHealth.RemoveAt(worstFloor);
             _towerDatas.RemoveAt(worstFloor);
-            _currentLevel--;
-            if (_currentLevel == 0)
+            GameData.Instance.towers[_towerIndex].RemoveAt(worstFloor);
+            if (CurrentLevel == 0)
             {
                 _topConstruction = transform.GetChild(0).gameObject;
                 IsBuilt = false;
             }
             else
             {
-                _topConstruction = _floors[_currentLevel - 1].transform.GetChild(1).gameObject;
+                _topConstruction = _floors[CurrentLevel - 1].transform.GetChild(1).gameObject;
             }
-            if (_curBuildTime > 0)
+            if (CurBuildProgress > 0)
             {
                 _newFloor.transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
-                _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = _currentLevel;
-                _newFloorAnimationManager.Init(_towerDatas[_currentLevel].TowerMaterial, _currentLevel, _towerDatas[_currentLevel].SecondsToAttack);
+                _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = CurrentLevel;
+                _newFloorAnimationManager.Init(_towerDatas[CurrentLevel-1].TowerMaterial, CurrentLevel-1, _towerDatas[CurrentLevel-1].SecondsToAttack);
                 _topConstruction.SetActive(true);
             }
         }
 
         public void DecWorstFloorHealth(float health)
         {
-            if (_currentLevel == 0)
+            if (CurrentLevel == 0)
                 return;
-            var newHealth = _floorsHealth[GetWorstFloor()] - health;
-            if (newHealth <= 0)
+            GameData.Instance.towers[_towerIndex][GetWorstFloor()].health -= health;
+            if (GameData.Instance.towers[_towerIndex][GetWorstFloor()].health <= 0)
             {
                 DestroyWorstFloor();
-            }
-            else
-            {
-                _floorsHealth[GetWorstFloor()] = newHealth;
             }
         }
         

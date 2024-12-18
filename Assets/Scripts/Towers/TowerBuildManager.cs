@@ -40,11 +40,10 @@ namespace Towers
             for (int i = 0; i < _towerBuilds.Length; i++)
             {
                 _towerBuilds[i].Init(i);
-                var towerLevels = GameData.Instance.towerLevels[i];
-                for (int j = 0; j < towerLevels.Length; j++)
+                var floors = GameData.Instance.towers[i];
+                foreach (var floor in floors)
                 {
-                    if (towerLevels[j] > -1)
-                        _towerBuilds[i].AddFloor((TowerMaterial)towerLevels[j]);
+                    _towerBuilds[i].AddFloor(floor);
                 }
             }
         }

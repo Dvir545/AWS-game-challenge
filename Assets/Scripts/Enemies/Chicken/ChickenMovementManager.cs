@@ -65,10 +65,10 @@ namespace Enemies.Chicken
 
         protected override void FindClosestTarget()
         {
-            Vector3Int? closestCrop = null;
+            Vector2Int? closestCrop = null;
             float closestDistance = float.MaxValue;
 
-            foreach (Vector3Int crop in _farmingManager.Farms.Keys)
+            foreach (Vector2Int crop in _farmingManager.Farms.Keys)
             {
                 Vector3 cropCenter = _farmingManager.Farms[crop].transform.position 
                                      + new Vector3(0.5f, 0.5f, 0);

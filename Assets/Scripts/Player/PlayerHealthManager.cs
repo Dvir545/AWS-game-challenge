@@ -97,6 +97,16 @@ namespace Player
             if (GameData.Instance.curHealth <= 0)
             {
                 EventManager.Instance.TriggerEvent(EventManager.PlayerDied, null);
+                UserGamesData.Instance.totalGamesPlayed++;
+                UserGamesData.Instance.consecutiveGamesPlayed++;
+                UserGamesData.Instance.killedLastGameBy = (int)enemyType;
+                UserGamesData.Instance.lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
+                if (UserGamesData.Instance.lastGameScore.daysSurvived > UserGamesData.Instance.highScore.daysSurvived ||
+                    (UserGamesData.Instance.lastGameScore.daysSurvived == UserGamesData.Instance.highScore.daysSurvived 
+                     && UserGamesData.Instance.lastGameScore.secondsSurvived > UserGamesData.Instance.highScore.secondsSurvived))
+                {
+                    UserGamesData.Instance.highScore = UserGamesData.Instance.lastGameScore;
+                }
                 yield break;
             }
 
