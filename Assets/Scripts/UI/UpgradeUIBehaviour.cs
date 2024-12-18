@@ -19,6 +19,8 @@ namespace UI
         private void Start()
         {
             EventManager.Instance.StartListening(EventManager.AbilityUpgraded, ChangeIcon);
+            ChangeIcon((Upgrade.Speed, GameData.Instance.speedUpgradeLevel));
+            ChangeIcon((Upgrade.Regen, GameData.Instance.regenUpgradeLevel));
         }
 
         private void ChangeIcon(object arg0)

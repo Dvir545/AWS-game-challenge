@@ -21,7 +21,6 @@ namespace Enemies.Chicken
             _farmingManager = FindObjectOfType<FarmingManager>();
             _enemyAnimationManager = GetComponent<EnemyAnimationManager>();
             base.Awake();
-            Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
         }
 
         protected override void Update()

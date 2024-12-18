@@ -39,7 +39,7 @@ namespace Utils.Data
             for (int i = 0; i < NumPredefinedCycles; i++)
             {
                 dayDurations[i] = Mathf.Max(Constants.FirstDayDurationInSeconds - Constants.DaySecondsReductionPerCycle * i, Constants.MinDayDurationInSeconds);
-                daySpawnDurations[i] = dayDurations[i] * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration);
+                daySpawnDurations[i] = dayDurations[i] - Constants.ChangeLightDurationInSeconds;
                 nightSpawnDurations[i] = Constants.FirstNightDurationInSeconds - Constants.NightSecondsReductionPerCycle * i;
             }
             var daySpawns = new List<EnemySpawns>()
@@ -115,16 +115,16 @@ namespace Utils.Data
             return cycles;
         }
 
-        private static readonly List<Cycle> FirstCycles = DefineCycles();
+        public static readonly List<Cycle> FirstCycles = DefineCycles();
 
-        public static void WarmupCycle(int cycleNum, EnemySpawnData spawnData) // should be called in coroutine to avoid lag
+        public static void WarmupCycle(int cycleNum, EnemySpawnData spawnData)
         {
             Cycle cycle;
             if (cycleNum < FirstCycles.Count)
                 cycle = FirstCycles[cycleNum];
             else
             {
-                var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum/2)));
+                var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum / 2)));
                 var nightEnemySpawns = new EnemySpawns();
                 var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 4);
                 while (enemyPowerPoints > 0)
@@ -139,8 +139,7 @@ namespace Utils.Data
                     DayWave = new DayWave()
                     {
                         DurationInSeconds = Constants.MinDayDurationInSeconds,
-                        SpawnDurationInSeconds = Constants.MinDayDurationInSeconds *
-                                                 (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
+                        SpawnDurationInSeconds = Constants.MinDayDurationInSeconds - Constants.ChangeLightDurationInSeconds,
                         EnemySpawns = dayEnemySpawns
                     },
                     NightWave = new NightWave()
@@ -182,7 +181,7 @@ namespace Utils.Data
                 DayWave = new DayWave()
                 {
                     DurationInSeconds = Constants.FirstDayDurationInSeconds - Constants.DaySecondsReductionPerCycle * (day - NumPredefinedCycles),
-                    SpawnDurationInSeconds = Constants.FirstDayDurationInSeconds * (1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration),
+                    SpawnDurationInSeconds = Constants.FirstDayDurationInSeconds - Constants.ChangeLightDurationInSeconds,
                     EnemySpawns = dayEnemySpawns
                 },
                 NightWave = new NightWave()

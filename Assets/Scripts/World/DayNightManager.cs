@@ -23,7 +23,7 @@ namespace World
         
         public bool GameStarted { get; private set; }
         private DayNightData.Cycle _currentCycle;
-        private float _curDayProgress = 0f;
+        private float _curDayPhaseProgress = 0f;
         private Coroutine _dayNightCycleCR;
         private Coroutine _spawnEnemiesCR;
         
@@ -38,10 +38,15 @@ namespace World
         private int _remainingEnemies;
         private Tween _waveDeclarationTween;
         [SerializeField] private PlayerHealthManager playerHealthManager;
+        private DayPhase _currentDayPhase;
 
         void Start()
         {
             _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
+            if (GameData.Instance.day >= DayNightData.FirstCycles.Count - 1)
+            {
+                GetNextCycleAsync(EnemySpawnData.Instance);
+            }
         }
 
         private void Update()
@@ -61,20 +66,39 @@ namespace World
         {
             if (!GameStarted) return;
             if (NightTime) return;
+            if (_currentDayPhase == DayPhase.Night) return;
             if (_dayNightCycleCR != null)
             {
                 StopCoroutine(_dayNightCycleCR);
+            }
+            if (_spawnEnemiesCR != null)
+            {
+                StopCoroutine(_spawnEnemiesCR);
             }
             if (_darkenTween != null)
             {
                 _darkenTween.Kill();
             }
+            if (_lightenTween != null)
+            {
+                _lightenTween.Kill();
+            }
 
-            globalLight.intensity = Constants.NightLightIntensity;
-            DayTime = false;
-            NightTime = true;
-            DayNightRollBehaviour.Instance.JumpToNight();
-            _dayNightCycleCR = StartCoroutine(DayNightCycle());
+            if (_currentDayPhase == DayPhase.NightEnd)  // still on night end of previous day
+            {
+                StartDay(force: true);
+            }
+
+            if (_currentDayPhase == DayPhase.Day)
+            {
+                EndDay(force: true);
+            }
+            if (_currentDayPhase == DayPhase.DayEnd)
+            {
+                DayNightRollBehaviour.Instance.JumpToNight();
+                StartNight();
+                _dayNightCycleCR = StartCoroutine(DayNightCycle());
+            }
         }
 
         public IEnumerator DayNightCycle()
@@ -85,27 +109,28 @@ namespace World
                 {
                     // daytime
                     StartDay();
-                    while (_curDayProgress < 1 - DayNightRollBehaviour.Instance.ChangeLightProgressDuration)
+                    _curDayPhaseProgress = 0;
+                    while (_curDayPhaseProgress < 1)
                     {
-                        var progress = Time.deltaTime / _currentCycle.DayWave.DurationInSeconds;
-                        _curDayProgress += progress;
+                        var progress = Time.deltaTime / (_currentCycle.DayWave.DurationInSeconds - 2*Constants.ChangeLightDurationInSeconds);
+                        _curDayPhaseProgress += progress;
                         DayNightRollBehaviour.Instance.AddProgress(progress);
                         yield return null;
                     }
 
-                    var remainingTime = (1 - _curDayProgress) * _currentCycle.DayWave.DurationInSeconds;
-                    EndDay(remainingTime);
-                    while (_curDayProgress < 1)
+                    _curDayPhaseProgress = 0;
+                    EndDay();
+                    while (_curDayPhaseProgress < 1)
                     {
-                        var progress = Time.deltaTime / _currentCycle.DayWave.DurationInSeconds;
-                        _curDayProgress += progress;
+                        var progress = Time.deltaTime / Constants.ChangeLightDurationInSeconds;
+                        _curDayPhaseProgress += progress;
                         DayNightRollBehaviour.Instance.AddProgress(progress);
                         yield return null;
                     }
+                    // night time
+                    StartNight();
                 }
-
-                // night time
-                StartNight();
+                
                 // wait for all enemies to be destroyed
                 while (_remainingEnemies > 0)
                 {
@@ -113,16 +138,12 @@ namespace World
                 }
 
                 // transition to day
-                _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
-                GetNextCycleAsync(EnemySpawnData.Instance);
-                GameData.Instance.day++;
-                _curDayProgress = 0;
-                EndNight(DayNightRollBehaviour.Instance.ChangeLightProgressDuration *
-                         _currentCycle.DayWave.DurationInSeconds);
-                while (_curDayProgress < DayNightRollBehaviour.Instance.ChangeLightProgressDuration)
+                EndNight();
+                _curDayPhaseProgress = 0;
+                while (_curDayPhaseProgress < 1)
                 {
-                    var progress = Time.deltaTime / _currentCycle.DayWave.DurationInSeconds;
-                    _curDayProgress += progress;
+                    var progress = Time.deltaTime / Constants.ChangeLightDurationInSeconds;
+                    _curDayPhaseProgress += progress;
                     DayNightRollBehaviour.Instance.AddProgress(progress);
                     yield return null;
                 }
@@ -155,8 +176,8 @@ namespace World
             var totalSpawnAmounts = enemySpawnData.TotalSpawnsAmount();
             if (NightTime)
             {
-                _totalEnemies = totalSpawnAmounts;
-                _remainingEnemies = totalSpawnAmounts;
+                _totalEnemies = totalSpawnAmounts + EnemyPool.Instance.EnemyCount;
+                _remainingEnemies = totalSpawnAmounts + EnemyPool.Instance.EnemyCount;
             }
             var enemySpawns = new EnemySpawn[totalSpawnAmounts];
             // randomize spawn time and position for each enemy
@@ -176,7 +197,7 @@ namespace World
 
             yield return null;
             // sort by spawn time
-            System.Array.Sort(enemySpawns, (a, b) => a.SpawnTime.CompareTo(b.SpawnTime));
+            Array.Sort(enemySpawns, (a, b) => a.SpawnTime.CompareTo(b.SpawnTime));
             // spawn enemies
             float elapsedTime = 0f;
             int currentEnemyIndex = 0;
@@ -193,29 +214,37 @@ namespace World
             }
         }
 
-        private void EndNight(float duration)
+        private void EndNight()
         {
             Debug.Log("Ending night");
+            _currentDayPhase = DayPhase.NightEnd;
+            GameData.Instance.day++;
+            _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
+            GetNextCycleAsync(EnemySpawnData.Instance);
             _lightenTween = DOTween.To(
                 () => globalLight.intensity,
                 x => globalLight.intensity = x,
                 Constants.DayLightIntensity,
-                duration
+                Constants.ChangeLightDurationInSeconds
             );
             NightTime = false;
         }
 
-        private void EndDay(float duration)
+        private void EndDay(bool force=false)
         {
             Debug.Log("Ending day");
-            NightTime = false;
-            DayTime = false;
-            _darkenTween = DOTween.To(
-                () => globalLight.intensity, 
-                x => globalLight.intensity = x, 
-                Constants.NightLightIntensity, 
-                duration
-            );
+            _currentDayPhase = DayPhase.DayEnd;
+            if (!force)
+            {
+                NightTime = false;
+                DayTime = false;
+                _darkenTween = DOTween.To(
+                    () => globalLight.intensity, 
+                    x => globalLight.intensity = x, 
+                    Constants.NightLightIntensity, 
+                    Constants.ChangeLightDurationInSeconds
+                );
+            }
             EventManager.Instance.TriggerEvent(EventManager.DayEnded, null);
         }
         
@@ -236,24 +265,30 @@ namespace World
             });
         }
 
-        private void StartDay()
+        private void StartDay(bool force=false)
         {
             Debug.Log($"Starting day {GameData.Instance.day + 1}");
-            waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
-            _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
-            ShowWaveDeclaration();
-            DayTime = true;
-            NightTime = false;
+            _currentDayPhase = DayPhase.Day;
+            if (!force)
+            {
+                waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
+                _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
+                ShowWaveDeclaration();
+                DayTime = true;
+                NightTime = false;
+                EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
+            }
             if (GameData.Instance.day > 0)
                 GeneralStoreManager.Instance.UpdateStock(_currentCycle.NewCrops, _currentCycle.NewMaterials);
-            EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
         }
 
         private void StartNight()
         {
             Debug.Log("Starting night");
+            _currentDayPhase = DayPhase.Night;
             DayTime = false;
             NightTime = true;
+            globalLight.intensity = Constants.NightLightIntensity;
             _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
             waveDeclarationText.text = $"- NIGHT -";
             ShowWaveDeclaration();
@@ -262,10 +297,11 @@ namespace World
 
         private async void GetNextCycleAsync(EnemySpawnData spawnData)
         {
-            await Task.Run(() =>
-            {
-                DayNightData.WarmupCycle(GameData.Instance.day + 1, spawnData);
-            });
+            var cycleNum = GameData.Instance.day + 1;
+            // await Task.Run(() =>
+            // {
+            DayNightData.WarmupCycle(cycleNum, spawnData);
+            // });
             GameData.Instance.SaveToJson();
         }
 

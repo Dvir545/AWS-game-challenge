@@ -66,6 +66,7 @@ namespace Utils.Data
             var enemies = new List<Enemy>();
             foreach (var enemy in (Enemy[]) Enum.GetValues(typeof(Enemy)))
             {
+                if (enemy == Enemy.EvilBall) continue;
                 if (GetPower(enemy) <= points)
                 {
                     enemies.Add(enemy);

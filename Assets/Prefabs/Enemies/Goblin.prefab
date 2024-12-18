@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 4932174386560713917, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_BaseOffset
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7564844226126082591, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     - {fileID: 1486797434681197276, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}

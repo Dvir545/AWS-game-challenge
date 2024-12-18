@@ -40,6 +40,7 @@ namespace UI
             EventManager.Instance.StartListening(EventManager.TowerBuilt, ForciblyReleaseButton);
             EventManager.Instance.StartListening(EventManager.CropHarvested, ForciblyReleaseButton);
             EventManager.Instance.StartListening(EventManager.ActiveToolChanged, ChangeToolIcon);
+            ChangeToolIcon(null);
         }
 
         private void ChangeToolIcon(object arg0)
