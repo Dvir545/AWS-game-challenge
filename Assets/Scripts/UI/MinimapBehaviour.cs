@@ -1,27 +1,37 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
+using Utils;
 
 namespace UI
 {
-    public class MinimapBehaviour : MonoBehaviour
+    public class MinimapBehaviour : Singleton<MinimapBehaviour>
     {
         private Transform _map;
         private Transform _mapOpenButton;
 
         private RectTransform _ref1UI;
         private RectTransform _ref2UI;
+        private Image _darkMask; 
         private RectTransform _playerUI;
         [SerializeField] private Transform ref1;
         [SerializeField] private Transform ref2;
         [SerializeField] private Transform player;
 
+        private Tween _darkenTween;
+        private Tween _lightenTween;
+        private const float NightAlpha = 0.9f;
+        
         private void Awake()
         {
             _map = transform.GetChild(0);
             _mapOpenButton = transform.GetChild(1);
-        
+            
             _ref1UI = _map.GetChild(0).GetComponent<RectTransform>();
             _ref2UI = _map.GetChild(1).GetComponent<RectTransform>();
-            _playerUI = _map.GetChild(2).GetComponent<RectTransform>();
+            _darkMask = _map.GetChild(2).GetComponent<Image>();
+            _playerUI = _map.GetChild(3).GetComponent<RectTransform>();
+            _darkMask.color = new Color(0, 0, 0, 0);
         }
         
         private void Update()
@@ -61,6 +71,38 @@ namespace UI
         {
             _map.gameObject.SetActive(false);
             _mapOpenButton.gameObject.SetActive(true);
+        }
+
+        public void DarkenMap(float duration)
+        {
+            if (_darkenTween != null)
+                return;
+            _darkenTween = _darkMask.DOFade(NightAlpha, duration);
+        }
+
+        public void LightenMap(float duration)
+        {
+            if (_lightenTween != null)
+                return;
+            _lightenTween = _darkMask.DOFade(0, duration);
+        }
+
+        public void JumpToNight()
+        {
+            SetDarkness(NightAlpha);
+        }
+
+        private void SetDarkness(float percent)
+        {
+            _darkMask.color = new Color(0, 0, 0, percent);
+        }
+
+        public void StopTweens()
+        {
+            if (_darkenTween != null)
+                _darkenTween.Kill();
+            if (_lightenTween != null)
+                _lightenTween.Kill();
         }
     }
 }

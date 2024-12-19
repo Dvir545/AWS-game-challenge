@@ -9,14 +9,14 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private GameObject darkOverlay;
     [SerializeField] private GameObject window;
     [SerializeField] private TextMeshProUGUI gameOverText;
-    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject scoreboard;
     
     private void Awake()
     {
         darkOverlay.SetActive(false);
         window.SetActive(false);
         gameOverText.color = new Color(1, 1, 1, 0);
-        restartButton.SetActive(false);
+        scoreboard.SetActive(false);
         
         EventManager.Instance.StartListening(EventManager.PlayerDied, Show);
     }
@@ -26,9 +26,10 @@ public class GameOverUI : MonoBehaviour
         darkOverlay.SetActive(true);
         window.SetActive(true);
         gameOverText.text = "GAME OVER\n\nyou survived " + GameData.Instance.day + " days";
-        gameOverText.DOColor(new Color(1, 1, 1, 1), 3f).OnComplete(() =>
+        gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() =>
         {
-            restartButton.SetActive(true);
+            gameOverText.enabled = false;
+            scoreboard.SetActive(true);
         });
     }
 }

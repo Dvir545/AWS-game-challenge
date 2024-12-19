@@ -83,6 +83,7 @@ namespace World
             {
                 _lightenTween.Kill();
             }
+            MinimapBehaviour.Instance.StopTweens();
 
             if (_currentDayPhase == DayPhase.NightEnd)  // still on night end of previous day
             {
@@ -96,6 +97,7 @@ namespace World
             if (_currentDayPhase == DayPhase.DayEnd)
             {
                 DayNightRollBehaviour.Instance.JumpToNight();
+                MinimapBehaviour.Instance.JumpToNight();
                 StartNight();
                 _dayNightCycleCR = StartCoroutine(DayNightCycle());
             }
@@ -228,6 +230,7 @@ namespace World
                 Constants.DayLightIntensity,
                 Constants.ChangeLightDurationInSeconds
             );
+            MinimapBehaviour.Instance.LightenMap(Constants.ChangeLightDurationInSeconds);
             NightTime = false;
         }
 
@@ -245,6 +248,7 @@ namespace World
                     Constants.NightLightIntensity, 
                     Constants.ChangeLightDurationInSeconds
                 );
+                MinimapBehaviour.Instance.DarkenMap(Constants.ChangeLightDurationInSeconds);
             }
             EventManager.Instance.TriggerEvent(EventManager.DayEnded, null);
         }
