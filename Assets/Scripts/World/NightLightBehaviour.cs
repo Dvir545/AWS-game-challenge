@@ -22,6 +22,10 @@ public class NightLightBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (!GameStarter.Instance.GameStarted)
+        {
+            return;
+        }
         if (!DayNightManager.Instance.DayTime && !DayNightManager.Instance.NightTime)
         {
             _light.intensity = 1 - _globalLight2D.intensity;

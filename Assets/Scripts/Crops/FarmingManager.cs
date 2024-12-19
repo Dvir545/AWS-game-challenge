@@ -79,6 +79,7 @@ namespace Crops
 
         private void PlantCrop(Vector2Int tilePos, Crop cropType)
         {
+            _farmTilemap.SetTile((Vector3Int)tilePos, farmTile);
             Vector2 cropPos = tilePos + new Vector2(_cropInstantiationOffset.x, _cropInstantiationOffset.y);
             GameObject cropSpritePrefab = cropType switch
             {
@@ -93,14 +94,13 @@ namespace Crops
             crop.transform.SetParent(cropsParent.transform);
             Farms[tilePos] = crop.GetComponent<CropBehaviour>();
             Farms[tilePos].Init(tilePos, cropType);
-            cropManager.RemoveCrop(Farms[tilePos].GetCrop());
         }
 
         private void PlantBestCrop(Vector2Int tilePos)
         {
-            _farmTilemap.SetTile((Vector3Int)tilePos, farmTile);
             var bestAvailableCrop = cropManager.GetBestAvailableCrop();
             PlantCrop(tilePos, bestAvailableCrop);
+            cropManager.RemoveCrop(Farms[tilePos].GetCrop());
         }
 
         private void HarvestCrop(Vector2Int tilePos)

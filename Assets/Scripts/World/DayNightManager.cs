@@ -21,7 +21,6 @@ namespace World
         [SerializeField] private Light2D globalLight;
         [SerializeField] private TextMeshProUGUI waveDeclarationText;
         
-        public bool GameStarted { get; private set; }
         private DayNightData.Cycle _currentCycle;
         private float _curDayPhaseProgress = 0f;
         private Coroutine _dayNightCycleCR;
@@ -51,20 +50,19 @@ namespace World
 
         private void Update()
         {
-            if (GameStarted && !playerHealthManager.IsDead)
+            if (GameStarter.Instance.GameStarted && !playerHealthManager.IsDead)
                 GameData.Instance.secondsSinceGameStarted += Time.deltaTime;
         }
 
 
         public void StartGame()
         {
-            GameStarted = true;
             _dayNightCycleCR = StartCoroutine(DayNightCycle());
         }
 
         public void JumpToNight()
         {
-            if (!GameStarted) return;
+            if (!GameStarter.Instance.GameStarted) return;
             if (NightTime) return;
             if (_currentDayPhase == DayPhase.Night) return;
             if (_dayNightCycleCR != null)

@@ -37,6 +37,7 @@ namespace Crops
             _position = position;
             if (!GameData.Instance.plantedCrops.ContainsKey(position))
                 GameData.Instance.plantedCrops[position] = new PlantedCropInfo((int)crop, 0, 0);
+            _cropSprite.sprite = SpriteData.Instance.GetCropSprite(Crop, Progress);
         }
         
         public void Update()

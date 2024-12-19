@@ -19,6 +19,7 @@ namespace Utils.Data
             this.progress = progress;
             this.health = health;
         }
+        public TowerLevelInfo() { }
     }
     
     [Serializable]
@@ -34,6 +35,7 @@ namespace Utils.Data
             this.growthProgress = growth;
             this.destroyProgress = destroyProgress;
         }
+        public PlantedCropInfo() { }
     }
     
     class SerializableGameData
@@ -55,7 +57,7 @@ namespace Utils.Data
         public int[] ThisDayEnemies;
         public int[] ThisNightEnemies;
         public List<TowerLevelInfo>[] Towers;
-        public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops;  //
+        public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops;
     }
     
     public class GameData: Singleton<GameData>
@@ -77,14 +79,14 @@ namespace Utils.Data
         public int[] thisDayEnemies;
         public int[] thisNightEnemies;
         public List<TowerLevelInfo>[] towers;
-        public Dictionary<Vector2Int, PlantedCropInfo> plantedCrops;  //
+        public Dictionary<Vector2Int, PlantedCropInfo> plantedCrops;
         
         public GameData()
         {
             NewGame();
         }
 
-        private void NewGame()
+        public void NewGame()
         {
             healthUpgradeLevel = Constants.StartHealthUpgradeLevel;
             regenUpgradeLevel = Constants.StartRegenUpgradeLevel;
@@ -153,6 +155,7 @@ namespace Utils.Data
                 PlantedCrops = plantedCrops
             };
             var json = JsonSerialization.ToJson(serializableData);
+            Debug.Log(json);
             // DVIR - upload json to aws
         }
     }
