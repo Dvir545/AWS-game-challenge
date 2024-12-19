@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/Scenes/GameScene/LightingData.asset.meta
 Assets/Scenes/GameScene/LightingData.asset.meta
+Assets/Scenes/GameScene.unity

@@ -4,18 +4,18 @@
 MemorySettings:
   m_ObjectHideFlags: 0
   m_EditorMemorySettings:
-    m_MainAllocatorBlockSize: -1
-    m_ThreadAllocatorBlockSize: -1
-    m_MainGfxBlockSize: -1
-    m_ThreadGfxBlockSize: -1
-    m_CacheBlockSize: -1
-    m_TypetreeBlockSize: -1
+    m_MainAllocatorBlockSize: 33554432
+    m_ThreadAllocatorBlockSize: 33554432
+    m_MainGfxBlockSize: 33554432
+    m_ThreadGfxBlockSize: 33554432
+    m_CacheBlockSize: 8388608
+    m_TypetreeBlockSize: 4194304
     m_ProfilerBlockSize: -1
     m_ProfilerEditorBlockSize: -1
-    m_BucketAllocatorGranularity: -1
-    m_BucketAllocatorBucketsCount: -1
-    m_BucketAllocatorBlockSize: -1
-    m_BucketAllocatorBlockCount: -1
+    m_BucketAllocatorGranularity: 32
+    m_BucketAllocatorBucketsCount: 16
+    m_BucketAllocatorBlockSize: 67108864
+    m_BucketAllocatorBlockCount: 8
     m_ProfilerBucketAllocatorGranularity: -1
     m_ProfilerBucketAllocatorBucketsCount: -1
     m_ProfilerBucketAllocatorBlockSize: -1
