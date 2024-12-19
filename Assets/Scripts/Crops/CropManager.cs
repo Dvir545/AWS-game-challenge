@@ -24,16 +24,13 @@ namespace Crops
         [SerializeField] private TextMeshProUGUI pumpkinAmount;
         private Dictionary<Crop, GameObject> _cropUI = new Dictionary<Crop, GameObject>();
         private Dictionary<Crop, TextMeshProUGUI> _cropAmount = new Dictionary<Crop, TextMeshProUGUI>();
-        private float _uiParentStartX;
-        private Vector2 _uiStartPos = new(0, 50);
-        private int _uiXoffset = -128;
-
-        private Vector2 _uiCurOffset;
+        private int _uiStartX = 256;
+        private int _uiXoffsetBetweenCrops = 128;
+        private int _uiXoffsetPerCrop;
 
         private void Awake()
         {
-            _uiParentStartX = cropUIParent.localPosition.x;
-            
+            _uiXoffsetPerCrop = _uiXoffsetBetweenCrops / 2;
             _cropUI.Add(Crop.Wheat, wheatUI);
             _cropUI.Add(Crop.Carrot, carrotUI);
             _cropUI.Add(Crop.Tomato, tomatoUI);
@@ -52,35 +49,16 @@ namespace Crops
                     DisableCropUI((Crop)i);
                 _cropAmount[(Crop)i].text = playerData.GetNumCrops((Crop)i).ToString();
             }
-            
-            SetCropUIParentPosition();
-
-            _uiCurOffset = new Vector2(_cropUI.Count * 128, 0);
-        }
-
-        private void SetCropUIParentPosition()
-        {
-            var numActiveCrops = 0;
-            foreach (var cropUI in _cropUI)
-            {
-                if (cropUI.Value.activeSelf)
-                    numActiveCrops++;
-            }
-            cropUIParent.localPosition = new Vector2(_uiParentStartX + (5-numActiveCrops) * 64, 0);
         }
 
         public void AddCrop(Crop crop)
         {
             if (playerData.GetNumCrops(crop) == 0)
+            {
                 EnableCropUI(crop);
+            }
             playerData.AddCrop(crop);
             _cropAmount[crop].text = playerData.GetNumCrops(crop).ToString();
-            SetCropUIParentPosition();
-        }
-
-        public void AddCrop(int cropN)
-        {
-            AddCrop((Crop)cropN);
         }
 
         public bool HasCrops()
@@ -97,41 +75,47 @@ namespace Crops
         {
             playerData.RemoveCrop(crop);
             if (playerData.GetNumCrops(crop) == 0)
+            {
                 DisableCropUI(crop);
+            }
             else
                 _cropAmount[crop].text = playerData.GetNumCrops(crop).ToString();
         }
         
         private void EnableCropUI(Crop crop)
         {
-            float xOffset = _uiCurOffset.x;
-            // move all crops after this crop by offset to the right
+            var xOffset = _uiStartX;
             foreach (var cropUI in _cropUI)
             {
-                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                if ((int)cropUI.Key < (int)crop && cropUI.Value.activeSelf)
                 {
-                    if (cropUI.Value.transform.localPosition.x < xOffset) 
-                        xOffset = cropUI.Value.transform.localPosition.x;
-                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffset, 0, 0);
+                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffsetPerCrop, 0, 0);
+                    xOffset += _uiXoffsetPerCrop;
+                }
+                else if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffsetPerCrop, 0, 0);
+                    xOffset -= _uiXoffsetPerCrop;
                 }
             }
-            _cropUI[crop].transform.localPosition = _uiStartPos + new Vector2(xOffset, 0);
-            _uiCurOffset += new Vector2(_uiXoffset, 0);
+            _cropUI[crop].transform.localPosition = new Vector3(xOffset, 0, 0);
             _cropUI[crop].SetActive(true);
         }
 
         private void DisableCropUI(Crop crop)
         {
             _cropUI[crop].SetActive(false);
-            // move all crops after this one to the left
             foreach (var cropUI in _cropUI)
             {
-                if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                if ((int)cropUI.Key < (int)crop && cropUI.Value.activeSelf)
                 {
-                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffset, 0, 0);
+                    cropUI.Value.transform.localPosition += new Vector3(_uiXoffsetPerCrop, 0, 0);
+                }
+                else if ((int)cropUI.Key > (int)crop && cropUI.Value.activeSelf)
+                {
+                    cropUI.Value.transform.localPosition -= new Vector3(_uiXoffsetPerCrop, 0, 0);
                 }
             }
-            _uiCurOffset.x -= _uiXoffset;
         }
 
         public Crop GetBestAvailableCrop()

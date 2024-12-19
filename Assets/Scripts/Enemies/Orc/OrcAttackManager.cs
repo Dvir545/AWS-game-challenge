@@ -27,7 +27,8 @@ namespace Enemies.Orc
                 SetAttacking(false);
                 if (progressBarBehavior.IsWorking)
                     progressBarBehavior.StopWork();
-                _curTarget.SetUnderAttack(false);
+                if (_curTarget != null)
+                    _curTarget.SetUnderAttack(false);
                 return;
             }
             if (_isAttacking)

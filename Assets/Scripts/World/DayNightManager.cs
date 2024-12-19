@@ -181,17 +181,18 @@ namespace World
             }
             var enemySpawns = new EnemySpawn[totalSpawnAmounts];
             // randomize spawn time and position for each enemy
+            int i = 0;
             for (int enemyType = 0; enemyType < spawnAmounts.Length; enemyType++)
             {
                 var spawnAmount = spawnAmounts[enemyType];
-                for (int i = 0; i < spawnAmount; i++)
+                for (int j = 0; j < spawnAmount; j++)
                 {
                     var enemySpawn = new EnemySpawn
                     {
                         Enemy = (Enemy)enemyType,
                         SpawnTime = Random.Range(0, spawnDurationInSeconds)
                     };
-                    enemySpawns[i] = enemySpawn;
+                    enemySpawns[i++] = enemySpawn;
                 }
             }
 
@@ -269,6 +270,8 @@ namespace World
         {
             Debug.Log($"Starting day {GameData.Instance.day + 1}");
             _currentDayPhase = DayPhase.Day;
+            if (GameData.Instance.day > 0)
+                GeneralStoreManager.Instance.UpdateStock(_currentCycle.NewCrops, _currentCycle.NewMaterials);
             if (!force)
             {
                 waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
@@ -278,8 +281,6 @@ namespace World
                 NightTime = false;
                 EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
             }
-            if (GameData.Instance.day > 0)
-                GeneralStoreManager.Instance.UpdateStock(_currentCycle.NewCrops, _currentCycle.NewMaterials);
         }
 
         private void StartNight()
