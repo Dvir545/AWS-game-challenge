@@ -126,7 +126,7 @@ namespace Utils.Data
             {
                 var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum / 2)));
                 var nightEnemySpawns = new EnemySpawns();
-                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 4);
+                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 2);
                 while (enemyPowerPoints > 0)
                 {
                     var (enemy, points) = spawnData.GetRandomEnemy(enemyPowerPoints);

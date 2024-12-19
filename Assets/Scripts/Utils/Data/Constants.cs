@@ -27,7 +27,7 @@ namespace Utils
         public const int StoreCornAmountPerCycle = 3;
         public const int StorePumpkinAmountPerCycle = 1;
 
-        public const int FirstDayDurationInSeconds = 30; //120
+        public const int FirstDayDurationInSeconds = 120;
         public const int DaySecondsReductionPerCycle = 10;
         public const int MinDayDurationInSeconds = 30;
         public const float FirstNightDurationInSeconds = 10;
@@ -37,7 +37,7 @@ namespace Utils
         public const int ChangeLightDurationInSeconds = 5;
         
         public const float DayLightIntensity = 1;
-        public const float NightLightIntensity = 0.1f;
+        public const float NightLightIntensity = 0.05f;
 
 
         public static readonly Color CashColor = new Color(1, 0.93f, 0, 1);
@@ -48,11 +48,11 @@ namespace Utils
         public const int StartHealthUpgradeLevel = 0;
         public const int StartRegenUpgradeLevel = 0;
         public const int StartSpeedUpgradeLevel = 0;
-        public const int StartSwordLevel = 3;
+        public const int StartSwordLevel = 0;
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;
         public const int StartCash = 0;
-        public const int StartDay = 9;
+        public const int StartDay = 0;
         public static readonly int[] StartCrops = {3, 0, 0, 0, 0};
         public static readonly int[] StartMaterials = {1, 0, 0, 0, 0};
         public static readonly int[] StartCropsInStore = {5, 0, 0, 0, 0};
