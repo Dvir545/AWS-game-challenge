@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Player;
+using UI.GameUI;
 using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -198,6 +199,14 @@ namespace Crops
                 }
             }
             return false;
+        }
+
+        public void ResetCrops()
+        {
+            foreach (var tilePos in Farms.Keys)
+            {
+                Destroy(Farms[tilePos].gameObject);
+            }
         }
     }
 }

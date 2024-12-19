@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using World;
 
 [Serializable]
 public class APIResponse
@@ -40,12 +42,22 @@ public class ScoreboardBehaviour : MonoBehaviour
     [SerializeField] private GameObject scorePrefab;
     [SerializeField] private GameObject scoresParent;
     [SerializeField] private GameObject playerScore;
+    private GameObject _darkOverlay;
+    private GameObject _window;
     private const float StartY = 92.6f;
     private const float YOffsetBetweenScores = 65;
     private const string API_URL = "https://wjfv1q5r9e.execute-api.us-east-1.amazonaws.com/fetch/fetch";
     private const string API_KEY = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
 
     private int _nScores = 0;
+    
+    private void Awake()
+    {
+        _darkOverlay = transform.GetChild(0).gameObject;
+        _window = transform.GetChild(1).gameObject;
+        _darkOverlay.SetActive(false);
+        _window.SetActive(false);
+    }
 
     private void ClearExistingScores()
     {
@@ -67,7 +79,7 @@ public class ScoreboardBehaviour : MonoBehaviour
         _nScores++;
     }
 
-    private void SetPlayerScore(string playerName, int daysSurvived, float secondsPlayed)
+    public void SetPlayerScore(string playerName, int daysSurvived, float secondsPlayed)
     {  // this should be used on your current score when losing
         SetScore(playerScore, playerName, daysSurvived, secondsPlayed);
     }
@@ -85,14 +97,15 @@ public class ScoreboardBehaviour : MonoBehaviour
             : $"{time.Minutes:D2}:{time.Seconds:D2}";
     }
 
-    private IEnumerator FetchAndDisplayScores()
+    private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(API_URL))
         {
             webRequest.SetRequestHeader("x-api-key", API_KEY);
 
             yield return webRequest.SendWebRequest();
-
+            gameOverText.enabled = false;
+            EnemyPool.Instance.ReleaseAll();
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 try
@@ -117,27 +130,33 @@ public class ScoreboardBehaviour : MonoBehaviour
                     {
                         Debug.LogError("Score data or scores list is null");
                     }
+                    _darkOverlay.SetActive(true);
+                    _window.SetActive(true);
                 }
                 catch (Exception e)
                 {
                     Debug.LogError($"Error parsing JSON: {e.Message}");
                     Debug.LogError($"Raw response: {webRequest.downloadHandler.text}");
+                    ReturnToMenu();
                 }
             }
             else
             {
                 Debug.LogError($"Error fetching scores: {webRequest.error}");
+                ReturnToMenu();
             }
         }
     }
 
-    public void RefreshScores()
+    public void RefreshScores(TextMeshProUGUI gameOverText)
     {
-        StartCoroutine(FetchAndDisplayScores());
+        StartCoroutine(FetchAndDisplayScores(gameOverText));
     }
 
-    private void Start()
+    public void ReturnToMenu()
     {
-        RefreshScores();
+        _darkOverlay.SetActive(false);
+        _window.SetActive(false);
+        GameEnder.Instance.EndGame();
     }
 }

@@ -242,5 +242,16 @@ namespace Towers
                 return;
             _warningSign.SetVisibility(true);
         }
+
+        public void Reset()
+        {
+            _towerDatas.Clear();
+            _floors.ForEach(Destroy);
+            _floors.Clear();
+            _topConstruction = transform.GetChild(0).gameObject;
+            _topConstruction.SetActive(false);
+            IsBuilt = false;
+            _isUnderAttack = false;
+        }
     }
 }

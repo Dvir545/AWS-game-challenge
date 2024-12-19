@@ -46,7 +46,7 @@ namespace UI.WarningSign
             _rect = GetComponent<RectTransform>();
             _player = GameObject.FindWithTag("Player").transform;
         }
-    
+
         public void Init(Transform target)
         {
             _target = target;
@@ -70,6 +70,7 @@ namespace UI.WarningSign
             }
             if (show)
             {
+                if (_rect == null) return;
                 UpdatePosition();
             }
         }
@@ -84,6 +85,7 @@ namespace UI.WarningSign
 
         private void UpdatePosition()
         {
+            if (gameObject.activeSelf == false) return;
             Vector2 direction = _target.position - _player.position;
             // Calculate the angle to determine which arrow to show
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

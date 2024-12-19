@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
@@ -33,8 +34,18 @@ namespace UI.WarningSign
                 defaultCapacity: 4,
                 maxSize: 100
             );
+            EventManager.Instance.StartListening(EventManager.PlayerDied, ReleaseAll);
+
         }
-        
+
+        private void ReleaseAll(object arg0)
+        {
+            foreach (var sign in _tgt2Sign.Values)
+            {
+                _warningSignPool.Release(sign);
+            }
+        }
+
         public GameObject GetWarningSign(Transform parent, Transform target, bool enemy=false)
         {
             var warningSign = _warningSignPool.Get();

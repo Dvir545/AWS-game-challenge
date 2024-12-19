@@ -35,6 +35,7 @@ namespace AWSUtils
 
         private void OnDisable()
         {
+            if (EventManager.Instance == null) return;
             EventManager.Instance.StopListening(EventManager.PlayerGotHit, OnPlayerGotHit);
             EventManager.Instance.StopListening(EventManager.CropHarvested, OnCropHarvested);
             EventManager.Instance.StopListening(EventManager.TowerBuilt, OnTowerBuilt);

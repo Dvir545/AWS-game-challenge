@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Amazon.GameLift.Model;
 using Player;
+using UI.GameUI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -119,6 +120,14 @@ namespace Towers
                     transforms.Add(_towerBuilds[i].transform);
             }
             return transforms.ToArray();
+        }
+
+        public void ResetTowers()
+        {
+            for (int i = 0; i < _towerBuilds.Length; i++)
+            {
+                _towerBuilds[i].Reset();
+            }
         }
     }
 }

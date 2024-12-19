@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 using Utils;
 using Utils.Data;
 using Player;
+using UI.GameUI;
+using World;
 
 namespace AWSUtils
 {
@@ -14,7 +16,8 @@ namespace AWSUtils
         [SerializeField] private SpeechBubbleBehaviour speechBubbleBehaviour;
         [SerializeField] private NPCType npcType;
         [SerializeField] private string apiKey = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
-        
+        [SerializeField] private Camera mainCamera;
+
         private PlayerData playerData;
         private const string API_URL_PREFIX = "https://creolt9mzl.execute-api.us-east-1.amazonaws.com/dev/";
         private string _apiURL;
@@ -28,9 +31,20 @@ namespace AWSUtils
         private const string DEFAULT_MESSAGE = "...";
         private const int MAX_RETRIES = 3;
         private const float RETRY_DELAY = 2f;
+        
+        private GameObject _canvas;
+        private float _showSpeechBubbleRadius = 8f;
+        private Transform _playerTransform;
+        private CanvasGroup _speechBubbleCanvasGroup;
+        private RectTransform _speechBubbleRectTransform;
+        private bool _isPlayerBehind;
 
         private void Awake()
         {
+            _canvas = transform.GetChild(0).gameObject;
+            _canvas.SetActive(false);
+            _speechBubbleCanvasGroup = _canvas.GetComponent<CanvasGroup>();
+            _playerTransform = GameObject.FindWithTag("Player").transform;
             var urlPostfix = npcType == NPCType.Start ? "startnpc" : "storenpc";
             _apiURL = API_URL_PREFIX + urlPostfix;
             Debug.Log($"Initialized {npcType} NPC with URL: {_apiURL}");
@@ -43,6 +57,7 @@ namespace AWSUtils
 
             if (npcType == NPCType.Start)
             {
+                _speechBubbleRectTransform = speechBubbleBehaviour.GetComponent<RectTransform>();
                 GameStatistics.Initialize();
             }
         }
@@ -55,7 +70,50 @@ namespace AWSUtils
             }
         }
 
-        private void Start() => SendNPCRequest();
+        private void Start()
+        {
+            if (npcType == NPCType.Start && GameStarter.Instance.GameContinued)
+                return;
+            SendNPCRequest();
+        } 
+        
+        private void Update()
+        {
+            if (string.IsNullOrEmpty(_currentText))
+                return;
+            var distanceToPlayer = Vector2.Distance(_playerTransform.position, transform.position);
+            if (!IsSpeechBubbleVisible() && distanceToPlayer <= _showSpeechBubbleRadius)
+            {
+                ShowSpeechBubble();
+            }
+            else if (IsSpeechBubbleVisible() && distanceToPlayer > _showSpeechBubbleRadius)
+            {
+                HideSpeechBubble();
+            }
+            if (IsSpeechBubbleVisible())
+            {
+                UpdateSpeechBubbleTransparency();
+            }
+        }
+
+        private void UpdateSpeechBubbleTransparency()
+        {
+            var offset = new Vector2(0f, 50f);
+            Vector2 screenPoint = mainCamera.WorldToScreenPoint(_playerTransform.position);
+            screenPoint += offset;
+            bool isPlayerBehind = RectTransformUtility.RectangleContainsScreenPoint(
+                _speechBubbleRectTransform, 
+                screenPoint, 
+                mainCamera
+            );
+    
+            // Set the appropriate alpha
+            _speechBubbleCanvasGroup.alpha = isPlayerBehind ? 0.2f : 1f;
+        }
+
+        private void ShowSpeechBubble() => _canvas.SetActive(true);
+        private bool IsSpeechBubbleVisible() => _canvas.activeSelf;
+        private void HideSpeechBubble() => _canvas.SetActive(false);
 
         private void Speak(string text)
         {
@@ -179,6 +237,8 @@ namespace AWSUtils
 
         private void OnDisable()
         {
+            if (EventManager.Instance == null)
+                return;
             EventManager.Instance.StopListening(EventManager.DayStarted, OnDayStarted);
             EventManager.Instance.StopListening(EventManager.NightStarted, OnNightStarted);
         }
@@ -218,7 +278,7 @@ namespace AWSUtils
             try
             {
                 _isWaitingForResponse = true;
-                Speak(DEFAULT_MESSAGE);
+                // Speak(DEFAULT_MESSAGE);
                 StartCoroutine(SendNPCRequestWithRetry(0));
             }
             catch (Exception ex)

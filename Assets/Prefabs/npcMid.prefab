@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
-  m_sharedMaterial: {fileID: 2713340834284964255, guid: e424654fb89febc42aaddbc6070a6032, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 525e19f6fcfbd564da6e947e3fa1863e, type: 2}
+  m_sharedMaterial: {fileID: -8566058401942132458, guid: 525e19f6fcfbd564da6e947e3fa1863e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,19 +92,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
-  m_fontSizeBase: 6
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
-  m_characterSpacing: 2
+  m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 4
+  m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5150225362679863796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -357,7 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubbleBehaviour: {fileID: 7604879548155446504}
-  npcType: 0
+  npcType: 1
+  apiKey: eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT
 --- !u!1 &5376688888504379059
 GameObject:
   m_ObjectHideFlags: 0

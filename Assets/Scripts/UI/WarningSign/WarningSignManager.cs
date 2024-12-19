@@ -17,7 +17,7 @@ namespace UI.WarningSign
             EventManager.Instance.StartListening(EventManager.TowerStoppedBeingUnderAttack, StopWarningSign);
             EventManager.Instance.StartListening(EventManager.EnemyKilled, StopWarningSign);
         }
-        
+
         private void StartWarningSign(object arg0)
         {
             if (arg0 is (Transform target, bool enemy))
