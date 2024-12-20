@@ -54,12 +54,7 @@ namespace AWSUtils
             {
                 Debug.LogError("Could not find PlayerData component!");
             }
-
-            if (npcType == NPCType.Start)
-            {
-                _speechBubbleRectTransform = speechBubbleBehaviour.GetComponent<RectTransform>();
-                GameStatistics.Initialize();
-            }
+            _speechBubbleRectTransform = speechBubbleBehaviour.GetComponent<RectTransform>();
         }
 
         public void TriggerNPCSpeech()
@@ -70,17 +65,19 @@ namespace AWSUtils
             }
         }
 
-        private void Start()
+        public void Init()
         {
             if (npcType == NPCType.Start && GameStarter.Instance.GameContinued)
-                return;
-            SendNPCRequest();
+                Speak("Fancy seeing you here, " + GameStatistics.Instance.username + "!");
+            else
+                SendNPCRequest();
         } 
         
         private void Update()
         {
             if (string.IsNullOrEmpty(_currentText))
                 return;
+            if (_playerTransform == null) return;
             var distanceToPlayer = Vector2.Distance(_playerTransform.position, transform.position);
             if (!IsSpeechBubbleVisible() && distanceToPlayer <= _showSpeechBubbleRadius)
             {

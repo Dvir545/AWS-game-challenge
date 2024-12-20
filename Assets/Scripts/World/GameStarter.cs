@@ -1,4 +1,5 @@
 using System;
+using AWSUtils;
 using DG.Tweening;
 using Player;
 using UI.GameUI;
@@ -12,7 +13,7 @@ namespace World
 {
     public class GameStarter : Singleton<GameStarter>
     {
-        private static readonly Vector2 PlayerMenuPos = new Vector2(-14, -11f);
+        private static readonly Vector2 PlayerMenuPos = new Vector2(-14, -12f);
         private static readonly Vector2 PlayerStartPos = new Vector2(-14, -9.5f);
         [SerializeField] private Transform boatWithPlayer;
         [SerializeField] private Transform anchoredBoat;
@@ -28,6 +29,8 @@ namespace World
         [SerializeField] private UpgradeUIBehaviour speedUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour regenUIBehaviour;
         [SerializeField] private ActButtonBehavior actButtonBehavior;
+        [SerializeField] private NPCSpeech npcBottom;
+        [SerializeField] private NPCSpeech npcMid;
         private float xOffsetBetweenNewGameAndContinue = 300f;
         private Collider2D _collider;
 
@@ -40,7 +43,6 @@ namespace World
         private void Awake()
         {
             _collider = GetComponent<Collider2D>();
-            Init();
         }
 
         public void Init()
@@ -84,6 +86,8 @@ namespace World
             boatWithPlayer.gameObject.SetActive(false);
             SetPlayerPosition();
             game.SetActive(true);
+            npcBottom.Init();
+            npcMid.Init();
             gameCanvas.SetActive(true);
         }
 
