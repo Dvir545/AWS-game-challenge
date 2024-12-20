@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Enemies.Demon;
 using TMPro;
+using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.Networking;
 using World;
@@ -97,7 +99,7 @@ public class ScoreboardBehaviour : MonoBehaviour
             : $"{time.Minutes:D2}:{time.Seconds:D2}";
     }
 
-    private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText)
+    private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(API_URL))
         {
@@ -105,7 +107,11 @@ public class ScoreboardBehaviour : MonoBehaviour
 
             yield return webRequest.SendWebRequest();
             gameOverText.enabled = false;
+            darkOverlay.SetActive(false);
+            window.SetActive(false);
+            WarningSignPool.Instance.ReleaseAll();
             EnemyPool.Instance.ReleaseAll();
+            BallPool.Instance.ReleaseAll();
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 try
@@ -148,9 +154,9 @@ public class ScoreboardBehaviour : MonoBehaviour
         }
     }
 
-    public void RefreshScores(TextMeshProUGUI gameOverText)
+    public void RefreshScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
     {
-        StartCoroutine(FetchAndDisplayScores(gameOverText));
+        StartCoroutine(FetchAndDisplayScores(gameOverText, darkOverlay, window));
     }
 
     public void ReturnToMenu()

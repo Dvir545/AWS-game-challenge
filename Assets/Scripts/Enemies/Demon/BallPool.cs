@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Pool;
 using Utils;
 
@@ -8,6 +9,7 @@ namespace Enemies.Demon
     {
         [SerializeField] private GameObject ballPrefab;
         private static ObjectPool<GameObject> _ballPool;
+        private List<GameObject> _balls = new();
 
         private GameObject CreateBall()
         {
@@ -28,15 +30,27 @@ namespace Enemies.Demon
                 maxSize: 100
             );
         }
-        
+
+        public void ReleaseAll()
+        {
+            foreach (var ball in _balls)
+            {
+                _ballPool.Release(ball);
+            }
+            _balls.Clear();
+        }
+
         public GameObject GetBall()
         {
-            return _ballPool.Get();
+            var ball = _ballPool.Get();
+            _balls.Add(ball);
+            return ball;
         }
 
         public void ReleaseBall(GameObject ball)
         {
             _ballPool.Release(ball);
+            _balls.Remove(ball);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using Utils;
 
@@ -19,7 +20,7 @@ namespace UI.GameUI
         private float NightXWidth => Mathf.Abs(NightEndX2 - NightStartX);
         private float NightEndXWidth => DayEndXWidth;
 
-        private DayPhase _nextDayPhase = DayPhase.Day;
+        private DayPhase _nextDayPhase;
         private float _rollProgressWidth;
         private float _rollCurProgress;
         
@@ -30,8 +31,7 @@ namespace UI.GameUI
         
         private void Awake()
         {
-            _rectTransform = GetComponent<RectTransform>();
-            SetRollProgressWidth();
+            Init();
         }
 
         private void SetRollProgressWidth()
@@ -96,5 +96,14 @@ namespace UI.GameUI
                 });
         }
 
+        public void Init()
+        {
+            if (_rectTransform == null)
+            {
+                _rectTransform = GetComponent<RectTransform>();
+            }
+            _nextDayPhase = DayPhase.Day;
+            SetRollProgressWidth();
+        }
     }
 }

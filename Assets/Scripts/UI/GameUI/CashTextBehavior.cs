@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -11,13 +12,13 @@ namespace UI.GameUI
         private TextMeshProUGUI _cashText;
         [SerializeField] private RectTransform parentRectTransform;
         private int _digitWidth;
-        
-        void Start()
+
+        private void Awake()
         {
             _cashText = GetComponent<TextMeshProUGUI>();
             EventManager.Instance.StartListening(EventManager.CashChanged, OnCashChanged);
             _digitWidth = (int)(4*_cashText.fontSize/5);
-            SetText(GameData.Instance.cash);
+            Init();
         }
 
         private void SetText(int amount)
@@ -33,6 +34,16 @@ namespace UI.GameUI
             {
                 SetText(cash); 
             }
+        }
+
+        public void Init()
+        {
+            if (_cashText == null)
+            {
+                _cashText = GetComponent<TextMeshProUGUI>();
+            }
+
+            SetText(GameData.Instance.cash);
         }
     }
 }

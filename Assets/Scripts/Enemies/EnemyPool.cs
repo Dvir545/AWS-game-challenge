@@ -72,6 +72,7 @@ namespace Enemies
             {
                 ReleaseEnemy(enemy, _enemies[enemy]);
             }
+            _enemies.Clear();
         }
     }
 }

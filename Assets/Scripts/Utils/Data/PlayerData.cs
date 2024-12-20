@@ -159,5 +159,10 @@ namespace Player
                     return Color.white;
             }
         }
+
+        public void Reset()
+        {
+            _curTool = HeldTool.Sword;
+        }
     }
 }

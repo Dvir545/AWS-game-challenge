@@ -54,6 +54,8 @@ namespace Player
             playerAttackManager.StopAttack();
             farmingManager.StopFarming();
             towerBuildManager.StopBuilding();
+            if (progressBarBehavior.IsWorking)
+                progressBarBehavior.StopWork();
         }
 
         private void Update()
@@ -105,6 +107,12 @@ namespace Player
             DisableActions();
             yield return new WaitForSeconds(hitTime);
             _canAct = true;
+        }
+
+        public void Reset()
+        {
+            _canAct = true;
+            isActing = false;
         }
     }
 }

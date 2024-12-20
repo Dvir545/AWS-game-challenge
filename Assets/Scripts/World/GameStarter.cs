@@ -1,5 +1,7 @@
 using System;
 using DG.Tweening;
+using Player;
+using UI.GameUI;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering.Universal;
@@ -21,7 +23,13 @@ namespace World
         [SerializeField] private GameObject newGameButton;
         [SerializeField] private GameObject continueButton;
         [SerializeField] private Light2D globalLight;
+        [SerializeField] private CashTextBehavior cashBehaviour;
+        [SerializeField] private DayNightRollBehaviour dayNightRollBehaviour;
+        [SerializeField] private UpgradeUIBehaviour speedUIBehaviour;
+        [SerializeField] private UpgradeUIBehaviour regenUIBehaviour;
+        [SerializeField] private ActButtonBehavior actButtonBehavior;
         private float xOffsetBetweenNewGameAndContinue = 300f;
+        private Collider2D _collider;
 
         private string _savedGameJson;
         private string _dummyJson = "{\n    \"HealthUpgradeLevel\": 0,\n    \"RegenUpgradeLevel\": 0,\n    \"SpeedUpgradeLevel\": 0,\n    \"SwordLevel\": 0,\n    \"HoeLevel\": 0,\n    \"HammerLevel\": 1,\n    \"Cash\": 99879,\n    \"Day\": 1,\n    \"CurHealth\": 6,\n    \"SecondsSinceGameStarted\": 108.235,\n    \"InventoryCrops\": [\n        2,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"InventoryMaterials\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"CropsInStore\": [\n        5,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"MaterialsInStore\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisDayEnemies\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisNightEnemies\": [\n        5,\n        4,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"Towers\": [\n        [],\n        [],\n        [],\n        [],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 1.000658,\n                \"health\": 5\n            }\n        ],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 0.2982577,\n                \"health\": 5\n            }\n        ],\n        []\n    ],\n    \"PlantedCrops\": [\n        {\n            \"Key\": {\n                \"x\": -3,\n                \"y\": 39\n            },\n            \"Value\": {\n                \"cropType\": 0,\n                \"growthProgress\": 0.4730192,\n                \"destroyProgress\": 0\n            }\n        }\n    ]\n}";
@@ -31,11 +39,13 @@ namespace World
 
         private void Awake()
         {
+            _collider = GetComponent<Collider2D>();
             Init();
         }
 
         public void Init()
         {
+            _collider.enabled = true;
             GameStarted = false;
             GameContinued = false;
             anchoredBoat.gameObject.SetActive(false);
@@ -61,8 +71,14 @@ namespace World
             }
         }
 
-        private void PositionPlayer()
+        private void SetupGame()
         {
+            player.GetComponent<PlayerHealthManager>().Init();
+            cashBehaviour.Init();
+            actButtonBehavior.Init();
+            dayNightRollBehaviour.Init();
+            speedUIBehaviour.Init();
+            regenUIBehaviour.Init();
             anchoredBoat.gameObject.SetActive(true);
             player.gameObject.SetActive(true);
             boatWithPlayer.gameObject.SetActive(false);
@@ -73,7 +89,7 @@ namespace World
 
         private void GameStart()
         {
-            GetComponent<Collider2D>().enabled = false;
+            _collider.enabled = false;
             Debug.Log("Game Started");
             GameStarted = true;
             DayNightManager.Instance.StartGame();
@@ -83,7 +99,7 @@ namespace World
         {
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
-            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 8f).SetEase(Ease.OutQuad).OnComplete(PositionPlayer);
+            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 8f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
         }
         
         public void PressedContinue()
@@ -96,7 +112,7 @@ namespace World
         public void ContinueFromSavedJson()
         {
             GameData.Instance.LoadFromJson(_savedGameJson);
-            PositionPlayer();
+            SetupGame();
         }
         
         private void SetPlayerPosition()

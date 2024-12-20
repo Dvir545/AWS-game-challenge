@@ -34,16 +34,16 @@ namespace UI.WarningSign
                 defaultCapacity: 4,
                 maxSize: 100
             );
-            EventManager.Instance.StartListening(EventManager.PlayerDied, ReleaseAll);
 
         }
 
-        private void ReleaseAll(object arg0)
+        public void ReleaseAll()
         {
             foreach (var sign in _tgt2Sign.Values)
             {
                 _warningSignPool.Release(sign);
             }
+            _tgt2Sign.Clear();
         }
 
         public GameObject GetWarningSign(Transform parent, Transform target, bool enemy=false)

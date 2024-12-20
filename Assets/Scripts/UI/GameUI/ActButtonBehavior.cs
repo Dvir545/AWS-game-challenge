@@ -1,3 +1,4 @@
+using System;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,14 +23,18 @@ namespace UI.GameUI
         private Image _buttonImage;
         private Image _iconImage;
 
-        private void Start()
+        private void Awake()
         {
             _button = GetComponent<Button>();
             _buttonImage = GetComponent<Image>();
             _iconImage = iconObject.GetComponent<Image>();
+        }
+
+        private void Start()
+        {
             
             // Cache the button sprites
-            _normalSprite = _buttonImage.sprite; // Changed this line
+            _normalSprite = _buttonImage.sprite;
             _pressedSprite = _button.spriteState.pressedSprite;
 
             if (iconObject != null)
@@ -98,6 +103,18 @@ namespace UI.GameUI
                 playerActionManager.StopActing();
                 _buttonImage.sprite = _normalSprite;
             }
+        }
+
+        public void Init()
+        {
+            if (_button is null)
+            {
+                _button = GetComponent<Button>();
+                _buttonImage = GetComponent<Image>();
+                _iconImage = iconObject.GetComponent<Image>();
+            }
+            ReleaseButton();
+            ChangeToolIcon(null);
         }
     }
 }

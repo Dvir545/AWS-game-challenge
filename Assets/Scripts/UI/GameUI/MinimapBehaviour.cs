@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -103,6 +104,13 @@ namespace UI.GameUI
                 _darkenTween.Kill();
             if (_lightenTween != null)
                 _lightenTween.Kill();
+        }
+
+        public void Reset()
+        {
+            _darkMask.color = new Color(0, 0, 0, 0);
+            _map.gameObject.SetActive(false);
+            _mapOpenButton.gameObject.SetActive(true);
         }
     }
 }

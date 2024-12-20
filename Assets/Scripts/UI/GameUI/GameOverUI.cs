@@ -32,7 +32,7 @@ namespace UI.GameUI
             gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() =>
             {
                 _scoreboardBehaviour.SetPlayerScore("Player", GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
-                _scoreboardBehaviour.RefreshScores(gameOverText);
+                _scoreboardBehaviour.RefreshScores(gameOverText, darkOverlay, window);
             });
         }
     }

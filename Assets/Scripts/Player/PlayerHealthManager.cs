@@ -18,7 +18,6 @@ namespace Player
         [SerializeField] private Sprite emptyHeartSprite;
 
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private EffectsManager effectsManager;
 
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
@@ -31,8 +30,6 @@ namespace Player
 
         private void Start()
         {
-            AddUIHealth(playerData.MaxHealth);
-            UpdateUIHealth(GameData.Instance.curHealth);
             EventManager.Instance.StartListening(EventManager.MaxHealthIncreased, AddUIHealth);
             EventManager.Instance.StartListening(EventManager.HealthChanged, UpdateUIHealth);
         }
@@ -112,7 +109,7 @@ namespace Player
 
             var pushForceMultiplier = EnemyData.GetPushForceMultiplier(enemyType);
             EventManager.Instance.TriggerEvent(EventManager.PlayerGotHit, (HitTime, hitDirection, pushForceMultiplier));
-            effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
+            EffectsManager.Instance.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
             
             yield return new WaitForSeconds(HitTime);
             _canGetHit = true;
@@ -136,6 +133,22 @@ namespace Player
                 yield return new WaitForSeconds(Constants.BaseSecondsPerHeal / playerData.RegenSpeedMultiplier);
                 playerData.IncHealth();
             }
+        }
+
+        public void Reset()
+        {
+            foreach (var heart in _heartPrefabs)
+            {
+                Destroy(heart);
+            }
+            _heartPrefabs.Clear();
+            _heartImages.Clear();
+        }
+
+        public void Init()
+        {
+            AddUIHealth(playerData.MaxHealth);
+            UpdateUIHealth(GameData.Instance.curHealth);
         }
     }
 }

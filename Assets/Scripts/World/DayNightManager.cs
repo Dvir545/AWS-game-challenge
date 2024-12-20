@@ -41,15 +41,6 @@ namespace World
         [SerializeField] private PlayerHealthManager playerHealthManager;
         private DayPhase _currentDayPhase;
 
-        void Start()
-        {
-            _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
-            if (GameData.Instance.day >= DayNightData.FirstCycles.Count - 1)
-            {
-                GetNextCycleAsync(EnemySpawnData.Instance);
-            }
-        }
-
         private void Update()
         {
             if (GameStarter.Instance.GameStarted && !playerHealthManager.IsDead)
@@ -59,6 +50,18 @@ namespace World
 
         public void StartGame()
         {
+            NightTime = false;
+            DayTime = true;
+            _currentDayPhase = DayPhase.Day;
+            _currentCycle = DayNightData.GetCycle(GameData.Instance.day, GameData.Instance.thisDayEnemies, GameData.Instance.thisNightEnemies);
+            if (GameData.Instance.day >= DayNightData.FirstCycles.Count - 1)
+            {
+                GetNextCycleAsync(EnemySpawnData.Instance);
+            }
+            if (_dayNightCycleCR != null)
+            {
+                StopCoroutine(_dayNightCycleCR);
+            }
             _dayNightCycleCR = StartCoroutine(DayNightCycle());
         }
 

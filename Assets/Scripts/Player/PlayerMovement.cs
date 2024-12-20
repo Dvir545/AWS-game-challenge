@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -122,6 +123,14 @@ namespace Player
             yield return new WaitForSeconds(knockbackTime);
             _rb.velocity = Vector2.zero;
             _canMove = true;
+        }
+
+        public void Reset()
+        {
+            _canMove = true;
+            _rb.velocity = Vector2.zero;
+            _movementDirection = Vector2.zero;
+            ChangeDirection(FacingDirection.Down);
         }
     }
 }

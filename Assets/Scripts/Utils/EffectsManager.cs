@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Utils
 {
-    public class EffectsManager : MonoBehaviour
+    public class EffectsManager : Singleton<EffectsManager>
     {
         [SerializeField] private GameObject cashRewardPrefab;
 
