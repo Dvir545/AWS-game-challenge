@@ -17,8 +17,9 @@ namespace Utils.Data
         }
     }
     
-    class SerializableUserGamesData
+    class SerializableGameStatistics
     {
+        public string username;
         public int TotalGamesPlayed;
         public int ConsecutiveGamesPlayed;
         public int KilledLastGameBy;
@@ -26,21 +27,18 @@ namespace Utils.Data
         public ScoreInfo HighScore;
     }
     
-    public class UserGamesData: Singleton<UserGamesData>
+    public class GameStatistics: Singleton<GameStatistics>
     {
+        public string username;
         public int totalGamesPlayed;
         public int consecutiveGamesPlayed;
         public int killedLastGameBy;
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
-        
-        public UserGamesData()
-        {
-            NewUser();
-        }
 
-        private void NewUser()
+        public void Init(string username)
         {
+            this.username = username;
             totalGamesPlayed = 0;
             consecutiveGamesPlayed = 0;
             killedLastGameBy = 0;
@@ -51,9 +49,10 @@ namespace Utils.Data
         public void LoadFromJson(string json)
         {
             // DVIR - use this function after login to load user data from aws
-            var data = JsonSerialization.FromJson<SerializableUserGamesData>(json);
+            var data = JsonSerialization.FromJson<SerializableGameStatistics>(json);
+            username = data.username;
             totalGamesPlayed = data.TotalGamesPlayed;
-            consecutiveGamesPlayed = 0;  // this field is reset after each entry to the app
+            consecutiveGamesPlayed = 0;  // this field is reset after each entry to the app so not saved in cloud
             killedLastGameBy = data.KilledLastGameBy;
             lastGameScore = data.LastGameScore;
             highScore = data.HighScore;
@@ -61,7 +60,7 @@ namespace Utils.Data
         
         public void SaveToJson()
         {
-            var serializableData = new SerializableUserGamesData
+            var serializableData = new SerializableGameStatistics
             {
                 TotalGamesPlayed = totalGamesPlayed,
                 ConsecutiveGamesPlayed = consecutiveGamesPlayed,
@@ -71,6 +70,20 @@ namespace Utils.Data
             };
             var json = JsonSerialization.ToJson(serializableData);
             // DVIR - upload json to aws & send to npc
+        }
+
+        public void UpdateStatistics(int enemyType)
+        {
+            totalGamesPlayed++;
+            consecutiveGamesPlayed++;
+            killedLastGameBy = enemyType;
+            lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
+            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
+                (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
+            {
+                highScore = lastGameScore;
+            }
+            SaveToJson();
         }
     }
 }

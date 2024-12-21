@@ -114,7 +114,8 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private void FinishEntry(string username)
     {
-        GameStatistics.Initialize(username);
+        // DVIR - try loading GameStatistics from dynamo, load using GameStatistics.Instance.LoadFromJson(json)
+        GameStatistics.Instance.Init(username);
         GameStarter.Instance.Init();
         gameObject.SetActive(false);
     }

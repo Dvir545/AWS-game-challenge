@@ -33,6 +33,7 @@ namespace UI.GameUI
             {
                 _scoreboardBehaviour.SetPlayerScore(GameStatistics.Instance.username, GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
                 _scoreboardBehaviour.RefreshScores(gameOverText, darkOverlay, window);
+                gameOverText.color = new Color(1, 1, 1, 0);
             });
         }
     }

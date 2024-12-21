@@ -103,9 +103,7 @@ namespace AWSUtils
                 screenPoint, 
                 mainCamera
             );
-    
-            // Set the appropriate alpha
-            _speechBubbleCanvasGroup.alpha = isPlayerBehind ? 0.2f : 1f;
+            _speechBubbleCanvasGroup.alpha = isPlayerBehind ? 0.1f : 1f;
         }
 
         private void ShowSpeechBubble() => _canvas.SetActive(true);
@@ -126,9 +124,11 @@ namespace AWSUtils
                 {
                     totalGamesPlayed = GameStatistics.Instance.totalGamesPlayed,
                     consecutiveGamesPlayed = GameStatistics.Instance.consecutiveGamesPlayed,
-                    killedLastGameBy = GameStatistics.Instance.killedLastGameBy,
-                    daysSurvivedLastGame = GameStatistics.Instance.daysSurvivedLastGame,
-                    daysSurvivedHighScore = GameStatistics.Instance.daysSurvivedHighScore
+                    killedLastGameBy = Enum.GetName(typeof(Enemy), GameStatistics.Instance.killedLastGameBy),
+                    daysSurvivedLastGame = GameStatistics.Instance.lastGameScore.daysSurvived,
+                    secondsPlayedLastGame = GameStatistics.Instance.lastGameScore.secondsSurvived,
+                    daysSurvivedHighScore = GameStatistics.Instance.highScore.daysSurvived,
+                    secondsPlayedHighScore = GameStatistics.Instance.highScore.secondsSurvived
                 };
                 return JsonUtility.ToJson(request);
             }

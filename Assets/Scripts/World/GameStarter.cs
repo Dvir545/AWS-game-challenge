@@ -33,6 +33,7 @@ namespace World
         [SerializeField] private NPCSpeech npcMid;
         private float xOffsetBetweenNewGameAndContinue = 300f;
         private Collider2D _collider;
+        private Vector2 _boatStartPos;
 
         private string _savedGameJson;
         private string _dummyJson = "{\n    \"HealthUpgradeLevel\": 0,\n    \"RegenUpgradeLevel\": 0,\n    \"SpeedUpgradeLevel\": 0,\n    \"SwordLevel\": 0,\n    \"HoeLevel\": 0,\n    \"HammerLevel\": 1,\n    \"Cash\": 99879,\n    \"Day\": 1,\n    \"CurHealth\": 6,\n    \"SecondsSinceGameStarted\": 108.235,\n    \"InventoryCrops\": [\n        2,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"InventoryMaterials\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"CropsInStore\": [\n        5,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"MaterialsInStore\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisDayEnemies\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisNightEnemies\": [\n        5,\n        4,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"Towers\": [\n        [],\n        [],\n        [],\n        [],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 1.000658,\n                \"health\": 5\n            }\n        ],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 0.2982577,\n                \"health\": 5\n            }\n        ],\n        []\n    ],\n    \"PlantedCrops\": [\n        {\n            \"Key\": {\n                \"x\": -3,\n                \"y\": 39\n            },\n            \"Value\": {\n                \"cropType\": 0,\n                \"growthProgress\": 0.4730192,\n                \"destroyProgress\": 0\n            }\n        }\n    ]\n}";
@@ -43,6 +44,7 @@ namespace World
         private void Awake()
         {
             _collider = GetComponent<Collider2D>();
+            _boatStartPos = boatWithPlayer.position;
         }
 
         public void Init()
@@ -51,7 +53,8 @@ namespace World
             GameStarted = false;
             GameContinued = false;
             anchoredBoat.gameObject.SetActive(false);
-            boatWithPlayer.gameObject.SetActive(true);
+            boatWithPlayer.gameObject.SetActive(false);
+            boatWithPlayer.position = _boatStartPos;
             game.SetActive(false);
             gameCanvas.SetActive(false);
             player.gameObject.SetActive(false);
@@ -103,6 +106,7 @@ namespace World
         {
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
+            boatWithPlayer.gameObject.SetActive(true);
             boatWithPlayer.DOMoveX(anchoredBoat.position.x, 8f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
         }
         

@@ -16,7 +16,9 @@ namespace AWSUtils
         public int consecutiveGamesPlayed;
         public string killedLastGameBy;
         public int daysSurvivedLastGame;
+        public float secondsPlayedLastGame;
         public int daysSurvivedHighScore;
+        public float secondsPlayedHighScore;
     }
 
     [Serializable]
