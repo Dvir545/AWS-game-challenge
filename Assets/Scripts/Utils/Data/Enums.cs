@@ -30,7 +30,8 @@ namespace Utils
         Health = 0,
         Regen = 1,
         Speed = 2,
-        Stamina = 3
+        Stamina = 3,
+        Knockback = 4
     }
 
     public enum Crop

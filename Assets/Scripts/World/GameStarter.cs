@@ -32,7 +32,7 @@ namespace World
         [SerializeField] private ActButtonBehavior actButtonBehavior;
         [SerializeField] private NPCSpeech npcBottom;
         [SerializeField] private NPCSpeech npcMid;
-        private float xOffsetBetweenNewGameAndContinue = 300f;
+        private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
         private Vector2 _boatStartPos;
 

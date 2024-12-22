@@ -57,6 +57,8 @@ namespace Utils.Data
         [SerializeField] private Sprite[] speedSpritesOutline;
         [SerializeField] private Sprite[] staminaSprites;
         [SerializeField] private Sprite[] staminaSpritesOutline;
+        [SerializeField] private Sprite[] knockbackSprites;
+        [SerializeField] private Sprite[] knockbackSpritesOutline;
 
         public Sprite GetUpgradeSprite(Upgrade upgradeType, int level, bool outline=true) => upgradeType switch
         {
@@ -64,6 +66,7 @@ namespace Utils.Data
             Upgrade.Regen => outline? regenSpritesOutline[level] : regenSprites[level],
             Upgrade.Speed => outline? speedSpritesOutline[level] : speedSprites[level],
             Upgrade.Stamina => outline? staminaSpritesOutline[level] : staminaSprites[level],
+            Upgrade.Knockback => outline? knockbackSpritesOutline[level] : knockbackSprites[level],
             _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
         };
         
