@@ -1,6 +1,7 @@
 ﻿using Player;
 using UnityEngine;
 using Utils;
+using Utils.Data;
 
 namespace UI.GameUI
 {

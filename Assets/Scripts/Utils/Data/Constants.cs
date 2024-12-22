@@ -15,7 +15,7 @@ namespace Utils
         public const float BaseActCooldownDuration = 3;
         public const int BasePlayerDamage = 1;
         public const int BaseEnemyDamage = 1;
-        public const int KnockbackForce = 7;
+        public const int BaseKnockbackForce = 7;
         public const float TimeToEatCrop = 3f;
         public const int MaxTowerLevels = 3;
         public const int TowerCount = 9;
@@ -52,6 +52,7 @@ namespace Utils
         public const int StartRegenUpgradeLevel = 0;
         public const int StartSpeedUpgradeLevel = 0;
         public const int StartStaminaUpgradeLevel = 0;
+        public const int StartKnockbackUpgradeLevel = 0;
         public const int StartSwordLevel = 0;
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;

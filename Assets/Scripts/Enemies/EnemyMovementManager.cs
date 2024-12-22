@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using JetBrains.Annotations;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
@@ -13,6 +14,7 @@ namespace Enemies
     {
         private GameObject[] _targets;
         [SerializeField] private float secondsToUpdateTarget = 5f;
+        private PlayerData playerData;
         protected Rigidbody2D Rb;
         protected NavMeshAgent Agent;
         protected Transform CurrentTarget;
@@ -46,6 +48,7 @@ namespace Enemies
             Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             
             _targets = GameObject.FindGameObjectsWithTag("Player");
+            playerData = FindObjectOfType<PlayerData>();
         
             UpdatePathCR = StartCoroutine(UpdatePath());
         }
@@ -127,7 +130,7 @@ namespace Enemies
         {
            Agent.updatePosition = false;
            IsMoving = false;
-           Rb.AddForce(hitDirection * (Constants.KnockbackForce * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
+           Rb.AddForce(hitDirection * (Constants.BaseKnockbackForce * playerData.KnockbackMultiplier * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
            {

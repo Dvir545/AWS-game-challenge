@@ -44,6 +44,7 @@ namespace Utils.Data
         public int RegenUpgradeLevel;
         public int SpeedUpgradeLevel;
         public int StaminaUpgradeLevel;
+        public int KnockbackUpgradeLevel;
         public int SwordLevel;
         public int HoeLevel;
         public int HammerLevel;
@@ -67,6 +68,7 @@ namespace Utils.Data
         public int regenUpgradeLevel;
         public int speedUpgradeLevel;
         public int staminaUpgradeLevel;
+        public int knockbackUpgradeLevel;
         public int swordLevel;
         public int hoeLevel;
         public int hammerLevel;
@@ -94,6 +96,7 @@ namespace Utils.Data
             regenUpgradeLevel = Constants.StartRegenUpgradeLevel;
             speedUpgradeLevel = Constants.StartSpeedUpgradeLevel;
             staminaUpgradeLevel = Constants.StartStaminaUpgradeLevel;
+            knockbackUpgradeLevel = Constants.StartKnockbackUpgradeLevel;
             swordLevel = Constants.StartSwordLevel;
             hoeLevel = Constants.StartHoeLevel;
             hammerLevel = Constants.StartHammerLevel;

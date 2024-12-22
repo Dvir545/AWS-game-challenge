@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utils;
+using Utils.Data;
 
 namespace Player
 {
@@ -119,7 +120,7 @@ namespace Player
         {
             _canMove = false;
             _rb.velocity = Vector2.zero;
-            _rb.AddForce(hitDirection * (Constants.KnockbackForce * pushForceMultiplier), ForceMode2D.Impulse);
+            _rb.AddForce(hitDirection * (Constants.BaseKnockbackForce * pushForceMultiplier), ForceMode2D.Impulse);
             yield return new WaitForSeconds(knockbackTime);
             _rb.velocity = Vector2.zero;
             _canMove = true;

@@ -3,6 +3,7 @@ using Player;
 using UnityEngine;
 using UnityEngine.Pool;
 using Utils;
+using Utils.Data;
 
 namespace World
 {

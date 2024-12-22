@@ -86,7 +86,14 @@ namespace Player
                     playerAttackManager.StartAttack();
                     _attackStaminaProgress +=
                         Constants.BaseStaminaProgressIncPerSingleAttack / playerData.StaminaMultiplier; // start boost
-                    progressBarBehavior.StartWork(_attackStaminaProgress);
+                    if (_attackStaminaProgress >= 1f)
+                    {
+                        _attackStaminaProgress = 1f;
+                        playerAttackManager.StopAttack();
+                        _cooldownCR = StartCoroutine(ActCooldown());
+                    }
+                    else
+                        progressBarBehavior.StartWork(_attackStaminaProgress);
                 }
                 else if (curTool != HeldTool.Sword && playerAttackManager.IsAttacking)
                 {

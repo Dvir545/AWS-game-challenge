@@ -10,6 +10,7 @@ namespace Enemies
         [SerializeField] private AudioClip hitSound;
         [SerializeField] private AudioClip deathSound;
         [SerializeField] protected AudioClip walkingSound;
+        [SerializeField] private float secondsBetweenWalks = 0.3f;
         protected AudioSource AudioSource;
         private EnemyMovementManager _enemyMovementManager;
         protected EnemyHealthManager EnemyHealthManager;
@@ -75,7 +76,7 @@ namespace Enemies
                     AudioSource.clip = walkingSound;
                     AudioSource.pitch = Random.Range(0.6f, 1.1f);
                     AudioSource.Play();
-                    yield return new WaitForSeconds(0.3f);
+                    yield return new WaitForSeconds(secondsBetweenWalks);
                 }
                 else
                 {

@@ -1,6 +1,7 @@
 using Enemies;
 using UnityEngine;
 using Utils;
+using Utils.Data;
 
 namespace Player
 {
