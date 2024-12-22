@@ -34,8 +34,24 @@ public class ScoreData
 [Serializable]
 public class ScoreItem
 {
+    [SerializeField]
     public string playerName;
-    public float daysSurvived;
+    [SerializeField]
+    public string Days;  // matches the JSON field name
+    [SerializeField]
+    public float timeTaken;
+
+    public float daysSurvived
+    {
+        get { return float.Parse(Days); }
+    }
+}
+
+[Serializable]
+public class ScoreRequest
+{
+    public string playerName;
+    public int daysSurvived;
     public float timeTaken;
 }
 
@@ -48,8 +64,11 @@ public class ScoreboardBehaviour : MonoBehaviour
     private GameObject _window;
     private const float StartY = 92.6f;
     private const float YOffsetBetweenScores = 65;
-    private const string API_URL = "https://wjfv1q5r9e.execute-api.us-east-1.amazonaws.com/fetch/fetch";
+    private const string FETCH_API_URL = "https://wjfv1q5r9e.execute-api.us-east-1.amazonaws.com/fetch/fetch";
+    private const string CREATE_API_URL = "https://jy3dw0v0uh.execute-api.us-east-1.amazonaws.com/create/";
     private const string API_KEY = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
+    private const int MAX_RETRIES = 3;
+    private const float RETRY_DELAY = 2f;
 
     private int _nScores = 0;
     
@@ -59,10 +78,12 @@ public class ScoreboardBehaviour : MonoBehaviour
         _window = transform.GetChild(1).gameObject;
         _darkOverlay.SetActive(false);
         _window.SetActive(false);
+        Debug.Log("ScoreboardBehaviour Awake - Initialized");
     }
 
     private void ClearExistingScores()
     {
+        Debug.Log("Clearing existing scores");
         foreach (Transform child in scoresParent.transform)
         {
             if (child.gameObject != playerScore)
@@ -75,6 +96,7 @@ public class ScoreboardBehaviour : MonoBehaviour
 
     private void AddScore(string playerName, int daysSurvived, float secondsPlayed)
     {
+        Debug.Log($"Adding score: Player={playerName}, Days={daysSurvived}, Time={secondsPlayed}");
         var score = Instantiate(scorePrefab, scoresParent.transform);
         SetScore(score, playerName, daysSurvived, secondsPlayed);
         score.transform.localPosition = new Vector3(0, StartY - YOffsetBetweenScores * _nScores, 0);
@@ -82,8 +104,10 @@ public class ScoreboardBehaviour : MonoBehaviour
     }
 
     public void SetPlayerScore(string playerName, int daysSurvived, float secondsPlayed)
-    {  // this should be used on your current score when losing
+    {  
+        Debug.Log($"Setting player score: Player={playerName}, Days={daysSurvived}, Time={secondsPlayed}");
         SetScore(playerScore, playerName, daysSurvived, secondsPlayed);
+        StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, 0));
     }
 
     private void SetScore(GameObject score, string playerName, int daysSurvived, float secondsPlayed)
@@ -97,38 +121,148 @@ public class ScoreboardBehaviour : MonoBehaviour
         timeText.text = time.Hours > 0 
             ? $"{time.Hours:D2}:{time.Minutes:D2}:{time.Seconds:D2}"
             : $"{time.Minutes:D2}:{time.Seconds:D2}";
+        Debug.Log($"Score set: Name={playerName}, Days={daysSurvived}, Time={timeText.text}");
+    }
+
+    private IEnumerator SetNewRecordWithRetry(string playerName, int daysSurvived, float secondsPlayed, int retryCount)
+    {
+        Debug.Log($"Starting SetNewRecordWithRetry - Attempt {retryCount + 1}/{MAX_RETRIES}");
+        UnityWebRequest request = null;
+
+        try
+        {
+            var requestData = new ScoreRequest
+            {
+                playerName = playerName,
+                daysSurvived = daysSurvived,
+                timeTaken = secondsPlayed
+            };
+
+            string jsonBody = JsonUtility.ToJson(requestData);
+            Debug.Log($"Request URL: {CREATE_API_URL}");
+            Debug.Log($"Request Body: {jsonBody}");
+
+            request = new UnityWebRequest(CREATE_API_URL, "POST");
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonBody);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error creating record request: {e.Message}");
+            Debug.LogError($"Stack trace: {e.StackTrace}");
+            if (request != null)
+                request.Dispose();
+            yield break;
+        }
+
+        using (request)
+        {
+            Debug.Log("Sending record request...");
+            yield return request.SendWebRequest();
+            Debug.Log($"Record request completed with result: {request.result}");
+            
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error setting new record: {request.error}");
+                Debug.LogError($"Response Code: {request.responseCode}");
+                Debug.LogError($"Response Body: {request.downloadHandler?.text}");
+                Debug.LogError($"Response Headers:");
+                var responseHeaders = request.GetResponseHeaders();
+                if (responseHeaders != null)
+                {
+                    foreach (var header in responseHeaders)
+                    {
+                        Debug.LogError($"{header.Key}: {header.Value}");
+                    }
+                }
+
+                if (retryCount < MAX_RETRIES - 1)
+                {
+                    Debug.Log($"Retrying request in {RETRY_DELAY} seconds...");
+                    yield return new WaitForSeconds(RETRY_DELAY);
+                    StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, retryCount + 1));
+                }
+            }
+            else 
+            {
+                try
+                {
+                    Debug.Log($"Success Response: {request.downloadHandler.text}");
+                    APIResponse response = JsonUtility.FromJson<APIResponse>(request.downloadHandler.text);
+                    Debug.Log($"Record update response: {response.body}");
+                    
+                    StartCoroutine(FetchAndDisplayScores(null, _darkOverlay, _window));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error parsing record response: {e.Message}");
+                    Debug.LogError($"Raw response: {request.downloadHandler.text}");
+                    Debug.LogError($"Stack trace: {e.StackTrace}");
+                }
+            }
+        }
     }
 
     private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(API_URL))
+        Debug.Log("Starting FetchAndDisplayScores");
+        UnityWebRequest webRequest = null;
+        try
         {
+            webRequest = UnityWebRequest.Get(FETCH_API_URL);
             webRequest.SetRequestHeader("x-api-key", API_KEY);
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+            Debug.Log($"Fetch request created with URL: {FETCH_API_URL}");
+            Debug.Log($"Headers set: x-api-key and Content-Type");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error creating fetch request: {e.Message}");
+            Debug.LogError($"Stack trace: {e.StackTrace}");
+            yield break;
+        }
 
+        using (webRequest)
+        {
+            Debug.Log("Sending fetch request...");
             yield return webRequest.SendWebRequest();
-            gameOverText.enabled = false;
-            darkOverlay.SetActive(false);
-            window.SetActive(false);
+            Debug.Log($"Fetch request completed with result: {webRequest.result}");
+            
+            if (gameOverText != null)
+            {
+                gameOverText.enabled = false;
+            }
+            if (darkOverlay != null)
+            {
+                darkOverlay.SetActive(false);
+            }
+            if (window != null)
+            {
+                window.SetActive(false);
+            }
+            
             WarningSignPool.Instance.ReleaseAll();
             EnemyPool.Instance.ReleaseAll();
             BallPool.Instance.ReleaseAll();
+            
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 try
                 {
-                    // First parse the outer API response
+                    Debug.Log($"Raw fetch response: {webRequest.downloadHandler.text}");
                     APIResponse apiResponse = JsonUtility.FromJson<APIResponse>(webRequest.downloadHandler.text);
-                    
-                    // Then parse the inner body which contains the scores
                     ScoreData scoreData = JsonUtility.FromJson<ScoreData>(apiResponse.body);
+                    Debug.Log($"Parsed score data: {apiResponse.body}");
 
                     ClearExistingScores();
 
                     if (scoreData != null && scoreData.scores != null)
                     {
+                        Debug.Log($"Processing {scoreData.scores.Count} scores");
                         foreach (var score in scoreData.scores)
                         {
-                            // Convert float daysSurvived to int for display
                             AddScore(score.playerName, Mathf.RoundToInt(score.daysSurvived), score.timeTaken);
                         }
                     }
@@ -141,14 +275,25 @@ public class ScoreboardBehaviour : MonoBehaviour
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"Error parsing JSON: {e.Message}");
+                    Debug.LogError($"Error parsing JSON from fetch: {e.Message}");
                     Debug.LogError($"Raw response: {webRequest.downloadHandler.text}");
+                    Debug.LogError($"Stack trace: {e.StackTrace}");
                     ReturnToMenu();
                 }
             }
             else
             {
                 Debug.LogError($"Error fetching scores: {webRequest.error}");
+                Debug.LogError($"Response Code: {webRequest.responseCode}");
+                Debug.LogError($"Response Headers:");
+                var responseHeaders = webRequest.GetResponseHeaders();
+                if (responseHeaders != null)
+                {
+                    foreach (var header in responseHeaders)
+                    {
+                        Debug.LogError($"{header.Key}: {header.Value}");
+                    }
+                }
                 ReturnToMenu();
             }
         }
@@ -156,11 +301,13 @@ public class ScoreboardBehaviour : MonoBehaviour
 
     public void RefreshScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
     {
+        Debug.Log("RefreshScores called");
         StartCoroutine(FetchAndDisplayScores(gameOverText, darkOverlay, window));
     }
 
     public void ReturnToMenu()
     {
+        Debug.Log("ReturnToMenu called");
         _darkOverlay.SetActive(false);
         _window.SetActive(false);
         GameEnder.Instance.EndGame();

@@ -39,21 +39,21 @@ namespace Utils
             {
                 string randomAction = Actions[Random.Range(0, Actions.Length)];
                 string randomAnimal = Animals[Random.Range(0, Animals.Length)];
-                int randomNumber = Random.Range(1, 100); // Reduced max number to keep length under control
+                int randomNumber = Random.Range(1, 100);
 
                 // Try different formats until we get one under 14 chars
                 result = $"{randomAction}-{randomAnimal}{randomNumber}";
-                if (result.Length > 13)
+                if (result.Length > 12)
                 {
                     // Try shorter format
                     result = $"{randomAction.Substring(0, Math.Min(4, randomAction.Length))}{randomAnimal}{randomNumber}";
                 }
-                if (result.Length > 13)
+                if (result.Length > 12)
                 {
                     // Try even shorter format
                     result = $"{randomAction.Substring(0, Math.Min(3, randomAction.Length))}{randomAnimal.Substring(0, Math.Min(3, randomAnimal.Length))}{randomNumber}";
                 }
-            } while (result.Length > 13);
+            } while (result.Length > 12);
 
             return result;
         }
