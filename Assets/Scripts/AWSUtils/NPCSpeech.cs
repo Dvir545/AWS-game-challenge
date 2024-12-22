@@ -124,7 +124,9 @@ namespace AWSUtils
                 {
                     totalGamesPlayed = GameStatistics.Instance.totalGamesPlayed,
                     consecutiveGamesPlayed = GameStatistics.Instance.consecutiveGamesPlayed,
-                    killedLastGameBy = Enum.GetName(typeof(Enemy), GameStatistics.Instance.killedLastGameBy),
+                    killedLastGameBy = GameStatistics.Instance.totalGamesPlayed > 0 
+                        ? Enum.GetName(typeof(Enemy), GameStatistics.Instance.killedLastGameBy) 
+                        : "None",
                     daysSurvivedLastGame = GameStatistics.Instance.lastGameScore.daysSurvived,
                     secondsPlayedLastGame = GameStatistics.Instance.lastGameScore.secondsSurvived,
                     daysSurvivedHighScore = GameStatistics.Instance.highScore.daysSurvived,
@@ -275,7 +277,6 @@ namespace AWSUtils
             try
             {
                 _isWaitingForResponse = true;
-                // Speak(DEFAULT_MESSAGE);
                 StartCoroutine(SendNPCRequestWithRetry(0));
             }
             catch (Exception ex)
