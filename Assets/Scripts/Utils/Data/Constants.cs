@@ -10,7 +10,7 @@ namespace Utils
         public const int MaxUpgradeLevel = 3;
         public const int StartHealth = 6;
         public const float BaseSecondsPerHeal = 2;  // per heart
-        public const float BaseAttackDuration = 2; // seconds
+        public const float BaseAttackDuration = 2.5f; // seconds
         public const float BaseStaminaProgressIncPerSingleAttack = 0.12f;
         public const float BaseActCooldownDuration = 3;
         public const int BasePlayerDamage = 1;
