@@ -47,6 +47,21 @@ namespace Utils.Data
         public float GetSpeedMultiplier() => _speedMultiplier;
         public int GetPrice() => _price;
     }
+    
+    readonly struct Stamina
+    {
+        private readonly float _staminaMultiplier;
+        private readonly int _price;
+
+        public Stamina(float staminaMultiplier, int price)
+        {
+            _staminaMultiplier = staminaMultiplier;
+            _price = price;
+        }
+
+        public float GetStaminaMultiplier() => _staminaMultiplier;
+        public int GetPrice() => _price;
+    }
 
     public static class UpgradesData
     {
@@ -72,6 +87,14 @@ namespace Utils.Data
             new(1.3f, 1000),
             new(1.5f, 3000)
         };
+
+        private static Stamina[] _staminas =
+        {
+            new(1, 0),
+            new(1.5f, 200),
+            new(2f, 1000),
+            new(3f, 1000)
+        };
         
         public static float GetRegenSpeedMultiplier(int index)
         {
@@ -80,6 +103,11 @@ namespace Utils.Data
         public static float GetSpeedMultiplier(int index)
         {
             return _speeds[index].GetSpeedMultiplier();
+        }
+        
+        public static float GetStaminaMultiplier(int index)
+        {
+            return _staminas[index].GetStaminaMultiplier();
         }
         public static int GetPrice(Upgrade upgradeType, int level)
         {
@@ -91,6 +119,8 @@ namespace Utils.Data
                     return _regens[level].GetPrice();
                 case Upgrade.Speed:
                     return _speeds[level].GetPrice();
+                case Upgrade.Stamina:
+                    return _staminas[level].GetPrice();
             }
 
             return 0;

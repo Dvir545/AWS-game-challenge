@@ -3,6 +3,7 @@ using Crops;
 using Player;
 using UI.GameUI;
 using UnityEngine;
+using Utils;
 using World;
 
 namespace Enemies.Chicken
@@ -22,6 +23,11 @@ namespace Enemies.Chicken
             _chickenMovementManager = GetComponent<ChickenMovementManager>();
             _chickenHealthManager = GetComponent<EnemyHealthManager>();
             _farmingManager = FindObjectOfType<FarmingManager>();
+        }
+        
+        private void Start()
+        {
+            progressBarBehavior.SetType(ProgressBarType.Evil);
         }
 
         private void Update()

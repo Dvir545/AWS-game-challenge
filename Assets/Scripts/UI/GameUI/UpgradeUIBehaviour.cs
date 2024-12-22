@@ -24,7 +24,8 @@ namespace UI.GameUI
         public void Init()
         {
             ChangeIcon((Upgrade.Speed, GameData.Instance.speedUpgradeLevel));
-            ChangeIcon((Upgrade.Regen, GameData.Instance.regenUpgradeLevel));        
+            ChangeIcon((Upgrade.Regen, GameData.Instance.regenUpgradeLevel));
+            ChangeIcon((Upgrade.Stamina, GameData.Instance.staminaUpgradeLevel));
         }
 
         private void ChangeIcon(object arg0)

@@ -43,6 +43,7 @@ namespace Utils.Data
         public int HealthUpgradeLevel;
         public int RegenUpgradeLevel;
         public int SpeedUpgradeLevel;
+        public int StaminaUpgradeLevel;
         public int SwordLevel;
         public int HoeLevel;
         public int HammerLevel;
@@ -65,6 +66,7 @@ namespace Utils.Data
         public int healthUpgradeLevel;
         public int regenUpgradeLevel;
         public int speedUpgradeLevel;
+        public int staminaUpgradeLevel;
         public int swordLevel;
         public int hoeLevel;
         public int hammerLevel;
@@ -80,7 +82,7 @@ namespace Utils.Data
         public int[] thisNightEnemies;
         public List<TowerLevelInfo>[] towers;
         public Dictionary<Vector2Int, PlantedCropInfo> plantedCrops;
-        
+
         public GameData()
         {
             NewGame();
@@ -91,6 +93,7 @@ namespace Utils.Data
             healthUpgradeLevel = Constants.StartHealthUpgradeLevel;
             regenUpgradeLevel = Constants.StartRegenUpgradeLevel;
             speedUpgradeLevel = Constants.StartSpeedUpgradeLevel;
+            staminaUpgradeLevel = Constants.StartStaminaUpgradeLevel;
             swordLevel = Constants.StartSwordLevel;
             hoeLevel = Constants.StartHoeLevel;
             hammerLevel = Constants.StartHammerLevel;
@@ -114,6 +117,7 @@ namespace Utils.Data
             healthUpgradeLevel = data.HealthUpgradeLevel;
             regenUpgradeLevel = data.RegenUpgradeLevel;
             speedUpgradeLevel = data.SpeedUpgradeLevel;
+            staminaUpgradeLevel = data.StaminaUpgradeLevel;
             swordLevel = data.SwordLevel;
             hoeLevel = data.HoeLevel;
             hammerLevel = data.HammerLevel;
@@ -138,6 +142,7 @@ namespace Utils.Data
                 HealthUpgradeLevel = healthUpgradeLevel,
                 RegenUpgradeLevel = regenUpgradeLevel,
                 SpeedUpgradeLevel = speedUpgradeLevel,
+                StaminaUpgradeLevel = staminaUpgradeLevel,
                 SwordLevel = swordLevel,
                 HoeLevel = hoeLevel,
                 HammerLevel = hammerLevel,

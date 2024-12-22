@@ -5,6 +5,7 @@ using Towers;
 using UI.GameUI;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utils;
 using Utils.Data;
 
 namespace Enemies.Orc
@@ -19,6 +20,11 @@ namespace Enemies.Orc
         private void Awake()
         {
             _enemyHealthManager = GetComponent<EnemyHealthManager>();
+        }
+
+        private void Start()
+        {
+            progressBarBehavior.SetType(ProgressBarType.Evil);
         }
 
         private void Update()

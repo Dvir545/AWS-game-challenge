@@ -10,11 +10,13 @@ namespace Player
 
         public float RegenSpeedMultiplier { get; private set; } 
         public float SpeedMultiplier { get; private set; }
+        public float StaminaMultiplier { get; private set; }
 
         private void Start()
         {
             RegenSpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.regenUpgradeLevel);
             SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);
+            StaminaMultiplier = UpgradesData.GetStaminaMultiplier(GameData.Instance.staminaUpgradeLevel);
         }
 
         public void SwitchTool()
@@ -120,6 +122,7 @@ namespace Player
             Upgrade.Health => GameData.Instance.healthUpgradeLevel,
             Upgrade.Regen => GameData.Instance.regenUpgradeLevel,
             Upgrade.Speed => GameData.Instance.speedUpgradeLevel,
+            Upgrade.Stamina => GameData.Instance.staminaUpgradeLevel,
             _ => 0
         };
 
@@ -138,6 +141,10 @@ namespace Player
                 case Upgrade.Speed: 
                     GameData.Instance.speedUpgradeLevel++;
                     SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);
+                    break;
+                case Upgrade.Stamina:
+                    GameData.Instance.staminaUpgradeLevel++;
+                    StaminaMultiplier = UpgradesData.GetStaminaMultiplier(GameData.Instance.staminaUpgradeLevel);
                     break;
             }
             EventManager.Instance.TriggerEvent(EventManager.AbilityUpgraded, (upgradeType, GetUpgradeLevel(upgradeType)));

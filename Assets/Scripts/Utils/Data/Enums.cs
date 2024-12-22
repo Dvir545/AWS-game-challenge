@@ -29,7 +29,8 @@ namespace Utils
     {
         Health = 0,
         Regen = 1,
-        Speed = 2
+        Speed = 2,
+        Stamina = 3
     }
 
     public enum Crop
@@ -81,5 +82,13 @@ namespace Utils
         DayEnd = 1,
         Night = 2,
         NightEnd = 3
+    }
+    
+    public enum ProgressBarType
+    {
+        Default = 0,
+        Stamina = 1,
+        Cooldown = 2,
+        Evil = 3
     }
 }

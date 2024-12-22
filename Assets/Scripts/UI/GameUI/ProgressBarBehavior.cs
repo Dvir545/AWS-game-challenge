@@ -1,27 +1,38 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
+using Utils;
+using Utils.Data;
 
 namespace UI.GameUI
 {
     public class ProgressBarBehavior : MonoBehaviour
     {
-        [SerializeField] private Sprite[] progressSprites;
+        private Sprite[] _progressSprites;
+        private ProgressBarType _type;
         private SpriteRenderer _spriteRenderer;
         private float _changeSpriteInterval;
-        private int _curSprite;
         public bool IsWorking { get; private set; }
 
-        void Start()
+        void Awake()
         {
+            SetType(ProgressBarType.Default);
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _changeSpriteInterval = 1f / progressSprites.Length;
-            _curSprite = -1;
             IsWorking = false;
+        }
+
+        private void Start()
+        {
+            EventManager.Instance.StartListening(EventManager.PlayerDied, StopWork);
+        }
+
+        private void StopWork(object arg0)
+        {
+            StopWork();
         }
 
         public void StartWork(float progress)
         {
-            _curSprite = -1;
             UpdateProgress(progress);
             IsWorking = true;
             _spriteRenderer.enabled = true;
@@ -31,18 +42,25 @@ namespace UI.GameUI
         {
             _spriteRenderer.enabled = false;
             IsWorking = false;
-            _curSprite = -1;
         }
 
 
         public void UpdateProgress(float progress)
         {
             int i = (int)math.floor(progress / _changeSpriteInterval);
-            if (i < progressSprites.Length)
+            if (i < _progressSprites.Length)
             {
-                _spriteRenderer.sprite = progressSprites[i];
-                _curSprite++;
+                _spriteRenderer.sprite = _progressSprites[i];
             }
+        }
+
+        public ProgressBarType GetType() => _type;
+
+        public void SetType(ProgressBarType type)
+        {
+            _type = type;
+            _progressSprites = SpriteData.Instance.GetProgressBarSprites(type);
+            _changeSpriteInterval = 1f / _progressSprites.Length;
         }
     }
 }

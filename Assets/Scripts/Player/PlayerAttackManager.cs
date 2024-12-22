@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UI.GameUI;
+using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Utils;
 
 namespace Player
@@ -11,6 +13,8 @@ namespace Player
         [SerializeField] private Collider2D upAttackCollider;
         [SerializeField] private Collider2D downAttackCollider;
         [SerializeField] private Collider2D rightAttackCollider;
+
+        
         public bool IsAttacking { get; private set; }
 
         private void Start()

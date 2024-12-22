@@ -10,6 +10,9 @@ namespace Utils
         public const int MaxUpgradeLevel = 3;
         public const int StartHealth = 6;
         public const float BaseSecondsPerHeal = 2;  // per heart
+        public const float BaseAttackDuration = 2; // seconds
+        public const float BaseStaminaProgressIncPerSingleAttack = 0.12f;
+        public const float BaseActCooldownDuration = 3;
         public const int BasePlayerDamage = 1;
         public const int BaseEnemyDamage = 1;
         public const int KnockbackForce = 7;
@@ -48,6 +51,7 @@ namespace Utils
         public const int StartHealthUpgradeLevel = 0;
         public const int StartRegenUpgradeLevel = 0;
         public const int StartSpeedUpgradeLevel = 0;
+        public const int StartStaminaUpgradeLevel = 0;
         public const int StartSwordLevel = 0;
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;
@@ -65,6 +69,6 @@ namespace Utils
             new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
             new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
         };
-        
+
     }
 }
