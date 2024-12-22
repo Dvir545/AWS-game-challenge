@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Utils;
 using UnityEngine;
 using Utils.Data;
 using World;
@@ -65,9 +66,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private string GetRandomUsername()
     {
-        // DVIR - implement random username generation
-        // if it fails (e.g. internet connection problem):
-        return "Player" + UnityEngine.Random.Range(0, 10000);
+        return NameGenerator.GenerateGuestName();
     }
 
     private bool Login(string username, string password)
