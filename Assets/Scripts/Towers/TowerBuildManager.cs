@@ -22,23 +22,20 @@ namespace Towers
         private Collider2D _playerCollider;
         [SerializeField] private MaterialManager materialManager;
 
-        private void Awake()
-        {
-            _towerBuilds = new TowerBuild[towersParent.transform.childCount];
-            _towerColliders = new Collider2D[_towerBuilds.Length];
-            for (int i = 0; i < _towerBuilds.Length; i++)
-            {
-                var child = towersParent.transform.GetChild(i);
-                _towerBuilds[i] = child.GetComponent<TowerBuild>();
-                _towerColliders[i] = child.GetComponent<Collider2D>();
-            }
-            _playerCollider = playerTransform.GetComponent<Collider2D>();
-        }
-
         public void Init()
         {
             if (_towerBuilds == null)
-                Awake();
+            {
+                _towerBuilds = new TowerBuild[towersParent.transform.childCount];
+                _towerColliders = new Collider2D[_towerBuilds.Length];
+                for (int i = 0; i < _towerBuilds.Length; i++)
+                {
+                    var child = towersParent.transform.GetChild(i);
+                    _towerBuilds[i] = child.GetComponent<TowerBuild>();
+                    _towerColliders[i] = child.GetComponent<Collider2D>();
+                }
+                _playerCollider = playerTransform.GetComponent<Collider2D>();
+            }
             // load existing tower levels
             for (int i = 0; i < _towerBuilds.Length; i++)
             {

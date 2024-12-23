@@ -29,26 +29,44 @@ namespace Crops
         private int _uiXoffsetBetweenCrops = 128;
         private int _uiXoffsetPerCrop;
 
-        private void Awake()
+        public void Init()
         {
-            _uiXoffsetPerCrop = _uiXoffsetBetweenCrops / 2;
-            _cropUI.Add(Crop.Wheat, wheatUI);
-            _cropUI.Add(Crop.Carrot, carrotUI);
-            _cropUI.Add(Crop.Tomato, tomatoUI);
-            _cropUI.Add(Crop.Corn, cornUI);
-            _cropUI.Add(Crop.Pumpkin, pumpkinUI);
+            if (_cropUI.Count == 0)
+            {
+                _uiXoffsetPerCrop = _uiXoffsetBetweenCrops / 2;
+                _cropUI.Add(Crop.Wheat, wheatUI);
+                _cropUI.Add(Crop.Carrot, carrotUI);
+                _cropUI.Add(Crop.Tomato, tomatoUI);
+                _cropUI.Add(Crop.Corn, cornUI);
+                _cropUI.Add(Crop.Pumpkin, pumpkinUI);
 
-            _cropAmount.Add(Crop.Wheat, wheatAmount);
-            _cropAmount.Add(Crop.Carrot, carrotAmount);
-            _cropAmount.Add(Crop.Tomato, tomatoAmount);
-            _cropAmount.Add(Crop.Corn, cornAmount);
-            _cropAmount.Add(Crop.Pumpkin, pumpkinAmount);
-            
+                _cropAmount.Add(Crop.Wheat, wheatAmount);
+                _cropAmount.Add(Crop.Carrot, carrotAmount);
+                _cropAmount.Add(Crop.Tomato, tomatoAmount);
+                _cropAmount.Add(Crop.Corn, cornAmount);
+                _cropAmount.Add(Crop.Pumpkin, pumpkinAmount);
+            }
+
+            ResetUIS();
             for (var i = 0; i < playerData.GetNumCropTypes(); i++)
             {
-                if (playerData.GetNumCrops((Crop)i) == 0)
-                    DisableCropUI((Crop)i);
-                _cropAmount[(Crop)i].text = playerData.GetNumCrops((Crop)i).ToString();
+                var ncrops = playerData.GetNumCrops((Crop)i);
+                if (ncrops > 0)
+                    EnableCropUI((Crop)i);
+                _cropAmount[(Crop)i].text = ncrops.ToString();
+            }
+        }
+
+        private void ResetUIS()
+        {
+            _cropUI[Crop.Wheat].transform.localPosition = new Vector3(_uiStartX - 2*_uiXoffsetBetweenCrops, 0, 0);
+            _cropUI[Crop.Carrot].transform.localPosition = new Vector3(_uiStartX - _uiXoffsetBetweenCrops, 0, 0);
+            _cropUI[Crop.Tomato].transform.localPosition = new Vector3(_uiStartX, 0, 0);
+            _cropUI[Crop.Corn].transform.localPosition = new Vector3(_uiStartX + _uiXoffsetBetweenCrops, 0, 0);
+            _cropUI[Crop.Pumpkin].transform.localPosition = new Vector3(_uiStartX + 2*_uiXoffsetBetweenCrops, 0, 0);
+            foreach (var ui in _cropUI)
+            {
+                ui.Value.SetActive(false);
             }
         }
 

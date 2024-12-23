@@ -23,8 +23,10 @@ namespace Stores
             _iconImage = transform.GetChild(0).GetComponent<Image>();
         }
 
-        private void Start()
+        public void Init()
         {
+            if (_iconImage == null)
+                _iconImage = transform.GetChild(0).GetComponent<Image>();
             UpdateLevel();
         }
 

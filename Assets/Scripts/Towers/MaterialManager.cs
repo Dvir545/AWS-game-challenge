@@ -29,29 +29,47 @@ namespace Towers
         private int _uiXoffsetBetweenMaterials = 128;
         private int _uiXoffsetPerMaterial;
 
-        private void Awake()
+        public void Init()
         {
-            _uiXoffsetPerMaterial = _uiXoffsetBetweenMaterials / 2;
-            _materialUI.Add(TowerMaterial.Wood, woodUI);
-            _materialUI.Add(TowerMaterial.Stone, stoneUI);
-            _materialUI.Add(TowerMaterial.Steel, steelUI);
-            _materialUI.Add(TowerMaterial.Gold, goldUI);
-            _materialUI.Add(TowerMaterial.Diamond, diamondUI);
+            if (_materialUI.Count == 0)
+            {
+                _uiXoffsetPerMaterial = _uiXoffsetBetweenMaterials / 2;
+                _materialUI.Add(TowerMaterial.Wood, woodUI);
+                _materialUI.Add(TowerMaterial.Stone, stoneUI);
+                _materialUI.Add(TowerMaterial.Steel, steelUI);
+                _materialUI.Add(TowerMaterial.Gold, goldUI);
+                _materialUI.Add(TowerMaterial.Diamond, diamondUI);
 
-            _materialAmount.Add(TowerMaterial.Wood, woodAmount);
-            _materialAmount.Add(TowerMaterial.Stone, stoneAmount);
-            _materialAmount.Add(TowerMaterial.Steel, steelAmount);
-            _materialAmount.Add(TowerMaterial.Gold, goldAmount);
-            _materialAmount.Add(TowerMaterial.Diamond, diamondAmount);
-            
+                _materialAmount.Add(TowerMaterial.Wood, woodAmount);
+                _materialAmount.Add(TowerMaterial.Stone, stoneAmount);
+                _materialAmount.Add(TowerMaterial.Steel, steelAmount);
+                _materialAmount.Add(TowerMaterial.Gold, goldAmount);
+                _materialAmount.Add(TowerMaterial.Diamond, diamondAmount);
+            }
+
+            ResetUIS();
             for (var i = 0; i < playerData.GetNumMaterialTypes(); i++)
             {
-                if (playerData.GetNumMaterials((TowerMaterial)i) == 0)
-                    DisableMaterialUI((TowerMaterial)i);
-                _materialAmount[(TowerMaterial)i].text = playerData.GetNumMaterials((TowerMaterial)i).ToString();
+                var nmaterials = playerData.GetNumMaterials((TowerMaterial)i);
+                if (nmaterials > 0)
+                    EnableMaterialUI((TowerMaterial)i);
+                _materialAmount[(TowerMaterial)i].text = nmaterials.ToString();
             }
         }
-        
+
+        private void ResetUIS()
+        {
+            _materialUI[TowerMaterial.Wood].transform.localPosition = new Vector3(_uiStartX - 2*_uiXoffsetBetweenMaterials, 0, 0);
+            _materialUI[TowerMaterial.Stone].transform.localPosition = new Vector3(_uiStartX - _uiXoffsetBetweenMaterials, 0, 0);
+            _materialUI[TowerMaterial.Steel].transform.localPosition = new Vector3(_uiStartX, 0, 0);
+            _materialUI[TowerMaterial.Gold].transform.localPosition = new Vector3(_uiStartX + _uiXoffsetBetweenMaterials, 0, 0);
+            _materialUI[TowerMaterial.Diamond].transform.localPosition = new Vector3(_uiStartX + 2*_uiXoffsetBetweenMaterials, 0, 0);
+            foreach (var ui in _materialUI)
+            {
+                ui.Value.SetActive(false);
+            }
+        }
+
         public void AddMaterial(TowerMaterial towerMaterial)
         {
             if (playerData.GetNumMaterials(towerMaterial) == 0)

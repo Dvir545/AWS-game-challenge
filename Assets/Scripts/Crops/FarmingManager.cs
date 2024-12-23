@@ -38,17 +38,14 @@ namespace Crops
         public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops => GameData.Instance.plantedCrops;
         
         public bool IsFarming { get; private set; }
-        
-        private void Awake()
-        {
-            _canFarmTilemap = GameObject.FindGameObjectWithTag("canFarmTilemap").GetComponent<Tilemap>();
-            _farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
-        }
 
         public void Init()
         {
             if (_canFarmTilemap == null)
-                Awake();
+            {
+                _canFarmTilemap = GameObject.FindGameObjectWithTag("canFarmTilemap").GetComponent<Tilemap>();
+                _farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
+            }
             // add existing crops to Farms
             foreach (var tilePos in PlantedCrops.Keys)
             {
@@ -207,6 +204,7 @@ namespace Crops
         {
             foreach (var tilePos in Farms.Keys)
             {
+                _farmTilemap.SetTile((Vector3Int)tilePos, null);
                 Destroy(Farms[tilePos].gameObject);
             }
             Farms.Clear();
