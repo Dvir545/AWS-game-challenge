@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using Utils;
 using UnityEngine;
 using Utils.Data;
 using World;
+using UnityEngine.Networking;
 
 public class GameEntryBehaviour : MonoBehaviour
 {
@@ -18,9 +21,41 @@ public class GameEntryBehaviour : MonoBehaviour
     [SerializeField] private TMP_InputField verificationCode;
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private GameObject mainMenu;
-    
+
+    private const string ApiUrl = "https://7tapke4vd6.execute-api.us-east-1.amazonaws.com/cognito/register";
+    private const string ApiKey = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
+    private string _userEmail;
     private Coroutine _userWarningCoroutine;
     private int _signUpStep = 0;
+
+    [Serializable]
+    private class SignUpRequest
+    {
+        public string email;
+        public string password;
+    }
+
+    [Serializable]
+    private class VerifyRequest
+    {
+        public string email;
+        public string code;
+    }
+
+    [Serializable]
+    private class LambdaResponse
+    {
+        public int statusCode;
+        public Dictionary<string, string> headers;
+        public string body;
+    }
+
+    [Serializable]
+    private class ApiResponse
+    {
+        public bool success;
+        public string message;
+    }
 
     private void ShowEntry()
     {
@@ -75,24 +110,141 @@ public class GameEntryBehaviour : MonoBehaviour
         Debug.Log("Password: " + password);
         return true;  // DVIR - implement login (if there's a problem, show it in the description)
     }
-    
-    private bool SignUp(string username, string password, string email)
+
+    private IEnumerator SignUpCoroutine(string email, string password, string displayUsername)
     {
-        Debug.Log("Email: " + username);
-        Debug.Log("Username: " + username);
-        Debug.Log("Password: " + password);
-        return true;  // DVIR - implement sign up (if use already exists or anything else interesting, show it in the description)
+        var requestData = new SignUpRequest
+        {
+            email = email,
+            password = password
+        };
+
+        string jsonData = JsonUtility.ToJson(requestData);
+        
+        using (UnityWebRequest www = new UnityWebRequest(ApiUrl, "POST"))
+        {
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("x-api-key", ApiKey);
+
+            Debug.Log($"Sending signup request to {ApiUrl} with data: {jsonData}");
+            
+            yield return www.SendWebRequest();
+
+            Debug.Log($"Response received. Status: {www.responseCode}");
+            Debug.Log($"Response body: {www.downloadHandler.text}");
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error during sign up: {www.error}\nResponse: {www.downloadHandler.text}");
+                description.text = "Error during sign up. Please try again.";
+                yield break;
+            }
+
+            try
+            {
+                Debug.Log($"Raw response body: {www.downloadHandler.text}");
+                var lambdaResponse = JsonUtility.FromJson<LambdaResponse>(www.downloadHandler.text);
+                var innerResponse = JsonUtility.FromJson<ApiResponse>(lambdaResponse.body);
+                
+                if (!innerResponse.success)
+                {
+                    description.text = innerResponse.message;
+                    yield break;
+                }
+
+                _userEmail = email;
+                PlayerPrefs.SetString("Username", displayUsername);
+                Debug.Log($"Successfully initiated sign up for: {email}");
+                
+                // Update UI for verification step
+                _signUpStep = 2;
+                ShowVerification();
+                description.text = "Please check your email and enter the verification code.";
+                verificationCode.gameObject.SetActive(true);  // Ensure verification code field is visible
+                verificationCode.text = "";  // Clear any previous input
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error parsing response: {e.Message}");
+                Debug.LogError($"Raw response was: {www.downloadHandler.text}");
+                description.text = "Error during sign up. Please try again.";
+            }
+        }
     }
-    
-    private bool VerifyCode(string verificationCodeText)
+
+    private IEnumerator VerifyCodeCoroutine(string code)
     {
-        Debug.Log("Verification code: " + verificationCodeText);
-        return true;  // DVIR - implement verification code (if it's wrong, show it in the description)
+        var requestData = new VerifyRequest
+        {
+            email = _userEmail,
+            code = code
+        };
+
+        string jsonData = JsonUtility.ToJson(requestData);
+        
+        using (UnityWebRequest www = new UnityWebRequest(ApiUrl, "POST"))
+        {
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("x-api-key", ApiKey);
+
+            Debug.Log($"Sending verification request to {ApiUrl} with data: {jsonData}");
+            
+            yield return www.SendWebRequest();
+
+            Debug.Log($"Response received. Status: {www.responseCode}");
+            Debug.Log($"Response body: {www.downloadHandler.text}");
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error during verification: {www.error}\nResponse: {www.downloadHandler.text}");
+                description.text = "Error during verification. Please try again.";
+                yield break;
+            }
+
+            try
+            {
+                Debug.Log($"Raw response body: {www.downloadHandler.text}");
+                var lambdaResponse = JsonUtility.FromJson<LambdaResponse>(www.downloadHandler.text);
+                var innerResponse = JsonUtility.FromJson<ApiResponse>(lambdaResponse.body);
+                
+                if (!innerResponse.success)
+                {
+                    description.text = innerResponse.message;
+                    yield break;
+                }
+
+                Debug.Log($"Successfully verified user: {_userEmail}");
+                description.text = "Sign up successful! logging in...";
+                OnLogin(fromSignUp: true);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error parsing response: {e.Message}");
+                Debug.LogError($"Raw response was: {www.downloadHandler.text}");
+                description.text = "Error during verification. Please try again.";
+            }
+        }
     }
     
     private bool IsValidInput(string username, string password, string email = "valid")
     {
-        return !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(email);
+        bool isValidPassword = !string.IsNullOrWhiteSpace(password) && password.Length >= 8;
+        
+        if (!isValidPassword)
+        {
+            description.text = "Password must be at least 8 characters long.";
+            return false;
+        }
+        
+        return !string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(email);
     }
 
     private void OnInvalidInput()
@@ -106,7 +258,10 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private IEnumerator UserWarning()
     {
-        description.text = "Please enter username and password to continue.";
+        if (string.IsNullOrEmpty(description.text))
+        {
+            description.text = "Please enter username and password to continue.";
+        }
         yield return new WaitForSeconds(4);
         description.text = "";
     }
@@ -124,7 +279,6 @@ public class GameEntryBehaviour : MonoBehaviour
         var username = GetRandomUsername();
         FinishEntry(username);
     }
-
 
     public void OnLogin(bool fromSignUp = false)
     {
@@ -147,8 +301,7 @@ public class GameEntryBehaviour : MonoBehaviour
     
     public void OnSignUp()
     {
-        Debug.Log("Sign up button clicked");
-        bool success;
+        Debug.Log($"Sign up button clicked. Current step: {_signUpStep}");
         if (_signUpStep == 0)
         {
             ShowSignUp();
@@ -163,24 +316,18 @@ public class GameEntryBehaviour : MonoBehaviour
                 return;
             }
             description.text = "Signing up...";
-            success = SignUp(username.text, password.text, email.text);
-            if (success)
-            {
-                description.text = "Please check your email and enter the verification code.";
-                ShowVerification();
-                _signUpStep = 2;
-            }
+            StartCoroutine(SignUpCoroutine(email.text, password.text, username.text));
             return;
         }
         if (_signUpStep == 2)
         {
-            description.text = "Verifying...";
-            success = VerifyCode(verificationCode.text);
-            if (success)
+            if (string.IsNullOrEmpty(verificationCode.text))
             {
-                description.text = "Sign up successful! logging in...";
-                OnLogin(fromSignUp: true);
+                description.text = "Please enter the verification code from your email.";
+                return;
             }
+            description.text = "Verifying...";
+            StartCoroutine(VerifyCodeCoroutine(verificationCode.text));
         }
     }
 
