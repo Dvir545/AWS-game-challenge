@@ -64,6 +64,8 @@ public class GameEntryBehaviour : MonoBehaviour
     {
         public bool success;
         public string message;
+        public string username;
+
         public SignInTokens tokens;
     }
 
@@ -167,7 +169,8 @@ public class GameEntryBehaviour : MonoBehaviour
                 }
 
                 // Store tokens securely
-                PlayerPrefs.SetString("Username", username);
+                string usernameToUse = signInResponse.username ?? username; // Use returned username if available
+                PlayerPrefs.SetString("Username", usernameToUse);
                 if (signInResponse.tokens != null)
                 {
                     PlayerPrefs.SetString("AccessToken", signInResponse.tokens.accessToken);
@@ -175,9 +178,9 @@ public class GameEntryBehaviour : MonoBehaviour
                     PlayerPrefs.SetString("IdToken", signInResponse.tokens.idToken);
                 }
                 
-                Debug.Log($"Successfully logged in user: {username}");
+                Debug.Log($"Successfully logged in user: {usernameToUse}");
                 description.text = "Login successful!";
-                FinishEntry(username);
+                FinishEntry(usernameToUse);
             }
             catch (Exception e)
             {
