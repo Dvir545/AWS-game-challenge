@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using Utils;
 using Utils.Data;
 
@@ -15,6 +16,9 @@ namespace Player
         [SerializeField] private SpriteRenderer bodySpriteRenderer;
         [SerializeField] private SpriteRenderer toolSpriteRenderer;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Joystick movementJoystick;
+
+        [SerializeField] private InputActionReference moveAction;
 
         private bool _canMove = true;
         private Vector2 _movementDirection;
@@ -47,39 +51,13 @@ namespace Player
 
         private void CheckInput()
         {
-            // first try and check for keyboard input
-            _movementDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            _movementDirection = moveAction.action.ReadValue<Vector2>();
+            if (_movementDirection.magnitude <= 0 && movementJoystick.Direction != Vector2.zero)
+            {
+                _movementDirection = movementJoystick.Direction.normalized;
+            } 
             if (_movementDirection.magnitude > 0)
-            {
                 SetFacingDirection();
-            }
-            else  // if no keyboard input, check for mouse input
-            {
-                // Check if the mouse is over a UI element
-                if (!EventSystem.current.IsPointerOverGameObject())
-                {
-                    if (Input.GetMouseButton(0))
-                    {
-                        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-                        // get player position relative to middle of screen
-                        Vector2 playerPos = mainCamera.WorldToScreenPoint(transform.position) - screenCenter;
-                        // get mouse position, relative to middle of screen
-                        Vector2 mousePos = Input.mousePosition - screenCenter;
-                        // get direction normalized vector from player to mouse
-                        _movementDirection = (mousePos - playerPos).normalized;
-                        SetFacingDirection();
-                    }
-                    else // no input
-                    {
-                        _movementDirection = Vector2.zero;
-                    }
-                }
-                else
-                {
-                    // Mouse is over a UI element, so we ignore mouse input
-                    _movementDirection = Vector2.zero;
-                }
-            }
         }
         
         private void SetFacingDirection()
