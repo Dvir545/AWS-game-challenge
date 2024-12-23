@@ -52,14 +52,14 @@ namespace Stores
             if (_curLevel > Constants.MaxUpgradeLevel)
             {
                 levelText.text = "Max";
-                priceText.text = "Level";
+                priceText.text = "LVL";
                 sprite = SpriteData.Instance.GetUpgradeSprite(upgradeType, Constants.MaxUpgradeLevel);
             }
             else
             {
                 _curPrice = UpgradesData.GetPrice(upgradeType, _curLevel);
                 priceText.text = _curPrice + " $";
-                levelText.text = "level " + _curLevel;
+                levelText.text = "LVL " + _curLevel;
                 sprite = SpriteData.Instance.GetUpgradeSprite(upgradeType, _curLevel);
             }
             _iconImage.sprite = sprite;

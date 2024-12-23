@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
+using Utils.Data;
 
 namespace Player
 {

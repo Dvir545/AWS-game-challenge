@@ -29,6 +29,7 @@ namespace World
         [SerializeField] private UpgradeUIBehaviour speedUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour regenUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour staminaUIBehaviour;
+        [SerializeField] private UpgradeUIBehaviour knockbackUIBehaviour;
         [SerializeField] private ActButtonBehavior actButtonBehavior;
         [SerializeField] private NPCSpeech npcBottom;
         [SerializeField] private NPCSpeech npcMid;
@@ -37,7 +38,7 @@ namespace World
         private Vector2 _boatStartPos;
 
         private string _savedGameJson;
-        private string _dummyJson = "{\n    \"HealthUpgradeLevel\": 0,\n    \"RegenUpgradeLevel\": 0,\n    \"SpeedUpgradeLevel\": 0,\n    \"StaminaUpgradeLevel\": 0,\n    \"SwordLevel\": 0,\n    \"HoeLevel\": 0,\n    \"HammerLevel\": 1,\n    \"Cash\": 99879,\n    \"Day\": 1,\n    \"CurHealth\": 6,\n    \"SecondsSinceGameStarted\": 108.235,\n    \"InventoryCrops\": [\n        2,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"InventoryMaterials\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"CropsInStore\": [\n        5,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"MaterialsInStore\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisDayEnemies\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisNightEnemies\": [\n        5,\n        4,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"Towers\": [\n        [],\n        [],\n        [],\n        [],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 1.000658,\n                \"health\": 5\n            }\n        ],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 0.2982577,\n                \"health\": 5\n            }\n        ],\n        []\n    ],\n    \"PlantedCrops\": [\n        {\n            \"Key\": {\n                \"x\": -3,\n                \"y\": 39\n            },\n            \"Value\": {\n                \"cropType\": 0,\n                \"growthProgress\": 0.4730192,\n                \"destroyProgress\": 0\n            }\n        }\n    ]\n}";
+        private string _dummyJson = "{\n    \"HealthUpgradeLevel\": 0,\n    \"RegenUpgradeLevel\": 0,\n    \"SpeedUpgradeLevel\": 0,\n    \"StaminaUpgradeLevel\": 0,\n    \"KnockbackUpgradeLevel\": 0,\n    \"SwordLevel\": 0,\n    \"HoeLevel\": 0,\n    \"HammerLevel\": 1,\n    \"Cash\": 99879,\n    \"Day\": 1,\n    \"CurHealth\": 6,\n    \"SecondsSinceGameStarted\": 108.235,\n    \"InventoryCrops\": [\n        2,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"InventoryMaterials\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"CropsInStore\": [\n        5,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"MaterialsInStore\": [\n        1,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisDayEnemies\": [\n        0,\n        0,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"ThisNightEnemies\": [\n        5,\n        4,\n        0,\n        0,\n        0,\n        0\n    ],\n    \"Towers\": [\n        [],\n        [],\n        [],\n        [],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 1.000658,\n                \"health\": 5\n            }\n        ],\n        [],\n        [\n            {\n                \"material\": 0,\n                \"progress\": 0.2982577,\n                \"health\": 5\n            }\n        ],\n        []\n    ],\n    \"PlantedCrops\": [\n        {\n            \"Key\": {\n                \"x\": -3,\n                \"y\": 39\n            },\n            \"Value\": {\n                \"cropType\": 0,\n                \"growthProgress\": 0.4730192,\n                \"destroyProgress\": 0\n            }\n        }\n    ]\n}";
         
         public bool GameStarted { get; private set; }
         public bool GameContinued { get; private set; }
@@ -86,6 +87,7 @@ namespace World
             speedUIBehaviour.Init();
             regenUIBehaviour.Init();
             staminaUIBehaviour.Init();
+            knockbackUIBehaviour.Init();
             anchoredBoat.gameObject.SetActive(true);
             player.gameObject.SetActive(true);
             boatWithPlayer.gameObject.SetActive(false);

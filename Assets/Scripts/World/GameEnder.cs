@@ -6,6 +6,7 @@ using Towers;
 using UI.GameUI;
 using UnityEngine;
 using Utils;
+using Utils.Data;
 
 namespace World
 {

@@ -1,8 +1,6 @@
 using UnityEngine;
-using Utils;
-using Utils.Data;
 
-namespace Player
+namespace Utils.Data
 {
     public class PlayerData: MonoBehaviour
     {
@@ -11,12 +9,14 @@ namespace Player
         public float RegenSpeedMultiplier { get; private set; } 
         public float SpeedMultiplier { get; private set; }
         public float StaminaMultiplier { get; private set; }
+        public float KnockbackMultiplier { get; private set; }
 
         private void Start()
         {
             RegenSpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.regenUpgradeLevel);
             SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);
             StaminaMultiplier = UpgradesData.GetStaminaMultiplier(GameData.Instance.staminaUpgradeLevel);
+            KnockbackMultiplier = UpgradesData.GetKnockbackMultiplier(GameData.Instance.knockbackUpgradeLevel);
         }
 
         public void SwitchTool()
@@ -123,6 +123,7 @@ namespace Player
             Upgrade.Regen => GameData.Instance.regenUpgradeLevel,
             Upgrade.Speed => GameData.Instance.speedUpgradeLevel,
             Upgrade.Stamina => GameData.Instance.staminaUpgradeLevel,
+            Upgrade.Knockback => GameData.Instance.knockbackUpgradeLevel,
             _ => 0
         };
 
@@ -145,6 +146,10 @@ namespace Player
                 case Upgrade.Stamina:
                     GameData.Instance.staminaUpgradeLevel++;
                     StaminaMultiplier = UpgradesData.GetStaminaMultiplier(GameData.Instance.staminaUpgradeLevel);
+                    break;
+                case Upgrade.Knockback:
+                    GameData.Instance.knockbackUpgradeLevel++;
+                    KnockbackMultiplier = UpgradesData.GetKnockbackMultiplier(GameData.Instance.knockbackUpgradeLevel);
                     break;
             }
             EventManager.Instance.TriggerEvent(EventManager.AbilityUpgraded, (upgradeType, GetUpgradeLevel(upgradeType)));

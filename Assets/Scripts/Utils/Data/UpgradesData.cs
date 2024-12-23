@@ -62,6 +62,20 @@ namespace Utils.Data
         public float GetStaminaMultiplier() => _staminaMultiplier;
         public int GetPrice() => _price;
     }
+    readonly struct Knockback
+    {
+        private readonly float _kbMultiplier;
+        private readonly int _price;
+
+        public Knockback(float kbMultiplier, int price)
+        {
+            _kbMultiplier = kbMultiplier;
+            _price = price;
+        }
+
+        public float GetKnockbackMultiplier() => _kbMultiplier;
+        public int GetPrice() => _price;
+    }
 
     public static class UpgradesData
     {
@@ -95,6 +109,13 @@ namespace Utils.Data
             new(2f, 1000),
             new(3f, 1000)
         };
+        private static Knockback[] _knockbacks =
+        {
+            new(1, 0),
+            new(1.1f, 200),
+            new(1.3f, 1000),
+            new(1.5f, 3000)
+        };
         
         public static float GetRegenSpeedMultiplier(int index)
         {
@@ -109,6 +130,12 @@ namespace Utils.Data
         {
             return _staminas[index].GetStaminaMultiplier();
         }
+        
+        public static float GetKnockbackMultiplier(int index)
+        {
+            return _knockbacks[index].GetKnockbackMultiplier();
+        }
+        
         public static int GetPrice(Upgrade upgradeType, int level)
         {
             switch (upgradeType)
@@ -121,6 +148,8 @@ namespace Utils.Data
                     return _speeds[level].GetPrice();
                 case Upgrade.Stamina:
                     return _staminas[level].GetPrice();
+                case Upgrade.Knockback:
+                    return _knockbacks[level].GetPrice();
             }
 
             return 0;

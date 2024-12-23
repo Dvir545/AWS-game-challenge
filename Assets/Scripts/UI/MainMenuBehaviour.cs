@@ -8,6 +8,6 @@ public class MainMenuBehaviour : MonoBehaviour
     
     private void Awake()
     {
-        welcomeMessage.text = "Welcome, " + GameStatistics.Instance.username + "!";
+        welcomeMessage.text = "WELCOME, " + GameStatistics.Instance.username + "!";
     }
 }
