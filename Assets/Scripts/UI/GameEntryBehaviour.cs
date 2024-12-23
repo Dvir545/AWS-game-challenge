@@ -22,7 +22,8 @@ public class GameEntryBehaviour : MonoBehaviour
     [SerializeField] private TextMeshProUGUI description;
     [SerializeField] private GameObject mainMenu;
 
-    private const string ApiUrl = "https://7tapke4vd6.execute-api.us-east-1.amazonaws.com/cognito/register";
+    private const string SignUpApiUrl = "https://7tapke4vd6.execute-api.us-east-1.amazonaws.com/cognito/register";
+    private const string SignInApiUrl = "https://7tapke4vd6.execute-api.us-east-1.amazonaws.com/cognito/sign-in";
     private const string ApiKey = "eVZBuSzrn113f2bFvQjTZ9tXmNyhHGxU3YcwPmWT";
     private string _userEmail;
     private Coroutine _userWarningCoroutine;
@@ -32,6 +33,13 @@ public class GameEntryBehaviour : MonoBehaviour
     private class SignUpRequest
     {
         public string email;
+        public string password;
+    }
+
+    [Serializable]
+    private class SignInRequest
+    {
+        public string username;
         public string password;
     }
 
@@ -55,6 +63,15 @@ public class GameEntryBehaviour : MonoBehaviour
     {
         public bool success;
         public string message;
+        public SignInTokens tokens;
+    }
+
+    [Serializable]
+    private class SignInTokens
+    {
+        public string accessToken;
+        public string refreshToken;
+        public string idToken;
     }
 
     private void ShowEntry()
@@ -104,11 +121,70 @@ public class GameEntryBehaviour : MonoBehaviour
         return NameGenerator.GenerateGuestName();
     }
 
-    private bool Login(string username, string password)
+    private IEnumerator LoginCoroutine(string username, string password)
     {
-        Debug.Log("Username: " + username);
-        Debug.Log("Password: " + password);
-        return true;  // DVIR - implement login (if there's a problem, show it in the description)
+        var requestData = new SignInRequest
+        {
+            username = username,
+            password = password
+        };
+
+        string jsonData = JsonUtility.ToJson(requestData);
+        
+        using (UnityWebRequest www = new UnityWebRequest(SignInApiUrl, "POST"))
+        {
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("x-api-key", ApiKey);
+
+            Debug.Log($"Sending login request with username: {username}");
+            
+            yield return www.SendWebRequest();
+
+            Debug.Log($"Response received. Status: {www.responseCode}");
+            Debug.Log($"Response body: {www.downloadHandler.text}");
+            
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error during login: {www.error}\nResponse: {www.downloadHandler.text}");
+                description.text = "Login failed. Please check your credentials.";
+                yield break;
+            }
+
+            try
+            {
+                var lambdaResponse = JsonUtility.FromJson<LambdaResponse>(www.downloadHandler.text);
+                var signInResponse = JsonUtility.FromJson<ApiResponse>(lambdaResponse.body);
+                
+                if (!signInResponse.success)
+                {
+                    description.text = signInResponse.message;
+                    yield break;
+                }
+
+                // Store tokens securely
+                PlayerPrefs.SetString("Username", username);
+                if (signInResponse.tokens != null)
+                {
+                    PlayerPrefs.SetString("AccessToken", signInResponse.tokens.accessToken);
+                    PlayerPrefs.SetString("RefreshToken", signInResponse.tokens.refreshToken);
+                    PlayerPrefs.SetString("IdToken", signInResponse.tokens.idToken);
+                }
+                
+                Debug.Log($"Successfully logged in user: {username}");
+                description.text = "Login successful!";
+                FinishEntry(username);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error parsing response: {e.Message}");
+                Debug.LogError($"Raw response was: {www.downloadHandler.text}");
+                description.text = "Error during login. Please try again.";
+            }
+        }
     }
 
     private IEnumerator SignUpCoroutine(string email, string password, string displayUsername)
@@ -121,7 +197,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(requestData);
         
-        using (UnityWebRequest www = new UnityWebRequest(ApiUrl, "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(SignUpApiUrl, "POST"))
         {
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
             www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
@@ -130,7 +206,7 @@ public class GameEntryBehaviour : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
             www.SetRequestHeader("x-api-key", ApiKey);
 
-            Debug.Log($"Sending signup request to {ApiUrl} with data: {jsonData}");
+            Debug.Log($"Sending signup request to {SignUpApiUrl} with data: {jsonData}");
             
             yield return www.SendWebRequest();
 
@@ -164,8 +240,8 @@ public class GameEntryBehaviour : MonoBehaviour
                 _signUpStep = 2;
                 ShowVerification();
                 description.text = "Please check your email and enter the verification code.";
-                verificationCode.gameObject.SetActive(true);  // Ensure verification code field is visible
-                verificationCode.text = "";  // Clear any previous input
+                verificationCode.gameObject.SetActive(true);
+                verificationCode.text = "";
             }
             catch (Exception e)
             {
@@ -186,7 +262,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(requestData);
         
-        using (UnityWebRequest www = new UnityWebRequest(ApiUrl, "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(SignUpApiUrl, "POST"))
         {
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
             www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
@@ -195,7 +271,7 @@ public class GameEntryBehaviour : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
             www.SetRequestHeader("x-api-key", ApiKey);
 
-            Debug.Log($"Sending verification request to {ApiUrl} with data: {jsonData}");
+            Debug.Log($"Sending verification request to {SignUpApiUrl} with data: {jsonData}");
             
             yield return www.SendWebRequest();
 
@@ -222,7 +298,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 }
 
                 Debug.Log($"Successfully verified user: {_userEmail}");
-                description.text = "Sign up successful! logging in...";
+                description.text = "Sign up successful! Logging in...";
                 OnLogin(fromSignUp: true);
             }
             catch (Exception e)
@@ -268,7 +344,6 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private void FinishEntry(string username)
     {
-        // DVIR - try loading GameStatistics from dynamo, load using GameStatistics.Instance.LoadFromJson(json)
         GameStatistics.Instance.Init(username);
         GameStarter.Instance.Init();
         gameObject.SetActive(false);
@@ -291,9 +366,9 @@ public class GameEntryBehaviour : MonoBehaviour
                 return;
             }
             description.text = "Logging in...";
+            StartCoroutine(LoginCoroutine(username.text, password.text));
         }
-        var success = Login(username.text, password.text);
-        if (success)
+        else
         {
             FinishEntry(username.text);
         }
