@@ -34,6 +34,7 @@ public class GameEntryBehaviour : MonoBehaviour
     {
         public string email;
         public string password;
+        public string username;
     }
 
     [Serializable]
@@ -192,7 +193,8 @@ public class GameEntryBehaviour : MonoBehaviour
         var requestData = new SignUpRequest
         {
             email = email,
-            password = password
+            password = password,
+            username = displayUsername
         };
 
         string jsonData = JsonUtility.ToJson(requestData);
