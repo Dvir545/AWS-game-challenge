@@ -53,16 +53,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.07609276
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Size.y
-      value: 0.5216716
+      value: 0.09903696
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.006171096
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Offset.y
-      value: 0.2608358
+      value: 0.14557181
       objectReference: {fileID: 0}
     - target: {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: enemyType
