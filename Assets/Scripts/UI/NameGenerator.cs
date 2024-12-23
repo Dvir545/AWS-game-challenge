@@ -43,17 +43,17 @@ namespace Utils
 
                 // Try different formats until we get one under 14 chars
                 result = $"{randomAction}-{randomAnimal}{randomNumber}";
-                if (result.Length > 12)
+                if (result.Length > 13)
                 {
                     // Try shorter format
                     result = $"{randomAction.Substring(0, Math.Min(4, randomAction.Length))}{randomAnimal}{randomNumber}";
                 }
-                if (result.Length > 12)
+                if (result.Length > 13)
                 {
                     // Try even shorter format
                     result = $"{randomAction.Substring(0, Math.Min(3, randomAction.Length))}{randomAnimal.Substring(0, Math.Min(3, randomAnimal.Length))}{randomNumber}";
                 }
-            } while (result.Length > 12);
+            } while (result.Length > 13);
 
             return result;
         }
