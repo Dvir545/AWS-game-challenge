@@ -1,7 +1,9 @@
 using System;
 using AWSUtils;
+using Crops;
 using DG.Tweening;
 using Player;
+using Towers;
 using UI.GameUI;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -31,6 +33,8 @@ namespace World
         [SerializeField] private UpgradeUIBehaviour staminaUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour knockbackUIBehaviour;
         [SerializeField] private ActButtonBehavior actButtonBehavior;
+        [SerializeField] private FarmingManager farmingManager;
+        [SerializeField] private TowerBuildManager towerBuildManager;
         [SerializeField] private NPCSpeech npcBottom;
         [SerializeField] private NPCSpeech npcMid;
         private float xOffsetBetweenNewGameAndContinue = 260f;
@@ -88,6 +92,8 @@ namespace World
             regenUIBehaviour.Init();
             staminaUIBehaviour.Init();
             knockbackUIBehaviour.Init();
+            farmingManager.Init();
+            towerBuildManager.Init();
             anchoredBoat.gameObject.SetActive(true);
             player.gameObject.SetActive(true);
             boatWithPlayer.gameObject.SetActive(false);

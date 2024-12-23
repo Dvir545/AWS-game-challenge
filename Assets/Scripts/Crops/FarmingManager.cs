@@ -45,8 +45,10 @@ namespace Crops
             _farmTilemap = GameObject.FindGameObjectWithTag("farmTilemap").GetComponent<Tilemap>();
         }
 
-        private void Start()
+        public void Init()
         {
+            if (_canFarmTilemap == null)
+                Awake();
             // add existing crops to Farms
             foreach (var tilePos in PlantedCrops.Keys)
             {
@@ -207,6 +209,7 @@ namespace Crops
             {
                 Destroy(Farms[tilePos].gameObject);
             }
+            Farms.Clear();
         }
     }
 }

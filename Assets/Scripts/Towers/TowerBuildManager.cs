@@ -35,8 +35,10 @@ namespace Towers
             _playerCollider = playerTransform.GetComponent<Collider2D>();
         }
 
-        private void Start()
+        public void Init()
         {
+            if (_towerBuilds == null)
+                Awake();
             // load existing tower levels
             for (int i = 0; i < _towerBuilds.Length; i++)
             {

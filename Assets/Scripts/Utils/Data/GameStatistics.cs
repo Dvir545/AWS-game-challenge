@@ -25,6 +25,7 @@ namespace Utils.Data
         public int KilledLastGameBy;
         public ScoreInfo LastGameScore;
         public ScoreInfo HighScore;
+        public bool LeftHanded;
     }
     
     public class GameStatistics: Singleton<GameStatistics>
@@ -35,6 +36,8 @@ namespace Utils.Data
         public int killedLastGameBy;
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
+        // settings
+        public bool leftHanded;
 
         public void Init(string username)
         {
@@ -44,6 +47,7 @@ namespace Utils.Data
             killedLastGameBy = 0;
             lastGameScore = new ScoreInfo(0, 0);
             highScore = new ScoreInfo(0, 0);
+            leftHanded = true;
         }
         
         public void LoadFromJson(string json)
@@ -56,6 +60,7 @@ namespace Utils.Data
             killedLastGameBy = data.KilledLastGameBy;
             lastGameScore = data.LastGameScore;
             highScore = data.HighScore;
+            leftHanded = data.LeftHanded;
         }
         
         public void SaveToJson()
@@ -66,7 +71,8 @@ namespace Utils.Data
                 ConsecutiveGamesPlayed = consecutiveGamesPlayed,
                 KilledLastGameBy = killedLastGameBy,
                 LastGameScore = lastGameScore,
-                HighScore = highScore
+                HighScore = highScore,
+                LeftHanded = leftHanded
             };
             var json = JsonSerialization.ToJson(serializableData);
             // DVIR - upload json to aws & send to npc
