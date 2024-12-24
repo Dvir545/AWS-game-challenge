@@ -21,7 +21,7 @@ namespace Player
         public bool isActing = false;
         private Coroutine _cooldownCR;
         private bool _onCooldown = false;
-        public bool IsActing => _canAct && isActing;
+        public bool IsActing => _canAct && !_onCooldown && isActing;
         
         private void Awake()
         {
@@ -161,7 +161,6 @@ namespace Player
         private IEnumerator ActCooldown()
         {
             _onCooldown = true;
-            _canAct = false;
             progressBarBehavior.SetType(ProgressBarType.Cooldown);  // todo add upgrade level
             progressBarBehavior.StartWork(1f);
             yield return null;
@@ -172,7 +171,6 @@ namespace Player
                 progressBarBehavior.UpdateProgress(_attackStaminaProgress);
                 yield return null;
             }
-            _canAct = true;
             progressBarBehavior.SetType(playerData.GetCurTool() == HeldTool.Sword
                 ? ProgressBarType.Stamina
                 : ProgressBarType.Default);
