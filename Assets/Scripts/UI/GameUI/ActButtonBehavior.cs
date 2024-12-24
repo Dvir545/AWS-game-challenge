@@ -16,7 +16,6 @@ namespace UI.GameUI
         [SerializeField] private float pressedOffset = 2f;
         
         private Button _button;
-        private Vector3 _originalIconPosition;
         private bool _isPressed;
         private Sprite _normalSprite;
         private Sprite _pressedSprite;
@@ -37,11 +36,6 @@ namespace UI.GameUI
             _normalSprite = _buttonImage.sprite;
             _pressedSprite = _button.spriteState.pressedSprite;
 
-            if (iconObject != null)
-            {
-                _originalIconPosition = iconObject.transform.localPosition;
-            }
-            
             EventManager.Instance.StartListening(EventManager.TowerBuilt, ForciblyReleaseButton);
             EventManager.Instance.StartListening(EventManager.CropHarvested, ForciblyReleaseButton);
             EventManager.Instance.StartListening(EventManager.ActiveToolChanged, ChangeToolIcon);
@@ -87,8 +81,9 @@ namespace UI.GameUI
             if (_button.interactable && !_isPressed)
             {
                 _isPressed = true;
-                Vector3 pressedPosition = _originalIconPosition + new Vector3(0, -pressedOffset, 0);
-                iconObject.transform.localPosition = pressedPosition;
+                var localPosition = iconObject.transform.localPosition;
+                localPosition = new Vector2(localPosition.x, localPosition.y-pressedOffset);
+                iconObject.transform.localPosition = localPosition;
                 _button.onClick.Invoke();
                 playerActionManager.StartActing();
             }
@@ -99,7 +94,8 @@ namespace UI.GameUI
             if (_isPressed)
             {
                 _isPressed = false;
-                iconObject.transform.localPosition = _originalIconPosition;
+                var localPosition = iconObject.transform.localPosition;
+                iconObject.transform.localPosition = new Vector2(localPosition.x, localPosition.y+pressedOffset);
                 playerActionManager.StopActing();
                 _buttonImage.sprite = _normalSprite;
             }
