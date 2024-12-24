@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -11,13 +12,16 @@ namespace UI.GameUI
     {
         private TextMeshProUGUI _cashText;
         [SerializeField] private RectTransform parentRectTransform;
+        [SerializeField] private Transform coinIcon;  // for tweening
         private int _digitWidth;
+        private float _coinIconScale;
 
         private void Awake()
         {
             _cashText = GetComponent<TextMeshProUGUI>();
             EventManager.Instance.StartListening(EventManager.CashChanged, OnCashChanged);
             _digitWidth = (int)(4*_cashText.fontSize/5);
+            _coinIconScale = coinIcon.localScale.x;
             Init();
         }
 
@@ -33,6 +37,7 @@ namespace UI.GameUI
             if (arg0 is int cash)
             {
                 SetText(cash); 
+                coinIcon.DOScale(_coinIconScale*1.3f, 0.2f).OnComplete(() => coinIcon.DOScale(_coinIconScale, 0.2f));
             }
         }
 

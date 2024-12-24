@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -21,8 +22,11 @@ namespace Player
 
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
+        private float _heartScale;
         private bool _canGetHit = true;
         private Coroutine _healCoroutine;
+        private bool _init;
+        private const float XStartOffset = -296;//-360 + 64;
         private const int XOffsetBetweenHearts = 128;
         private const float HitTime = 0.25f;
         
@@ -43,8 +47,7 @@ namespace Player
                 for (int i = 0; i < nNew; i++)
                 {
                     GameObject newPrefab = Instantiate(heartUIPrefab,
-                        new Vector3(XOffsetBetweenHearts * _heartPrefabs.Count, 0, 0), Quaternion.identity);
-                    // todo why its spawned at bottom of screen?
+                        new Vector3(XStartOffset + XOffsetBetweenHearts * _heartPrefabs.Count, 0, 0), Quaternion.identity);
                     newPrefab.transform.SetParent(heartsUIParent.transform, worldPositionStays:false);
                     _heartPrefabs.Add(newPrefab);
                     _heartImages.Add(newPrefab.GetComponent<Image>());
@@ -75,7 +78,13 @@ namespace Player
                     {
                         sprite = emptyHeartSprite;
                     }
-                    _heartImages[i].sprite = sprite;
+
+                    if (_heartImages[i].sprite != sprite)
+                    {
+                        _heartImages[i].sprite = sprite;
+                        _heartPrefabs[i].transform.DOScale(_heartScale*1.3f, 0.2f).OnComplete(() => _heartPrefabs[i].transform.DOScale(_heartScale, 0.2f));
+                        break;
+                    }
                 }
             }
         }
@@ -138,9 +147,15 @@ namespace Player
 
         public void Init()
         {
+            _init = true;
+            if (_heartScale == 0)
+            {
+                _heartScale = heartUIPrefab.transform.localScale.x;
+            }
             AddUIHealth(playerData.MaxHealth);
             UpdateUIHealth(GameData.Instance.curHealth);
             _canGetHit = true;
+            _init = false;
         }
     }
 }
