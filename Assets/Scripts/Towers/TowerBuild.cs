@@ -119,7 +119,7 @@ namespace Towers
             _newFloorAttackZone.transform.position -= new Vector3(0, towerHeight, 0);
             _newFloorAnimationManager = _newFloor.GetComponent<TowerFloorAnimationManager>();
             _newFloorAnimationManager.Init(material, CurrentLevel-1, towerData.SecondsToAttack);
-            _newFloorAttackZone.GetComponent<TowerFloorAttackZoneBehaviour>().Init(towerData.Range, towerData.Damage, towerData.SecondsToAttack);
+            _newFloorAttackZone.GetComponent<TowerFloorAttackZoneBehaviour>().Init(towerData.Range, towerData.Damage, towerData.MaxTargets, towerData.SecondsToAttack);
             _floors.Add(_newFloor);
             
             AddToProgress(Time.deltaTime);

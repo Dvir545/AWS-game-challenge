@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
+using Utils;
 
 namespace Towers
 {
@@ -8,6 +9,7 @@ namespace Towers
     {
         private int _range;
         private int _damage;
+        private int _maxTargets;
         private float _secondsToAttack;
         private float _attackTimer;
         
@@ -19,14 +21,29 @@ namespace Towers
         private void Awake()
         {
             _towerFloorAnimationManager = GetComponentInParent<TowerFloorAnimationManager>();
+            EventManager.Instance.StartListening(EventManager.EnemyKilled, EnemyKilled);
         }
         
-        public void Init(int range, int damage, float secondsToAttack)
+        public void Init(int range, int damage, int maxTargets,  float secondsToAttack)
         {
             _range = range;
             _damage = damage;
+            _maxTargets = maxTargets;
             _secondsToAttack = secondsToAttack;
             GetComponent<CircleCollider2D>().radius = _range;
+
+        }
+
+        private void EnemyKilled(object arg0)
+        {
+            if (arg0 is Transform enemyBody)
+            {
+                var enemy = enemyBody.parent.GetComponent<EnemyHealthManager>();
+                if (_enemiesInRange.Contains(enemy))
+                {
+                    _enemiesInRange.Remove(enemy);
+                }                
+            }
         }
 
         private void Update()
@@ -53,7 +70,9 @@ namespace Towers
                 if (_attackTimer >= _secondsToAttack)
                 {
                     _attackTimer = 0;
-                    foreach (var enemy in _enemiesInRange)
+                    // copy the list to avoid concurrent modification
+                    var enemiesToAttack = new List<EnemyHealthManager>(_enemiesInRange);
+                    foreach (var enemy in enemiesToAttack)
                     {
                         enemy.TakeDamage(_damage, tower: true);
                     }
@@ -63,11 +82,13 @@ namespace Towers
                 _attackTimer = 0;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy") && _enemiesInRange.Count < _maxTargets)
             {
-                _enemiesInRange.Add(other.GetComponent<EnemyHealthManager>());
+                var enemy = other.GetComponent<EnemyHealthManager>();
+                if (!_enemiesInRange.Contains(enemy))
+                    _enemiesInRange.Add(enemy);
             }
         }
         
