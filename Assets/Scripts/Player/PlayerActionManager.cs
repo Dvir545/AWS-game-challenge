@@ -32,7 +32,12 @@ namespace Player
         private void Die(object arg0)
         {
             if (_cooldownCR != null)
+            {
                 StopCoroutine(_cooldownCR);
+                _cooldownCR = null;
+                progressBarBehavior.SetType(ProgressBarType.Default);
+            }
+
             DisableActions();
             _canAct = false;
         }

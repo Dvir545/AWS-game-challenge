@@ -55,7 +55,8 @@ namespace Enemies.Orc
                     else
                         progressBarBehavior.UpdateProgress(destroyProgress);
                 }
-            }
+            } else if (progressBarBehavior.IsWorking)
+                progressBarBehavior.StopWork();
         }
 
         public void StartAttacking(Transform tower)

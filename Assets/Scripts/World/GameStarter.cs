@@ -132,7 +132,7 @@ namespace World
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
             boatWithPlayer.gameObject.SetActive(true);
-            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 8f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
+            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 6f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
         }
         
         public void PressedContinue()

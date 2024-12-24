@@ -34,6 +34,7 @@ namespace Towers
         private Transform _newFloorBody;
         private GameObject _topConstruction;
         private bool _isUnderAttack;  // can't build while tower is under attack
+        private int _worstFloor;
         
         // private const int MaxLevel = 3;  // The maximum level of the tower
         private const float YOffsetBetweenFloors = 0.9375f;  // The offset between the floors
@@ -62,6 +63,7 @@ namespace Towers
         public void Init(int index)
         {
             _towerIndex = index;
+            _worstFloor = GetWorstFloor();
         }
 
         public bool CanBuild()
@@ -137,6 +139,7 @@ namespace Towers
             _topConstruction = _floors[CurrentLevel-1].transform.GetChild(1).gameObject;
             _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = CurrentLevel;
             EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
+            _worstFloor = GetWorstFloor();
             IsBuilt = true;
         }
         
@@ -159,8 +162,8 @@ namespace Towers
         {
             if (CurrentLevel == 0)
                 return 0;
-            var maxHealth = _towerDatas[CurrentLevel - 1].SecondsToDestroy;
-            var curHealth = GameData.Instance.towers[_towerIndex][CurrentLevel - 1].health;
+            var maxHealth = _towerDatas[_worstFloor].SecondsToDestroy;
+            var curHealth = GameData.Instance.towers[_towerIndex][_worstFloor].health;
             return 1 - curHealth / maxHealth;
         }
         
@@ -170,7 +173,8 @@ namespace Towers
             for (int i = 1; i < CurrentLevel; i++)
             {
                 if (GameData.Instance.towers[_towerIndex][i].progress >= 1f
-                    && _towerDatas[i].TowerMaterial < _towerDatas[worstFloor].TowerMaterial)
+                    && (_towerDatas[i].TowerMaterial < _towerDatas[worstFloor].TowerMaterial 
+                        || (_towerDatas[i].TowerMaterial == _towerDatas[worstFloor].TowerMaterial && i > worstFloor)))
                     worstFloor = i;
             }
             return worstFloor;
@@ -178,18 +182,17 @@ namespace Towers
 
         private void DestroyWorstFloor()
         {
-            var worstFloor = GetWorstFloor();
             // move down all the floors above the worst one
-            for (int i = worstFloor + 1; i < CurrentLevel; i++)
+            for (int i = _worstFloor + 1; i < CurrentLevel; i++)
             {
                 _floors[i].transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
-                _floors[i].GetComponent<SpriteRenderer>().sortingOrder = i;
+                _floors[i].GetComponent<TowerFloorAnimationManager>().Init(_towerDatas[i].TowerMaterial, i, _towerDatas[i].SecondsToAttack);
             }
-            Destroy(_floors[worstFloor]);
-            _floors.RemoveAt(worstFloor);
-            _towerDatas.RemoveAt(worstFloor);
-            GameData.Instance.towers[_towerIndex].RemoveAt(worstFloor);
-            if (CurrentLevel == 0)
+            Destroy(_floors[_worstFloor]);
+            _floors.RemoveAt(_worstFloor);
+            _towerDatas.RemoveAt(_worstFloor);
+            GameData.Instance.towers[_towerIndex].RemoveAt(_worstFloor);
+            if (CurrentLevel == 0 || (CurrentLevel == 1 && CurBuildProgress < 1))
             {
                 _topConstruction = transform.GetChild(0).gameObject;
                 IsBuilt = false;
@@ -198,21 +201,21 @@ namespace Towers
             {
                 _topConstruction = _floors[CurrentLevel - 1].transform.GetChild(1).gameObject;
             }
-            if (CurBuildProgress > 0)
+            if (CurrentLevel == 1 && CurBuildProgress > 0 && CurBuildProgress < 1)
             {
-                _newFloor.transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
                 _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = CurrentLevel;
                 _newFloorAnimationManager.Init(_towerDatas[CurrentLevel-1].TowerMaterial, CurrentLevel-1, _towerDatas[CurrentLevel-1].SecondsToAttack);
                 _topConstruction.SetActive(true);
             }
+            _worstFloor = GetWorstFloor();
         }
 
         public void DecWorstFloorHealth(float health)
         {
             if (CurrentLevel == 0)
                 return;
-            GameData.Instance.towers[_towerIndex][GetWorstFloor()].health -= health;
-            if (GameData.Instance.towers[_towerIndex][GetWorstFloor()].health <= 0)
+            GameData.Instance.towers[_towerIndex][_worstFloor].health -= health;
+            if (GameData.Instance.towers[_towerIndex][_worstFloor].health <= 0)
             {
                 DestroyWorstFloor();
             }
@@ -252,6 +255,7 @@ namespace Towers
             _topConstruction.SetActive(false);
             IsBuilt = false;
             _isUnderAttack = false;
+            _worstFloor = 0;
         }
     }
 }
