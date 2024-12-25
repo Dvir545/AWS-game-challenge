@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 525, y: 9.400024}
+  m_AnchoredPosition: {x: 589, y: 9.400024}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2084555047852345780
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -169,7 +169,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -28.599976}
-  m_SizeDelta: {x: 752, y: 8}
+  m_SizeDelta: {x: 816, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6879541999272048565
 CanvasRenderer:
@@ -246,7 +246,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 92.6}
-  m_SizeDelta: {x: 750, y: 65}
+  m_SizeDelta: {x: 814, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4425914542136868237
 GameObject:
@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 9.400024}
+  m_AnchoredPosition: {x: 364, y: 9.400024}
   m_SizeDelta: {x: 225, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2165908889816050993
@@ -340,8 +340,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -417,7 +417,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 9.400024}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 364, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6051459403224731086
 CanvasRenderer:
@@ -474,8 +474,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
