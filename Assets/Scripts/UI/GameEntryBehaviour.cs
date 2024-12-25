@@ -28,53 +28,31 @@ public class GameEntryBehaviour : MonoBehaviour
     private string _userEmail;
     private Coroutine _userWarningCoroutine;
     private int _signUpStep = 0;
+    private string _pendingUsername;
 
-    [Serializable]
-    private class SignUpRequest
+    private void OnEnable()
     {
-        public string email;
-        public string password;
-        public string username;
+        if (GameStatistics.Instance != null)
+        {
+            GameStatistics.Instance.OnGameDataLoaded += HandleGameDataLoaded;
+        }
     }
 
-    [Serializable]
-    private class SignInRequest
+    private void OnDisable()
     {
-        public string username;
-        public string password;
+        if (GameStatistics.Instance != null)
+        {
+            GameStatistics.Instance.OnGameDataLoaded -= HandleGameDataLoaded;
+        }
     }
 
-    [Serializable]
-    private class VerifyRequest
+    private void HandleGameDataLoaded()
     {
-        public string email;
-        public string code;
-    }
-
-    [Serializable]
-    private class LambdaResponse
-    {
-        public int statusCode;
-        public Dictionary<string, string> headers;
-        public string body;
-    }
-
-    [Serializable]
-    private class ApiResponse
-    {
-        public bool success;
-        public string message;
-        public string username;
-
-        public SignInTokens tokens;
-    }
-
-    [Serializable]
-    private class SignInTokens
-    {
-        public string accessToken;
-        public string refreshToken;
-        public string idToken;
+        if (!string.IsNullOrEmpty(_pendingUsername))
+        {
+            CompleteGameEntry(_pendingUsername);
+            _pendingUsername = null;
+        }
     }
 
     private void ShowEntry()
@@ -169,7 +147,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 }
 
                 // Store tokens securely
-                string usernameToUse = signInResponse.username ?? username; // Use returned username if available
+                string usernameToUse = signInResponse.username ?? username;
                 PlayerPrefs.SetString("Username", usernameToUse);
                 if (signInResponse.tokens != null)
                 {
@@ -179,7 +157,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 }
                 
                 Debug.Log($"Successfully logged in user: {usernameToUse}");
-                description.text = "Login successful!";
+                
                 FinishEntry(usernameToUse);
             }
             catch (Exception e)
@@ -347,17 +325,22 @@ public class GameEntryBehaviour : MonoBehaviour
         description.text = "";
     }
 
-    private void FinishEntry(string username)
+    private void CompleteGameEntry(string username)
     {
-        GameStatistics.Instance.Init(username);
         GameStarter.Instance.Init();
         gameObject.SetActive(false);
+    }
+
+    private void FinishEntry(string username)
+    {
+        _pendingUsername = username;
+        GameStatistics.Instance.Init(username);
     }
 
     public void OnGuestLogin()
     {
         var username = GetRandomUsername();
-        FinishEntry(username);
+        CompleteGameEntry(username);
     }
 
     public void OnLogin(bool fromSignUp = false)
@@ -416,4 +399,51 @@ public class GameEntryBehaviour : MonoBehaviour
         _signUpStep = 0;
         ShowEntry();
     }
-}
+
+    [Serializable]
+    private class SignUpRequest
+    {
+        public string email;
+        public string password;
+        public string username;
+    }
+
+    [Serializable]
+    private class SignInRequest
+    {
+        public string username;
+        public string password;
+    }
+
+    [Serializable]
+    private class VerifyRequest
+    {
+        public string email;
+        public string code;
+    }
+
+    [Serializable]
+    private class LambdaResponse
+    {
+        public int statusCode;
+        public Dictionary<string, string> headers;
+        public string body;
+    }
+
+    [Serializable]
+    private class ApiResponse
+    {
+        public bool success;
+        public string message;
+        public string username;
+        public SignInTokens tokens;
+    }
+
+    [Serializable]
+        private class SignInTokens
+        {
+            public string accessToken;
+            public string refreshToken;
+            public string idToken;
+        }
+    }
