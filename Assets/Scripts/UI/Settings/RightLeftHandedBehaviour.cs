@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using Utils.Data;
+using World;
 
 namespace UI.Settings
 {
@@ -26,7 +27,9 @@ namespace UI.Settings
 
         private void ToggleLeftHanded(bool v, bool firstTime=false)
         {
-            GameStatistics.Instance.leftHanded = v;
+            GameStatistics.Instance.SetLeftHanded(v);
+            if(!firstTime)
+                SoundManager.Instance.ButtonRelease();
             var bPos = _button.localPosition;
             var tPos = _text.transform.localPosition;
             if (v)  // left handed

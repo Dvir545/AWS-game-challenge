@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
+using World;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Player
@@ -19,6 +20,7 @@ namespace Player
         [SerializeField] private Sprite emptyHeartSprite;
 
         [SerializeField] private PlayerData playerData;
+        private PlayerSoundManager _playerSoundManager;
 
         private List<GameObject> _heartPrefabs = new();
         private List<Image> _heartImages = new();
@@ -34,6 +36,7 @@ namespace Player
 
         private void Start()
         {
+            _playerSoundManager = GetComponent<PlayerSoundManager>();
             EventManager.Instance.StartListening(EventManager.MaxHealthIncreased, AddUIHealth);
             EventManager.Instance.StartListening(EventManager.HealthChanged, UpdateUIHealth);
         }
@@ -131,7 +134,11 @@ namespace Player
             while (true)
             {
                 yield return new WaitForSeconds(Constants.BaseSecondsPerHeal / playerData.RegenSpeedMultiplier);
-                playerData.IncHealth();
+                if (GameData.Instance.curHealth < playerData.MaxHealth)
+                {
+                    playerData.IncHealth();
+                    SoundManager.Instance.Healed();
+                }
             }
         }
 

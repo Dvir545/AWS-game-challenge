@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace UI.GameUI
 {
@@ -42,6 +43,7 @@ namespace UI.GameUI
         {
             playerData.SwitchTool();
             playerActionManager.SwitchActing();
+            SoundManager.Instance.ShortButton();
             EventManager.Instance.TriggerEvent(EventManager.ActiveToolChanged, null);
         }
     }

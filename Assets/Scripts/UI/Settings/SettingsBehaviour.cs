@@ -4,6 +4,8 @@ using Enemies;
 using Enemies.Demon;
 using UI.WarningSign;
 using UnityEngine;
+using UnityEngine.UI;
+using Utils.Data;
 using World;
 
 public class SettingsBehaviour : MonoBehaviour
@@ -12,6 +14,9 @@ public class SettingsBehaviour : MonoBehaviour
     [SerializeField] private GameObject saveNQuitButton;
     [SerializeField] private GameObject darkOverlay;
     [SerializeField] private GameObject settingsWindow;
+    [SerializeField] private Slider sfxVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    
     
     private bool _fromMenu;
     
@@ -27,6 +32,8 @@ public class SettingsBehaviour : MonoBehaviour
             darkOverlay.SetActive(true);
             Time.timeScale = 0;
         }
+        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
+        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
     }
@@ -54,5 +61,16 @@ public class SettingsBehaviour : MonoBehaviour
         EnemyPool.Instance.ReleaseAll();
         BallPool.Instance.ReleaseAll();
         GameEnder.Instance.EndGame();
+    }
+    
+    public void ChangeSFXVolume(float volume)
+    {
+        GameStatistics.Instance.SetSfxVolume(volume);
+    }
+    
+    public void ChangeMusicVolume(float volume)
+    {
+        GameStatistics.Instance.SetMusicVolume(volume);
+        SoundManager.Instance.SyncMusicVolume();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Stores
 {
@@ -32,6 +33,7 @@ namespace Stores
 
         public void BuyUpgrade()
         {
+            bool bought = false;
             if (_curLevel > Constants.MaxUpgradeLevel)
             {
                 Debug.Log("Max upgrade level reached");
@@ -45,7 +47,10 @@ namespace Stores
                 playerData.SpendCash(_curPrice);
                 playerData.UpgradeTool(tool);
                 UpdateLevel();
+                bought = true;
             }
+            if (!bought)
+                SoundManager.Instance.CantPurchase();
         }
 
         private void UpdateLevel()

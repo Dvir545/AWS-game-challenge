@@ -1,4 +1,5 @@
 using UnityEngine;
+using World;
 
 namespace Utils.Data
 {
@@ -87,11 +88,13 @@ namespace Utils.Data
         public void AddCash(int amount)
         {
             GameData.Instance.cash += amount;
+            SoundManager.Instance.GotMoney();
             EventManager.Instance.TriggerEvent(EventManager.CashChanged, GameData.Instance.cash);
         }
         public void SpendCash(int amount)
         {
             GameData.Instance.cash -= amount;
+            SoundManager.Instance.Purchase();
             EventManager.Instance.TriggerEvent(EventManager.CashChanged, GameData.Instance.cash);
         }
         

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
@@ -12,11 +13,23 @@ namespace World
         [SerializeField] private GameObject healEffectPrefab;
         private Dictionary<GameObject, GameObject> _playerHealEffects = new Dictionary<GameObject, GameObject>();
         [SerializeField] private PlayerData playerData;
+        private Collider2D _collider;
         
-        void Start()
+        public void Init()
         {
-            _playerHealEffects = new Dictionary<GameObject, GameObject>();
+            if (_collider == null)
+            {
+                _playerHealEffects = new Dictionary<GameObject, GameObject>();
+                _collider = GetComponent<Collider2D>();
+            }
+            _collider.enabled = true;
             EventManager.Instance.StartListening(EventManager.NightStarted, StopHeal);
+            EventManager.Instance.StartListening(EventManager.NightEnded, StartHeal);
+        }
+
+        private void StartHeal(object arg0)
+        {
+            _collider.enabled = true;
         }
 
         private void StopHeal(object arg0)
@@ -33,11 +46,12 @@ namespace World
                 player.GetComponent<PlayerHealthManager>().StopHeal();
             }
             _playerHealEffects.Clear();   
+            _collider.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (DayNightManager.Instance.NightTime) return;
+            // if (DayNightManager.Instance.NightTime) return;
             if (other.CompareTag("Player") && !_playerHealEffects.ContainsKey(other.gameObject))
             {
                 var healEffect = Instantiate(healEffectPrefab, other.transform.position, Quaternion.identity);
@@ -77,6 +91,5 @@ namespace World
             }
             _playerHealEffects.Clear();
         }
-
     }
 }

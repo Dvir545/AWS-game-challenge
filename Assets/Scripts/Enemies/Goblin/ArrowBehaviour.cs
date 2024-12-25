@@ -80,6 +80,7 @@ namespace Enemies.Goblin
                     var damage = EnemyData.GetDamageMultiplier(Enemy.Goblin);
                     other.GetComponent<EnemyHealthManager>().TakeDamage(damage, hitDirection);
                 }
+                _audioSource.volume = GameStatistics.Instance.sfxVolume;
                 _audioSource.Play();
                 DisableArrow();
             }

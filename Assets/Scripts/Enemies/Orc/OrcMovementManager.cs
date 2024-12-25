@@ -8,6 +8,7 @@ namespace Enemies.Orc
     {
         private TowerBuildManager _towerBuildManager;
         private bool _foundTower;
+        private TowerBuild _currentTower;
         [SerializeField] private float attackDistance;
         private OrcAttackManager _orcAttackManager;
         private float accelerationDistance = 3f; // Distance threshold for acceleration
@@ -28,7 +29,7 @@ namespace Enemies.Orc
                 float distanceToTarget = Vector2.Distance(transform.position, CurrentTargetPosition);
                 if (_foundTower)
                 {
-                    if (distanceToTarget <= attackDistance)
+                    if (distanceToTarget <= attackDistance && _currentTower!.IsBuilt)
                     {
                         Agent.isStopped = true;
                         IsMoving = false;
@@ -72,9 +73,14 @@ namespace Enemies.Orc
             if (closestTower != null)
             {
                 CurrentTarget = closestTower;
+                _currentTower = closestTower.GetComponent<TowerBuild>();
             }
             else if (!foundTower)
+            {
+                _currentTower = null;
                 base.FindClosestTarget();
+            }
+
             _foundTower = foundTower;
             CurrentTargetPosition = CurrentTarget.position;
         }

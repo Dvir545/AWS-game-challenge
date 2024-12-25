@@ -50,7 +50,7 @@ namespace UI.WarningSign
         {
             var warningSign = _warningSignPool.Get();
             warningSign.transform.SetParent(parent);
-            warningSign.GetComponent<WarningSignBehaviour>().Init(target);
+            warningSign.GetComponent<WarningSignBehaviour>().Init(target, !enemy);
             var sprite = enemy ? enemySignSprite : destroySignSprite;
             warningSign.transform.GetChild(4).GetComponent<Image>().sprite = sprite;
             _tgt2Sign.Add(target, warningSign);

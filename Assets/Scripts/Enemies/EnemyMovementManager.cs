@@ -63,11 +63,6 @@ namespace Enemies
             }
         }
 
-        protected void StopUpdatingPath()
-        {
-            StopCoroutine(UpdatePathCR);
-        }
-
         protected virtual void Update()
         {
             if (EnemyHealthManager.IsDead)

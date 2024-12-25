@@ -4,6 +4,8 @@ using System.Diagnostics;
 using DG.Tweening;
 using UnityEngine;
 using Utils;
+using Utils.Data;
+using World;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -57,9 +59,7 @@ namespace Enemies.Demon
         {
             _attackSoundPlaying = true;
             _hitPlayer = true;
-            AudioSource.clip = attackSound;
-            AudioSource.pitch = Random.Range(0.8f, 1.2f);
-            AudioSource.Play();
+            SoundManager.Instance.PlaySFX(AudioSource, attackSound, true, 0.2f);
             yield return new WaitForSeconds(attackSound.length/2);
             _attackSoundPlaying = false;
             if (!EnemyHealthManager.IsDead && Random.Range(0, 5) == 0)
@@ -71,6 +71,7 @@ namespace Enemies.Demon
 
         protected override IEnumerator PlayWalkingSoundCR()
         {
+            walkingAudioSource.volume = GameStatistics.Instance.sfxVolume;
             walkingAudioSource.clip = walkingSound;
             walkingAudioSource.loop = true;
             walkingAudioSource.Play();

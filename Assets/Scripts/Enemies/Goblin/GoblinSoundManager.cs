@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
+using World;
 
 public class GoblinSoundManager : EnemySoundManager
 {
@@ -9,8 +10,6 @@ public class GoblinSoundManager : EnemySoundManager
     
     public void PlayShootSound()
     {
-        AudioSource.clip = shootSound;
-        AudioSource.pitch = Random.Range(0.8f, 1.2f);
-        AudioSource.Play();
+        SoundManager.Instance.PlaySFX(AudioSource, shootSound, true, .2f);
     }
 }

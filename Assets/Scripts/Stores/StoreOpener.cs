@@ -21,6 +21,7 @@ namespace Stores
             if (!_isPlayerInTrigger && other == _myPlayer)
             {
                 GeneralStoreManager.Instance.OpenStore(storeType);
+                SoundManager.Instance.OpenStore();
                 _isPlayerInTrigger = true;
             }
         }

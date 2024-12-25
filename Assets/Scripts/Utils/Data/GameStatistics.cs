@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity.Serialization.Json;
+using UnityEngine;
 
 namespace Utils.Data
 {
@@ -26,6 +27,8 @@ namespace Utils.Data
         public ScoreInfo LastGameScore;
         public ScoreInfo HighScore;
         public bool LeftHanded;
+        public float SfxVolume;
+        public float MusicVolume;
     }
     
     public class GameStatistics: Singleton<GameStatistics>
@@ -37,7 +40,9 @@ namespace Utils.Data
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
         // settings
-        public bool leftHanded;
+        public bool leftHanded { get; private set; }
+        public float sfxVolume { get; private set; }
+        public float musicVolume { get; private set; }
 
         public void Init(string username)
         {
@@ -47,7 +52,30 @@ namespace Utils.Data
             killedLastGameBy = 0;
             lastGameScore = new ScoreInfo(0, 0);
             highScore = new ScoreInfo(0, 0);
-            leftHanded = true;
+            leftHanded = PlayerPrefs.GetInt("leftHanded", 0) == 1;
+            sfxVolume = PlayerPrefs.GetFloat("sfxVolume", .5f);
+            musicVolume = PlayerPrefs.GetFloat("musicVolume", .5f);
+        }
+        
+        public void SetLeftHanded(bool leftHanded)
+        {
+            this.leftHanded = leftHanded;
+            PlayerPrefs.SetInt("leftHanded", leftHanded ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+        
+        public void SetSfxVolume(float sfxVolume)
+        {
+            this.sfxVolume = sfxVolume;
+            PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
+            PlayerPrefs.Save();
+        }
+        
+        public void SetMusicVolume(float musicVolume)
+        {
+            this.musicVolume = musicVolume;
+            PlayerPrefs.SetFloat("musicVolume", musicVolume);
+            PlayerPrefs.Save();
         }
         
         public void LoadFromJson(string json)
@@ -60,7 +88,9 @@ namespace Utils.Data
             killedLastGameBy = data.KilledLastGameBy;
             lastGameScore = data.LastGameScore;
             highScore = data.HighScore;
-            leftHanded = data.LeftHanded;
+            SetLeftHanded(data.LeftHanded);
+            SetSfxVolume(data.SfxVolume);
+            SetMusicVolume(data.MusicVolume);
         }
         
         public void SaveToJson()
@@ -72,7 +102,9 @@ namespace Utils.Data
                 KilledLastGameBy = killedLastGameBy,
                 LastGameScore = lastGameScore,
                 HighScore = highScore,
-                LeftHanded = leftHanded
+                LeftHanded = leftHanded,
+                SfxVolume = sfxVolume,
+                MusicVolume = musicVolume
             };
             var json = JsonSerialization.ToJson(serializableData);
             // DVIR - upload json to aws & send to npc

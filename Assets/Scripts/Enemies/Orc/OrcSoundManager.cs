@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Utils.Data;
 
 namespace Enemies.Orc
 {
@@ -53,6 +54,7 @@ namespace Enemies.Orc
             {
                 if (_orcAttackManager.IsAttacking())
                 {
+                    attackAudioSource.volume = GameStatistics.Instance.sfxVolume;
                     attackAudioSource.clip = attackSound;
                     attackAudioSource.pitch = Random.Range(0.6f, 1.1f);
                     attackAudioSource.Play();

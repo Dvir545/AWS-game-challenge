@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using Utils.Data;
+using World;
 using Random = UnityEngine.Random;
 
 namespace Enemies
@@ -45,9 +47,7 @@ namespace Enemies
             {
                 AudioSource.Stop();
             }
-            AudioSource.clip = deathSound;
-            AudioSource.pitch = Random.Range(0.8f, 1.2f);
-            AudioSource.Play();
+            SoundManager.Instance.PlaySFX(AudioSource, deathSound, true, 0.2f);
             return deathSound.length;
         }
 
@@ -73,6 +73,7 @@ namespace Enemies
                 if (EnemyHealthManager.IsDead) break;
                 if (IsEnemyMoving && !IsPlayingImportantSound)
                 {
+                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
                     AudioSource.clip = walkingSound;
                     AudioSource.pitch = Random.Range(0.6f, 1.1f);
                     AudioSource.Play();

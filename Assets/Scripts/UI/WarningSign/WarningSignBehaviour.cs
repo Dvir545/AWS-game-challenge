@@ -26,6 +26,9 @@ namespace UI.WarningSign
         private Transform _player;
     
         private bool _isTargetVisible;
+        
+        [SerializeField] private AudioSource warningAudioSource;
+        [SerializeField] private AudioClip warningSound;
 
         private void Awake()
         {
@@ -47,13 +50,17 @@ namespace UI.WarningSign
             _player = GameObject.FindWithTag("Player").transform;
         }
 
-        public void Init(Transform target)
+        public void Init(Transform target, bool dangerous = false)
         {
             _target = target;
             var warnable = target.GetComponent<IWarnable>();
             warnable.SetWarningSign(this);
             _parentBounds = transform.parent.GetComponent<RectTransform>().rect.size * 0.5f;
             SetVisibility(warnable.IsVisible());
+            if (!_isTargetVisible && dangerous)
+            {
+                warningAudioSource.PlayOneShot(warningSound);
+            }
         }
         
         public void SetVisibility(bool isTargetVisible)

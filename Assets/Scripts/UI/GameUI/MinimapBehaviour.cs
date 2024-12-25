@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using World;
 
 namespace UI.GameUI
 {
@@ -64,12 +65,14 @@ namespace UI.GameUI
     
         public void OpenMap()
         {
+            SoundManager.Instance.ShortButton();
             _map.gameObject.SetActive(true);
             _mapOpenButton.gameObject.SetActive(false);
         }
     
         public void CloseMap()
         {
+            SoundManager.Instance.ShortButton();
             _map.gameObject.SetActive(false);
             _mapOpenButton.gameObject.SetActive(true);
         }

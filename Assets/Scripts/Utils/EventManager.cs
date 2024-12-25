@@ -24,7 +24,9 @@ namespace Utils
         public const string DayStarted = "DayStarted";
         public const string DayEnded = "DayEnded";
         public const string NightStarted = "NightStarted";
+        public const string NightEnded = "NightEnded";
         public const string NewHighScore = "NewHighScore";
+        public const string Cooldown = "Cooldown";
 
         protected EventManager()
         {

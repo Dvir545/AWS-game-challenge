@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using AWSUtils;
 using Crops;
 using DG.Tweening;
@@ -33,6 +34,7 @@ namespace World
         [SerializeField] private UpgradeUIBehaviour regenUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour staminaUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour knockbackUIBehaviour;
+        [SerializeField] private HealingMatBehaviour healingMatBehaviour;
         [SerializeField] private ActButtonBehavior actButtonBehavior;
         [SerializeField] private CropManager cropManager;
         [SerializeField] private FarmingManager farmingManager;
@@ -51,11 +53,16 @@ namespace World
         
         public bool GameStarted { get; private set; }
         public bool GameContinued { get; private set; }
+        
 
         private void Awake()
         {
             _collider = GetComponent<Collider2D>();
             _boatStartPos = boatWithPlayer.position;
+            GameStatistics.Instance.Init("");
+            SoundManager.Instance.SyncMusicVolume();
+            SoundManager.Instance.PlayOcean();
+            SoundManager.Instance.StartEntryMusicCR();
         }
 
         public void Init()
@@ -63,6 +70,7 @@ namespace World
             _collider.enabled = true;
             GameStarted = false;
             GameContinued = false;
+            SoundManager.Instance.PlayOcean();
             anchoredBoat.gameObject.SetActive(false);
             boatWithPlayer.gameObject.SetActive(false);
             boatWithPlayer.position = _boatStartPos;
@@ -89,6 +97,7 @@ namespace World
 
         private void SetupGame()
         {
+            SoundManager.Instance.StopEntryMusicCR();
             player.GetComponent<PlayerHealthManager>().Init();
             cashBehaviour.Init();
             actButtonBehavior.Init();
@@ -97,6 +106,7 @@ namespace World
             regenUIBehaviour.Init();
             staminaUIBehaviour.Init();
             knockbackUIBehaviour.Init();
+            healingMatBehaviour.Init();
             cropManager.Init();
             farmingManager.Init();
             materialManager.Init();
@@ -114,6 +124,7 @@ namespace World
             boatWithPlayer.gameObject.SetActive(false);
             SetPlayerPosition();
             game.SetActive(true);
+            player.GetComponent<PlayerSoundManager>().Init();
             npcBottom.Init();
             npcMid.Init();
             gameCanvas.SetActive(true);
@@ -122,6 +133,7 @@ namespace World
         private void GameStart()
         {
             _collider.enabled = false;
+            SoundManager.Instance.StopOcean();
             Debug.Log("Game Started");
             GameStarted = true;
             DayNightManager.Instance.StartGame();
@@ -129,6 +141,7 @@ namespace World
 
         public void PressedStartNewGame()
         {
+            SoundManager.Instance.StopEntryMusicCR();
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
             boatWithPlayer.gameObject.SetActive(true);

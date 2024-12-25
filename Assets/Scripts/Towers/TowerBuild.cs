@@ -7,6 +7,7 @@ using UnityEngine.AI;
 using UnityEngine.Serialization;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Towers
 {
@@ -81,31 +82,32 @@ namespace Towers
             return CurBuildProgress;
         }
 
-        public void AddToProgress(float time)  // Returns true if the tower has been built
+        public void AddToProgress(float time, bool isInstant=false)
         {
             CurBuildProgress += time / TowersData.Instance.GetTowerData(_towerDatas[CurrentLevel-1].TowerMaterial).SecondsToBuild;
             if (CurBuildProgress >= 1f)
             {
-                OnBuildCompleted();
+                CurBuildProgress = 1f;
+                OnBuildCompleted(isInstant);
             }
         }
         
         public void AddFloor(TowerLevelInfo towerLevelInfo)  // instantly
         {
-            StartBuild((TowerMaterial)towerLevelInfo.material, towerLevelInfo.health, addToGameData:false);
-            CurBuildProgress = towerLevelInfo.progress;
-            if (CurBuildProgress >= 1f)
-            {
-                OnBuildCompleted();
-            }
+            StartBuild((TowerMaterial)towerLevelInfo.material, towerLevelInfo.health, true);
+            // CurBuildProgress = towerLevelInfo.progress;
+            // if (CurBuildProgress >= 1f)
+            // {
+            //     OnBuildCompleted(true);
+            // }
         }
 
-        public void StartBuild(TowerMaterial material, float health = 0, bool addToGameData = true)
+        public void StartBuild(TowerMaterial material, float health = 0, bool isInstant = false)
         {
             _topConstruction.SetActive(true);
             var towerData = TowersData.Instance.GetTowerData(material);
             _towerDatas.Add(towerData);
-            if (addToGameData)
+            if (!isInstant)
                 GameData.Instance.towers[_towerIndex].Add(new TowerLevelInfo(
                     (int)material, 
                     0,
@@ -121,11 +123,10 @@ namespace Towers
             _newFloorAnimationManager.Init(material, CurrentLevel-1, towerData.SecondsToAttack);
             _newFloorAttackZone.GetComponent<TowerFloorAttackZoneBehaviour>().Init(towerData.Range, towerData.Damage, towerData.MaxTargets, towerData.SecondsToAttack);
             _floors.Add(_newFloor);
-            
-            AddToProgress(Time.deltaTime);
+            AddToProgress(Time.deltaTime, isInstant);
         }
 
-        private void OnBuildCompleted()
+        private void OnBuildCompleted(bool isInstant = false)
         {
             _topConstruction.SetActive(false);
             _newFloorBody.gameObject.SetActive(true);
@@ -141,6 +142,8 @@ namespace Towers
             EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
             _worstFloor = GetWorstFloor();
             IsBuilt = true;
+            if (!isInstant)
+                SoundManager.Instance.TowerBuilt();
         }
         
         public void SetUnderAttack(bool isUnderAttack)

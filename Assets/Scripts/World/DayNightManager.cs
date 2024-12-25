@@ -235,6 +235,7 @@ namespace World
             );
             MinimapBehaviour.Instance.LightenMap(Constants.ChangeLightDurationInSeconds);
             NightTime = false;
+            EventManager.Instance.TriggerEvent(EventManager.NightEnded, null);
         }
 
         private void EndDay(bool force=false)
@@ -264,6 +265,10 @@ namespace World
             }
             waveDeclarationText.alpha = 0;
             waveDeclarationText.gameObject.SetActive(true);
+            if (DayTime)
+                SoundManager.Instance.DayStarted();
+            else
+                SoundManager.Instance.NightStarted();
             _waveDeclarationTween = waveDeclarationText.DOFade(1, _textFadeDuration).OnComplete(() =>
             {
                 waveDeclarationText.DOFade(0, _textFadeDuration).SetDelay(_textFadeDelay).OnComplete(() =>
@@ -283,9 +288,9 @@ namespace World
             {
                 waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
                 _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
-                ShowWaveDeclaration();
                 DayTime = true;
                 NightTime = false;
+                ShowWaveDeclaration();
                 EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
             }
         }

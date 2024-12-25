@@ -4,6 +4,7 @@ using Towers;
 using UnityEngine;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Stores
 {
@@ -29,6 +30,7 @@ namespace Stores
 
         public void BuyMaterial()
         {
+            bool bought = false;
             if (GameData.Instance.cash < TowersData.Instance.GetTowerData(material).Price)
             {
                 Debug.Log("Not enough cash");
@@ -46,6 +48,11 @@ namespace Stores
                 materialManager.AddMaterial(material);
                 Amount--;
                 amount.text = Amount.ToString();
+                bought = true;
+            }
+            if (!bought)
+            {
+                SoundManager.Instance.CantPurchase();
             }
         }
     }

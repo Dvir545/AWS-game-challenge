@@ -161,6 +161,7 @@ namespace Player
         private IEnumerator ActCooldown()
         {
             _onCooldown = true;
+            EventManager.Instance.TriggerEvent(EventManager.Cooldown, null);
             progressBarBehavior.SetType(ProgressBarType.Cooldown);  // todo add upgrade level
             progressBarBehavior.StartWork(1f);
             yield return null;

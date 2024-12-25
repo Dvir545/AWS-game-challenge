@@ -26,6 +26,7 @@ namespace World
             player.GetComponent<PlayerMovement>().Reset();
             player.GetComponent<PlayerActionManager>().Reset();
             player.GetComponent<PlayerHealthManager>().Reset();
+            player.GetComponent<PlayerSoundManager>().Reset();
             
             GameStarter.Instance.Init();
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Utils.Data;
+using World;
 using Random = UnityEngine.Random;
 
 namespace Enemies.Chicken
@@ -49,6 +51,7 @@ namespace Enemies.Chicken
                 if (EnemyHealthManager.IsDead) break;
                 if (!_chickenEatingManager.IsEating && !IsPlayingImportantSound)
                 {
+                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
                     AudioSource.clip = walkingSound;
                     AudioSource.Play();
                     yield return new WaitForSeconds(Random.Range(2f, 5f));
@@ -67,6 +70,7 @@ namespace Enemies.Chicken
             {
                 if (_chickenEatingManager.IsEating && !IsPlayingImportantSound)
                 {
+                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
                     AudioSource.clip = eatingSound;
                     AudioSource.pitch = Random.Range(0.6f, 1.1f);
                     AudioSource.Play();
