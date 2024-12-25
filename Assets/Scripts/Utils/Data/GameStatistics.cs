@@ -35,7 +35,7 @@ namespace Utils.Data
         public string Content_Type;
         public string Access_Control_Allow_Origin;
     }
-    
+
     [Serializable]
     internal class GameDataResponse
     {
@@ -59,7 +59,23 @@ namespace Utils.Data
         public ScoreInfo LastGameScore;
         public ScoreInfo HighScore;
         public bool LeftHanded;
+        public float SfxVolume;
+        public float MusicVolume;
         public GameState CurrentGameState;
+    }
+
+    [Serializable]
+    class SerializableGameStatistics
+    {
+        public string username;
+        public int TotalGamesPlayed;
+        public int ConsecutiveGamesPlayed;
+        public int KilledLastGameBy;
+        public ScoreInfo LastGameScore;
+        public ScoreInfo HighScore;
+        public bool LeftHanded;
+        public float SfxVolume;
+        public float MusicVolume;
     }
 
     public class GameStatistics : Singleton<GameStatistics>
@@ -80,7 +96,43 @@ namespace Utils.Data
         public int killedLastGameBy;
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
-        public bool leftHanded;
+        
+        // Audio settings
+        private float _sfxVolume;
+        private float _musicVolume;
+        public float sfxVolume 
+        { 
+            get => _sfxVolume;
+            private set
+            {
+                _sfxVolume = value;
+                PlayerPrefs.SetFloat("sfxVolume", value);
+                PlayerPrefs.Save();
+            }
+        }
+        public float musicVolume 
+        { 
+            get => _musicVolume;
+            private set
+            {
+                _musicVolume = value;
+                PlayerPrefs.SetFloat("musicVolume", value);
+                PlayerPrefs.Save();
+            }
+        }
+
+        // Game settings
+        private bool _leftHanded;
+        public bool leftHanded 
+        { 
+            get => _leftHanded;
+            private set
+            {
+                _leftHanded = value;
+                PlayerPrefs.SetInt("leftHanded", value ? 1 : 0);
+                PlayerPrefs.Save();
+            }
+        }
 
         private void OnEnable()
         {
@@ -113,9 +165,28 @@ namespace Utils.Data
             killedLastGameBy = 0;
             lastGameScore = new ScoreInfo(0, 0);
             highScore = new ScoreInfo(0, 0);
-            leftHanded = true;
+            
+            // Load settings from PlayerPrefs
+            leftHanded = PlayerPrefs.GetInt("leftHanded", 0) == 1;
+            sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
+            musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
 
             StartCoroutine(LoadUserDataWithRetry(0));
+        }
+
+        public void SetLeftHanded(bool value)
+        {
+            leftHanded = value;
+        }
+
+        public void SetSfxVolume(float volume)
+        {
+            sfxVolume = Mathf.Clamp01(volume);
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            musicVolume = Mathf.Clamp01(volume);
         }
 
         private TowerArrayWrapper[] SerializeTowers(List<TowerLevelInfo>[] towers)
@@ -204,7 +275,9 @@ namespace Utils.Data
                             killedLastGameBy = Mathf.RoundToInt(gameData.KilledLastGameBy);
                             lastGameScore = gameData.LastGameScore;
                             highScore = gameData.HighScore;
-                            leftHanded = gameData.LeftHanded;
+                            SetLeftHanded(gameData.LeftHanded);
+                            SetSfxVolume(gameData.SfxVolume);
+                            SetMusicVolume(gameData.MusicVolume);
 
                             if (gameData.CurrentGameState != null && gameData.CurrentGameState.towers != null)
                             {
@@ -229,6 +302,20 @@ namespace Utils.Data
                     }
                 }
             }
+        }
+
+        public void LoadFromJson(string json)
+        {
+            var data = JsonUtility.FromJson<SerializableGameStatistics>(json);
+            username = data.username;
+            totalGamesPlayed = data.TotalGamesPlayed;
+            consecutiveGamesPlayed = 0;  // Reset on each app entry
+            killedLastGameBy = data.KilledLastGameBy;
+            lastGameScore = data.LastGameScore;
+            highScore = data.HighScore;
+            SetLeftHanded(data.LeftHanded);
+            SetSfxVolume(data.SfxVolume);
+            SetMusicVolume(data.MusicVolume);
         }
 
         private IEnumerator SaveGameCoroutine()
@@ -261,6 +348,8 @@ namespace Utils.Data
                         LastGameScore = lastGameScore,
                         HighScore = highScore,
                         LeftHanded = leftHanded,
+                        SfxVolume = sfxVolume,
+                        MusicVolume = musicVolume,
                         CurrentGameState = new GameState
                         {
                             healthUpgradeLevel = GameData.Instance.healthUpgradeLevel,
@@ -297,96 +386,95 @@ namespace Utils.Data
             catch (Exception e)
             {
                 Debug.LogError($"********** CRITICAL ERROR preparing save data: {e.Message} **********");
-                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
-                _isSaving = false;
-                yield break;
-            }
+                                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
+                                _isSaving = false;
+                                yield break;
+                            }
 
-            UnityWebRequest www = null;
-            try
-            {
-                www = new UnityWebRequest(SAVE_API_URL, "POST");
-                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
-                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
-                www.downloadHandler = new DownloadHandlerBuffer();
-                www.SetRequestHeader("Content-Type", "application/json");
-                
-                string authToken = PlayerPrefs.GetString("IdToken");
-                if (!string.IsNullOrEmpty(authToken))
-                {
-                    Debug.Log("********** Auth token found and set in request header **********");
-                    www.SetRequestHeader("Authorization", authToken);
-                }
-                else 
-                {
-                    Debug.Log("********** WARNING: No auth token found! **********");
-                }
+                            UnityWebRequest www = null;
+                            try
+                            {
+                                www = new UnityWebRequest(SAVE_API_URL, "POST");
+                                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+                                www.downloadHandler = new DownloadHandlerBuffer();
+                                www.SetRequestHeader("Content-Type", "application/json");
+                                
+                                string authToken = PlayerPrefs.GetString("IdToken");
+                                if (!string.IsNullOrEmpty(authToken))
+                                {
+                                    Debug.Log("********** Auth token found and set in request header **********");
+                                    www.SetRequestHeader("Authorization", authToken);
+                                }
+                                else 
+                                {
+                                    Debug.Log("********** WARNING: No auth token found! **********");
+                                }
 
-                Debug.Log($"********** Sending save request to {SAVE_API_URL} **********");
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"********** CRITICAL ERROR creating web request: {e.Message} **********");
-                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
-                if (www != null) www.Dispose();
-                _isSaving = false;
-                yield break;
-            }
+                                Debug.Log($"********** Sending save request to {SAVE_API_URL} **********");
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.LogError($"********** CRITICAL ERROR creating web request: {e.Message} **********");
+                                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
+                                if (www != null) www.Dispose();
+                                _isSaving = false;
+                                yield break;
+                            }
 
-            using (www)
-            {
-                yield return www.SendWebRequest();
+                            using (www)
+                            {
+                                yield return www.SendWebRequest();
 
-                if (www.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError($"********** SAVE FAILED - Error: {www.error} **********");
-                    Debug.LogError($"********** Response Code: {www.responseCode} **********");
-                    Debug.LogError($"********** Response: {www.downloadHandler.text} **********");
-                }
-                else
-                {
-                    Debug.Log($"********** Game saved successfully **********");
-                    Debug.Log($"********** Response: {www.downloadHandler.text} **********");
-                }
-            }
+                                if (www.result != UnityWebRequest.Result.Success)
+                                {
+                                    Debug.LogError($"********** SAVE FAILED - Error: {www.error} **********");
+                                    Debug.LogError($"********** Response Code: {www.responseCode} **********");
+                                    Debug.LogError($"********** Response: {www.downloadHandler.text} **********");
+                                }
+                                else
+                                {
+                                    Debug.Log($"********** Game saved successfully **********");
+                                    Debug.Log($"********** Response: {www.downloadHandler.text} **********");
+                                }
+                            }
 
-            _isSaving = false;
-            Debug.Log("********** SaveGameCoroutine completed **********");
-        }
-
-        public void SaveToJson()
-        {
-            Debug.Log("********** SaveToJson called - Starting save process **********");
-            StartCoroutine(SaveGameCoroutine());
-        }
-
-        public void UpdateStatistics(int enemyType)
-        {
-            Debug.Log("********** UpdateStatistics called - Player died **********");
-            Debug.Log($"********** Enemy type: {enemyType}, Days survived: {GameData.Instance.day}, Time survived: {GameData.Instance.secondsSinceGameStarted} **********");
-            
-            totalGamesPlayed++;
-            consecutiveGamesPlayed++;
-            killedLastGameBy = enemyType;
-            lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
-            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
-                            (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
-                        {
-                            highScore = lastGameScore;
-                            Debug.Log("********** New high score achieved! **********");
-                            EventManager.Instance.TriggerEvent(EventManager.NewHighScore, null);
+                            _isSaving = false;
+                            Debug.Log("********** SaveGameCoroutine completed **********");
                         }
-                        SaveToJson();
+
+                        public void SaveToJson()
+                        {
+                            Debug.Log("********** SaveToJson called - Starting save process **********");
+                            StartCoroutine(SaveGameCoroutine());
+                        }
+
+                        public void UpdateStatistics(int enemyType)
+                        {
+                            Debug.Log("********** UpdateStatistics called - Player died **********");
+                            Debug.Log($"********** Enemy type: {enemyType}, Days survived: {GameData.Instance.day}, Time survived: {GameData.Instance.secondsSinceGameStarted} **********");
+                            
+                            totalGamesPlayed++;
+                            consecutiveGamesPlayed++;
+                            killedLastGameBy = enemyType;
+                            lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
+                            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
+                                (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
+                            {
+                                highScore = lastGameScore;
+                                Debug.Log("********** New high score achieved! **********");
+                                EventManager.Instance.TriggerEvent(EventManager.NewHighScore, null);
+                            }
+                            SaveToJson();
+                        }
+                    }
+
+                    [Serializable]
+                    internal class LoadSaveRequest
+                    {
+                        public string username;
                     }
                 }
-
-                [Serializable]
-                internal class LoadSaveRequest
-                {
-                    public string username;
-                }
-            }
-// Save on death
 
 // TODO: Add manual saving functionality and save on quit
 // Potential implementation points:
