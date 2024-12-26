@@ -185,6 +185,7 @@ namespace Towers
 
         private void DestroyWorstFloor()
         {
+            SoundManager.Instance.TowerDestroyed();
             // move down all the floors above the worst one
             for (int i = _worstFloor + 1; i < CurrentLevel; i++)
             {

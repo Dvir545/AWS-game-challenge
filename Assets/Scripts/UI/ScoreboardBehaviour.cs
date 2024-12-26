@@ -223,7 +223,7 @@ public class ScoreboardBehaviour : MonoBehaviour
             Debug.LogError($"Stack trace: {e.StackTrace}");
             yield break;
         }
-
+        SoundManager.Instance.PauseBackgroundSong(1f);
         using (webRequest)
         {
             Debug.Log("Sending fetch request...");

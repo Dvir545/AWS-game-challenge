@@ -120,6 +120,7 @@ namespace Crops
 
         private void DestroyCrop(Vector2Int tilePos)
         {
+            SoundManager.Instance.FarmDestroyed();
             _farmTilemap.SetTile((Vector3Int)tilePos, null);
             WarningSignPool.Instance.ReleaseWarningSign(Farms[tilePos].transform);
             Destroy(Farms[tilePos].gameObject);

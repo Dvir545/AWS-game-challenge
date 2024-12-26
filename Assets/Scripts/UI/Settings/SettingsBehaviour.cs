@@ -36,6 +36,7 @@ public class SettingsBehaviour : MonoBehaviour
         musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
+        SoundManager.Instance.PauseBackgroundSong();
     }
     
     public void CloseSettings()
@@ -51,6 +52,7 @@ public class SettingsBehaviour : MonoBehaviour
         }
         darkOverlay.SetActive(false);
         settingsWindow.SetActive(false);
+        SoundManager.Instance.ResumeBackgroundSong();
     }
 
     public void SaveNQuit()
@@ -60,6 +62,7 @@ public class SettingsBehaviour : MonoBehaviour
         WarningSignPool.Instance.ReleaseAll();
         EnemyPool.Instance.ReleaseAll();
         BallPool.Instance.ReleaseAll();
+        SoundManager.Instance.PauseBackgroundSong(0f);
         GameEnder.Instance.EndGame();
     }
     

@@ -40,6 +40,7 @@ namespace World
         private Tween _waveDeclarationTween;
         [SerializeField] private PlayerHealthManager playerHealthManager;
         private DayPhase _currentDayPhase;
+        public DayPhase CurrentDayPhase => _currentDayPhase;
 
         private void Update()
         {
@@ -102,6 +103,7 @@ namespace World
                 DayNightRollBehaviour.Instance.JumpToNight();
                 MinimapBehaviour.Instance.JumpToNight();
                 StartNight();
+                SoundManager.Instance.SwitchBackgroundMusic(false, 0f);
                 _dayNightCycleCR = StartCoroutine(DayNightCycle());
             }
         }
@@ -234,6 +236,7 @@ namespace World
                 Constants.ChangeLightDurationInSeconds
             );
             MinimapBehaviour.Instance.LightenMap(Constants.ChangeLightDurationInSeconds);
+            SoundManager.Instance.SwitchBackgroundMusic(true);
             NightTime = false;
             EventManager.Instance.TriggerEvent(EventManager.NightEnded, null);
         }
@@ -253,6 +256,7 @@ namespace World
                     Constants.ChangeLightDurationInSeconds
                 );
                 MinimapBehaviour.Instance.DarkenMap(Constants.ChangeLightDurationInSeconds);
+                SoundManager.Instance.SwitchBackgroundMusic(false);
             }
             EventManager.Instance.TriggerEvent(EventManager.DayEnded, null);
         }

@@ -21,12 +21,33 @@ namespace World
         [SerializeField] private AudioClip cantPurchase;
         [SerializeField] private AudioClip openStore;
         [SerializeField] private AudioClip towerBuilt;
+        [SerializeField] private AudioClip towerDestroyed;
+        [SerializeField] private AudioClip farmDestroyed;
         private float _buttonPitch = 1f;
         
         [Header("music")]
         [SerializeField] private AudioSource ocean;
         [SerializeField] private AudioSource entryMusic;
+        [SerializeField] private AudioSource dayBackgroundMusic;
+        [SerializeField] private List<AudioClip> dayPlaylist;
+        private int _currentDaySongIndex;
+        private Coroutine _dayBackgroundCoroutine;
+        [SerializeField] private AudioSource nightBackgroundMusic;
+        [SerializeField] private List<AudioClip> nightPlaylist;
+        private int _currentNightSongIndex;
+        private Coroutine _nightBackgroundCoroutine;
+        private bool _backgroundMusicPaused;
+        private bool _playingDayMusic;
         private List<AudioSource> _musicSources = new();
+
+        public void Init(bool stop=false)
+        {
+            _currentDaySongIndex = 0;
+            _currentNightSongIndex = 0;
+            _backgroundMusicPaused = false;
+            if (stop)
+                StopEntryMusicCR();
+        }
 
         public void SyncMusicVolume()
         {
@@ -34,6 +55,8 @@ namespace World
             {
                 _musicSources.Add(ocean);
                 _musicSources.Add(entryMusic);
+                _musicSources.Add(dayBackgroundMusic);
+                _musicSources.Add(nightBackgroundMusic);
             }
             foreach (var source in _musicSources)
             {
@@ -52,21 +75,26 @@ namespace World
             source.Play();
         }
         
-        private void PlayMusic(AudioSource source)
+        private void PlayMusic(AudioSource source, float duration=1f, bool restart=false)
         {
             if (!source.isPlaying)
             {
+                if (restart)
+                {
+                    source.Stop();
+                }
                 source.Play();
                 if (source.volume == 0 && GameStatistics.Instance.musicVolume > 0)
                 {
-                    source.DOFade(GameStatistics.Instance.musicVolume, 1f);
+                    source.DOFade(GameStatistics.Instance.musicVolume, duration);
                 }
             }
         }
         
-        private void StopMusic(AudioSource source, float fadeDuration = 1f)
+        private void PauseMusic(AudioSource source, float fadeDuration = 1f)
         {
-            source.DOFade(0, fadeDuration).OnComplete(source.Pause);
+            if (source.isPlaying)
+                source.DOFade(0, fadeDuration).OnComplete(source.Pause);
         }
     
         public void ButtonPress()
@@ -120,6 +148,16 @@ namespace World
         {
             PlaySFX(ui, towerBuilt);
         }
+        
+        public void TowerDestroyed()
+        {
+            PlaySFX(ui, towerDestroyed);
+        }
+        
+        public void FarmDestroyed()
+        {
+            PlaySFX(ui, farmDestroyed);
+        }
     
         public void DayStarted()
         {
@@ -138,17 +176,17 @@ namespace World
         
         public void StopOcean()
         {
-            StopMusic(ocean);
+            PauseMusic(ocean);
         }
         
-        public void PlayEntryMusic()
+        public void PlayEntryMusic(float duration=0f)
         {
-            PlayMusic(entryMusic);
+            PlayMusic(entryMusic, duration);
         }
         
         public void StopEntryMusic()
         {
-            StopMusic(entryMusic, .3f);
+            PauseMusic(entryMusic, .3f);
         }
         
         private Coroutine _entryMusicCoroutine;
@@ -156,7 +194,7 @@ namespace World
         {
             if (!immediate)
             {
-                yield return  new WaitForSeconds(4f);
+                yield return  new WaitForSeconds(3f);
             }
             PlayEntryMusic();
         }
@@ -178,6 +216,79 @@ namespace World
             StopEntryMusic();
             _entryMusicCoroutine = null;
         }
-    
+        
+        private IEnumerator DayBackgroundMusicCR()
+        {
+            while (true)
+            {
+                while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || 
+                       dayBackgroundMusic.isPlaying || DayNightManager.Instance.CurrentDayPhase != DayPhase.Day)
+                {
+                    yield return new WaitForSeconds(1f); // Check every second
+                }
+                dayBackgroundMusic.clip = dayPlaylist[_currentDaySongIndex];
+                PlayMusic(dayBackgroundMusic);
+                _currentDaySongIndex = (_currentDaySongIndex + 1) % dayPlaylist.Count;
+                
+                yield return null;
+            }
+        }
+        
+        private IEnumerator NightBackgroundMusicCR()
+        {
+            while (true)
+            {
+                while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || nightBackgroundMusic.isPlaying || 
+                       DayNightManager.Instance.CurrentDayPhase != DayPhase.Night)
+                {
+                    yield return new WaitForSeconds(1f); // Check every second
+                }
+                nightBackgroundMusic.clip = nightPlaylist[_currentNightSongIndex];
+                PlayMusic(nightBackgroundMusic);
+                _currentNightSongIndex = (_currentNightSongIndex + 1) % nightPlaylist.Count;
+                yield return null;
+            }
+        }
+        
+        public void StartGame()
+        {
+            StopOcean();
+            PlayMusic(dayBackgroundMusic, 0f, restart: true);
+            PlayMusic(nightBackgroundMusic, 0f, restart: true);
+            _dayBackgroundCoroutine = StartCoroutine(DayBackgroundMusicCR());
+            _nightBackgroundCoroutine = StartCoroutine(NightBackgroundMusicCR());
+            PauseMusic(nightBackgroundMusic, 0f);
+            _playingDayMusic = true;
+        }
+        
+        public void PauseBackgroundSong(float duration=0f)
+        {
+            PauseMusic(dayBackgroundMusic, duration);
+            PauseMusic(nightBackgroundMusic, duration);
+            _backgroundMusicPaused = true;
+        }
+        
+        public void ResumeBackgroundSong()
+        {
+            _backgroundMusicPaused = false;
+            SwitchBackgroundMusic(_playingDayMusic, 0f);
+        }
+
+        public void SwitchBackgroundMusic(bool day, float duration = Constants.ChangeLightDurationInSeconds)
+        {
+            if (day)
+            {
+                if (nightBackgroundMusic.isPlaying)
+                    PauseMusic(nightBackgroundMusic, duration);
+                PlayMusic(dayBackgroundMusic, duration);
+            }
+            else
+            {
+                if (dayBackgroundMusic.isPlaying)
+                    PauseMusic(dayBackgroundMusic, duration);
+                PlayMusic(nightBackgroundMusic, duration);
+            }
+            _playingDayMusic = day;
+        }
     }
 }

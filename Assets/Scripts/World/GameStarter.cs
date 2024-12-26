@@ -70,7 +70,9 @@ namespace World
             _collider.enabled = true;
             GameStarted = false;
             GameContinued = false;
+            SoundManager.Instance.Init();
             SoundManager.Instance.PlayOcean();
+            SoundManager.Instance.PlayEntryMusic(1f);
             anchoredBoat.gameObject.SetActive(false);
             boatWithPlayer.gameObject.SetActive(false);
             boatWithPlayer.position = _boatStartPos;
@@ -97,7 +99,7 @@ namespace World
 
         private void SetupGame()
         {
-            SoundManager.Instance.StopEntryMusicCR();
+            SoundManager.Instance.Init(stop: true);
             player.GetComponent<PlayerHealthManager>().Init();
             cashBehaviour.Init();
             actButtonBehavior.Init();
@@ -133,7 +135,7 @@ namespace World
         private void GameStart()
         {
             _collider.enabled = false;
-            SoundManager.Instance.StopOcean();
+            SoundManager.Instance.StartGame();
             Debug.Log("Game Started");
             GameStarted = true;
             DayNightManager.Instance.StartGame();
