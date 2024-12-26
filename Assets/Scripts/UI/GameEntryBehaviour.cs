@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using TMPro;
 using Utils;
 using UnityEngine;
@@ -340,6 +339,7 @@ public class GameEntryBehaviour : MonoBehaviour
     public void OnGuestLogin()
     {
         var username = GetRandomUsername();
+        FinishEntry(username);
         CompleteGameEntry(username);
     }
 

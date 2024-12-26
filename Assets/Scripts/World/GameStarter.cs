@@ -1,7 +1,10 @@
 using System;
 using AWSUtils;
+using Crops;
 using DG.Tweening;
 using Player;
+using Stores;
+using Towers;
 using UI.GameUI;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -29,9 +32,16 @@ namespace World
         [SerializeField] private UpgradeUIBehaviour regenUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour staminaUIBehaviour;
         [SerializeField] private UpgradeUIBehaviour knockbackUIBehaviour;
+        [SerializeField] private HealingMatBehaviour healingMatBehaviour;
         [SerializeField] private ActButtonBehavior actButtonBehavior;
+        [SerializeField] private CropManager cropManager;
+        [SerializeField] private FarmingManager farmingManager;
+        [SerializeField] private MaterialManager materialManager;
+        [SerializeField] private TowerBuildManager towerBuildManager;
         [SerializeField] private NPCSpeech npcBottom;
         [SerializeField] private NPCSpeech npcMid;
+        [SerializeField] private ToolBuyer[] tools;
+        [SerializeField] private UpgradeBuyer[] upgrades;
         
         private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
@@ -45,6 +55,10 @@ namespace World
         {
             _collider = GetComponent<Collider2D>();
             _boatStartPos = boatWithPlayer.position;
+            GameStatistics.Instance.Init("");
+            SoundManager.Instance.SyncMusicVolume();
+            SoundManager.Instance.PlayOcean();
+            SoundManager.Instance.StartEntryMusicCR();
         }
 
         private void OnEnable()
@@ -137,11 +151,25 @@ namespace World
             regenUIBehaviour.Init();
             staminaUIBehaviour.Init();
             knockbackUIBehaviour.Init();
+            healingMatBehaviour.Init();
+            cropManager.Init();
+            farmingManager.Init();
+            materialManager.Init();
+            towerBuildManager.Init();
+            foreach (var tool in tools)
+            {
+                tool.Init();
+            }
+            foreach (var upgrade in upgrades)
+            {
+                upgrade.Init();
+            }
             anchoredBoat.gameObject.SetActive(true);
             player.gameObject.SetActive(true);
             boatWithPlayer.gameObject.SetActive(false);
             SetPlayerPosition();
             game.SetActive(true);
+            player.GetComponent<PlayerSoundManager>().Init();
             npcBottom.Init();
             npcMid.Init();
             gameCanvas.SetActive(true);
@@ -158,10 +186,11 @@ namespace World
 
         public void PressedStartNewGame()
         {
+            SoundManager.Instance.StopEntryMusicCR();
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
             boatWithPlayer.gameObject.SetActive(true);
-            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 8f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
+            boatWithPlayer.DOMoveX(anchoredBoat.position.x, 6f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
         }
         
         public void PressedContinue()
