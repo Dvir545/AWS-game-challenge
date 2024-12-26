@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 using Utils;
+using World;
 
 namespace Towers
 {
@@ -17,6 +18,9 @@ namespace Towers
         private bool IsAttacking => _enemiesInRange.Count > 0;
         
         private TowerFloorAnimationManager _towerFloorAnimationManager;
+        
+        [SerializeField] private AudioSource cannon;
+        [SerializeField] private AudioClip cannonShot;
         
         private void Awake()
         {
@@ -76,6 +80,7 @@ namespace Towers
                     {
                         enemy.TakeDamage(_damage, tower: true);
                     }
+                    SoundManager.Instance.PlaySFX(cannon, cannonShot);
                 }
             }
             else if (_attackTimer > 0)
