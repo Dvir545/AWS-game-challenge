@@ -1,11 +1,45 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Serialization.Json;
 using UnityEngine;
+using Utils;
 
 namespace Utils.Data
 {
+    [Serializable]
+    public class Vector2IntSerializable
+    {
+        public int x;
+        public int y;
+
+        public Vector2IntSerializable(Vector2Int vector)
+        {
+            x = vector.x;
+            y = vector.y;
+        }
+
+        public Vector2Int ToVector2Int()
+        {
+            return new Vector2Int(x, y);
+        }
+    }
+
+    [Serializable]
+    public class PlantedCropsData
+    {
+        public int cropType;
+        public float growthProgress;
+        public float destroyProgress;
+    }
+
+    [Serializable]
+    public class PlantedCropKeyValue
+    {
+        public Vector2IntSerializable Key;
+        public PlantedCropInfo Value;
+    }
+
     [Serializable]
     public class TowerLevelInfo
     {
@@ -38,6 +72,7 @@ namespace Utils.Data
         public PlantedCropInfo() { }
     }
     
+    [Serializable]
     class SerializableGameData
     {
         public int HealthUpgradeLevel;
@@ -62,7 +97,7 @@ namespace Utils.Data
         public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops;
     }
     
-    public class GameData: Singleton<GameData>
+    public class GameData : Singleton<GameData>
     {
         public int healthUpgradeLevel;
         public int regenUpgradeLevel;
@@ -114,28 +149,80 @@ namespace Utils.Data
             plantedCrops = new Dictionary<Vector2Int, PlantedCropInfo>();
         }
         
-        public void LoadFromJson(string json)
+        public void LoadFromGameState(GameState state)
         {
-            var data = JsonSerialization.FromJson<SerializableGameData>(json);
-            healthUpgradeLevel = data.HealthUpgradeLevel;
-            regenUpgradeLevel = data.RegenUpgradeLevel;
-            speedUpgradeLevel = data.SpeedUpgradeLevel;
-            staminaUpgradeLevel = data.StaminaUpgradeLevel;
-            swordLevel = data.SwordLevel;
-            hoeLevel = data.HoeLevel;
-            hammerLevel = data.HammerLevel;
-            cash = data.Cash;
-            day = data.Day;
-            curHealth = data.CurHealth;
-            secondsSinceGameStarted = data.SecondsSinceGameStarted;
-            crops = data.InventoryCrops.ToArray();
-            materials = data.InventoryMaterials.ToArray();
-            cropsInStore = data.CropsInStore.ToArray();
-            materialsInStore = data.MaterialsInStore.ToArray();
-            thisDayEnemies = data.ThisDayEnemies.ToArray();
-            thisNightEnemies = data.ThisNightEnemies.ToArray();
-            towers = data.Towers.Select(towerList => new List<TowerLevelInfo>(towerList)).ToArray();
-            plantedCrops = data.PlantedCrops;
+            if (state == null)
+            {
+                Debug.LogError("Attempted to load null game state!");
+                return;
+            }
+
+            try
+            {
+                healthUpgradeLevel = state.healthUpgradeLevel;
+                regenUpgradeLevel = state.regenUpgradeLevel;
+                speedUpgradeLevel = state.speedUpgradeLevel;
+                staminaUpgradeLevel = state.staminaUpgradeLevel;
+                knockbackUpgradeLevel = state.knockbackUpgradeLevel;
+                swordLevel = state.swordLevel;
+                hoeLevel = state.hoeLevel;
+                hammerLevel = state.hammerLevel;
+                cash = state.cash;
+                day = state.day;
+                curHealth = state.curHealth;
+                secondsSinceGameStarted = state.secondsSinceGameStarted;
+                
+                // Copy arrays with null checks
+                crops = state.crops?.ToArray() ?? Constants.StartCrops.ToArray();
+                materials = state.materials?.ToArray() ?? Constants.StartMaterials.ToArray();
+                cropsInStore = state.cropsInStore?.ToArray() ?? Constants.StartCropsInStore.ToArray();
+                materialsInStore = state.materialsInStore?.ToArray() ?? Constants.StartMaterialsInStore.ToArray();
+                thisDayEnemies = state.thisDayEnemies?.ToArray() ?? Constants.FirstDayEnemies.ToArray();
+                thisNightEnemies = state.thisNightEnemies?.ToArray() ?? Constants.FirstNightEnemies.ToArray();
+
+                // Initialize towers array
+                towers = new List<TowerLevelInfo>[Constants.TowerCount];
+                for (int i = 0; i < Constants.TowerCount; i++)
+                {
+                    towers[i] = new List<TowerLevelInfo>();
+                    if (state.towers != null && i < state.towers.Length && state.towers[i] != null)
+                    {
+                        foreach (var towerInfo in state.towers[i].towers)
+                        {
+                            if (towerInfo != null)
+                            {
+                                towers[i].Add(new TowerLevelInfo(
+                                    towerInfo.material,
+                                    towerInfo.progress,
+                                    towerInfo.health
+                                ));
+                            }
+                        }
+                    }
+                }
+
+                // Initialize and populate planted crops
+                plantedCrops = new Dictionary<Vector2Int, PlantedCropInfo>();
+                if (state.plantedCrops != null)
+                {
+                    foreach (var cropKeyValue in state.plantedCrops)
+                    {
+                        var position = cropKeyValue.Key.ToVector2Int();
+                        plantedCrops[position] = new PlantedCropInfo(
+                            cropKeyValue.Value.cropType,
+                            cropKeyValue.Value.growthProgress,
+                            cropKeyValue.Value.destroyProgress
+                        );
+                    }
+                }
+
+                Debug.Log($"Successfully loaded game state. Day: {day}, Health: {curHealth}, Cash: {cash}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error loading game state: {e.Message}\n{e.StackTrace}");
+                NewGame(); // Fallback to new game if loading fails
+            }
         }
         
         public void SaveToJson()
@@ -146,6 +233,7 @@ namespace Utils.Data
                 RegenUpgradeLevel = regenUpgradeLevel,
                 SpeedUpgradeLevel = speedUpgradeLevel,
                 StaminaUpgradeLevel = staminaUpgradeLevel,
+                KnockbackUpgradeLevel = knockbackUpgradeLevel,
                 SwordLevel = swordLevel,
                 HoeLevel = hoeLevel,
                 HammerLevel = hammerLevel,
@@ -162,9 +250,40 @@ namespace Utils.Data
                 Towers = towers,
                 PlantedCrops = plantedCrops
             };
+            
             var json = JsonSerialization.ToJson(serializableData);
-            Debug.Log(json);
-            // DVIR - upload json to aws
+            Debug.Log($"Game state serialized: {json}");
         }
+    }
+
+    [Serializable]
+    public class GameState
+    {
+        public int healthUpgradeLevel;
+        public int regenUpgradeLevel;
+        public int speedUpgradeLevel;
+        public int staminaUpgradeLevel;
+        public int knockbackUpgradeLevel;
+        public int swordLevel;
+        public int hoeLevel;
+        public int hammerLevel;
+        public int cash;
+        public int day;
+        public int curHealth;
+        public float secondsSinceGameStarted;
+        public int[] crops;
+        public int[] materials;
+        public int[] cropsInStore;
+        public int[] materialsInStore;
+        public int[] thisDayEnemies;
+        public int[] thisNightEnemies;
+        public TowerArrayWrapper[] towers;
+        public List<PlantedCropKeyValue> plantedCrops;
+    }
+
+    [Serializable]
+    public class TowerArrayWrapper
+    {
+        public List<TowerLevelInfo> towers = new List<TowerLevelInfo>();
     }
 }
