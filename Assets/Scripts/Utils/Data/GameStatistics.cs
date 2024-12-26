@@ -160,18 +160,68 @@ namespace Utils.Data
         {
             Debug.Log($"********** Initializing GameStatistics for user: {username} **********");
             this.username = username;
-            totalGamesPlayed = 0;
-            consecutiveGamesPlayed = 0;
-            killedLastGameBy = 0;
-            lastGameScore = new ScoreInfo(0, 0);
-            highScore = new ScoreInfo(0, 0);
+            Debug.Log($"********** Set internal username to: {this.username} **********");
+            
+            // Store username in PlayerPrefs
+            PlayerPrefs.SetString("Username", username);
+            PlayerPrefs.Save();
             
             // Load settings from PlayerPrefs
             leftHanded = PlayerPrefs.GetInt("leftHanded", 0) == 1;
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
             musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-            if (username != "")
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                Debug.Log($"********** Starting LoadUserDataWithRetry for user: {username} **********");
                 StartCoroutine(LoadUserDataWithRetry(0));
+            }
+            else
+            {
+                Debug.LogError("********** Init called with empty username! **********");
+                InitializeNewPlayer();
+            }
+        }
+
+        private void InitializeNewPlayer()
+        {
+            Debug.Log($"********** Initializing new player with username: {username} **********");
+            
+            // Keep the username we already set in Init()
+            string currentUsername = this.username;
+            
+            // Initialize default values
+            totalGamesPlayed = 0;
+            consecutiveGamesPlayed = 0;
+            killedLastGameBy = 0;
+            lastGameScore = new ScoreInfo(0, 0);
+            highScore = new ScoreInfo(0, 0);
+
+            // Create new game data structure
+            LoadedGameData = new SavedGameData
+            {
+                username = currentUsername,
+                TotalGamesPlayed = totalGamesPlayed,
+                ConsecutiveGamesPlayed = consecutiveGamesPlayed,
+                KilledLastGameBy = killedLastGameBy,
+                LastGameScore = lastGameScore,
+                HighScore = highScore,
+                LeftHanded = leftHanded,
+                SfxVolume = sfxVolume,
+                MusicVolume = musicVolume,
+                CurrentGameState = null
+            };
+
+            // Make sure username is preserved
+            this.username = currentUsername;
+            
+            // Store in PlayerPrefs again to be safe
+            PlayerPrefs.SetString("Username", currentUsername);
+            PlayerPrefs.Save();
+            
+            Debug.Log($"********** Finished initializing new player. Username: {this.username} **********");
+            
+            OnGameDataLoaded?.Invoke();
         }
 
         public void SetLeftHanded(bool value)
@@ -219,7 +269,7 @@ namespace Utils.Data
 
         private IEnumerator LoadUserDataWithRetry(int retryCount)
         {
-            Debug.Log($"********** Attempting to load user data (attempt {retryCount + 1}/{MAX_RETRIES}) **********");
+            Debug.Log($"********** Attempting to load user data (attempt {retryCount + 1}/{MAX_RETRIES}) for username: {username} **********");
             var requestData = new LoadSaveRequest { username = this.username };
             string jsonData = JsonUtility.ToJson(requestData);
             Debug.Log($"********** Load request JSON: {jsonData} **********");
@@ -257,65 +307,53 @@ namespace Utils.Data
                         StartCoroutine(LoadUserDataWithRetry(retryCount + 1));
                         yield break;
                     }
-                    LoadedGameData = null;
+                    InitializeNewPlayer();
+                    yield break;
                 }
-                else
+
+                try
                 {
-                    try
+                    Debug.Log($"********** Received response: {www.downloadHandler.text} **********");
+                    var response = JsonUtility.FromJson<GameDataResponse>(www.downloadHandler.text);
+
+                    if (response != null && response.gameData != null)
                     {
-                        var response = JsonUtility.FromJson<GameDataResponse>(www.downloadHandler.text);
+                        LoadedGameData = response.gameData;
+                        var gameData = response.gameData;
+                        
+                        // Preserve the username we got from login
+                        string currentUsername = this.username;
+                        
+                        // Load other data
+                        totalGamesPlayed = Mathf.RoundToInt(gameData.TotalGamesPlayed);
+                        consecutiveGamesPlayed = Mathf.RoundToInt(gameData.ConsecutiveGamesPlayed);
+                        killedLastGameBy = Mathf.RoundToInt(gameData.KilledLastGameBy);
+                        lastGameScore = gameData.LastGameScore;
+                        highScore = gameData.HighScore;
+                        SetLeftHanded(gameData.LeftHanded);
+                        SetSfxVolume(gameData.SfxVolume);
+                        SetMusicVolume(gameData.MusicVolume);
 
-                        if (response != null && response.gameData != null)
-                        {
-                            LoadedGameData = response.gameData;
-                            var gameData = response.gameData;
-                            username = gameData.username;
-                            totalGamesPlayed = Mathf.RoundToInt(gameData.TotalGamesPlayed);
-                            consecutiveGamesPlayed = Mathf.RoundToInt(gameData.ConsecutiveGamesPlayed);
-                            killedLastGameBy = Mathf.RoundToInt(gameData.KilledLastGameBy);
-                            lastGameScore = gameData.LastGameScore;
-                            highScore = gameData.HighScore;
-                            SetLeftHanded(gameData.LeftHanded);
-                            SetSfxVolume(gameData.SfxVolume);
-                            SetMusicVolume(gameData.MusicVolume);
+                        // Restore username
+                        this.username = currentUsername;
+                        LoadedGameData.username = currentUsername;
 
-                            if (gameData.CurrentGameState != null && gameData.CurrentGameState.towers != null)
-                            {
-                                var deserializedTowers = DeserializeTowers(gameData.CurrentGameState.towers);
-                                gameData.CurrentGameState.towers = gameData.CurrentGameState.towers;
-                            }
-
-                            Debug.Log($"********** Successfully loaded game data: TotalGames={totalGamesPlayed}, LastScore={lastGameScore.daysSurvived} days **********");
-                            OnGameDataLoaded?.Invoke();
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"********** No save data found for user: {username} **********");
-                            LoadedGameData = null;
-                        }
+                        Debug.Log($"********** Successfully loaded game data for user: {this.username} **********");
+                        OnGameDataLoaded?.Invoke();
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Debug.LogError($"********** Error parsing save data response: {e.Message} **********");
-                        Debug.LogError($"********** Raw response was: {www.downloadHandler.text} **********");
-                        LoadedGameData = null;
+                        Debug.LogWarning($"********** No save data found for user: {username} - Initializing new player **********");
+                        InitializeNewPlayer();
                     }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"********** Error parsing save data response: {e.Message} **********");
+                    Debug.LogError($"********** Raw response was: {www.downloadHandler.text} **********");
+                    InitializeNewPlayer();
                 }
             }
-        }
-
-        public void LoadFromJson(string json)
-        {
-            var data = JsonUtility.FromJson<SerializableGameStatistics>(json);
-            username = data.username;
-            totalGamesPlayed = data.TotalGamesPlayed;
-            consecutiveGamesPlayed = 0;  // Reset on each app entry
-            killedLastGameBy = data.KilledLastGameBy;
-            lastGameScore = data.LastGameScore;
-            highScore = data.HighScore;
-            SetLeftHanded(data.LeftHanded);
-            SetSfxVolume(data.SfxVolume);
-            SetMusicVolume(data.MusicVolume);
         }
 
         private IEnumerator SaveGameCoroutine()
@@ -386,98 +424,92 @@ namespace Utils.Data
             catch (Exception e)
             {
                 Debug.LogError($"********** CRITICAL ERROR preparing save data: {e.Message} **********");
-                                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
-                                _isSaving = false;
-                                yield break;
-                            }
+                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
+                _isSaving = false;
+                yield break;
+            }
 
-                            UnityWebRequest www = null;
-                            try
-                            {
-                                www = new UnityWebRequest(SAVE_API_URL, "POST");
-                                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
-                                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
-                                www.downloadHandler = new DownloadHandlerBuffer();
-                                www.SetRequestHeader("Content-Type", "application/json");
-                                
-                                string authToken = PlayerPrefs.GetString("IdToken");
-                                if (!string.IsNullOrEmpty(authToken))
-                                {
-                                    Debug.Log("********** Auth token found and set in request header **********");
-                                    www.SetRequestHeader("Authorization", authToken);
-                                }
-                                else 
-                                {
-                                    Debug.Log("********** WARNING: No auth token found! **********");
-                                }
-
-                                Debug.Log($"********** Sending save request to {SAVE_API_URL} **********");
-                            }
-                            catch (Exception e)
-                            {
-                                Debug.LogError($"********** CRITICAL ERROR creating web request: {e.Message} **********");
-                                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
-                                if (www != null) www.Dispose();
-                                _isSaving = false;
-                                yield break;
-                            }
-
-                            using (www)
-                            {
-                                yield return www.SendWebRequest();
-
-                                if (www.result != UnityWebRequest.Result.Success)
-                                {
-                                    Debug.LogError($"********** SAVE FAILED - Error: {www.error} **********");
-                                    Debug.LogError($"********** Response Code: {www.responseCode} **********");
-                                    Debug.LogError($"********** Response: {www.downloadHandler.text} **********");
-                                }
-                                else
-                                {
-                                    Debug.Log($"********** Game saved successfully **********");
-                                    Debug.Log($"********** Response: {www.downloadHandler.text} **********");
-                                }
-                            }
-
-                            _isSaving = false;
-                            Debug.Log("********** SaveGameCoroutine completed **********");
-                        }
-
-                        public void SaveToJson()
-                        {
-                            Debug.Log("********** SaveToJson called - Starting save process **********");
-                            StartCoroutine(SaveGameCoroutine());
-                        }
-
-                        public void UpdateStatistics(int enemyType)
-                        {
-                            Debug.Log("********** UpdateStatistics called - Player died **********");
-                            Debug.Log($"********** Enemy type: {enemyType}, Days survived: {GameData.Instance.day}, Time survived: {GameData.Instance.secondsSinceGameStarted} **********");
-                            
-                            totalGamesPlayed++;
-                            consecutiveGamesPlayed++;
-                            killedLastGameBy = enemyType;
-                            lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
-                            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
-                                (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
-                            {
-                                highScore = lastGameScore;
-                                Debug.Log("********** New high score achieved! **********");
-                                EventManager.Instance.TriggerEvent(EventManager.NewHighScore, null);
-                            }
-                            SaveToJson();
-                        }
-                    }
-
-                    [Serializable]
-                    internal class LoadSaveRequest
-                    {
-                        public string username;
-                    }
+            UnityWebRequest www = null;
+            try
+            {
+                www = new UnityWebRequest(SAVE_API_URL, "POST");
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+                www.downloadHandler = new DownloadHandlerBuffer();
+                www.SetRequestHeader("Content-Type", "application/json");
+                
+                string authToken = PlayerPrefs.GetString("IdToken");
+                if (!string.IsNullOrEmpty(authToken))
+                {
+                    Debug.Log("********** Auth token found and set in request header **********");
+                    www.SetRequestHeader("Authorization", authToken);
+                }
+                else 
+                {
+                    Debug.Log("********** WARNING: No auth token found! **********");
                 }
 
-// TODO: Add manual saving functionality and save on quit
-// Potential implementation points:
-// 1. Add a save button to the pause menu  
-// 2. Hook into the game's quit process to save before closing
-// 3. Add auto-save on certain achievements or milestones
+                Debug.Log($"********** Sending save request to {SAVE_API_URL} **********");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"********** CRITICAL ERROR creating web request: {e.Message} **********");
+                Debug.LogError($"********** Stack trace: {e.StackTrace} **********");
+                if (www != null) www.Dispose();
+                _isSaving = false;
+                yield break;
+            }
+
+            using (www)
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError($"********** SAVE FAILED - Error: {www.error} **********");
+                    Debug.LogError($"********** Response Code: {www.responseCode} **********");
+                    Debug.LogError($"********** Response: {www.downloadHandler.text} **********");
+                }
+                else
+                {
+                    Debug.Log($"********** Game saved successfully **********");
+                    Debug.Log($"********** Response: {www.downloadHandler.text} **********");
+                }
+            }
+
+            _isSaving = false;
+            Debug.Log("********** SaveGameCoroutine completed **********");
+        }
+
+        public void SaveToJson()
+        {
+            Debug.Log("********** SaveToJson called - Starting save process **********");
+            StartCoroutine(SaveGameCoroutine());
+        }
+
+        public void UpdateStatistics(int enemyType)
+        {
+            Debug.Log("********** UpdateStatistics called - Player died **********");
+            Debug.Log($"********** Enemy type: {enemyType}, Days survived: {GameData.Instance.day}, Time survived: {GameData.Instance.secondsSinceGameStarted} **********");
+            
+            totalGamesPlayed++;
+            consecutiveGamesPlayed++;
+            killedLastGameBy = enemyType;
+            lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
+            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
+                (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
+            {
+                highScore = lastGameScore;
+                Debug.Log("********** New high score achieved! **********");
+                EventManager.Instance.TriggerEvent(EventManager.NewHighScore, null);
+            }
+            SaveToJson();
+        }
+    }
+
+    [Serializable]
+    internal class LoadSaveRequest
+    {
+        public string username;
+    }
+}

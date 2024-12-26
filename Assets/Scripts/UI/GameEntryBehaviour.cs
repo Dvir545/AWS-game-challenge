@@ -120,16 +120,16 @@ public class GameEntryBehaviour : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
             www.SetRequestHeader("x-api-key", ApiKey);
 
-            Debug.Log($"Sending login request with username: {username}");
+            Debug.Log($"[LOGIN] Sending login request with username: {username}");
             
             yield return www.SendWebRequest();
 
-            Debug.Log($"Response received. Status: {www.responseCode}");
-            Debug.Log($"Response body: {www.downloadHandler.text}");
+            Debug.Log($"[LOGIN] Response received. Status: {www.responseCode}");
+            Debug.Log($"[LOGIN] Response body: {www.downloadHandler.text}");
             
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"Error during login: {www.error}\nResponse: {www.downloadHandler.text}");
+                Debug.LogError($"[LOGIN] Error during login: {www.error}\nResponse: {www.downloadHandler.text}");
                 description.text = "Login failed. Please check your credentials.";
                 yield break;
             }
@@ -145,24 +145,39 @@ public class GameEntryBehaviour : MonoBehaviour
                     yield break;
                 }
 
-                // Store tokens securely
-                string usernameToUse = signInResponse.username ?? username;
+                // Explicitly check username from response
+                Debug.Log($"[LOGIN] API Response username: {signInResponse.username}");
+                Debug.Log($"[LOGIN] Input username: {username}");
+
+                // Prioritize the username from API response (when email is used to login)
+                // Fall back to the input username if API doesn't return one
+                string usernameToUse = !string.IsNullOrEmpty(signInResponse.username) ? signInResponse.username : username;
+                Debug.Log($"[LOGIN] Selected username to use: {usernameToUse}");
+                
+                // Store username first to ensure it's available
                 PlayerPrefs.SetString("Username", usernameToUse);
+                PlayerPrefs.Save(); // Ensure the preferences are saved immediately
+                
+                // Verify the username was stored
+                string storedUsername = PlayerPrefs.GetString("Username");
+                Debug.Log($"[LOGIN] Verified stored username in PlayerPrefs: {storedUsername}");
+                
                 if (signInResponse.tokens != null)
                 {
                     PlayerPrefs.SetString("AccessToken", signInResponse.tokens.accessToken);
                     PlayerPrefs.SetString("RefreshToken", signInResponse.tokens.refreshToken);
                     PlayerPrefs.SetString("IdToken", signInResponse.tokens.idToken);
+                    PlayerPrefs.Save();
                 }
                 
-                Debug.Log($"Successfully logged in user: {usernameToUse}");
+                Debug.Log($"[LOGIN] Successfully logged in user: {usernameToUse}");
                 
                 FinishEntry(usernameToUse);
             }
             catch (Exception e)
             {
-                Debug.LogError($"Error parsing response: {e.Message}");
-                Debug.LogError($"Raw response was: {www.downloadHandler.text}");
+                Debug.LogError($"[LOGIN] Error parsing response: {e.Message}");
+                Debug.LogError($"[LOGIN] Raw response was: {www.downloadHandler.text}");
                 description.text = "Error during login. Please try again.";
             }
         }
@@ -326,14 +341,17 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private void CompleteGameEntry(string username)
     {
+        Debug.Log($"[COMPLETE] Starting CompleteGameEntry with username: {username}");
         GameStarter.Instance.Init();
         gameObject.SetActive(false);
     }
-
     private void FinishEntry(string username)
     {
+        Debug.Log($"[FINISH] Starting FinishEntry with username: {username}");
         _pendingUsername = username;
+        Debug.Log($"[FINISH] Set _pendingUsername to: {_pendingUsername}");
         GameStatistics.Instance.Init(username);
+        Debug.Log($"[FINISH] Called GameStatistics.Init with username: {username}");
     }
 
     public void OnGuestLogin()
