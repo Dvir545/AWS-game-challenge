@@ -170,8 +170,8 @@ namespace Utils.Data
             leftHanded = PlayerPrefs.GetInt("leftHanded", 0) == 1;
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
             musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-
-            StartCoroutine(LoadUserDataWithRetry(0));
+            if (username != "")
+                StartCoroutine(LoadUserDataWithRetry(0));
         }
 
         public void SetLeftHanded(bool value)
