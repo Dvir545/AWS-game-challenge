@@ -224,8 +224,8 @@ namespace World
         {
             while (true)
             {
-                while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || 
-                       dayBackgroundMusic.isPlaying || DayNightManager.Instance.CurrentDayPhase != DayPhase.Day)
+                while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || dayBackgroundMusic.isPlaying || 
+                       _appPaused || DayNightManager.Instance.CurrentDayPhase != DayPhase.Day)
                 {
                     yield return new WaitForSeconds(1f); // Check every second
                 }
