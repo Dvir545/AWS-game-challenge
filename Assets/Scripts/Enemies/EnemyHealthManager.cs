@@ -50,9 +50,10 @@ namespace Enemies
         
         private IEnumerator TakeDamageCoroutine(int damage, Vector2? hitDirection = null, bool tower = false)
         {
-            _canGetHit = false;
             if (tower)
                 damage = Mathf.FloorToInt(damage * EnemyData.GetTowerDamageMultiplier(enemyType));
+            else 
+                _canGetHit = false;
             _curHealth -= damage;
             UpdateHealthBar();
             _enemySoundManager.PlayHitSound();

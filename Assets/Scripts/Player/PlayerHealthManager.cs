@@ -30,7 +30,8 @@ namespace Player
         private bool _init;
         private const float XStartOffset = -296;//-360 + 64;
         private const int XOffsetBetweenHearts = 128;
-        private const float HitTime = 0.25f;
+        private const float HitTime = .25f;
+        private const float HitMercyTime = .5f;
         
         public bool IsDead => GameData.Instance.curHealth <= 0;
 
@@ -114,7 +115,8 @@ namespace Player
             EventManager.Instance.TriggerEvent(EventManager.PlayerGotHit, (HitTime, hitDirection, pushForceMultiplier));
             EffectsManager.Instance.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.PlayerDamageColor, 1.5f);
             
-            yield return new WaitForSeconds(HitTime);
+            var hitMercyTime = enemyType == Enemy.EvilBall ? HitTime : HitMercyTime;
+            yield return new WaitForSeconds(hitMercyTime);
             _canGetHit = true;
         }
         

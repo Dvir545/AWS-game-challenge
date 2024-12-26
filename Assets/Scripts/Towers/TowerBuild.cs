@@ -134,7 +134,6 @@ namespace Towers
             if (CurrentLevel == 1)  // first floor
             {
                 _newFloorBody.GetComponent<Collider2D>().enabled = true;
-                _newFloorBody.GetComponent<NavMeshObstacle>().enabled = true;
             }
             _newFloorAnimationManager.StartTower();
             _topConstruction = _floors[CurrentLevel-1].transform.GetChild(1).gameObject;

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Utils;
 using Utils.Data;
+using Random = UnityEngine.Random;
 
 namespace World
 {
@@ -37,6 +39,7 @@ namespace World
         private int _currentNightSongIndex;
         private Coroutine _nightBackgroundCoroutine;
         private bool _backgroundMusicPaused;
+        private bool _appPaused;
         private bool _playingDayMusic;
         private List<AudioSource> _musicSources = new();
 
@@ -190,22 +193,22 @@ namespace World
         }
         
         private Coroutine _entryMusicCoroutine;
-        private IEnumerator PlayEntryMusicCR(bool immediate = false)
+        private IEnumerator PlayEntryMusicCR(bool immediate = false, float duration=0f)
         {
             if (!immediate)
             {
                 yield return  new WaitForSeconds(3f);
             }
-            PlayEntryMusic();
+            PlayEntryMusic(duration);
         }
         
-        public void StartEntryMusicCR(bool immediate = false)
+        public void StartEntryMusicCR(bool immediate = false, float duration=0f)
         {
             if (_entryMusicCoroutine != null)
             {
                 return;
             }
-            _entryMusicCoroutine = StartCoroutine(PlayEntryMusicCR(immediate));
+            _entryMusicCoroutine = StartCoroutine(PlayEntryMusicCR(immediate, duration));
         }
         public void StopEntryMusicCR()
         {
@@ -239,7 +242,7 @@ namespace World
             while (true)
             {
                 while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || nightBackgroundMusic.isPlaying || 
-                       DayNightManager.Instance.CurrentDayPhase != DayPhase.Night)
+                       _appPaused || DayNightManager.Instance.CurrentDayPhase != DayPhase.Night)
                 {
                     yield return new WaitForSeconds(1f); // Check every second
                 }
@@ -289,6 +292,16 @@ namespace World
                 PlayMusic(nightBackgroundMusic, duration);
             }
             _playingDayMusic = day;
+        }
+
+        private void OnApplicationPause(bool hasFocus)
+        {
+            _appPaused = true;
+        }
+        
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            _appPaused = false;
         }
     }
 }

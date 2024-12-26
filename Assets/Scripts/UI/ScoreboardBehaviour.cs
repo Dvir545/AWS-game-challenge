@@ -249,7 +249,7 @@ public class ScoreboardBehaviour : MonoBehaviour
             
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
-                SoundManager.Instance.StartEntryMusicCR(true);
+                SoundManager.Instance.StartEntryMusicCR(true, 1f);
                 try
                 {
                     Debug.Log($"Raw fetch response: {webRequest.downloadHandler.text}");

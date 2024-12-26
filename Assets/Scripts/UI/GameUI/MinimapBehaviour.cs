@@ -93,6 +93,7 @@ namespace UI.GameUI
 
         public void JumpToNight()
         {
+            StopTweens();
             SetDarkness(NightAlpha);
         }
 
@@ -104,9 +105,15 @@ namespace UI.GameUI
         public void StopTweens()
         {
             if (_darkenTween != null)
+            {
                 _darkenTween.Kill();
+                _darkenTween = null;
+            }
             if (_lightenTween != null)
+            {
                 _lightenTween.Kill();
+                _lightenTween = null;
+            }
         }
 
         public void Reset()

@@ -108,6 +108,8 @@ GameObject:
   - component: {fileID: 2075743032119391277}
   - component: {fileID: 6098988588668083569}
   - component: {fileID: 6067751096450263886}
+  - component: {fileID: 8864805873946380655}
+  - component: {fileID: 3540296657395481048}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -180,6 +182,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorPrefab: {fileID: 5343346920017203117, guid: 87c86b8743db896488b3bda0b3405938, type: 3}
+--- !u!114 &8864805873946380655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990226623042425194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.154541, y: 0.97199893, z: 4}
+  m_Center: {x: 0.020709991, y: 0.545051, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
+--- !u!114 &3540296657395481048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990226623042425194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.724865, y: 0.31341028, z: 4}
+  m_Center: {x: 0.007130742, y: 0.35154843, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &8733900449144418652
 GameObject:
   m_ObjectHideFlags: 0

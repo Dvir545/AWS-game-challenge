@@ -13,6 +13,8 @@ public class SettingsBehaviour : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject saveNQuitButton;
     [SerializeField] private GameObject darkOverlay;
+    [SerializeField] private GameObject settingsEnterButton;
+    [SerializeField] private GameObject settingsExitButton;
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
@@ -30,13 +32,15 @@ public class SettingsBehaviour : MonoBehaviour
         else  // pause game
         {
             darkOverlay.SetActive(true);
+            settingsEnterButton.SetActive(false);
+            settingsExitButton.SetActive(true);
             Time.timeScale = 0;
+            SoundManager.Instance.PauseBackgroundSong();
         }
         sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
         musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
-        SoundManager.Instance.PauseBackgroundSong();
     }
     
     public void CloseSettings()
@@ -49,10 +53,12 @@ public class SettingsBehaviour : MonoBehaviour
         else  // resume game
         {
             Time.timeScale = 1;
+            SoundManager.Instance.ResumeBackgroundSong();
         }
         darkOverlay.SetActive(false);
+        settingsEnterButton.SetActive(true);
+        settingsExitButton.SetActive(false);
         settingsWindow.SetActive(false);
-        SoundManager.Instance.ResumeBackgroundSong();
     }
 
     public void SaveNQuit()
