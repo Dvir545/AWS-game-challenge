@@ -42,7 +42,7 @@ namespace Utils
                 int randomNumber = Random.Range(1, 100);
 
                 // Try different formats until we get one under 14 chars
-                result = $"{randomAction}-{randomAnimal}{randomNumber}";
+                result = $"{randomAction}{randomAnimal}{randomNumber}";
                 if (result.Length > 13)
                 {
                     // Try shorter format
