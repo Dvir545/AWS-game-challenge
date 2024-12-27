@@ -9,6 +9,8 @@ namespace Utils
         private void Awake()
         {
             _isFullScreen = Screen.fullScreen;
+            if (_isFullScreen)
+                WebGLSupport.WebGLWindow.SwitchFullscreen();
         }
 
         private void Update()
