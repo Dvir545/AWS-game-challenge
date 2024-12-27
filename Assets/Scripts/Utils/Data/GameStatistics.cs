@@ -167,7 +167,7 @@ namespace Utils.Data
             PlayerPrefs.Save();
             
             // Load settings from PlayerPrefs
-            leftHanded = PlayerPrefs.GetInt("leftHanded", 0) == 1;
+            leftHanded = PlayerPrefs.GetInt("leftHanded", 1) == 1;
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
             musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
 

@@ -17,6 +17,7 @@ public class SetResolution : MonoBehaviour
 
         // Get the real ratio
         float ratio = (float)Screen.width / (float)Screen.height;
+        Debug.Log("Ratio: " + ratio);
 
         // Cammera settings to landscape
         if (ratio >= LandscapeRatio)
