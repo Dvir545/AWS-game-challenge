@@ -9,8 +9,9 @@ using World;
 
 namespace Stores
 {
-    public class ToolBuyer : MonoBehaviour
+    public class ToolBuyer : MonoBehaviour, IBuyable
     {
+        [SerializeField] private int toolNumber;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private HeldTool tool;
         [SerializeField] private TextMeshProUGUI priceText;
@@ -71,6 +72,16 @@ namespace Stores
                 sprite = SpriteData.Instance.GetToolSprite(tool, _curLevel);
             }
             _iconImage.sprite = sprite;
+        }
+        
+        public void BuyItem()
+        {
+            BuyUpgrade();
+        }
+        
+        public int GetItemNumber()
+        {
+            return toolNumber;
         }
     }
 }

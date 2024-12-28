@@ -8,7 +8,7 @@ using World;
 
 namespace Stores
 {
-    public class CropBuyer : MonoBehaviour
+    public class CropBuyer : MonoBehaviour, IBuyable
     {
         [SerializeField] private CropManager cropManager;
         [SerializeField] private PlayerData playerData;
@@ -60,6 +60,11 @@ namespace Stores
             {
                 SoundManager.Instance.CantPurchase();
             }
+        }
+
+        public void BuyItem()
+        {
+            BuyCrop();
         }
     }
 }

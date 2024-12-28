@@ -5,21 +5,24 @@ using Enemies.Demon;
 using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 using Utils.Data;
 using World;
 
-public class SettingsBehaviour : MonoBehaviour
+public class SettingsBehaviour : Singleton<SettingsBehaviour>
 {
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject entry;
     [SerializeField] private GameObject saveNQuitButton;
+    [SerializeField] private GameObject disconnectButton;
     [SerializeField] private GameObject darkOverlay;
     [SerializeField] private GameObject settingsEnterButton;
     [SerializeField] private GameObject settingsExitButton;
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
-    
-    
+
+    private bool _isOpen;
     private bool _fromMenu;
     
     public void OpenSettings(bool fromMenu=false)
@@ -28,12 +31,15 @@ public class SettingsBehaviour : MonoBehaviour
         {
             mainMenu.SetActive(false);
             saveNQuitButton.SetActive(false);
+            disconnectButton.SetActive(true);
         }
         else  // pause game
         {
             darkOverlay.SetActive(true);
             settingsEnterButton.SetActive(false);
             settingsExitButton.SetActive(true);
+            saveNQuitButton.SetActive(true);
+            disconnectButton.SetActive(false);
             Time.timeScale = 0;
             SoundManager.Instance.PauseBackgroundSong();
         }
@@ -41,6 +47,7 @@ public class SettingsBehaviour : MonoBehaviour
         musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
+        _isOpen = true;
     }
     
     public void CloseSettings()
@@ -48,7 +55,6 @@ public class SettingsBehaviour : MonoBehaviour
         if (_fromMenu)
         {
             mainMenu.SetActive(true);
-            saveNQuitButton.SetActive(true);
         }
         else  // resume game
         {
@@ -59,6 +65,19 @@ public class SettingsBehaviour : MonoBehaviour
         settingsEnterButton.SetActive(true);
         settingsExitButton.SetActive(false);
         settingsWindow.SetActive(false);
+        _isOpen = false;
+    }
+    
+    public void ToggleSettings()
+    {
+        if (_isOpen)
+        {
+            CloseSettings();
+        }
+        else
+        {
+            OpenSettings();
+        }
     }
 
     public void SaveNQuit()
@@ -70,6 +89,15 @@ public class SettingsBehaviour : MonoBehaviour
         BallPool.Instance.ReleaseAll();
         SoundManager.Instance.PauseBackgroundSong(0f);
         GameEnder.Instance.EndGame();
+    }
+
+    public void Disconnect()
+    {
+        // DVIR - disconnect the player
+        CloseSettings();
+        CloseSettings();
+        mainMenu.SetActive(false);
+        entry.SetActive(true);
     }
     
     public void ChangeSFXVolume(float volume)

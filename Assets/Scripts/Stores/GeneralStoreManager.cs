@@ -17,6 +17,11 @@ namespace Stores
         private Dictionary<StoreType, GameObject> _storesDarkOverlays;
         private Dictionary<StoreType, GameObject> _storesWindowCanvases;
         private StoreType? _activeStore;
+        [SerializeField] private CropBuyer[] cropItems;
+        [SerializeField] private MaterialBuyer[] materialItems;
+        [SerializeField] private ToolBuyer[] toolItems;
+        [SerializeField] private UpgradeBuyer[] upgradeItems;
+        private IBuyable[] _activeItems;
         
         private void Awake()
         {
@@ -61,6 +66,14 @@ namespace Stores
             _storesDarkOverlays[storeType].SetActive(true);
             _storesWindowCanvases[storeType].SetActive(true);
             _activeStore = storeType;
+            _activeItems = storeType switch
+            {
+                StoreType.Crops => cropItems,
+                StoreType.Materials => materialItems,
+                StoreType.Tools => toolItems,
+                StoreType.Upgrades => upgradeItems,
+                _ => null
+            };
         }
         
         public void CloseStore()
@@ -70,6 +83,7 @@ namespace Stores
             _storesDarkOverlays[activeStore].SetActive(false);
             _storesWindowCanvases[activeStore].SetActive(false);
             _activeStore = null;
+            _activeItems = null;
         }
 
         public void UpdateStock(int[] newCrops, int[] newMaterials)
@@ -82,6 +96,13 @@ namespace Stores
             {
                 GameData.Instance.materialsInStore[i] = Mathf.Min(GameData.Instance.materialsInStore[i] + newMaterials[i], Constants.MaxMaterialsInStore);
             }
+        }
+        
+        public void BuyItem(int itemNumber)
+        {
+            if (_activeItems == null) return;
+            if (itemNumber < 0 || itemNumber >= _activeItems.Length) return;
+            _activeItems[itemNumber].BuyItem();
         }
     }
 }

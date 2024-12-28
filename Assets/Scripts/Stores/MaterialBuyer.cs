@@ -8,8 +8,9 @@ using World;
 
 namespace Stores
 {
-    public class MaterialBuyer : MonoBehaviour
+    public class MaterialBuyer : MonoBehaviour, IBuyable
     {
+        [SerializeField] private int materialNumber;
         [SerializeField] private MaterialManager materialManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private TowerMaterial material;
@@ -26,6 +27,7 @@ namespace Stores
             amount.text = Amount.ToString();
             priceText.text = TowersData.Instance.GetTowerData(material).Price + " $";
             EventManager.Instance.StartListening(EventManager.DayStarted, (arg0 => amount.text = Amount.ToString()));
+            
         }
 
         public void BuyMaterial()
@@ -54,6 +56,16 @@ namespace Stores
             {
                 SoundManager.Instance.CantPurchase();
             }
+        }
+        
+        public void BuyItem()
+        {
+            BuyMaterial();
+        }
+        
+        public int GetItemNumber()
+        {
+            return materialNumber;
         }
     }
 }

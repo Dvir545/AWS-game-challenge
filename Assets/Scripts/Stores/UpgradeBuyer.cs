@@ -8,8 +8,9 @@ using World;
 
 namespace Stores
 {
-    public class UpgradeBuyer : MonoBehaviour
+    public class UpgradeBuyer : MonoBehaviour, IBuyable
     {
+        [SerializeField] private int upgradeNumber;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Upgrade upgradeType;
         [SerializeField] private TextMeshProUGUI priceText;
@@ -70,6 +71,16 @@ namespace Stores
                 sprite = SpriteData.Instance.GetUpgradeSprite(upgradeType, _curLevel);
             }
             _iconImage.sprite = sprite;
+        }
+        
+        public void BuyItem()
+        {
+            BuyUpgrade();
+        }
+        
+        public int GetItemNumber()
+        {
+            return upgradeNumber;
         }
     }
 }

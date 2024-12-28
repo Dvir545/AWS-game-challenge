@@ -23,6 +23,7 @@ namespace UI.GameUI
         private Tween _darkenTween;
         private Tween _lightenTween;
         private const float NightAlpha = 0.9f;
+        private bool _mapOpen = false;
         
         private void Awake()
         {
@@ -68,6 +69,7 @@ namespace UI.GameUI
             SoundManager.Instance.ShortButton();
             _map.gameObject.SetActive(true);
             _mapOpenButton.gameObject.SetActive(false);
+            _mapOpen = true;
         }
     
         public void CloseMap()
@@ -75,6 +77,19 @@ namespace UI.GameUI
             SoundManager.Instance.ShortButton();
             _map.gameObject.SetActive(false);
             _mapOpenButton.gameObject.SetActive(true);
+            _mapOpen = false;
+        }
+        
+        public void ToggleMap()
+        {
+            if (_mapOpen)
+            {
+                CloseMap();
+            }
+            else
+            {
+                OpenMap();
+            }
         }
 
         public void DarkenMap(float duration)
