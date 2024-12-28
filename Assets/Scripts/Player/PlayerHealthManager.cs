@@ -86,9 +86,18 @@ namespace Player
                     if (_heartImages[i].sprite != sprite)
                     {
                         _heartImages[i].sprite = sprite;
-                        _heartPrefabs[i].transform.DOScale(_heartScale*1.3f, 0.2f).OnComplete(() => _heartPrefabs[i].transform.DOScale(_heartScale, 0.2f));
-                        break;
+                        if (!_init)
+                            _heartPrefabs[i].transform.DOScale(_heartScale*1.3f, 0.2f).OnComplete(() => _heartPrefabs[i].transform.DOScale(_heartScale, 0.2f));
+                        else
+                        {
+                            _heartPrefabs[i].transform.localScale = new Vector3(_heartScale, _heartScale, _heartScale);
+                        }
                     }
+                }
+                if (!_init)
+                {
+                    _init = true;
+                    _heartScale = _heartPrefabs[0].transform.localScale.x;
                 }
             }
         }
