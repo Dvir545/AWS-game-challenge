@@ -35,6 +35,7 @@ public class GameEntryBehaviour : MonoBehaviour
         {
             GameStatistics.Instance.OnGameDataLoaded += HandleGameDataLoaded;
         }
+        description.text = "";
     }
 
     private void OnDisable()
