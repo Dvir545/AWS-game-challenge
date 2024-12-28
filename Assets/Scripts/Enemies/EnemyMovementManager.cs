@@ -16,6 +16,7 @@ namespace Enemies
         [SerializeField] private float secondsToUpdateTarget = 5f;
         private PlayerData playerData;
         protected Rigidbody2D Rb;
+        private Collider2D _collider2D;
         protected NavMeshAgent Agent;
         protected Transform CurrentTarget;
         protected Vector3 CurrentTargetPosition = Vector3.zero;
@@ -38,6 +39,7 @@ namespace Enemies
             EnemyHealthManager = GetComponent<EnemyHealthManager>();
             _enemyType = EnemyHealthManager.enemyType;
             Rb = GetComponent<Rigidbody2D>();
+            _collider2D = GetComponent<Collider2D>();
             Agent = GetComponent<NavMeshAgent>();
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
@@ -125,6 +127,7 @@ namespace Enemies
         {
            Agent.updatePosition = false;
            IsMoving = false;
+           _collider2D.enabled = true;
            Rb.AddForce(hitDirection * (Constants.BaseKnockbackForce * playerData.KnockbackMultiplier * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
@@ -133,6 +136,7 @@ namespace Enemies
                Agent.updatePosition = true;
                IsMoving = true;
            }
+           _collider2D.enabled = false;
            Rb.velocity = Vector2.zero;
         }
 
@@ -153,6 +157,7 @@ namespace Enemies
             Agent.updatePosition = true;
             Agent.Warp(transform.position);
             IsMoving = true;
+            _collider2D.enabled = false;
         }
 
         public Vector3 GetCurrentTargetPosition()

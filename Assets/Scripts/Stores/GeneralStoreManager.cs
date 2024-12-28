@@ -17,6 +17,7 @@ namespace Stores
         private Dictionary<StoreType, GameObject> _storesDarkOverlays;
         private Dictionary<StoreType, GameObject> _storesWindowCanvases;
         private StoreType? _activeStore;
+        public bool IsStoreOpen => _activeStore != null;
         [SerializeField] private CropBuyer[] cropItems;
         [SerializeField] private MaterialBuyer[] materialItems;
         [SerializeField] private ToolBuyer[] toolItems;

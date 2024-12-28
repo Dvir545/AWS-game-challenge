@@ -87,7 +87,11 @@ namespace Player
                     {
                         _heartImages[i].sprite = sprite;
                         if (!_init)
-                            _heartPrefabs[i].transform.DOScale(_heartScale*1.3f, 0.2f).OnComplete(() => _heartPrefabs[i].transform.DOScale(_heartScale, 0.2f));
+                        {
+                            var index = i;
+                            _heartPrefabs[index].transform.DOScale(_heartScale * 1.3f, 0.2f).OnComplete(() =>
+                                _heartPrefabs[index].transform.DOScale(_heartScale, 0.2f));
+                        }
                         else
                         {
                             _heartPrefabs[i].transform.localScale = new Vector3(_heartScale, _heartScale, _heartScale);
@@ -96,7 +100,6 @@ namespace Player
                 }
                 if (!_init)
                 {
-                    _init = true;
                     _heartScale = _heartPrefabs[0].transform.localScale.x;
                 }
             }

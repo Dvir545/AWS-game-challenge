@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -37,6 +38,11 @@ namespace Player
         }
 
         private void Start()
+        {
+            Init();
+        }
+
+        public void Init()
         {
             ChangeToolColor(null);
         }

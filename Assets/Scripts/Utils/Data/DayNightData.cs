@@ -49,8 +49,9 @@ namespace Utils.Data
             };
             var nightSpawns = new List<EnemySpawns>()
             {
-                new(Constants.FirstNightEnemies), 
-                new(8, 1), 
+                new(goblins:1), new(goblins:1),
+                //new(Constants.FirstNightEnemies), 
+                //new(8, 1), 
                 new(5, 4), 
                 new(6, 5, 0, 0, 2), 
                 new(5, 6, 0, 0, 5), 

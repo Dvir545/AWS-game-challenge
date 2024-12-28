@@ -144,6 +144,7 @@ namespace World
         {
             SoundManager.Instance.Init(stop: true);
             player.GetComponent<PlayerHealthManager>().Init();
+            player.GetComponent<PlayerAnimationManager>().Init();
             cashBehaviour.Init();
             actButtonBehavior.Init();
             dayNightRollBehaviour.Init();

@@ -24,7 +24,10 @@ namespace Utils
             }
             if (Input.GetKeyDown(_settingsKey))
             {
-                SettingsBehaviour.Instance.ToggleSettings();
+                if (GeneralStoreManager.Instance.IsStoreOpen)
+                    GeneralStoreManager.Instance.CloseStore();
+                else
+                    SettingsBehaviour.Instance.ToggleSettings();
             }
             if (Input.GetKeyDown(_skipToNightKey))
             {

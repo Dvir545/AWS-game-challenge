@@ -36,23 +36,25 @@ namespace Enemies.Goblin
                     _spriteRenderer.sprite = arrowDownSprite;
                     _collider.offset = downCollider.offset;
                     _collider.size = downCollider.size;
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case FacingDirection.Up:
                     _spriteRenderer.sprite = arrowDownSprite;
                     _collider.offset = downCollider.offset;
                     _collider.size = downCollider.size;
-                    _spriteRenderer.flipY = true;
+                    transform.localScale = new Vector3(1, -1, 1);
                     break;
                 case FacingDirection.Right:
                     _spriteRenderer.sprite = arrowRightSprite;
                     _collider.offset = rightCollider.offset;
                     _collider.size = rightCollider.size;
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case FacingDirection.Left:
                     _spriteRenderer.sprite = arrowRightSprite;
                     _collider.offset = rightCollider.offset;
                     _collider.size = rightCollider.size;
-                    _spriteRenderer.flipX = true;
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
             }
         }
