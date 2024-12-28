@@ -37,9 +37,9 @@ public class MobileKeyboardManager : Singleton<MobileKeyboardManager>
         }
     
         // Check for mobile device in WebGL
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        if (Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform)
         {
-            return SystemInfo.deviceType == DeviceType.Handheld;
+            return true;
         }
     
         return false;
