@@ -7,6 +7,7 @@ namespace UI
     {
         private GameObject _window;
         [SerializeField] private GameObject mainMenu;
+        [SerializeField] private GameObject[] tutorialPages;
 
         private void Awake()
         {
@@ -17,6 +18,22 @@ namespace UI
         {
             _window.SetActive(true);
             mainMenu.SetActive(false);
+        }
+        
+        public void NextPage()
+        {
+            for (int i = 0; i < tutorialPages.Length; i++)
+            {
+                if (tutorialPages[i].activeSelf)
+                {
+                    tutorialPages[i].SetActive(false);
+                    if (i == tutorialPages.Length - 1)
+                        tutorialPages[0].SetActive(true);
+                    else
+                        tutorialPages[i + 1].SetActive(true);
+                    return;
+                }
+            }
         }
     }
 }
