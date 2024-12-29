@@ -136,7 +136,8 @@ namespace Enemies
                Agent.updatePosition = true;
                IsMoving = true;
            }
-           _collider2D.enabled = false;
+           if (!_collider2D.isTrigger) 
+               _collider2D.enabled = false;
            Rb.velocity = Vector2.zero;
         }
 
@@ -157,7 +158,8 @@ namespace Enemies
             Agent.updatePosition = true;
             Agent.Warp(transform.position);
             IsMoving = true;
-            _collider2D.enabled = false;
+            if (!_collider2D.isTrigger)
+                _collider2D.enabled = false;
         }
 
         public Vector3 GetCurrentTargetPosition()
