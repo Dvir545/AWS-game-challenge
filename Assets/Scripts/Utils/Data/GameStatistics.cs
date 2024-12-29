@@ -505,12 +505,29 @@ namespace Utils.Data
                 EventManager.Instance.TriggerEvent(EventManager.NewHighScore, null);
             }
             SaveToJson();
+            StartCoroutine(ReloadAfterSave());
         }
-    }
+
+        private IEnumerator ReloadAfterSave()
+        {
+            // Wait for the save operation to complete
+            while (_isSaving)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+            
+            // Add a small delay to ensure AWS has processed the save
+            yield return new WaitForSeconds(1f);
+            
+            // Reload the data
+            Debug.Log("********** Starting data reload after save **********");
+            StartCoroutine(LoadUserDataWithRetry(0));
+        }
 
     [Serializable]
     internal class LoadSaveRequest
     {
         public string username;
     }
+}
 }

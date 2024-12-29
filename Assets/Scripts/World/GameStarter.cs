@@ -84,7 +84,7 @@ namespace World
             if (GameStatistics.Instance.LoadedGameData?.CurrentGameState != null)
             {
                 var gameState = GameStatistics.Instance.LoadedGameData.CurrentGameState;
-                bool isDefaultGameState = gameState.day == 0 && gameState.curHealth == 0 && gameState.cash == 0;
+                bool isDefaultGameState = gameState.curHealth == 0 ;
 
                 if (isDefaultGameState)
                 {
