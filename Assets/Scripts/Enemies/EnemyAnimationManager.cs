@@ -88,6 +88,7 @@ namespace Enemies
             foreach (var animator in animators)
             {
                 animator.SetTrigger(AnimationDeath);
+                animator.ResetTrigger(AnimationGotHit);
             }
         }
         

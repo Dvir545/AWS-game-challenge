@@ -24,7 +24,7 @@ namespace Utils.Data
                 cashDrop = 5,
                 speed = 1,
                 knockbackForceMultiplier = .5f,
-                towerDamageMultiplier = 1,
+                towerDamageMultiplier = 2/3f,
                 pushForceMultiplier = 1
             }},
             {Enemy.Skeleton, new EnemyInfo
@@ -34,7 +34,7 @@ namespace Utils.Data
                 cashDrop = 10,
                 speed = 1,
                 knockbackForceMultiplier = 1,
-                towerDamageMultiplier = 1,
+                towerDamageMultiplier = 2/3f,
                 pushForceMultiplier = 1
             }},
             {Enemy.Chicken, new EnemyInfo
@@ -44,7 +44,7 @@ namespace Utils.Data
                 cashDrop = 25,
                 speed = 2,
                 knockbackForceMultiplier = 1,
-                towerDamageMultiplier = 1,
+                towerDamageMultiplier = 2/3f,
                 pushForceMultiplier = 1
             }},
             { Enemy.Orc, new EnemyInfo
@@ -64,7 +64,7 @@ namespace Utils.Data
                 cashDrop = 20,
                 speed = 1.5f,
                 knockbackForceMultiplier = 1,
-                towerDamageMultiplier = 1,
+                towerDamageMultiplier = 2/3f,
                 pushForceMultiplier = 1
             }},
             { Enemy.Demon, new EnemyInfo
@@ -74,7 +74,7 @@ namespace Utils.Data
                 cashDrop = 100,
                 speed = .6f,
                 knockbackForceMultiplier = -.2f,
-                towerDamageMultiplier = 1,
+                towerDamageMultiplier = 1/5f,
                 pushForceMultiplier = 4
             }},
             { Enemy.EvilBall, new EnemyInfo
