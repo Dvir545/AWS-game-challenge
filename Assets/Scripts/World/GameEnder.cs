@@ -27,6 +27,7 @@ namespace World
             player.GetComponent<PlayerHealthManager>().Reset();
             player.GetComponent<PlayerSoundManager>().Reset();
             petsManager.Reset();
+            DayNightManager.Instance.Reset();
             
             GameStarter.Instance.Init(died: died);
         }

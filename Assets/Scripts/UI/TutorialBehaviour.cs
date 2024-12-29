@@ -8,14 +8,28 @@ namespace UI
         private GameObject _window;
         [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject[] tutorialPages;
+        [SerializeField] private GameObject controlsMobile;
+        [SerializeField] private GameObject controlsPC;
 
         private void Awake()
         {
             _window = transform.GetChild(0).gameObject;
+            if (MobileKeyboardManager.Instance.IsMobileDevice())
+            {
+                controlsMobile.SetActive(true);
+                controlsPC.SetActive(false);
+            }
+            else
+            {
+                controlsMobile.SetActive(false);
+                controlsPC.SetActive(true);
+            }
         }
 
         public void OpenTutorial()
         {
+            if (_window == null)
+                Awake();
             _window.SetActive(true);
             mainMenu.SetActive(false);
         }

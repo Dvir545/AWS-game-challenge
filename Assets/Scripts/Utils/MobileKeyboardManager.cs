@@ -27,7 +27,7 @@ public class MobileKeyboardManager : Singleton<MobileKeyboardManager>
         }
     }
     
-    private bool IsMobileDevice()
+    public bool IsMobileDevice()
     {
         // Check for mobile platforms
         if (Application.platform == RuntimePlatform.Android || 

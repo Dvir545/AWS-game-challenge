@@ -42,6 +42,16 @@ namespace World
         private DayPhase _currentDayPhase;
         public DayPhase CurrentDayPhase => _currentDayPhase;
 
+        public void Reset()
+        {
+            if (_waveDeclarationTween != null)
+            {
+                _waveDeclarationTween.Kill();
+            }
+            if (waveDeclarationText != null)
+                waveDeclarationText.alpha = 0;
+        }
+        
         private void Update()
         {
             if (GameStarter.Instance.GameStarted && !playerHealthManager.IsDead)

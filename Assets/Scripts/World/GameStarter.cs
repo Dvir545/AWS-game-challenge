@@ -138,15 +138,16 @@ namespace World
             {
                 Debug.Log("Enabling continue button - save data found");
                 continueButton.SetActive(true);
-                
-                var newGamePos = newGameButton.transform.localPosition;
-                newGamePos = new Vector3(-xOffsetBetweenNewGameAndContinue, newGamePos.y, newGamePos.z);
-                newGameButton.transform.localPosition = newGamePos;
-                
-                var continuePos = continueButton.transform.localPosition;
-                continuePos = new Vector3(xOffsetBetweenNewGameAndContinue, continuePos.y, continuePos.z);
-                continueButton.transform.localPosition = continuePos;
             }
+
+            if (!continueButton.activeSelf) return;
+            var newGamePos = newGameButton.transform.localPosition;
+            newGamePos = new Vector3(-xOffsetBetweenNewGameAndContinue, newGamePos.y, newGamePos.z);
+            newGameButton.transform.localPosition = newGamePos;
+            
+            var continuePos = continueButton.transform.localPosition;
+            continuePos = new Vector3(xOffsetBetweenNewGameAndContinue, continuePos.y, continuePos.z);
+            continueButton.transform.localPosition = continuePos;
         }
 
         private void SetupGame()
@@ -211,17 +212,19 @@ namespace World
         
         public void PressedContinue()
         {
-            var gameState = GameStatistics.Instance.LoadedGameData?.CurrentGameState;
-            if (gameState == null)
-            {
-                Debug.LogError("Attempted to continue game without valid save data!");
-                return;
-            }
-
             menuCanvas.SetActive(false);
             GameContinued = true;
             if (_fromEntry)
+            {
+                var gameState = GameStatistics.Instance.LoadedGameData?.CurrentGameState;
+                if (gameState == null)
+                {
+                    Debug.LogError("Attempted to continue game without valid save data!");
+                    return;
+                }
                 GameData.Instance.LoadFromGameState(gameState);
+            }
+            
             SetupGame();
         }
         
