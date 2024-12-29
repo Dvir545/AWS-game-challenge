@@ -343,7 +343,7 @@ public class GameEntryBehaviour : MonoBehaviour
     private void CompleteGameEntry(string username)
     {
         Debug.Log($"[COMPLETE] Starting CompleteGameEntry with username: {username}");
-        GameStarter.Instance.Init();
+        GameStarter.Instance.Init(true);
         gameObject.SetActive(false);
     }
     private void FinishEntry(string username)

@@ -25,12 +25,12 @@ namespace Stores
         {
             amount.text = Amount.ToString();
             priceText.text = CropsData.Instance.GetPrice(crop) + " $";
-            EventManager.Instance.StartListening(EventManager.DayStarted, UpdateAmountText);
+            // EventManager.Instance.StartListening(EventManager.DayStarted, UpdateAmountText);
         }
 
-        private void UpdateAmountText(object arg0)
+        public void UpdateAmountText(int newAmount)
         {
-            amount.text = Amount.ToString();
+            amount.text = newAmount.ToString();
         }
 
         public void BuyCrop()

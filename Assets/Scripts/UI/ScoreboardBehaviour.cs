@@ -311,6 +311,6 @@ public class ScoreboardBehaviour : MonoBehaviour
         Debug.Log("ReturnToMenu called");
         _darkOverlay.SetActive(false);
         _window.SetActive(false);
-        GameEnder.Instance.EndGame();
+        GameEnder.Instance.EndGame(died: true);
     }
 }

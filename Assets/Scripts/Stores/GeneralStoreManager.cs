@@ -97,10 +97,12 @@ namespace Stores
             for (int i = 0; i < newCrops.Length; i++)
             {
                 GameData.Instance.cropsInStore[i] = Mathf.Min(GameData.Instance.cropsInStore[i] + newCrops[i], Constants.MaxCropsInStore);
+                cropItems[i].UpdateAmountText(GameData.Instance.cropsInStore[i]);
             }
             for (int i = 0; i < newMaterials.Length; i++)
             {
                 GameData.Instance.materialsInStore[i] = Mathf.Min(GameData.Instance.materialsInStore[i] + newMaterials[i], Constants.MaxMaterialsInStore);
+                materialItems[i].UpdateAmountText(GameData.Instance.materialsInStore[i]);
             }
         }
         

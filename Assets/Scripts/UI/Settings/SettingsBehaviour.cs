@@ -88,7 +88,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         EnemyPool.Instance.ReleaseAll();
         BallPool.Instance.ReleaseAll();
         SoundManager.Instance.PauseBackgroundSong(0f);
-        GameEnder.Instance.EndGame();
+        GameEnder.Instance.EndGame(died: false);
     }
 
     public void Disconnect()

@@ -16,7 +16,7 @@ namespace World
         [SerializeField] private Transform player;
         [SerializeField] private PetsManager petsManager;
 
-        public void EndGame()
+        public void EndGame(bool died)
         {
             towerBuildManager.ResetTowers();
             farmingManager.ResetCrops();
@@ -28,7 +28,7 @@ namespace World
             player.GetComponent<PlayerSoundManager>().Reset();
             petsManager.Reset();
             
-            GameStarter.Instance.Init();
+            GameStarter.Instance.Init(died: died);
         }
     }
 }

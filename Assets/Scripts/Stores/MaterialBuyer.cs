@@ -26,8 +26,11 @@ namespace Stores
         {
             amount.text = Amount.ToString();
             priceText.text = TowersData.Instance.GetTowerData(material).Price + " $";
-            EventManager.Instance.StartListening(EventManager.DayStarted, (arg0 => amount.text = Amount.ToString()));
-            
+        }
+        
+        public void UpdateAmountText(int newAmount)
+        {
+            amount.text = newAmount.ToString();
         }
 
         public void BuyMaterial()

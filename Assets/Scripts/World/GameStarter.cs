@@ -48,7 +48,7 @@ namespace World
         private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
         private Vector2 _boatStartPos;
-        private bool _initialized = false;
+        private bool _fromEntry = false;
 
         public bool GameStarted { get; private set; }
         public bool GameContinued { get; private set; }
@@ -98,7 +98,7 @@ namespace World
             }
         }
 
-        public void Init()
+        public void Init(bool fromEntry=false, bool died=false)
         {
             _collider.enabled = true;
             GameStarted = false;
@@ -113,16 +113,23 @@ namespace World
             gameCanvas.SetActive(false);
             player.gameObject.SetActive(false);
             player.transform.localPosition = PlayerMenuPos;
-            continueButton.SetActive(false);
+            if (fromEntry || died)
+                continueButton.SetActive(false);
             menuCanvas.SetActive(true);
             globalLight.intensity = 1f;
+            var localPosition = newGameButton.transform.localPosition;
+            localPosition = new Vector3(0, localPosition.y, localPosition.z);
+            newGameButton.transform.localPosition = localPosition;
 
-            if (GameStatistics.Instance?.LoadedGameData?.CurrentGameState != null)
+            if (fromEntry)
             {
                 HandleGameDataLoaded();
+            } else if (!died)
+            {
+                EnableContinueButton();
             }
             
-            _initialized = true;
+            _fromEntry = fromEntry;
         }
 
         private void EnableContinueButton()
@@ -213,7 +220,8 @@ namespace World
 
             menuCanvas.SetActive(false);
             GameContinued = true;
-            GameData.Instance.LoadFromGameState(gameState);
+            if (_fromEntry)
+                GameData.Instance.LoadFromGameState(gameState);
             SetupGame();
         }
         
