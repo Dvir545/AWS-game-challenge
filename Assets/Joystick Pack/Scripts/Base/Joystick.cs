@@ -64,6 +64,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!MobileKeyboardManager.Instance.IsMobileDevice() && eventData.button == PointerEventData.InputButton.Left)
+            return;
         cam = null;
         if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
             cam = canvas.worldCamera;

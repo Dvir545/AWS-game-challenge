@@ -2,6 +2,7 @@ using System;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
@@ -15,7 +16,8 @@ namespace UI.GameUI
         [SerializeField] private PlayerActionManager playerActionManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private float pressedOffset = 2f;
-        
+        [SerializeField] private InputActionReference actAction;
+
         private Button _button;
         private bool _isPressed;
         private Sprite _normalSprite;
@@ -28,6 +30,30 @@ namespace UI.GameUI
             _button = GetComponent<Button>();
             _buttonImage = GetComponent<Image>();
             _iconImage = iconObject.GetComponent<Image>();
+            actAction.action.Enable();
+            actAction.action.performed += OnActPerformed;
+            actAction.action.canceled += OnActCanceled;
+        }
+        
+        private void OnDestroy()
+        {
+            // Clean up the subscriptions when the object is destroyed
+            if (actAction != null)
+            {
+                actAction.action.performed -= OnActPerformed;
+                actAction.action.canceled -= OnActCanceled;
+            }
+        }
+        
+        private void OnActPerformed(InputAction.CallbackContext context)
+        {
+            PressButton();
+            _buttonImage.sprite = _pressedSprite;
+        }
+
+        private void OnActCanceled(InputAction.CallbackContext context)
+        {
+            ReleaseButton();
         }
 
         private void Start()
@@ -55,17 +81,17 @@ namespace UI.GameUI
             ReleaseButton();
         }
 
-        private void Update()
-        {
-            if (Input.GetButtonDown("Attack"))
-            {
-                PressButton();
-                _buttonImage.sprite = _pressedSprite;
-            }
-            else if (Input.GetButtonUp("Attack"))
-            {
-                ReleaseButton(); }
-        }
+        // private void Update()
+        // {
+        //     // if (Input.GetButtonDown("Attack"))
+        //     {
+        //         PressButton();
+        //         _buttonImage.sprite = _pressedSprite;
+        //     }
+        //     // else if (Input.GetButtonUp("Attack"))
+        //     {
+        //         ReleaseButton(); }
+        // }
 
         public void OnPointerDown(PointerEventData eventData)
         {
