@@ -73,6 +73,20 @@ namespace Utils.Data
     }
     
     [Serializable]
+    public class PetInfo
+    {
+        public int petType;
+        public int petIndex;
+        
+        public PetInfo(int petType, int petIndex)
+        {
+            this.petType = petType;
+            this.petIndex = petIndex;
+        }
+        public PetInfo() { }
+    }
+    
+    [Serializable]
     class SerializableGameData
     {
         public int HealthUpgradeLevel;
@@ -95,6 +109,7 @@ namespace Utils.Data
         public int[] ThisNightEnemies;
         public List<TowerLevelInfo>[] Towers;
         public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops;
+        public List<PetInfo> Pets;
     }
     
     public class GameData : Singleton<GameData>
@@ -119,6 +134,7 @@ namespace Utils.Data
         public int[] thisNightEnemies;
         public List<TowerLevelInfo>[] towers;
         public Dictionary<Vector2Int, PlantedCropInfo> plantedCrops;
+        public List<PetInfo> pets;
 
         public GameData()
         {
@@ -147,6 +163,7 @@ namespace Utils.Data
             thisNightEnemies = Constants.FirstNightEnemies.ToArray();
             towers = Constants.StartTowers.Select(towerList => new List<TowerLevelInfo>(towerList)).ToArray();
             plantedCrops = new Dictionary<Vector2Int, PlantedCropInfo>();
+            pets = new List<PetInfo>();
         }
         
         public void LoadFromGameState(GameState state)
@@ -215,6 +232,16 @@ namespace Utils.Data
                         );
                     }
                 }
+                
+                // Initialize pets
+                pets = new List<PetInfo>();
+                if (state.pets != null)
+                {
+                    foreach (var petInfo in state.pets)
+                    {
+                        pets.Add(new PetInfo(petInfo.petType, petInfo.petIndex));
+                    }
+                }
 
                 Debug.Log($"Successfully loaded game state. Day: {day}, Health: {curHealth}, Cash: {cash}");
             }
@@ -248,7 +275,8 @@ namespace Utils.Data
                 ThisDayEnemies = thisDayEnemies,
                 ThisNightEnemies = thisNightEnemies,
                 Towers = towers,
-                PlantedCrops = plantedCrops
+                PlantedCrops = plantedCrops,
+                Pets = pets
             };
             
             var json = JsonSerialization.ToJson(serializableData);
@@ -279,6 +307,7 @@ namespace Utils.Data
         public int[] thisNightEnemies;
         public TowerArrayWrapper[] towers;
         public List<PlantedCropKeyValue> plantedCrops;
+        public List<PetInfo> pets;
     }
 
     [Serializable]

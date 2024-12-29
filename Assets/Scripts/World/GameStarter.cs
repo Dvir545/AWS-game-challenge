@@ -42,12 +42,14 @@ namespace World
         [SerializeField] private NPCSpeech npcMid;
         [SerializeField] private ToolBuyer[] tools;
         [SerializeField] private UpgradeBuyer[] upgrades;
+        [SerializeField] private PetBuyer[] pets;
+        [SerializeField] private PetsManager petsManager;
         
         private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
         private Vector2 _boatStartPos;
         private bool _initialized = false;
-        
+
         public bool GameStarted { get; private set; }
         public bool GameContinued { get; private set; }
 
@@ -165,10 +167,16 @@ namespace World
             {
                 upgrade.Init();
             }
+
+            foreach (var pet in pets)
+            {
+                pet.Init();
+            }
             anchoredBoat.gameObject.SetActive(true);
             player.gameObject.SetActive(true);
             boatWithPlayer.gameObject.SetActive(false);
             SetPlayerPosition();
+            petsManager.Init();
             game.SetActive(true);
             player.GetComponent<PlayerSoundManager>().Init();
             npcBottom.Init();

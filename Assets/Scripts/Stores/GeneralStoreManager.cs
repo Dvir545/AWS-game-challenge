@@ -12,6 +12,7 @@ namespace Stores
         [SerializeField] private GameObject materialsStore;
         [SerializeField] private GameObject toolsStore;
         [SerializeField] private GameObject upgradesStore;
+        [SerializeField] private GameObject petsStore;
         private int _darkOverlayOrder = 0;
         private int _windowCanvasOrder = 1;
         private Dictionary<StoreType, GameObject> _storesDarkOverlays;
@@ -22,6 +23,7 @@ namespace Stores
         [SerializeField] private MaterialBuyer[] materialItems;
         [SerializeField] private ToolBuyer[] toolItems;
         [SerializeField] private UpgradeBuyer[] upgradeItems;
+        [SerializeField] private PetBuyer[] petItems;
         private IBuyable[] _activeItems;
         
         private void Awake()
@@ -31,14 +33,16 @@ namespace Stores
                 [StoreType.Crops] = cropsStore.transform.GetChild(_darkOverlayOrder).gameObject,
                 [StoreType.Materials] = materialsStore.transform.GetChild(_darkOverlayOrder).gameObject,
                 [StoreType.Tools] = toolsStore.transform.GetChild(_darkOverlayOrder).gameObject,
-                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_darkOverlayOrder).gameObject
+                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_darkOverlayOrder).gameObject,
+                [StoreType.Pets] = petsStore.transform.GetChild(_darkOverlayOrder).gameObject
             };
             _storesWindowCanvases = new Dictionary<StoreType, GameObject>
             {
                 [StoreType.Crops] = cropsStore.transform.GetChild(_windowCanvasOrder).gameObject,
                 [StoreType.Materials] = materialsStore.transform.GetChild(_windowCanvasOrder).gameObject,
                 [StoreType.Tools] = toolsStore.transform.GetChild(_windowCanvasOrder).gameObject,
-                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_windowCanvasOrder).gameObject
+                [StoreType.Upgrades] = upgradesStore.transform.GetChild(_windowCanvasOrder).gameObject,
+                [StoreType.Pets] = petsStore.transform.GetChild(_windowCanvasOrder).gameObject
             };
         }
 
@@ -73,6 +77,7 @@ namespace Stores
                 StoreType.Materials => materialItems,
                 StoreType.Tools => toolItems,
                 StoreType.Upgrades => upgradeItems,
+                StoreType.Pets => petItems,
                 _ => null
             };
         }

@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 using World;
 
@@ -174,10 +175,16 @@ namespace Utils.Data
                     return Color.white;
             }
         }
+        public void AddPet(Pet pet, int index)
+        {
+            GameData.Instance.pets.Add(new PetInfo((int)pet, index));
+            PetsManager.Instance.AddPet(pet, index);
+        }
 
         public void Reset()
         {
             _curTool = HeldTool.Sword;
         }
+
     }
 }

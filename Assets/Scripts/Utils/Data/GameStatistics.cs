@@ -409,6 +409,7 @@ namespace Utils.Data
                             thisDayEnemies = GameData.Instance.thisDayEnemies,
                             thisNightEnemies = GameData.Instance.thisNightEnemies,
                             towers = SerializeTowers(GameData.Instance.towers),
+                            pets = GameData.Instance.pets,
                             plantedCrops = GameData.Instance.plantedCrops.Select(kvp => new PlantedCropKeyValue 
                             { 
                                 Key = new Vector2IntSerializable(kvp.Key),

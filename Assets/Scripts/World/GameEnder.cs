@@ -1,6 +1,4 @@
-﻿using System;
-using Crops;
-using Enemies;
+﻿using Crops;
 using Player;
 using Towers;
 using UI.GameUI;
@@ -16,6 +14,7 @@ namespace World
         [SerializeField] private FarmingManager farmingManager;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Transform player;
+        [SerializeField] private PetsManager petsManager;
 
         public void EndGame()
         {
@@ -27,6 +26,7 @@ namespace World
             player.GetComponent<PlayerActionManager>().Reset();
             player.GetComponent<PlayerHealthManager>().Reset();
             player.GetComponent<PlayerSoundManager>().Reset();
+            petsManager.Reset();
             
             GameStarter.Instance.Init();
         }

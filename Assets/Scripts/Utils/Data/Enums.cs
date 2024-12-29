@@ -68,7 +68,8 @@ namespace Utils
         Crops = 0,
         Materials = 1,
         Tools = 2,
-        Upgrades = 3
+        Upgrades = 3,
+        Pets = 4
     }
 
     public enum NPCType
@@ -91,5 +92,10 @@ namespace Utils
         Stamina = 1,
         Cooldown = 2,
         Evil = 3
+    }
+
+    public enum Pet
+    {
+        Slime = 0
     }
 }

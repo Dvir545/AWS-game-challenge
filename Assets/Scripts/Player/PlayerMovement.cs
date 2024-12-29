@@ -66,9 +66,14 @@ namespace Player
             ChangeDirection(facingDirection);
         }
 
+        public float GetMovementSpeed()
+        {
+            return baseMovementSpeed * playerData.SpeedMultiplier;
+        }
+
         private void Move()
         {
-            _rb.velocity = _movementDirection * (baseMovementSpeed * playerData.SpeedMultiplier);
+            _rb.velocity = _movementDirection * GetMovementSpeed();
         }
 
         private void ChangeDirection(FacingDirection direction)
