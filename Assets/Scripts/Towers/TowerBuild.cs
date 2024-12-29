@@ -64,6 +64,10 @@ namespace Towers
         public void Init(int index)
         {
             _towerIndex = index;
+            foreach (var floor in GameData.Instance.towers[index])
+            {
+                _towerDatas.Add(TowersData.Instance.GetTowerData((TowerMaterial)floor.material));
+            }
             _worstFloor = GetWorstFloor();
         }
 
@@ -112,7 +116,7 @@ namespace Towers
                     (int)material, 
                     0,
                     health == 0 ? towerData.SecondsToDestroy: health));
-            var towerHeight = YOffsetBetweenFloors * (CurrentLevel-1);
+            var towerHeight = YOffsetBetweenFloors * (_floors.Count);
             _newFloor = Instantiate(towerData.GetFloorPrefab(),
                 transform.position + new Vector3(0, towerHeight, 0), Quaternion.identity);
             _newFloor.transform.SetParent(transform);
@@ -120,7 +124,7 @@ namespace Towers
             _newFloorAttackZone = _newFloor.transform.GetChild(2).GetComponent<Collider2D>();
             _newFloorAttackZone.transform.position -= new Vector3(0, towerHeight, 0);
             _newFloorAnimationManager = _newFloor.GetComponent<TowerFloorAnimationManager>();
-            _newFloorAnimationManager.Init(material, CurrentLevel-1, towerData.SecondsToAttack);
+            _newFloorAnimationManager.Init(material, _floors.Count, towerData.SecondsToAttack);
             _newFloorAttackZone.GetComponent<TowerFloorAttackZoneBehaviour>().Init(towerData.Range, towerData.Damage, towerData.MaxTargets, towerData.SecondsToAttack);
             _floors.Add(_newFloor);
             AddToProgress(Time.deltaTime, isInstant);
@@ -131,15 +135,15 @@ namespace Towers
             _topConstruction.SetActive(false);
             _newFloorBody.gameObject.SetActive(true);
             _newFloorAttackZone.enabled = true;
-            if (CurrentLevel == 1)  // first floor
+            if (_floors.Count == 1)  // first floor
             {
                 _newFloorBody.GetComponent<Collider2D>().enabled = true;
             }
             _newFloorAnimationManager.StartTower();
-            _topConstruction = _floors[CurrentLevel-1].transform.GetChild(1).gameObject;
+            _topConstruction = _floors[^1].transform.GetChild(1).gameObject;
             _topConstruction.GetComponent<SpriteRenderer>().sortingOrder = CurrentLevel;
-            EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
             _worstFloor = GetWorstFloor();
+            EventManager.Instance.TriggerEvent(EventManager.TowerBuilt, this);
             IsBuilt = true;
             if (!isInstant)
                 SoundManager.Instance.TowerBuilt();

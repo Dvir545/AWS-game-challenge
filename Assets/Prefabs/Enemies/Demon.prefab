@@ -275,6 +275,7 @@ MonoBehaviour:
   rotationSpeed: 2
   distanceToSendBall: 6
   enemyMovementManager: {fileID: 6351192737160943745}
+  enemyHealthManager: {fileID: 1907275858399666727}
 --- !u!1 &8306847627159078975
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +526,17 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
   m_PrefabInstance: {fileID: 3906157295475115369}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907275858399666727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+  m_PrefabInstance: {fileID: 3906157295475115369}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222977079772989281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1834dcf19e74f7583addab8f04bafec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2546312932790667800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -555,6 +567,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: a7c19c38e786fcd4e849124af8683a01, type: 3}
   deathSound: {fileID: 8300000, guid: f6a2586c312536340b603f892e863114, type: 3}
   walkingSound: {fileID: 8300000, guid: 39c2d259003809e4eb38b71f7e2e2677, type: 3}
+  secondsBetweenWalks: 0.3
   attackSound: {fileID: 8300000, guid: ff001b40305670f499f7befd0d11dc48, type: 3}
   killedYouSound: {fileID: 8300000, guid: 05657b4dfb09c51419b79d8ce274052a, type: 3}
   walkingAudioSource: {fileID: 7532057582279519307}

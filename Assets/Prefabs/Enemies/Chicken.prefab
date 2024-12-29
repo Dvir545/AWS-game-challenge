@@ -97,22 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a32d1b9e715bc1a5ae1ea4d9c8451b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSprites:
-  - {fileID: 506520508, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 109732543, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 734396216, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -161002939, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1079205977, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1913725454, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1159296094, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -943660654, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -892226509, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -1537554483, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 284423159, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 508620983, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1464943191, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -490359301, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1097045580, guid: cec2fad0888785141be5e66190963c0b, type: 3}
 --- !u!1001 &2690486696926926140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480796997248486343, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_FlipX
@@ -260,6 +244,7 @@ MonoBehaviour:
   roamRadius: 4
   roamSecondsToSwitchTarget: 3
   roamingSpeed: 1
+  _hitCollider: {fileID: 0}
 --- !u!114 &6696381113802702910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +260,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 7cd2b38cfc845a34e9323d24599525cd, type: 3}
   deathSound: {fileID: 8300000, guid: 5f723dfc2c61de1489cd81ae4eb1e4b4, type: 3}
   walkingSound: {fileID: 8300000, guid: b09e20a385349694784c8b2cef9939e1, type: 3}
+  secondsBetweenWalks: 0.3
   eatingSound: {fileID: 8300000, guid: c2d0131f0d6c50e498a9cbabd38563e1, type: 3}
 --- !u!114 &1335838919117715595
 MonoBehaviour:

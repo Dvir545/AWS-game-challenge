@@ -115,6 +115,13 @@ namespace Enemies.Demon
             float angleOffset = (360f / _totalBalls) * _ballIndex;
             _newAngle = angleOffset * Mathf.Deg2Rad;
         }
+        
+        public void Release()
+        {
+            _sent = false;
+            BallPool.Instance.ReleaseBall(gameObject);
+            _agent.updatePosition = false;
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -125,9 +132,7 @@ namespace Enemies.Demon
             if (other.CompareTag("Player") || other.CompareTag("Sword"))
             {
                 _audioSource.PlayOneShot(hitSound);
-                _sent = false;
-                BallPool.Instance.ReleaseBall(gameObject);
-                _agent.updatePosition = false;
+                Release();
             }
         }
     }

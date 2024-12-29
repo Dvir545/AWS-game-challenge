@@ -19,6 +19,7 @@ public class EvilBallManager : MonoBehaviour
     private List<EvilBallBehaviour> _balls = new List<EvilBallBehaviour>();
     [CanBeNull] private EvilBallBehaviour _sentBall;
     [SerializeField] private EnemyMovementManager enemyMovementManager;
+    [SerializeField] private EnemyHealthManager enemyHealthManager;
     private AudioSource _audioSource;
     
     private void Awake()
@@ -48,6 +49,18 @@ public class EvilBallManager : MonoBehaviour
     
     private void Update()
     {
+        if (enemyHealthManager.IsDead)
+        {
+            if (_balls.Count > 0)
+            {
+                foreach (var ball in _balls) {
+                    ball.Release();
+                }
+                _balls.Clear();
+            }
+
+            return;
+        }
         if (_sentBall != null && !_sentBall.gameObject.activeSelf)
         {
             _sentBall = null;

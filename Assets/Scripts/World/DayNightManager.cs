@@ -286,8 +286,6 @@ namespace World
         {
             Debug.Log($"Starting day {GameData.Instance.day + 1}");
             _currentDayPhase = DayPhase.Day;
-            if (GameData.Instance.day > 0)
-                GeneralStoreManager.Instance.UpdateStock(_currentCycle.NewCrops, _currentCycle.NewMaterials);
             if (!force)
             {
                 waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
@@ -297,6 +295,8 @@ namespace World
                 ShowWaveDeclaration();
                 EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
             }
+            if (GameData.Instance.day > 0)
+                GeneralStoreManager.Instance.UpdateStock(_currentCycle.NewCrops, _currentCycle.NewMaterials);
         }
 
         private void StartNight()
@@ -312,7 +312,7 @@ namespace World
             EventManager.Instance.TriggerEvent(EventManager.NightStarted, null);
         }
 
-        private async void GetNextCycleAsync(EnemySpawnData spawnData)
+        private void GetNextCycleAsync(EnemySpawnData spawnData)
         {
             var cycleNum = GameData.Instance.day + 1;
             // await Task.Run(() =>

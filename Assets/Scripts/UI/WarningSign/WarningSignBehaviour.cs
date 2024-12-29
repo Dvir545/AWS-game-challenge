@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using World;
 
 namespace UI.WarningSign
 {
@@ -59,7 +60,7 @@ namespace UI.WarningSign
             SetVisibility(warnable.IsVisible());
             if (!_isTargetVisible && dangerous)
             {
-                warningAudioSource.PlayOneShot(warningSound);
+                SoundManager.Instance.PlaySFX(warningAudioSource, warningSound, false);
             }
         }
         
