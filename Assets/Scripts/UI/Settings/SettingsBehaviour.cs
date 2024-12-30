@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Enemies.Demon;
+using UI.Settings;
 using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,12 +22,22 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private RightLeftHandedBehaviour rightLeftHandedBehaviour;
 
     private bool _isOpen;
     private bool _fromMenu;
+
+    public void Init()
+    {
+        rightLeftHandedBehaviour.Init();
+        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
+        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
+    }
     
     public void OpenSettings(bool fromMenu=false)
     {
+        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
+        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         if (fromMenu)
         {
             mainMenu.SetActive(false);
@@ -43,8 +54,6 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
             Time.timeScale = 0;
             SoundManager.Instance.PauseBackgroundSong();
         }
-        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
-        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
         _isOpen = true;

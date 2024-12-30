@@ -85,7 +85,7 @@ public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
     private List<PlayerScore> _scoreboardEntries = new List<PlayerScore>();
     public bool IsAvailable = false;
     private bool _fromMenu;
-    
+   
     private void Awake()
     {
         _darkOverlay = transform.GetChild(0).gameObject;
@@ -115,25 +115,20 @@ public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
 
     private void SortNewScore(Transform score, string playerName, int daysSurvived, float secondsPlayed)
     {
-        // TODO why is this not working????
-        // iterate over all existing scores from last to first and place the new score accordingly.
-        // each score lower than current score should be lowered in Y axis by YOffsetBetweenScores,
-        // so the new score will be placed correctly.
-        score.localPosition = new Vector3(0, StartY - YOffsetBetweenScores * _scoreboardEntries.Count, 0);
         for (int i = _scoreboardEntries.Count - 1; i >= 0; i--)
         {
             var entry = _scoreboardEntries[i];
             if (playerName == entry.PlayerName)  // replace
             {
-                score.localPosition = new Vector3(0, entry.ScoreTransform.localPosition.y, 0);
                 RemoveScore(entry);
+                score.SetSiblingIndex(i);
             }
             else
             {
                 if (IsScoreHigher(daysSurvived, secondsPlayed, entry.DaysSurvived, entry.SecondsSurvived))
                 {
-                    score.localPosition = new Vector3(0, score.localPosition.y + YOffsetBetweenScores, 0);
-                    entry.ScoreTransform.localPosition = new Vector3(0, entry.ScoreTransform.localPosition.y - YOffsetBetweenScores, 0);
+                    score.SetSiblingIndex(i);
+                    entry.ScoreTransform.SetSiblingIndex(i - 1);
                 }
                 else
                 {
@@ -181,8 +176,6 @@ public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
             yield return StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, 0));
             AddScore(playerName, daysSurvived, secondsPlayed, sort:true);
         }
-        ShowScoreboard(fromMenu);
-        
     }
 
     private void SetScore(GameObject score, string playerName, int daysSurvived, float secondsPlayed)

@@ -50,8 +50,8 @@ namespace UI.GameUI
             yield return scoreboardCoroutine;
             darkOverlay.SetActive(false);
             window.SetActive(false);
-            _scoreboardBehaviour.ShowScoreboard(false);
             gameOverText.color = new Color(1, 1, 1, 0);
+            _scoreboardBehaviour.ShowScoreboard(false);
         }
 
         private IEnumerator SetScoreboardRoutine()

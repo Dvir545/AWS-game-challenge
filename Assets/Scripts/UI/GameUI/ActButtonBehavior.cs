@@ -54,7 +54,7 @@ namespace UI.GameUI
             
             // only keep button objects
             click_results.RemoveAll(
-                result => result.gameObject.GetComponent<Button>() == null
+                result => result.gameObject.GetComponent<Button>() == null && result.gameObject.name != "Window" && result.gameObject.name != "DarkOverlay"
             );
             
         }
@@ -84,8 +84,13 @@ namespace UI.GameUI
         private void OnActPerformed(InputAction.CallbackContext context)
         {
             if (!playerActionManager.CanAct) return;
-            GetUiElementsClicked();
-            if (click_results.Count > 0) return;  // ignore if clicking a ui element
+            if (Time.timeScale == 0) return;
+            // only if button
+            if (context.control.device == Mouse.current)
+            {
+                GetUiElementsClicked();
+                if (click_results.Count > 0) return;  // ignore if clicking a ui element
+            }
             PressButton();
             _buttonImage.sprite = _pressedSprite;
             _acting = true;

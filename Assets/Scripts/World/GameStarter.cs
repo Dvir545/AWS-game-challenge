@@ -155,6 +155,7 @@ namespace World
         private void SetupGame()
         {
             SoundManager.Instance.Init(stop: true);
+            SettingsBehaviour.Instance.Init();
             player.GetComponent<PlayerHealthManager>().Init();
             player.GetComponent<PlayerAnimationManager>().Init();
             cashBehaviour.Init();
