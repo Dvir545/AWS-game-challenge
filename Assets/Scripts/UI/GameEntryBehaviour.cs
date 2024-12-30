@@ -28,32 +28,33 @@ public class GameEntryBehaviour : MonoBehaviour
     private Coroutine _userWarningCoroutine;
     private int _signUpStep = 0;
     private string _pendingUsername;
+    private bool _lockButtons;
 
-    private void OnEnable()
-    {
-        if (GameStatistics.Instance != null)
-        {
-            GameStatistics.Instance.OnGameDataLoaded += HandleGameDataLoaded;
-        }
-        description.text = "";
-    }
+    // private void OnEnable()
+    // {
+    //     if (GameStatistics.Instance != null)
+    //     {
+    //         GameStatistics.Instance.OnGameDataLoaded += HandleGameDataLoaded;
+    //     }
+    //     description.text = "";
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     if (GameStatistics.Instance != null)
+    //     {
+    //         GameStatistics.Instance.OnGameDataLoaded -= HandleGameDataLoaded;
+    //     }
+    // }
 
-    private void OnDisable()
-    {
-        if (GameStatistics.Instance != null)
-        {
-            GameStatistics.Instance.OnGameDataLoaded -= HandleGameDataLoaded;
-        }
-    }
-
-    private void HandleGameDataLoaded()
-    {
-        if (!string.IsNullOrEmpty(_pendingUsername))
-        {
-            CompleteGameEntry(_pendingUsername);
-            _pendingUsername = null;
-        }
-    }
+    // private void HandleGameDataLoaded()
+    // {
+    //     if (!string.IsNullOrEmpty(_pendingUsername))
+    //     {
+    //         CompleteGameEntry(_pendingUsername);
+    //         _pendingUsername = null;
+    //     }
+    // }
 
     private void ShowEntry()
     {
@@ -104,6 +105,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
     private IEnumerator LoginCoroutine(string username, string password)
     {
+        _lockButtons = true;
         var requestData = new SignInRequest
         {
             username = username,
@@ -132,9 +134,11 @@ public class GameEntryBehaviour : MonoBehaviour
             {
                 Debug.LogError($"[LOGIN] Error during login: {www.error}\nResponse: {www.downloadHandler.text}");
                 description.text = "Login failed. Please check your credentials.";
+                _lockButtons = false;
                 yield break;
             }
 
+            string usernameToUse;
             try
             {
                 var lambdaResponse = JsonUtility.FromJson<LambdaResponse>(www.downloadHandler.text);
@@ -143,6 +147,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 if (!signInResponse.success)
                 {
                     description.text = signInResponse.message;
+                    _lockButtons = false;
                     yield break;
                 }
 
@@ -152,7 +157,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
                 // Prioritize the username from API response (when email is used to login)
                 // Fall back to the input username if API doesn't return one
-                string usernameToUse = !string.IsNullOrEmpty(signInResponse.username) ? signInResponse.username : username;
+                usernameToUse = !string.IsNullOrEmpty(signInResponse.username) ? signInResponse.username : username;
                 Debug.Log($"[LOGIN] Selected username to use: {usernameToUse}");
                 
                 // Store username first to ensure it's available
@@ -172,20 +177,23 @@ public class GameEntryBehaviour : MonoBehaviour
                 }
                 
                 Debug.Log($"[LOGIN] Successfully logged in user: {usernameToUse}");
-                
-                FinishEntry(usernameToUse);
             }
             catch (Exception e)
             {
                 Debug.LogError($"[LOGIN] Error parsing response: {e.Message}");
                 Debug.LogError($"[LOGIN] Raw response was: {www.downloadHandler.text}");
                 description.text = "Error during login. Please try again.";
+                _lockButtons = false;
+                yield break;
             }
+            yield return FinishEntry(usernameToUse, isGuest:false);
+            _lockButtons = false;
         }
     }
 
     private IEnumerator SignUpCoroutine(string email, string password, string displayUsername)
     {
+        _lockButtons = true;
         var requestData = new SignUpRequest
         {
             email = email,
@@ -215,6 +223,7 @@ public class GameEntryBehaviour : MonoBehaviour
             {
                 Debug.LogError($"Error during sign up: {www.error}\nResponse: {www.downloadHandler.text}");
                 description.text = "Error during sign up. Please try again.";
+                _lockButtons = false;
                 yield break;
             }
 
@@ -227,6 +236,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 if (!innerResponse.success)
                 {
                     description.text = innerResponse.message;
+                    _lockButtons = false;
                     yield break;
                 }
 
@@ -247,11 +257,16 @@ public class GameEntryBehaviour : MonoBehaviour
                 Debug.LogError($"Raw response was: {www.downloadHandler.text}");
                 description.text = "Error during sign up. Please try again.";
             }
+            finally
+            {
+                _lockButtons = false;
+            }
         }
     }
 
     private IEnumerator VerifyCodeCoroutine(string code)
     {
+        _lockButtons = true;
         var requestData = new VerifyRequest
         {
             email = _userEmail,
@@ -280,6 +295,7 @@ public class GameEntryBehaviour : MonoBehaviour
             {
                 Debug.LogError($"Error during verification: {www.error}\nResponse: {www.downloadHandler.text}");
                 description.text = "Error during verification. Please try again.";
+                _lockButtons = false;
                 yield break;
             }
 
@@ -292,6 +308,7 @@ public class GameEntryBehaviour : MonoBehaviour
                 if (!innerResponse.success)
                 {
                     description.text = innerResponse.message;
+                    _lockButtons = false;
                     yield break;
                 }
 
@@ -304,6 +321,10 @@ public class GameEntryBehaviour : MonoBehaviour
                 Debug.LogError($"Error parsing response: {e.Message}");
                 Debug.LogError($"Raw response was: {www.downloadHandler.text}");
                 description.text = "Error during verification. Please try again.";
+            }
+            finally
+            {
+                _lockButtons = false;
             }
         }
     }
@@ -346,24 +367,47 @@ public class GameEntryBehaviour : MonoBehaviour
         GameStarter.Instance.Init(true);
         gameObject.SetActive(false);
     }
-    private void FinishEntry(string username)
+
+    private IEnumerator FetchScoresCR()
     {
+        yield return StartCoroutine(ScoreboardBehaviour.Instance.FetchScores());
+        Debug.Log($"[FINISH] Called ScoreboardBehaviour.FetchScores");
+        _lockButtons = false;
+        CompleteGameEntry(_pendingUsername);
+    }
+    
+    
+    
+    private IEnumerator FinishEntry(string username, bool isGuest)
+    {
+        _lockButtons = true;
         Debug.Log($"[FINISH] Starting FinishEntry with username: {username}");
         _pendingUsername = username;
         Debug.Log($"[FINISH] Set _pendingUsername to: {_pendingUsername}");
-        GameStatistics.Instance.Init(username);
+        GameStatistics.Instance.Init(username, isGuest);
         Debug.Log($"[FINISH] Called GameStatistics.Init with username: {username}");
+        // fetch scores only if connected to internet
+        description.text = "Getting ready...";
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            Debug.Log($"[FINISH] Internet is reachable. Fetching scores...");
+            yield return StartCoroutine(ScoreboardBehaviour.Instance.FetchScores());
+            Debug.Log($"[FINISH] Called ScoreboardBehaviour.FetchScores");
+        }
+        CompleteGameEntry(username);
+        _lockButtons = false;
     }
 
     public void OnGuestLogin()
     {
+        if (_lockButtons) return;
         var username = GetRandomUsername();
-        FinishEntry(username);
-        CompleteGameEntry(username);
+        StartCoroutine(FinishEntry(username, isGuest:true));
     }
 
     public void OnLogin(bool fromSignUp = false)
     {
+        if (_lockButtons) return;
         if (!fromSignUp)
         {
             Debug.Log("Login button clicked");
@@ -377,12 +421,13 @@ public class GameEntryBehaviour : MonoBehaviour
         }
         else
         {
-            FinishEntry(username.text);
+            StartCoroutine(FinishEntry(username.text, isGuest:false));
         }
     }
     
     public void OnSignUp()
     {
+        if (_lockButtons) return;
         Debug.Log($"Sign up button clicked. Current step: {_signUpStep}");
         if (_signUpStep == 0)
         {
@@ -415,6 +460,7 @@ public class GameEntryBehaviour : MonoBehaviour
 
     public void OnBack()
     {
+        if (_lockButtons) return;
         _signUpStep = 0;
         ShowEntry();
     }

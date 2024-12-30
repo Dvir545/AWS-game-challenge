@@ -17,11 +17,11 @@ namespace Player
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         private float _attackStaminaProgress = 0f;
 
-        private bool _canAct = true;
+        public bool CanAct = true;
         public bool isActing = false;
         private Coroutine _cooldownCR;
         private bool _onCooldown = false;
-        public bool IsActing => _canAct && !_onCooldown && isActing;
+        public bool IsActing => CanAct && !_onCooldown && isActing;
         
         private void Awake()
         {
@@ -39,7 +39,7 @@ namespace Player
             }
 
             DisableActions();
-            _canAct = false;
+            CanAct = false;
         }
 
         public void StartActing()
@@ -190,15 +190,15 @@ namespace Player
 
         private IEnumerator GotHitCoroutine(float hitTime)
         {
-            _canAct = false;
+            CanAct = false;
             DisableActions();
             yield return new WaitForSeconds(hitTime);
-            _canAct = true;
+            CanAct = true;
         }
 
         public void Reset()
         {
-            _canAct = true;
+            CanAct = true;
             isActing = false;
             _attackStaminaProgress = 0f;
             _onCooldown = false;

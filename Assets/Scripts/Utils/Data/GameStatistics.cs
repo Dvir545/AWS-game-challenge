@@ -64,20 +64,6 @@ namespace Utils.Data
         public GameState CurrentGameState;
     }
 
-    [Serializable]
-    class SerializableGameStatistics
-    {
-        public string username;
-        public int TotalGamesPlayed;
-        public int ConsecutiveGamesPlayed;
-        public int KilledLastGameBy;
-        public ScoreInfo LastGameScore;
-        public ScoreInfo HighScore;
-        public bool LeftHanded;
-        public float SfxVolume;
-        public float MusicVolume;
-    }
-
     public class GameStatistics : Singleton<GameStatistics>
     {
         public delegate void GameDataLoadedHandler();
@@ -96,6 +82,7 @@ namespace Utils.Data
         public int killedLastGameBy;
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
+        public bool isGuest;
         
         // Audio settings
         private float _sfxVolume;
@@ -156,7 +143,7 @@ namespace Utils.Data
             SaveToJson();
         }
 
-        public void Init(string username)
+        public void Init(string username, bool isGuest)
         {
             Debug.Log($"********** Initializing GameStatistics for user: {username} **********");
             this.username = username;
@@ -171,19 +158,19 @@ namespace Utils.Data
             sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
             musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
 
-            if (!string.IsNullOrEmpty(username))
+            if (!string.IsNullOrEmpty(username) && !isGuest)
             {
                 Debug.Log($"********** Starting LoadUserDataWithRetry for user: {username} **********");
                 StartCoroutine(LoadUserDataWithRetry(0));
             }
             else
             {
-                Debug.LogError("********** Init called with empty username! **********");
-                InitializeNewPlayer();
+                Debug.LogError("********** Init called with no login! **********");
+                InitializeNewPlayer(isGuest);
             }
         }
 
-        private void InitializeNewPlayer()
+        private void InitializeNewPlayer(bool isGuest)
         {
             Debug.Log($"********** Initializing new player with username: {username} **********");
             
@@ -196,6 +183,7 @@ namespace Utils.Data
             killedLastGameBy = 0;
             lastGameScore = new ScoreInfo(0, 0);
             highScore = new ScoreInfo(0, 0);
+            this.isGuest = isGuest;
 
             // Create new game data structure
             LoadedGameData = new SavedGameData
@@ -307,7 +295,7 @@ namespace Utils.Data
                         StartCoroutine(LoadUserDataWithRetry(retryCount + 1));
                         yield break;
                     }
-                    InitializeNewPlayer();
+                    InitializeNewPlayer(isGuest:true);
                     yield break;
                 }
 
@@ -336,6 +324,8 @@ namespace Utils.Data
 
                         // Restore username
                         this.username = currentUsername;
+                        this.isGuest = false;
+                        
                         LoadedGameData.username = currentUsername;
 
                         Debug.Log($"********** Successfully loaded game data for user: {this.username} **********");
@@ -344,14 +334,14 @@ namespace Utils.Data
                     else
                     {
                         Debug.LogWarning($"********** No save data found for user: {username} - Initializing new player **********");
-                        InitializeNewPlayer();
+                        InitializeNewPlayer(isGuest:false);
                     }
                 }
                 catch (Exception e)
                 {
                     Debug.LogError($"********** Error parsing save data response: {e.Message} **********");
                     Debug.LogError($"********** Raw response was: {www.downloadHandler.text} **********");
-                    InitializeNewPlayer();
+                    InitializeNewPlayer(isGuest:false);
                 }
             }
         }
@@ -488,6 +478,17 @@ namespace Utils.Data
             StartCoroutine(SaveGameCoroutine());
         }
 
+        public bool IsHighScore(int daysSurvived, float secondsPlayed)
+        {
+            if (highScore == null || (highScore.daysSurvived == 0 && highScore.secondsSurvived == 0))
+            {
+                return true;
+            }
+            return daysSurvived > highScore.daysSurvived ||
+                   (daysSurvived == highScore.daysSurvived &&
+                    secondsPlayed < highScore.secondsSurvived);
+        }
+
         public void UpdateStatistics(int enemyType)
         {
             Debug.Log("********** UpdateStatistics called - Player died **********");
@@ -497,8 +498,7 @@ namespace Utils.Data
             consecutiveGamesPlayed++;
             killedLastGameBy = enemyType;
             lastGameScore = new ScoreInfo(GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
-            if (lastGameScore.daysSurvived > highScore.daysSurvived ||
-                (lastGameScore.daysSurvived == highScore.daysSurvived && lastGameScore.secondsSurvived > highScore.secondsSurvived))
+            if (IsHighScore(lastGameScore.daysSurvived, lastGameScore.secondsSurvived))
             {
                 highScore = lastGameScore;
                 Debug.Log("********** New high score achieved! **********");

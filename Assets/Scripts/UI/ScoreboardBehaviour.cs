@@ -7,6 +7,8 @@ using TMPro;
 using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.Networking;
+using Utils;
+using Utils.Data;
 using World;
 
 [Serializable]
@@ -55,11 +57,21 @@ public class ScoreRequest
     public float timeTaken;
 }
 
-public class ScoreboardBehaviour : MonoBehaviour
+public class PlayerScore
+{
+    public string PlayerName;
+    public int DaysSurvived;
+    public float SecondsSurvived;
+    public Transform ScoreTransform;
+}
+
+public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
 {
     [SerializeField] private GameObject scorePrefab;
     [SerializeField] private GameObject scoresParent;
     [SerializeField] private GameObject playerScore;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject hidePlayerScore;
     private GameObject _darkOverlay;
     private GameObject _window;
     private const float StartY = 92.6f;
@@ -70,7 +82,9 @@ public class ScoreboardBehaviour : MonoBehaviour
     private const int MAX_RETRIES = 3;
     private const float RETRY_DELAY = 2f;
 
-    private int _nScores = 0;
+    private List<PlayerScore> _scoreboardEntries = new List<PlayerScore>();
+    public bool IsAvailable = false;
+    private bool _fromMenu;
     
     private void Awake()
     {
@@ -91,23 +105,84 @@ public class ScoreboardBehaviour : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-        _nScores = 0;
+        _scoreboardEntries.Clear();
     }
 
-    private void AddScore(string playerName, int daysSurvived, float secondsPlayed)
+    private bool IsScoreHigher(int daysFrom, float secFrom, int daysTo, float secTo)
+    {
+        return daysFrom > daysTo || (daysFrom == daysTo && secFrom < secTo);
+    }
+
+    private void SortNewScore(Transform score, string playerName, int daysSurvived, float secondsPlayed)
+    {
+        // TODO why is this not working????
+        // iterate over all existing scores from last to first and place the new score accordingly.
+        // each score lower than current score should be lowered in Y axis by YOffsetBetweenScores,
+        // so the new score will be placed correctly.
+        score.localPosition = new Vector3(0, StartY - YOffsetBetweenScores * _scoreboardEntries.Count, 0);
+        for (int i = _scoreboardEntries.Count - 1; i >= 0; i--)
+        {
+            var entry = _scoreboardEntries[i];
+            if (playerName == entry.PlayerName)  // replace
+            {
+                score.localPosition = new Vector3(0, entry.ScoreTransform.localPosition.y, 0);
+                RemoveScore(entry);
+            }
+            else
+            {
+                if (IsScoreHigher(daysSurvived, secondsPlayed, entry.DaysSurvived, entry.SecondsSurvived))
+                {
+                    score.localPosition = new Vector3(0, score.localPosition.y + YOffsetBetweenScores, 0);
+                    entry.ScoreTransform.localPosition = new Vector3(0, entry.ScoreTransform.localPosition.y - YOffsetBetweenScores, 0);
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+    }
+
+    private void RemoveScore(PlayerScore score)
+    {
+        _scoreboardEntries.Remove(score);
+        Destroy(score.ScoreTransform.gameObject);
+    }
+
+    private void AddScore(string playerName, int daysSurvived, float secondsPlayed, bool sort=false)
     {
         Debug.Log($"Adding score: Player={playerName}, Days={daysSurvived}, Time={secondsPlayed}");
         var score = Instantiate(scorePrefab, scoresParent.transform);
         SetScore(score, playerName, daysSurvived, secondsPlayed);
-        score.transform.localPosition = new Vector3(0, StartY - YOffsetBetweenScores * _nScores, 0);
-        _nScores++;
+        if (sort)
+        {
+            SortNewScore(score.transform, playerName, daysSurvived, secondsPlayed);
+        }
+        else
+        {
+            score.transform.localPosition = new Vector3(0, StartY - YOffsetBetweenScores * _scoreboardEntries.Count, 0);
+        }
+        _scoreboardEntries.Add(new PlayerScore
+        {
+            PlayerName = playerName,
+            DaysSurvived = daysSurvived,
+            SecondsSurvived = secondsPlayed,
+            ScoreTransform = score.transform
+        });
     }
 
-    public void SetPlayerScore(string playerName, int daysSurvived, float secondsPlayed)
+    public IEnumerator SetPlayerScore(string playerName, int daysSurvived, float secondsPlayed, bool fromMenu)
     {  
         Debug.Log($"Setting player score: Player={playerName}, Days={daysSurvived}, Time={secondsPlayed}");
         SetScore(playerScore, playerName, daysSurvived, secondsPlayed);
-        StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, 0));
+        if (!fromMenu && GameStatistics.Instance.IsHighScore(daysSurvived, secondsPlayed))
+        {
+            yield return StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, 0));
+            AddScore(playerName, daysSurvived, secondsPlayed, sort:true);
+        }
+        ShowScoreboard(fromMenu);
+        
     }
 
     private void SetScore(GameObject score, string playerName, int daysSurvived, float secondsPlayed)
@@ -185,15 +260,13 @@ public class ScoreboardBehaviour : MonoBehaviour
                     StartCoroutine(SetNewRecordWithRetry(playerName, daysSurvived, secondsPlayed, retryCount + 1));
                 }
             }
-            else 
+            else  // success
             {
                 try
                 {
                     Debug.Log($"Success Response: {request.downloadHandler.text}");
                     APIResponse response = JsonUtility.FromJson<APIResponse>(request.downloadHandler.text);
                     Debug.Log($"Record update response: {response.body}");
-                    
-                    StartCoroutine(FetchAndDisplayScores(null, _darkOverlay, _window));
                 }
                 catch (Exception e)
                 {
@@ -205,9 +278,9 @@ public class ScoreboardBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
+    public IEnumerator FetchScores()
     {
-        Debug.Log("Starting FetchAndDisplayScores");
+        Debug.Log("Starting FetchScores");
         UnityWebRequest webRequest = null;
         try
         {
@@ -221,35 +294,17 @@ public class ScoreboardBehaviour : MonoBehaviour
         {
             Debug.LogError($"Error creating fetch request: {e.Message}");
             Debug.LogError($"Stack trace: {e.StackTrace}");
+            IsAvailable = false;
             yield break;
         }
-        SoundManager.Instance.PauseBackgroundSong(1f);
         using (webRequest)
         {
             Debug.Log("Sending fetch request...");
             yield return webRequest.SendWebRequest();
             Debug.Log($"Fetch request completed with result: {webRequest.result}");
             
-            if (gameOverText != null)
-            {
-                gameOverText.enabled = false;
-            }
-            if (darkOverlay != null)
-            {
-                darkOverlay.SetActive(false);
-            }
-            if (window != null)
-            {
-                window.SetActive(false);
-            }
-            
-            WarningSignPool.Instance.ReleaseAll();
-            EnemyPool.Instance.ReleaseAll();
-            BallPool.Instance.ReleaseAll();
-            
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
-                SoundManager.Instance.StartEntryMusicCR(true, 1f);
                 try
                 {
                     Debug.Log($"Raw fetch response: {webRequest.downloadHandler.text}");
@@ -271,16 +326,15 @@ public class ScoreboardBehaviour : MonoBehaviour
                     {
                         Debug.LogError("Score data or scores list is null");
                     }
-                    _darkOverlay.SetActive(true);
-                    _window.SetActive(true);
                 }
                 catch (Exception e)
                 {
                     Debug.LogError($"Error parsing JSON from fetch: {e.Message}");
                     Debug.LogError($"Raw response: {webRequest.downloadHandler.text}");
                     Debug.LogError($"Stack trace: {e.StackTrace}");
-                    ReturnToMenu();
                 }
+
+                IsAvailable = true;
             }
             else
             {
@@ -295,22 +349,166 @@ public class ScoreboardBehaviour : MonoBehaviour
                         Debug.LogError($"{header.Key}: {header.Value}");
                     }
                 }
-                ReturnToMenu();
+                IsAvailable = false;
             }
         }
     }
 
-    public void RefreshScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window)
+    public void ShowScoreboard(bool fromMenu)
     {
-        Debug.Log("RefreshScores called");
-        StartCoroutine(FetchAndDisplayScores(gameOverText, darkOverlay, window));
+        if (!IsAvailable) return;
+        if (fromMenu)
+        {
+            mainMenu.SetActive(false);
+        }
+        else
+        {
+            WarningSignPool.Instance.ReleaseAll();
+            EnemyPool.Instance.ReleaseAll();
+            BallPool.Instance.ReleaseAll();
+            SoundManager.Instance.PauseBackgroundSong(1f);
+            SoundManager.Instance.StartEntryMusicCR(true, 1f);
+            _darkOverlay.SetActive(true);
+        }
+        _window.SetActive(true);
+        _fromMenu = fromMenu;
     }
+
+    // private IEnumerator FetchAndDisplayScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window, bool fromMenu)
+    // {
+    //     Debug.Log("Starting FetchAndDisplayScores");
+    //     UnityWebRequest webRequest = null;
+    //     try
+    //     {
+    //         webRequest = UnityWebRequest.Get(FETCH_API_URL);
+    //         webRequest.SetRequestHeader("x-api-key", API_KEY);
+    //         webRequest.SetRequestHeader("Content-Type", "application/json");
+    //         Debug.Log($"Fetch request created with URL: {FETCH_API_URL}");
+    //         Debug.Log($"Headers set: x-api-key and Content-Type");
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Debug.LogError($"Error creating fetch request: {e.Message}");
+    //         Debug.LogError($"Stack trace: {e.StackTrace}");
+    //         yield break;
+    //     }
+    //     if (!fromMenu)
+    //         SoundManager.Instance.PauseBackgroundSong(1f);
+    //     using (webRequest)
+    //     {
+    //         Debug.Log("Sending fetch request...");
+    //         yield return webRequest.SendWebRequest();
+    //         Debug.Log($"Fetch request completed with result: {webRequest.result}");
+    //         
+    //         if (gameOverText != null)
+    //         {
+    //             gameOverText.enabled = false;
+    //         }
+    //         if (darkOverlay != null)
+    //         {
+    //             darkOverlay.SetActive(false);
+    //         }
+    //         if (window != null)
+    //         {
+    //             window.SetActive(false);
+    //         }
+    //
+    //         if (!fromMenu)
+    //         {
+    //             WarningSignPool.Instance.ReleaseAll();
+    //             EnemyPool.Instance.ReleaseAll();
+    //             BallPool.Instance.ReleaseAll();
+    //         }
+    //         
+    //         if (webRequest.result == UnityWebRequest.Result.Success)
+    //         {
+    //             if (!fromMenu)
+    //                 SoundManager.Instance.StartEntryMusicCR(true, 1f);
+    //             try
+    //             {
+    //                 Debug.Log($"Raw fetch response: {webRequest.downloadHandler.text}");
+    //                 APIResponse apiResponse = JsonUtility.FromJson<APIResponse>(webRequest.downloadHandler.text);
+    //                 ScoreData scoreData = JsonUtility.FromJson<ScoreData>(apiResponse.body);
+    //                 Debug.Log($"Parsed score data: {apiResponse.body}");
+    //
+    //                 ClearExistingScores();
+    //
+    //                 if (scoreData != null && scoreData.scores != null)
+    //                 {
+    //                     Debug.Log($"Processing {scoreData.scores.Count} scores");
+    //                     foreach (var score in scoreData.scores)
+    //                     {
+    //                         AddScore(score.playerName, Mathf.RoundToInt(score.daysSurvived), score.timeTaken);
+    //                     }
+    //                 }
+    //                 else
+    //                 {
+    //                     Debug.LogError("Score data or scores list is null");
+    //                 }
+    //                 if (fromMenu)
+    //                     mainMenu.SetActive(false);
+    //                 else if (_darkOverlay != null)
+    //                     _darkOverlay.SetActive(true);
+    //                 _window.SetActive(true);
+    //             }
+    //             catch (Exception e)
+    //             {
+    //                 Debug.LogError($"Error parsing JSON from fetch: {e.Message}");
+    //                 Debug.LogError($"Raw response: {webRequest.downloadHandler.text}");
+    //                 Debug.LogError($"Stack trace: {e.StackTrace}");
+    //                 ReturnToMenu(fromMenu);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             Debug.LogError($"Error fetching scores: {webRequest.error}");
+    //             Debug.LogError($"Response Code: {webRequest.responseCode}");
+    //             Debug.LogError($"Response Headers:");
+    //             var responseHeaders = webRequest.GetResponseHeaders();
+    //             if (responseHeaders != null)
+    //             {
+    //                 foreach (var header in responseHeaders)
+    //                 {
+    //                     Debug.LogError($"{header.Key}: {header.Value}");
+    //                 }
+    //             }
+    //             ReturnToMenu(fromMenu);
+    //         }
+    //     }
+    // }
+
+    // public void RefreshScores(TextMeshProUGUI gameOverText, GameObject darkOverlay, GameObject window, bool fromMenu)
+    // {
+    //     Debug.Log("RefreshScores called");
+    //     StartCoroutine(FetchAndDisplayScores(gameOverText, darkOverlay, window, fromMenu));
+    // }
 
     public void ReturnToMenu()
     {
         Debug.Log("ReturnToMenu called");
         _darkOverlay.SetActive(false);
         _window.SetActive(false);
-        GameEnder.Instance.EndGame(died: true);
+        hidePlayerScore.SetActive(false);
+        if (_fromMenu)
+            mainMenu.SetActive(true);
+        else
+            GameEnder.Instance.EndGame(died: true);
+    }
+
+    public void OpenScoreboardFromMenu()
+    {
+        StartCoroutine(OpenScoreboardFromMenuCR());
+    }
+    
+    private IEnumerator OpenScoreboardFromMenuCR()
+    {
+        if (!GameStatistics.Instance.isGuest && GameStatistics.Instance.highScore != null)
+            yield return StartCoroutine(SetPlayerScore(GameStatistics.Instance.username,
+                GameStatistics.Instance.highScore.daysSurvived,
+                GameStatistics.Instance.highScore.secondsSurvived, fromMenu: true));
+        else
+            hidePlayerScore.SetActive(true);
+        ShowScoreboard(true);
+        _fromMenu = true;
     }
 }

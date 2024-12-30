@@ -27,6 +27,7 @@ namespace Utils
         public const string NightEnded = "NightEnded";
         public const string NewHighScore = "NewHighScore";
         public const string Cooldown = "Cooldown";
+        public const string Disconnect = "Disconnect";
 
         protected EventManager()
         {

@@ -25,6 +25,7 @@ namespace World
         [SerializeField] private GameObject menuCanvas;
         [SerializeField] private GameObject newGameButton;
         [SerializeField] private GameObject continueButton;
+        [SerializeField] private GameObject scoreboardButton;
         [SerializeField] private Light2D globalLight;
         [SerializeField] private CashTextBehavior cashBehaviour;
         [SerializeField] private DayNightRollBehaviour dayNightRollBehaviour;
@@ -57,7 +58,7 @@ namespace World
         {
             _collider = GetComponent<Collider2D>();
             _boatStartPos = boatWithPlayer.position;
-            GameStatistics.Instance.Init("");
+            GameStatistics.Instance.Init("", isGuest:true);
             SoundManager.Instance.SyncMusicVolume();
             SoundManager.Instance.PlayOcean();
             SoundManager.Instance.StartEntryMusicCR();
@@ -128,6 +129,7 @@ namespace World
             {
                 EnableContinueButton();
             }
+            scoreboardButton.SetActive(ScoreboardBehaviour.Instance.IsAvailable);
             
             _fromEntry = fromEntry;
         }

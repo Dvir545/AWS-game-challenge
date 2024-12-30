@@ -93,11 +93,10 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
 
     public void Disconnect()
     {
-        // DVIR - disconnect the player
-        CloseSettings();
         CloseSettings();
         mainMenu.SetActive(false);
         entry.SetActive(true);
+        EventManager.Instance.TriggerEvent(EventManager.Disconnect, null);
     }
     
     public void ChangeSFXVolume(float volume)

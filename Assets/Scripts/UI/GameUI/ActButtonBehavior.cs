@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
@@ -24,6 +26,38 @@ namespace UI.GameUI
         private Sprite _pressedSprite;
         private Image _buttonImage;
         private Image _iconImage;
+        
+        PointerEventData click_data;
+        List<RaycastResult> click_results;
+ 
+        // void Update()
+        // {
+        //     if (!GameStarter.Instance.GameStarted) return;
+        //     // use isPressed if you wish to ray cast every frame:
+        //     if(Mouse.current.leftButton.wasPressedThisFrame)
+        //         //
+        //         // // use wasReleasedThisFrame if you wish to ray cast just once per click:
+        //         // if(Mouse.current.leftButton.wasReleasedThisFrame)
+        //     {
+        //         GetUiElementsClicked();
+        //     }
+        // }
+ 
+        void GetUiElementsClicked()
+        {
+            /** Get all the UI elements clicked, using the current mouse position and raycasting. **/
+ 
+            click_data.position = Mouse.current.position.ReadValue();
+            click_results.Clear();
+
+            EventSystem.current.RaycastAll(click_data, click_results);
+            
+            // only keep button objects
+            click_results.RemoveAll(
+                result => result.gameObject.GetComponent<Button>() == null
+            );
+            
+        }
 
         private void Awake()
         {
@@ -44,21 +78,30 @@ namespace UI.GameUI
                 actAction.action.canceled -= OnActCanceled;
             }
         }
+
+        private bool _acting;
         
         private void OnActPerformed(InputAction.CallbackContext context)
         {
+            if (!playerActionManager.CanAct) return;
+            GetUiElementsClicked();
+            if (click_results.Count > 0) return;  // ignore if clicking a ui element
             PressButton();
             _buttonImage.sprite = _pressedSprite;
+            _acting = true;
         }
 
         private void OnActCanceled(InputAction.CallbackContext context)
         {
+            if (!_acting) return;
             ReleaseButton();
+            _acting = false;
         }
 
         private void Start()
         {
-            
+            click_data = new PointerEventData(EventSystem.current);
+            click_results = new List<RaycastResult>();
             // Cache the button sprites
             _normalSprite = _buttonImage.sprite;
             _pressedSprite = _button.spriteState.pressedSprite;

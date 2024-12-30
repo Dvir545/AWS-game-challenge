@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -21,20 +22,48 @@ namespace UI.GameUI
             gameOverText.color = new Color(1, 1, 1, 0);
             _scoreboardBehaviour = scoreboard.GetComponent<ScoreboardBehaviour>();
         
-            EventManager.Instance.StartListening(EventManager.PlayerDied, Show);
+            EventManager.Instance.StartListening(EventManager.PlayerDied, ShowScoreboard);
+        }
+        
+        private void ShowScoreboard(object arg0)
+        {
+            StartCoroutine(Show(arg0));
         }
 
-        private void Show(object arg0)
+        private IEnumerator Show(object arg0)
         {
             darkOverlay.SetActive(true);
             window.SetActive(true);
             gameOverText.text = "GAME OVER\n\nyou survived " + GameData.Instance.day + " days";
-            gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() =>
-            {
-                _scoreboardBehaviour.SetPlayerScore(GameStatistics.Instance.username, GameData.Instance.day, GameData.Instance.secondsSinceGameStarted);
-                _scoreboardBehaviour.RefreshScores(gameOverText, darkOverlay, window);
-                gameOverText.color = new Color(1, 1, 1, 0);
+    
+            // Start both operations
+            bool tweenComplete = false;
+            gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() => {
+                tweenComplete = true;
             });
+
+            // Create a coroutine for the scoreboard operations
+            Coroutine scoreboardCoroutine = StartCoroutine(SetScoreboardRoutine());
+
+            // Wait for both operations to complete
+            yield return new WaitUntil(() => tweenComplete);
+            yield return scoreboardCoroutine;
+            darkOverlay.SetActive(false);
+            window.SetActive(false);
+            _scoreboardBehaviour.ShowScoreboard(false);
+            gameOverText.color = new Color(1, 1, 1, 0);
         }
+
+        private IEnumerator SetScoreboardRoutine()
+        {
+            yield return StartCoroutine(_scoreboardBehaviour.SetPlayerScore(
+                GameStatistics.Instance.username, 
+                GameData.Instance.day, 
+                GameData.Instance.secondsSinceGameStarted, 
+                fromMenu: false
+            ));
+        }
+
+
     }
 }
