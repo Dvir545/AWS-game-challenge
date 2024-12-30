@@ -1,4 +1,4 @@
-# AWS Infrastructure
+# AWS
 
 This repository contains the AWS infrastructure and backend services for our Unity WebGL game. The project uses AWS CDK for infrastructure deployment and AWS Lambda functions for various game services.
 
