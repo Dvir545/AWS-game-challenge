@@ -55,7 +55,75 @@ public class GameEntryBehaviour : MonoBehaviour
     //         _pendingUsername = null;
     //     }
     // }
+private void OnEnable()
+    {
+        if (GameStatistics.Instance != null)
+        {
+            GameStatistics.Instance.OnGameDataLoaded += HandleGameDataLoaded;
+        }
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.StartListening(EventManager.Disconnect, OnDisconnect);
+        }
+    }
 
+    private void OnDisable()
+    {
+        if (GameStatistics.Instance != null)
+        {
+            GameStatistics.Instance.OnGameDataLoaded -= HandleGameDataLoaded;
+        }
+        if (EventManager.Instance != null)
+        {
+            EventManager.Instance.StopListening(EventManager.Disconnect, OnDisconnect);
+        }
+    }
+
+    private void HandleGameDataLoaded()
+    {
+        Debug.Log($"[GAMEDATA] HandleGameDataLoaded called with pendingUsername: {_pendingUsername}");
+        if (!string.IsNullOrEmpty(_pendingUsername))
+        {
+            StartCoroutine(FetchScoresCR());
+        }
+    }
+
+    private void OnDisconnect(object _)
+    {
+        Debug.Log("[DISCONNECT] GameEntryBehaviour handling disconnect");
+        
+        // Reset local state
+        _pendingUsername = null;
+        _signUpStep = 0;
+        _userEmail = null;
+        _lockButtons = false;
+        
+        // Clear all input fields
+        if (email != null) email.text = "";
+        if (username != null) username.text = "";
+        if (password != null) password.text = "";
+        if (verificationCode != null) verificationCode.text = "";
+        
+        // Clear description and update UI state
+        if (description != null) 
+        {
+            description.text = "Logged out successfully.";
+            StartCoroutine(ClearDescriptionAfterDelay());
+        }
+        
+        // Reset UI state
+        ShowEntry();
+    }
+
+    private IEnumerator ClearDescriptionAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        if (description != null)
+        {
+            description.text = "";
+        }
+    }
+    
     private void ShowEntry()
     {
         title.SetActive(true);

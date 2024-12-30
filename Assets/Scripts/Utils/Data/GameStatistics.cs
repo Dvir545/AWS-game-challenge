@@ -126,6 +126,7 @@ namespace Utils.Data
             if (EventManager.Instance != null)
             {
                 EventManager.Instance.StartListening(EventManager.DayStarted, OnDayStarted);
+                EventManager.Instance.StartListening(EventManager.Disconnect, OnDisconnect);
             }
         }
 
@@ -134,6 +135,7 @@ namespace Utils.Data
             if (EventManager.Instance != null)
             {
                 EventManager.Instance.StopListening(EventManager.DayStarted, OnDayStarted);
+                EventManager.Instance.StopListening(EventManager.Disconnect, OnDisconnect);
             }
         }
 
@@ -141,6 +143,47 @@ namespace Utils.Data
         {
             Debug.Log("********** OnDayStarted triggered - Attempting auto-save **********");
             SaveToJson();
+        }
+        
+        private void OnDisconnect(object _)
+        {
+            Debug.Log("********** Disconnect event received - Resetting player data **********");
+            
+            // Clear the saved username from PlayerPrefs
+            PlayerPrefs.DeleteKey("Username");
+            PlayerPrefs.DeleteKey("IdToken");
+            PlayerPrefs.DeleteKey("AccessToken");
+            PlayerPrefs.DeleteKey("RefreshToken");
+            PlayerPrefs.Save();
+            
+            // Reset all player data
+            username = "";
+            totalGamesPlayed = 0;
+            consecutiveGamesPlayed = 0;
+            killedLastGameBy = 0;
+            lastGameScore = new ScoreInfo(0, 0);
+            highScore = new ScoreInfo(0, 0);
+            isGuest = true;
+            
+            // Reset loaded game data
+            LoadedGameData = new SavedGameData
+            {
+                username = "",
+                TotalGamesPlayed = 0,
+                ConsecutiveGamesPlayed = 0,
+                KilledLastGameBy = 0,
+                LastGameScore = new ScoreInfo(0, 0),
+                HighScore = new ScoreInfo(0, 0),
+                LeftHanded = leftHanded,
+                SfxVolume = sfxVolume,
+                MusicVolume = musicVolume,
+                CurrentGameState = null
+            };
+
+            // Reset game data
+            GameData.Instance.NewGame();
+            
+            Debug.Log("********** Player data reset completed **********");
         }
 
         public void Init(string username, bool isGuest)
