@@ -42,7 +42,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         {
             mainMenu.SetActive(false);
             saveNQuitButton.SetActive(false);
-            // disconnectButton.SetActive(true);  todo restore this line
+            disconnectButton.SetActive(true);
         }
         else  // pause game
         {
