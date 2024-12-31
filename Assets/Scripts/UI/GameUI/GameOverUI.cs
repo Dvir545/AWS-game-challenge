@@ -40,7 +40,8 @@ namespace UI.GameUI
             // Start both operations
             bool tweenComplete = false;
             _tween = gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() => {
-                tweenComplete = true; _tween.Kill(); _tween = null;
+                tweenComplete = true;
+                _tween = null;
             });
 
             // Create a coroutine for the scoreboard operations
