@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Enemies.Demon;
+using Player;
 using TMPro;
 using UI.Settings;
 using UI.WarningSign;
@@ -15,6 +16,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject entry;
+    [SerializeField] private GameObject game;
     [SerializeField] private GameObject saveNQuitButton;
     [SerializeField] private GameObject disconnectButton;
     [SerializeField] private GameObject controlsButton;
@@ -29,6 +31,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     
     [SerializeField] private GameObject settingsParent;
     [SerializeField] private GameObject controlsParent;
+    [SerializeField] private PlayerHealthManager playerHealthManager;
 
     private bool _isOpen;
     private bool _fromMenu;
@@ -42,6 +45,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     
     public void OpenSettings(bool fromMenu=false)
     {
+        if (playerHealthManager.IsDead) return;
         settingsParent.SetActive(true);
         controlsParent.SetActive(false);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat(Constants.SFXVolumePlayerPref, 0.5f);
@@ -58,19 +62,42 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         {
             darkOverlay.SetActive(true);
             daysCountText.gameObject.SetActive(true);
-            daysCountText.text = "DAY " + (GameData.Instance.day + 1);
+            daysCountText.text = "- DAY " + (GameData.Instance.day + 1) + " -";
             settingsEnterButton.SetActive(false);
             settingsExitButton.SetActive(true);
             controlsButton.SetActive(true);
             saveNQuitButton.SetActive(true);
             disconnectButton.SetActive(false);
             Time.timeScale = 0;  // pause game
-            if (GameStarter.Instance.GameStarted)
-                SoundManager.Instance.PauseBackgroundSong();
+            if (game.activeSelf)
+                SoundManager.Instance.PauseAllMusic();
         }
         settingsWindow.SetActive(true);
+        settingsWindow.transform.localScale = 0.75f * Vector3.one;
         _fromMenu = fromMenu;
         _isOpen = true;
+    }
+    
+    private void Awake()
+    {
+        // Register pause/resume handlers
+        Application.focusChanged += OnFocusChanged;
+    }
+    
+    private void OnDestroy()
+    {
+        Application.focusChanged -= OnFocusChanged;
+    }
+    
+    private void OnFocusChanged(bool hasFocus)
+    {
+        if (game.activeSelf)
+        {
+            if (!hasFocus && !_isOpen)
+            {
+                OpenSettings();
+            }
+        }
     }
     
     public void CloseSettings()
@@ -82,8 +109,8 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         else  // resume game
         {
             Time.timeScale = 1;
-            if (GameStarter.Instance.GameStarted)
-                SoundManager.Instance.ResumeBackgroundSong();
+            if (game.activeSelf)
+                SoundManager.Instance.ResumeAllMusic();
         }
         darkOverlay.SetActive(false);
         settingsEnterButton.SetActive(true);
@@ -108,6 +135,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     {
         settingsParent.SetActive(false);
         controlsParent.SetActive(true);
+        settingsWindow.transform.localScale = 1.25f * Vector3.one;
     }
 
     public void BackButton()
@@ -116,6 +144,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         {
             settingsParent.SetActive(true);
             controlsParent.SetActive(false);
+            settingsWindow.transform.localScale = 0.75f * Vector3.one;
         }
         else
         {
@@ -125,13 +154,12 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
 
     public void SaveNQuit()
     {
-        CloseSettings();
         // game is saved on its own each morning, so only quit to menu
         WarningSignPool.Instance.ReleaseAll();
         EnemyPool.Instance.ReleaseAll();
         BallPool.Instance.ReleaseAll();
-        SoundManager.Instance.PauseBackgroundSong(0f);
         GameEnder.Instance.EndGame(died: false);
+        CloseSettings();
     }
 
     public void Disconnect()

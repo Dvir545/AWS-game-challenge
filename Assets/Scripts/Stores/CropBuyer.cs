@@ -21,11 +21,10 @@ namespace Stores
             set => GameData.Instance.cropsInStore[(int)crop] = value;
         }
 
-        private void Start()
+        public void Init()
         {
             amount.text = Amount.ToString();
             priceText.text = CropsData.Instance.GetPrice(crop) + " $";
-            // EventManager.Instance.StartListening(EventManager.DayStarted, UpdateAmountText);
         }
 
         public void UpdateAmountText(int newAmount)

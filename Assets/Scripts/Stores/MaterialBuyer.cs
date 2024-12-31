@@ -22,7 +22,7 @@ namespace Stores
             set => GameData.Instance.materialsInStore[(int)material] = value;
         }
 
-        private void Start()
+        public void Init()
         {
             amount.text = Amount.ToString();
             priceText.text = TowersData.Instance.GetTowerData(material).Price + " $";

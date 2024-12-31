@@ -41,6 +41,8 @@ namespace World
         [SerializeField] private TowerBuildManager towerBuildManager;
         [SerializeField] private NPCSpeech npcBottom;
         [SerializeField] private NPCSpeech npcMid;
+        [SerializeField] private CropBuyer[] crops;
+        [SerializeField] private MaterialBuyer[] materials;
         [SerializeField] private ToolBuyer[] tools;
         [SerializeField] private UpgradeBuyer[] upgrades;
         [SerializeField] private PetBuyer[] pets;
@@ -59,6 +61,7 @@ namespace World
             _collider = GetComponent<Collider2D>();
             _boatStartPos = boatWithPlayer.position;
             GameStatistics.Instance.Init("", isGuest:true);
+            SettingsBehaviour.Instance.Init();
             SoundManager.Instance.SyncMusicVolume();
             SoundManager.Instance.PlayOcean();
             SoundManager.Instance.StartEntryMusicCR();
@@ -106,7 +109,7 @@ namespace World
             GameContinued = false;
             SoundManager.Instance.Init();
             SoundManager.Instance.PlayOcean();
-            SoundManager.Instance.PlayEntryMusic(1f);
+            SoundManager.Instance.PlayEntryMusic(0f, restart:true);
             anchoredBoat.gameObject.SetActive(false);
             boatWithPlayer.gameObject.SetActive(false);
             boatWithPlayer.position = _boatStartPos;
@@ -155,7 +158,6 @@ namespace World
         private void SetupGame()
         {
             SoundManager.Instance.Init(stop: true);
-            SettingsBehaviour.Instance.Init();
             player.GetComponent<PlayerHealthManager>().Init();
             player.GetComponent<PlayerAnimationManager>().Init();
             cashBehaviour.Init();
@@ -170,6 +172,15 @@ namespace World
             farmingManager.Init();
             materialManager.Init();
             towerBuildManager.Init();
+            foreach (var crop in crops)
+            {
+                crop.Init();
+            }
+
+            foreach (var material in materials)
+            {
+                material.Init();
+            }
             foreach (var tool in tools)
             {
                 tool.Init();
