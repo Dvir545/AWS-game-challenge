@@ -128,6 +128,7 @@ namespace Enemies
            Agent.updatePosition = false;
            IsMoving = false;
            _collider2D.enabled = true;
+           Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
            Rb.AddForce(hitDirection * (Constants.BaseKnockbackForce * playerData.KnockbackMultiplier * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
@@ -138,6 +139,7 @@ namespace Enemies
            }
            if (!_collider2D.isTrigger) 
                _collider2D.enabled = false;
+           Rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
            Rb.velocity = Vector2.zero;
         }
 

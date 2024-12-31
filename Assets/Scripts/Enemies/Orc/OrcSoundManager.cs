@@ -54,7 +54,7 @@ namespace Enemies.Orc
             {
                 if (_orcAttackManager.IsAttacking())
                 {
-                    attackAudioSource.volume = GameStatistics.Instance.sfxVolume;
+                    attackAudioSource.volume = SettingsBehaviour.Instance.SFXVolume;
                     attackAudioSource.clip = attackSound;
                     attackAudioSource.pitch = Random.Range(0.6f, 1.1f);
                     attackAudioSource.Play();

@@ -63,13 +63,13 @@ namespace World
             }
             foreach (var source in _musicSources)
             {
-                source.volume = GameStatistics.Instance.musicVolume;
+                source.volume = SettingsBehaviour.Instance.MusicVolume;
             }
         }
 
         public void PlaySFX(AudioSource source, AudioClip clip, bool randomPitch = true, float pitchRange = .3f)
         {
-            source.volume = GameStatistics.Instance.sfxVolume;
+            source.volume = SettingsBehaviour.Instance.SFXVolume;
             source.clip = clip;
             if (randomPitch)
             {
@@ -87,22 +87,25 @@ namespace World
                     source.Stop();
                 }
                 source.Play();
-                if (source.volume == 0 && GameStatistics.Instance.musicVolume > 0)
+                if (source.volume == 0 && SettingsBehaviour.Instance.MusicVolume > 0)
                 {
-                    source.DOFade(GameStatistics.Instance.musicVolume, duration);
+                    source.DOFade(SettingsBehaviour.Instance.MusicVolume, duration);
                 }
             }
         }
         
-        private void PauseMusic(AudioSource source, float fadeDuration = 1f)
+        private void PauseMusic(AudioSource source, float fadeDuration = 1f, bool stop=false)
         {
             if (source.isPlaying)
-                source.DOFade(0, fadeDuration).OnComplete(source.Pause);
+                if (stop)
+                    source.DOFade(0, fadeDuration).OnComplete(source.Stop);
+                else
+                    source.DOFade(0, fadeDuration).OnComplete(source.Pause);
         }
     
         public void ButtonPress()
         {
-            ui.volume = GameStatistics.Instance.sfxVolume;
+            ui.volume = SettingsBehaviour.Instance.SFXVolume;
             ui.clip = buttonPress;
             ui.pitch = _buttonPitch;
             ui.Play();
@@ -110,7 +113,7 @@ namespace World
     
         public void ButtonRelease()
         {
-            ui.volume = GameStatistics.Instance.sfxVolume;
+            ui.volume = SettingsBehaviour.Instance.SFXVolume;
             ui.clip = buttonRelease;
             ui.pitch = _buttonPitch;
             ui.Play();
@@ -302,6 +305,20 @@ namespace World
         private void OnApplicationFocus(bool hasFocus)
         {
             _appPaused = false;
+        }
+
+        public void StopGameMusic()
+        {
+            if (_dayBackgroundCoroutine != null)
+            {
+                StopCoroutine(_dayBackgroundCoroutine);
+            }
+            if (_nightBackgroundCoroutine != null)
+            {
+                StopCoroutine(_nightBackgroundCoroutine);
+            }
+            PauseMusic(dayBackgroundMusic, stop: true);
+            PauseMusic(nightBackgroundMusic, stop: true);
         }
     }
 }

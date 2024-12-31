@@ -21,9 +21,16 @@ namespace Utils.Data
             KnockbackMultiplier = UpgradesData.GetKnockbackMultiplier(GameData.Instance.knockbackUpgradeLevel);
         }
 
-        public void SwitchTool()
+        private int Mod(int x, int m)
         {
-            _curTool = (HeldTool)(((int)_curTool + 1) % Constants.NumTools);
+            int r = x%m;
+            return r<0 ? r+m : r;
+        }
+
+        public void SwitchTool(bool next)
+        {
+            var idx = next? (int)_curTool + 1 : (int)_curTool - 1;
+            _curTool = (HeldTool)Mod(idx, Constants.NumTools);
         }
         private int GetCurToolLevel() => _curTool switch
         {

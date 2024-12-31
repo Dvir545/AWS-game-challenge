@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Enemies.Demon;
+using TMPro;
 using UI.Settings;
 using UI.WarningSign;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     [SerializeField] private GameObject entry;
     [SerializeField] private GameObject saveNQuitButton;
     [SerializeField] private GameObject disconnectButton;
+    [SerializeField] private GameObject controlsButton;
     [SerializeField] private GameObject darkOverlay;
     [SerializeField] private GameObject settingsEnterButton;
     [SerializeField] private GameObject settingsExitButton;
@@ -23,36 +25,48 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private RightLeftHandedBehaviour rightLeftHandedBehaviour;
+    [SerializeField] private TextMeshProUGUI daysCountText;
+    
+    [SerializeField] private GameObject settingsParent;
+    [SerializeField] private GameObject controlsParent;
 
     private bool _isOpen;
     private bool _fromMenu;
-
+    
     public void Init()
     {
         rightLeftHandedBehaviour.Init();
-        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
-        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat(Constants.SFXVolumePlayerPref, 0.5f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat(Constants.MusicVolumePlayerPref, 0.5f);
     }
     
     public void OpenSettings(bool fromMenu=false)
     {
-        sfxVolumeSlider.value = GameStatistics.Instance.sfxVolume;
-        musicVolumeSlider.value = GameStatistics.Instance.musicVolume;
+        settingsParent.SetActive(true);
+        controlsParent.SetActive(false);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat(Constants.SFXVolumePlayerPref, 0.5f);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat(Constants.MusicVolumePlayerPref, 0.5f);
         if (fromMenu)
         {
             mainMenu.SetActive(false);
+            daysCountText.gameObject.SetActive(false);
+            controlsButton.SetActive(false);
             saveNQuitButton.SetActive(false);
             disconnectButton.SetActive(true);
         }
-        else  // pause game
+        else
         {
             darkOverlay.SetActive(true);
+            daysCountText.gameObject.SetActive(true);
+            daysCountText.text = "DAY " + (GameData.Instance.day + 1);
             settingsEnterButton.SetActive(false);
             settingsExitButton.SetActive(true);
+            controlsButton.SetActive(true);
             saveNQuitButton.SetActive(true);
             disconnectButton.SetActive(false);
-            Time.timeScale = 0;
-            SoundManager.Instance.PauseBackgroundSong();
+            Time.timeScale = 0;  // pause game
+            if (GameStarter.Instance.GameStarted)
+                SoundManager.Instance.PauseBackgroundSong();
         }
         settingsWindow.SetActive(true);
         _fromMenu = fromMenu;
@@ -68,7 +82,8 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         else  // resume game
         {
             Time.timeScale = 1;
-            SoundManager.Instance.ResumeBackgroundSong();
+            if (GameStarter.Instance.GameStarted)
+                SoundManager.Instance.ResumeBackgroundSong();
         }
         darkOverlay.SetActive(false);
         settingsEnterButton.SetActive(true);
@@ -86,6 +101,25 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         else
         {
             OpenSettings();
+        }
+    }
+    
+    public void OpenControls()
+    {
+        settingsParent.SetActive(false);
+        controlsParent.SetActive(true);
+    }
+
+    public void BackButton()
+    {
+        if (controlsParent.activeSelf)
+        {
+            settingsParent.SetActive(true);
+            controlsParent.SetActive(false);
+        }
+        else
+        {
+            CloseSettings();
         }
     }
 
@@ -110,12 +144,15 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     
     public void ChangeSFXVolume(float volume)
     {
-        GameStatistics.Instance.SetSfxVolume(volume);
+        PlayerPrefs.SetFloat(Constants.SFXVolumePlayerPref, volume);
     }
     
     public void ChangeMusicVolume(float volume)
     {
-        GameStatistics.Instance.SetMusicVolume(volume);
+        PlayerPrefs.SetFloat(Constants.MusicVolumePlayerPref, volume);
         SoundManager.Instance.SyncMusicVolume();
     }
+
+    public float SFXVolume => sfxVolumeSlider.value;
+    public float MusicVolume => musicVolumeSlider.value;
 }

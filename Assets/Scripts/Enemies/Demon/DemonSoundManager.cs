@@ -71,7 +71,7 @@ namespace Enemies.Demon
 
         protected override IEnumerator PlayWalkingSoundCR()
         {
-            walkingAudioSource.volume = GameStatistics.Instance.sfxVolume;
+            walkingAudioSource.volume = SettingsBehaviour.Instance.SFXVolume;
             walkingAudioSource.clip = walkingSound;
             walkingAudioSource.loop = true;
             walkingAudioSource.Play();

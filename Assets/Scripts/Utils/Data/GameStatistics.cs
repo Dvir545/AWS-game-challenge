@@ -59,8 +59,6 @@ namespace Utils.Data
         public ScoreInfo LastGameScore;
         public ScoreInfo HighScore;
         public bool LeftHanded;
-        public float SfxVolume;
-        public float MusicVolume;
         public GameState CurrentGameState;
     }
 
@@ -83,30 +81,6 @@ namespace Utils.Data
         public ScoreInfo lastGameScore;
         public ScoreInfo highScore;
         public bool isGuest;
-        
-        // Audio settings
-        private float _sfxVolume;
-        private float _musicVolume;
-        public float sfxVolume 
-        { 
-            get => _sfxVolume;
-            private set
-            {
-                _sfxVolume = value;
-                PlayerPrefs.SetFloat("sfxVolume", value);
-                PlayerPrefs.Save();
-            }
-        }
-        public float musicVolume 
-        { 
-            get => _musicVolume;
-            private set
-            {
-                _musicVolume = value;
-                PlayerPrefs.SetFloat("musicVolume", value);
-                PlayerPrefs.Save();
-            }
-        }
 
         // Game settings
         private bool _leftHanded;
@@ -175,8 +149,6 @@ namespace Utils.Data
                 LastGameScore = new ScoreInfo(0, 0),
                 HighScore = new ScoreInfo(0, 0),
                 LeftHanded = leftHanded,
-                SfxVolume = sfxVolume,
-                MusicVolume = musicVolume,
                 CurrentGameState = null
             };
 
@@ -197,9 +169,7 @@ namespace Utils.Data
             PlayerPrefs.Save();
             
             // Load settings from PlayerPrefs
-            leftHanded = PlayerPrefs.GetInt("leftHanded", 1) == 1;
-            sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
-            musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+            leftHanded = PlayerPrefs.GetInt(Constants.LeftHandedPlayerPref, 0) == 0;
 
             if (!string.IsNullOrEmpty(username) && !isGuest)
             {
@@ -238,8 +208,6 @@ namespace Utils.Data
                 LastGameScore = lastGameScore,
                 HighScore = highScore,
                 LeftHanded = leftHanded,
-                SfxVolume = sfxVolume,
-                MusicVolume = musicVolume,
                 CurrentGameState = null
             };
 
@@ -258,16 +226,6 @@ namespace Utils.Data
         public void SetLeftHanded(bool value)
         {
             leftHanded = value;
-        }
-
-        public void SetSfxVolume(float volume)
-        {
-            sfxVolume = Mathf.Clamp01(volume);
-        }
-
-        public void SetMusicVolume(float volume)
-        {
-            musicVolume = Mathf.Clamp01(volume);
         }
 
         private TowerArrayWrapper[] SerializeTowers(List<TowerLevelInfo>[] towers)
@@ -362,8 +320,6 @@ namespace Utils.Data
                         lastGameScore = gameData.LastGameScore;
                         highScore = gameData.HighScore;
                         SetLeftHanded(gameData.LeftHanded);
-                        SetSfxVolume(gameData.SfxVolume);
-                        SetMusicVolume(gameData.MusicVolume);
 
                         // Restore username
                         this.username = currentUsername;
@@ -419,8 +375,6 @@ namespace Utils.Data
                         LastGameScore = lastGameScore,
                         HighScore = highScore,
                         LeftHanded = leftHanded,
-                        SfxVolume = sfxVolume,
-                        MusicVolume = musicVolume,
                         CurrentGameState = new GameState
                         {
                             healthUpgradeLevel = GameData.Instance.healthUpgradeLevel,

@@ -98,7 +98,7 @@ namespace Player
 
             if (action.clip != null)
             {
-                action.volume = GameStatistics.Instance.sfxVolume;
+                action.volume = SettingsBehaviour.Instance.SFXVolume;
                 action.pitch = Random.Range(0.7f, 1.3f);
                 action.Play();
             }

@@ -57,7 +57,7 @@ namespace Utils.Data
                 new(0, 8, 0, 2, 5), 
                 new(30),
                 new(0, 15, 0, 0, 3),
-                new(10, 8, 6, 4, 6), 
+                new(10, 8, 6, 3, 6), 
                 new(demons:1)
             };
 

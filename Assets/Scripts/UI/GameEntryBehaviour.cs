@@ -475,9 +475,9 @@ private void OnEnable()
 
     public void OnLogin(bool fromSignUp = false)
     {
-        if (_lockButtons) return;
         if (!fromSignUp)
         {
+            if (_lockButtons) return;
             Debug.Log("Login button clicked");
             if (!IsValidInput(username.text, password.text))
             {

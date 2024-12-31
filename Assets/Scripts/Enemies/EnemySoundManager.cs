@@ -73,7 +73,7 @@ namespace Enemies
                 if (EnemyHealthManager.IsDead) break;
                 if (IsEnemyMoving && !IsPlayingImportantSound)
                 {
-                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
+                    AudioSource.volume = SettingsBehaviour.Instance.SFXVolume;
                     AudioSource.clip = walkingSound;
                     AudioSource.pitch = Random.Range(0.6f, 1.1f);
                     AudioSource.Play();

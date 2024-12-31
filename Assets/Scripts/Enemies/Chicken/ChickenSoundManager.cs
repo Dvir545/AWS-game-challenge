@@ -51,7 +51,7 @@ namespace Enemies.Chicken
                 if (EnemyHealthManager.IsDead) break;
                 if (!_chickenEatingManager.IsEating && !IsPlayingImportantSound)
                 {
-                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
+                    AudioSource.volume = SettingsBehaviour.Instance.SFXVolume;
                     AudioSource.clip = walkingSound;
                     AudioSource.Play();
                     yield return new WaitForSeconds(Random.Range(2f, 5f));
@@ -70,7 +70,7 @@ namespace Enemies.Chicken
             {
                 if (_chickenEatingManager.IsEating && !IsPlayingImportantSound)
                 {
-                    AudioSource.volume = GameStatistics.Instance.sfxVolume;
+                    AudioSource.volume = SettingsBehaviour.Instance.SFXVolume;
                     AudioSource.clip = eatingSound;
                     AudioSource.pitch = Random.Range(0.6f, 1.1f);
                     AudioSource.Play();

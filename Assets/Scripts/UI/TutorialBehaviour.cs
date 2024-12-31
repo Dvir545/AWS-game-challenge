@@ -49,5 +49,21 @@ namespace UI
                 }
             }
         }
+        
+        public void PrevPage()
+        {
+            for (int i = 0; i < tutorialPages.Length; i++)
+            {
+                if (tutorialPages[i].activeSelf)
+                {
+                    tutorialPages[i].SetActive(false);
+                    if (i == 0)
+                        tutorialPages[tutorialPages.Length - 1].SetActive(true);
+                    else
+                        tutorialPages[i - 1].SetActive(true);
+                    return;
+                }
+            }
+        }
     }
 }

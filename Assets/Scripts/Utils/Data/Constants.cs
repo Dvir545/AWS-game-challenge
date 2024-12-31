@@ -71,5 +71,8 @@ namespace Utils
             new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), new List<TowerLevelInfo>(), 
         };
 
+        public const string SFXVolumePlayerPref = "SFX_VOLUME";
+        public const string MusicVolumePlayerPref = "MUSIC_VOLUME";
+        public const string LeftHandedPlayerPref = "LEFT_HANDED";
     }
 }
