@@ -26,6 +26,8 @@ namespace Towers
                 left.sprite = sprites.Left;
                 right.sprite = sprites.Right;
             }
+            
+            
         }
 
         [SerializeField] private GameObject floorPrefab;
@@ -193,7 +195,11 @@ namespace Towers
             for (int i = _worstFloor + 1; i < CurrentLevel; i++)
             {
                 _floors[i].transform.position -= new Vector3(0, YOffsetBetweenFloors, 0);
-                _floors[i].GetComponent<TowerFloorAnimationManager>().Init(_towerDatas[i].TowerMaterial, i, _towerDatas[i].SecondsToAttack);
+                _floors[i].GetComponent<TowerFloorAnimationManager>().Init(_towerDatas[i].TowerMaterial, i-1, _towerDatas[i].SecondsToAttack);
+                if (i == 1)  // this floor now becomes bottom floor
+                {
+                    _floors[i].transform.GetChild(0).GetComponent<Collider2D>().enabled = true;
+                }
             }
             Destroy(_floors[_worstFloor]);
             _floors.RemoveAt(_worstFloor);
