@@ -50,18 +50,18 @@ namespace Utils
         // game start values
         public const int StartHealthUpgradeLevel = 0;
         public const int StartRegenUpgradeLevel = 0;
-        public const int StartSpeedUpgradeLevel = 3;  // TODO 0
+        public const int StartSpeedUpgradeLevel = 0;
         public const int StartStaminaUpgradeLevel = 0;
         public const int StartKnockbackUpgradeLevel = 0;
         public const int StartSwordLevel = 0;
         public const int StartHoeLevel = 0;
-        public const int StartHammerLevel = 3;  // TODO 0
+        public const int StartHammerLevel = 0;
         public const int StartCash = 0;
         public const int StartDay = 0;
         public static readonly int[] StartCrops = {3, 0, 0, 0, 0};
         public static readonly int[] StartMaterials = {1, 0, 0, 0, 0};
         public static readonly int[] StartCropsInStore = {5, 0, 0, 0, 0};
-        public static readonly int[] StartMaterialsInStore = {3, 1, 1, 0, 0};  // TODO 3 0 0 0 0
+        public static readonly int[] StartMaterialsInStore = {3, 0, 0, 0, 0};
         public static readonly int[] FirstDayEnemies = { 0, 0, 0, 0, 0, 0 };
         public static readonly int[] FirstNightEnemies = { 5, 0, 0, 0, 0, 0 };
         public static readonly List<TowerLevelInfo>[] StartTowers = new List<TowerLevelInfo>[]
