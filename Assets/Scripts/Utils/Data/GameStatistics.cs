@@ -158,7 +158,7 @@ namespace Utils.Data
             Debug.Log("********** Player data reset completed **********");
         }
 
-        public void Init(string username, bool isGuest)
+        public IEnumerator Init(string username, bool isGuest, bool wait=false)
         {
             Debug.Log($"********** Initializing GameStatistics for user: {username} **********");
             this.username = username;
@@ -174,7 +174,11 @@ namespace Utils.Data
             if (!string.IsNullOrEmpty(username) && !isGuest)
             {
                 Debug.Log($"********** Starting LoadUserDataWithRetry for user: {username} **********");
-                StartCoroutine(LoadUserDataWithRetry(0));
+                var cr = StartCoroutine(LoadUserDataWithRetry(0));
+                if (wait)
+                {
+                    yield return cr;
+                }
             }
             else
             {

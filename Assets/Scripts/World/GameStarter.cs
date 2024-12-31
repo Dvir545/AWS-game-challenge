@@ -60,7 +60,8 @@ namespace World
         {
             _collider = GetComponent<Collider2D>();
             _boatStartPos = boatWithPlayer.position;
-            GameStatistics.Instance.Init("", isGuest:true);
+            StartCoroutine(GameStatistics.Instance.Init("", isGuest:true));
+            // wait for GameStatistics to finish initializing
             SettingsBehaviour.Instance.Init();
             SoundManager.Instance.SyncMusicVolume();
             SoundManager.Instance.PlayOcean();

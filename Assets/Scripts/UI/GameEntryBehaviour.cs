@@ -452,7 +452,7 @@ private void OnEnable()
         Debug.Log($"[FINISH] Starting FinishEntry with username: {username}");
         _pendingUsername = username;
         Debug.Log($"[FINISH] Set _pendingUsername to: {_pendingUsername}");
-        GameStatistics.Instance.Init(username, isGuest);
+        yield return GameStatistics.Instance.Init(username, isGuest, wait: true);
         Debug.Log($"[FINISH] Called GameStatistics.Init with username: {username}");
         // fetch scores only if connected to internet
         description.text = "Getting ready...";

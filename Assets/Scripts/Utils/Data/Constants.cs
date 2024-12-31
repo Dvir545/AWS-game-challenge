@@ -30,7 +30,7 @@ namespace Utils
         public const int StoreCornAmountPerCycle = 3;
         public const int StorePumpkinAmountPerCycle = 1;
 
-        public const int FirstDayDurationInSeconds = 180;
+        public const int FirstDayDurationInSeconds = 30;//180;
         public const int DaySecondsReductionPerCycle = 10;
         public const int MinDayDurationInSeconds = 40;
         public const float FirstNightDurationInSeconds = 10;

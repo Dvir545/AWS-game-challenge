@@ -96,14 +96,14 @@ namespace UI.GameUI
         {
             if (_darkenTween != null)
                 return;
-            _darkenTween = _darkMask.DOFade(NightAlpha, duration);
+            _darkenTween = _darkMask.DOFade(NightAlpha, duration).OnComplete(() => _darkenTween = null);
         }
 
         public void LightenMap(float duration)
         {
             if (_lightenTween != null)
                 return;
-            _lightenTween = _darkMask.DOFade(0, duration);
+            _lightenTween = _darkMask.DOFade(0, duration).OnComplete(() => _lightenTween = null);
         }
 
         public void JumpToNight()
@@ -135,6 +135,7 @@ namespace UI.GameUI
         {
             _darkMask.color = new Color(0, 0, 0, 0);
             _map.gameObject.SetActive(false);
+            _mapOpen = false;
             _mapOpenButton.gameObject.SetActive(true);
         }
     }

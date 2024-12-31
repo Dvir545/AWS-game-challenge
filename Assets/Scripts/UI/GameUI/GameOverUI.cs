@@ -14,6 +14,7 @@ namespace UI.GameUI
         [SerializeField] private TextMeshProUGUI gameOverText;
         [SerializeField] private GameObject scoreboard;
         private ScoreboardBehaviour _scoreboardBehaviour;
+        private Tween _tween;
     
         private void Awake()
         {
@@ -38,8 +39,8 @@ namespace UI.GameUI
     
             // Start both operations
             bool tweenComplete = false;
-            gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() => {
-                tweenComplete = true;
+            _tween = gameOverText.DOColor(new Color(1, 1, 1, 1), 5f).OnComplete(() => {
+                tweenComplete = true; _tween.Kill(); _tween = null;
             });
 
             // Create a coroutine for the scoreboard operations
