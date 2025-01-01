@@ -364,13 +364,7 @@ namespace Utils.Data
             
             Debug.Log($"********** Preparing save data for user: {username} **********");
             Debug.Log($"********** Current game state - Day: {GameData.Instance.day}, Health: {GameData.Instance.curHealth}, Cash: {GameData.Instance.cash} **********");
-
-            try 
-            {
-                saveRequest = new SaveRequest
-                {
-                    username = username,
-                    gameData = new SavedGameData
+            GameStatistics.Instance.LoadedGameData = new SavedGameData 
                     {
                         username = username,
                         TotalGamesPlayed = totalGamesPlayed,
@@ -407,7 +401,13 @@ namespace Utils.Data
                                 Value = kvp.Value
                             }).ToList()
                         }
-                    }
+                    };
+            try 
+            {
+                saveRequest = new SaveRequest
+                {
+                    username = username,
+                    gameData = GameStatistics.Instance.LoadedGameData,
                 };
 
                 jsonData = JsonUtility.ToJson(saveRequest);
