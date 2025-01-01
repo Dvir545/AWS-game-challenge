@@ -45,7 +45,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     
     public void OpenSettings(bool fromMenu=false)
     {
-        if (playerHealthManager.IsDead) return;
+        if (playerHealthManager.IsDead && !mainMenu.activeSelf) return;
         settingsParent.SetActive(true);
         controlsParent.SetActive(false);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat(Constants.SFXVolumePlayerPref, 0.5f);

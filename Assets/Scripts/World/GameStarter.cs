@@ -229,16 +229,16 @@ namespace World
         {
             menuCanvas.SetActive(false);
             GameContinued = true;
-            if (_fromEntry)
+            // if (_fromEntry)
+        // {
+            var gameState = GameStatistics.Instance.LoadedGameData?.CurrentGameState;
+            if (gameState == null)
             {
-                var gameState = GameStatistics.Instance.LoadedGameData?.CurrentGameState;
-                if (gameState == null)
-                {
-                    Debug.LogError("Attempted to continue game without valid save data!");
-                    return;
-                }
-                GameData.Instance.LoadFromGameState(gameState);
+                Debug.LogError("Attempted to continue game without valid save data!");
+                return;
             }
+            GameData.Instance.LoadFromGameState(gameState);
+        // }
             
             SetupGame();
         }
