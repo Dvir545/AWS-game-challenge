@@ -26,6 +26,10 @@ namespace Enemies.Demon
         protected Transform CurrentTarget;
         private GameObject[] _targets;
         public bool Targeted => _agent.updatePosition && CurrentTarget != null;
+        
+        private float _currentAngle;  // Add this field to track current angle
+        private float _targetAngle;   // Add this field for the target angle
+
 
     
         public void Init(float rotationSpeed, float horizontalRadius, float verticalRadius, int ballIndex, int totalBalls, Transform pivot, AudioSource audioSource)
@@ -43,6 +47,7 @@ namespace Enemies.Demon
             float angleOffset = (360f / _totalBalls) * _ballIndex;
             _angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
             _newAngle = _angle;
+            _sent = false;
         }
 
         private void Awake()
@@ -74,7 +79,7 @@ namespace Enemies.Demon
             _angle += _rotationSpeed * Time.deltaTime;
             _newAngle += _rotationSpeed * Time.deltaTime;
             if (Math.Abs(_angle - _newAngle) > 0.01f)
-                _angle = Mathf.Lerp(_angle, _newAngle, Time.deltaTime/3f);
+                _angle = Mathf.Lerp(_angle, _newAngle, Time.deltaTime/20f);
         
             float x = _horizontalRadius * Mathf.Cos(_angle);
             float y = _verticalRadius * Mathf.Sin(_angle);

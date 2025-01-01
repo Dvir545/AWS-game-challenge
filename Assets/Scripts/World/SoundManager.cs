@@ -41,7 +41,6 @@ namespace World
         [SerializeField] private List<AudioClip> nightPlaylist;
         private int _currentNightSongIndex = 0;
         private Coroutine _nightBackgroundCoroutine;
-        private bool _backgroundMusicPaused;
         private bool _playingDayMusic;
         private List<AudioSource> _musicSources = new();
         private float dayBeforeSample;
@@ -53,7 +52,6 @@ namespace World
             // _currentNightSongIndex = 0;
             dayBeforeSample = 0;
             nightBeforeSample = 0;
-            _backgroundMusicPaused = false;
             if (stop)
                 StopEntryMusicCR();
             if (pausedSources.ContainsKey(dayBackgroundMusic))
@@ -239,47 +237,12 @@ namespace World
             StopEntryMusic();
             _entryMusicCoroutine = null;
         }
-
-        // private IEnumerator DayBackgroundMusicCR()
-        // {
-        //     while (true)
-        //     {
-        //         while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || dayBackgroundMusic.isPlaying || 
-        //                DayNightManager.Instance.CurrentDayPhase != DayPhase.Day)
-        //         {
-        //             yield return new WaitForSeconds(1f); // Check every second
-        //         }
-        //         dayBackgroundMusic.clip = dayPlaylist[_currentDaySongIndex];
-        //         PlayMusic(dayBackgroundMusic);
-        //         _currentDaySongIndex = (_currentDaySongIndex + 1) % dayPlaylist.Count;
-        //         
-        //         yield return null;
-        //     }
-        // }
-        //
-        // private IEnumerator NightBackgroundMusicCR()
-        // {
-        //     while (true)
-        //     {
-        //         while (!GameStarter.Instance.GameStarted || _backgroundMusicPaused || nightBackgroundMusic.isPlaying || 
-        //                DayNightManager.Instance.CurrentDayPhase != DayPhase.Night)
-        //         {
-        //             yield return new WaitForSeconds(1f); // Check every second
-        //         }
-        //         nightBackgroundMusic.clip = nightPlaylist[_currentNightSongIndex];
-        //         PlayMusic(nightBackgroundMusic);
-        //         _currentNightSongIndex = (_currentNightSongIndex + 1) % nightPlaylist.Count;
-        //         yield return null;
-        //     }
-        // }
         
         public void StartGame()
         {
             StopOcean();
             PlayMusic(dayBackgroundMusic, 0f, restart: true);
             PlayMusic(nightBackgroundMusic, 0f, restart: true);
-            // _dayBackgroundCoroutine = StartCoroutine(DayBackgroundMusicCR());
-            // _nightBackgroundCoroutine = StartCoroutine(NightBackgroundMusicCR());
             PauseMusic(nightBackgroundMusic, 0f);
             _playingDayMusic = true;
         }
@@ -288,13 +251,6 @@ namespace World
         {
             PauseMusic(dayBackgroundMusic, duration);
             PauseMusic(nightBackgroundMusic, duration);
-            _backgroundMusicPaused = true;
-        }
-        
-        public void ResumeBackgroundSong()
-        {
-            _backgroundMusicPaused = false;
-            SwitchBackgroundMusic(_playingDayMusic, 0f);
         }
 
         public void SwitchBackgroundMusic(bool day, float duration = Constants.ChangeLightDurationInSeconds)
@@ -302,14 +258,24 @@ namespace World
             if (day)
             {
                 if (nightBackgroundMusic.isPlaying)
+                {
                     PauseMusic(nightBackgroundMusic, duration);
+                    if (activeAudioSources.Contains(nightBackgroundMusic))
+                        activeAudioSources.Remove(nightBackgroundMusic);
+                }
                 PlayMusic(dayBackgroundMusic, duration);
+                activeAudioSources.Add(dayBackgroundMusic);
             }
             else
             {
                 if (dayBackgroundMusic.isPlaying)
+                {
                     PauseMusic(dayBackgroundMusic, duration);
+                    if (activeAudioSources.Contains(dayBackgroundMusic))
+                        activeAudioSources.Remove(dayBackgroundMusic);
+                }
                 PlayMusic(nightBackgroundMusic, duration);
+                activeAudioSources.Add(nightBackgroundMusic);
             }
             _playingDayMusic = day;
         }
