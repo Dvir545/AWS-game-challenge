@@ -216,11 +216,6 @@ namespace World
             }
 
             PlayEntryMusic(duration);
-            if (notInFocus)
-            {
-                activeAudioSources.Add(entryMusic);
-                entryMusic.Pause();
-            }
         }
         
         public void StartEntryMusicCR(bool immediate = false, float duration=0f)
@@ -404,7 +399,7 @@ namespace World
         {
             Application.focusChanged -= OnFocusChanged;
         }
-
+        
         private void OnFocusChanged(bool hasFocus)
         {
             if (!isInitialized) return;
@@ -412,19 +407,11 @@ namespace World
             if (!hasFocus)
             {
                 wasGamePaused = game.activeSelf && !playerHealthManager.IsDead;  // because SettingsBehaviour pauses if game.activeSelf
-                PauseAllMusic();
-                notInFocus = true;
+                if (wasGamePaused)
+                    PauseAllMusic();
             }
             else {
-                notInFocus = false;
-                if (!wasGamePaused)
-                {
-                    ResumeAllMusic();
-                }
-                else  // returned to focus but game is paused
-                {
-                    waitingForGameResume = true;
-                }
+                waitingForGameResume = true;
             }
         }
 
