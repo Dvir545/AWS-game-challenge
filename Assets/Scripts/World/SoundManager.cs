@@ -56,6 +56,10 @@ namespace World
             _backgroundMusicPaused = false;
             if (stop)
                 StopEntryMusicCR();
+            if (pausedSources.ContainsKey(dayBackgroundMusic))
+                pausedSources.Remove(dayBackgroundMusic);
+            if (pausedSources.ContainsKey(nightBackgroundMusic))
+                    pausedSources.Remove(nightBackgroundMusic);
         }
 
         public void SyncMusicVolume()
@@ -384,11 +388,11 @@ namespace World
         {
             if (source != null)
             {
-                if (source.isPlaying)
+                if (source.isPlaying && !activeAudioSources.Contains(source))
                 {
                     activeAudioSources.Add(source);
                 }
-                else if (!source.isPlaying && !pausedSources.ContainsKey(source))
+                else if (!source.isPlaying && activeAudioSources.Contains(source) && !pausedSources.ContainsKey(source))
                 {
                     activeAudioSources.Remove(source);
                 }

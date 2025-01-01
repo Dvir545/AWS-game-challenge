@@ -364,7 +364,7 @@ namespace Utils.Data
             
             Debug.Log($"********** Preparing save data for user: {username} **********");
             Debug.Log($"********** Current game state - Day: {GameData.Instance.day}, Health: {GameData.Instance.curHealth}, Cash: {GameData.Instance.cash} **********");
-            GameStatistics.Instance.LoadedGameData = new SavedGameData 
+            LoadedGameData = new SavedGameData 
                     {
                         username = username,
                         TotalGamesPlayed = totalGamesPlayed,
@@ -387,14 +387,14 @@ namespace Utils.Data
                             day = GameData.Instance.day,
                             curHealth = GameData.Instance.curHealth,
                             secondsSinceGameStarted = GameData.Instance.secondsSinceGameStarted,
-                            crops = GameData.Instance.crops,
-                            materials = GameData.Instance.materials,
-                            cropsInStore = GameData.Instance.cropsInStore,
-                            materialsInStore = GameData.Instance.materialsInStore,
-                            thisDayEnemies = GameData.Instance.thisDayEnemies,
-                            thisNightEnemies = GameData.Instance.thisNightEnemies,
+                            crops = GameData.Instance.crops.ToArray(),
+                            materials = GameData.Instance.materials.ToArray(),
+                            cropsInStore = GameData.Instance.cropsInStore.ToArray(),
+                            materialsInStore = GameData.Instance.materialsInStore.ToArray(),
+                            thisDayEnemies = GameData.Instance.thisDayEnemies.ToArray(),
+                            thisNightEnemies = GameData.Instance.thisNightEnemies.ToArray(),
                             towers = SerializeTowers(GameData.Instance.towers),
-                            pets = GameData.Instance.pets,
+                            pets = GameData.Instance.pets.ToList(),
                             plantedCrops = GameData.Instance.plantedCrops.Select(kvp => new PlantedCropKeyValue 
                             { 
                                 Key = new Vector2IntSerializable(kvp.Key),
@@ -407,7 +407,7 @@ namespace Utils.Data
                 saveRequest = new SaveRequest
                 {
                     username = username,
-                    gameData = GameStatistics.Instance.LoadedGameData,
+                    gameData = LoadedGameData,
                 };
 
                 jsonData = JsonUtility.ToJson(saveRequest);

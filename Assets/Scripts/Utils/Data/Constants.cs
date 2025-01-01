@@ -13,6 +13,7 @@ namespace Utils
         public const float BaseAttackDuration = 2.5f; // seconds
         public const float BaseStaminaProgressIncPerSingleAttack = 0.12f;
         public const float BaseActCooldownDuration = 3;
+        public const float GracePeriodDuration = 1.5f;
         public const int BasePlayerDamage = 1;
         public const int BaseEnemyDamage = 1;
         public const int BaseKnockbackForce = 7;
@@ -21,8 +22,8 @@ namespace Utils
         public const int TowerCount = 9;
         public const int MaxCropsInStore = 99;
         public const int MaxMaterialsInStore = 99;
-        public const int MaxCrops = 99;
-        public const int MaxMaterials = 99;
+        public const int MaxCrops = 999;
+        public const int MaxMaterials = 999;
         
         public const int StoreWheatAmountPerCycle = 5;
         public const int StoreCarrotAmountPerCycle = 5;
@@ -32,7 +33,7 @@ namespace Utils
 
         public const int FirstDayDurationInSeconds = 180;
         public const int DaySecondsReductionPerCycle = 10;
-        public const int MinDayDurationInSeconds = 40;
+        public const int MinDayDurationInSeconds = 45;
         public const float FirstNightDurationInSeconds = 10;
         public const float NightSecondsReductionPerCycle = .5f;
         public const float MinNightDurationInSeconds = 5;
@@ -40,7 +41,7 @@ namespace Utils
         public const int ChangeLightDurationInSeconds = 5;
         
         public const float DayLightIntensity = 1;
-        public const float NightLightIntensity = 0.05f;
+        public const float NightLightIntensity = 0.1f;
 
 
         public static readonly Color CashColor = new Color(1, 0.93f, 0, 1);

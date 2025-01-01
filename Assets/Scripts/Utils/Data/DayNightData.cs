@@ -176,17 +176,23 @@ namespace Utils.Data
             {
                 nightEnemySpawns.AddEnemy((Enemy) i, nightEnemies[i]);
             }
+
+            var dayDuration = Mathf.Max(Constants.MinDayDurationInSeconds,
+                Constants.FirstDayDurationInSeconds -
+                Constants.DaySecondsReductionPerCycle * (day - NumPredefinedCycles));
             return new Cycle()
             {
                 DayWave = new DayWave()
                 {
-                    DurationInSeconds = Constants.FirstDayDurationInSeconds - Constants.DaySecondsReductionPerCycle * (day - NumPredefinedCycles),
-                    SpawnDurationInSeconds = Constants.FirstDayDurationInSeconds - Constants.ChangeLightDurationInSeconds,
+                    DurationInSeconds = dayDuration,
+                    SpawnDurationInSeconds = dayDuration - Constants.ChangeLightDurationInSeconds,
                     EnemySpawns = dayEnemySpawns
                 },
                 NightWave = new NightWave()
                 {
-                    SpawnDurationInSeconds = Constants.FirstNightDurationInSeconds - Constants.NightSecondsReductionPerCycle * (day - NumPredefinedCycles),
+                    SpawnDurationInSeconds = Mathf.Max(Constants.MinNightDurationInSeconds,
+                        Constants.FirstNightDurationInSeconds -
+                        Constants.NightSecondsReductionPerCycle * (day - NumPredefinedCycles)),
                     EnemySpawns = nightEnemySpawns
                 },
                 NewCrops = new [] {
