@@ -26,14 +26,6 @@ namespace Utils.Data
     }
 
     [Serializable]
-    public class PlantedCropsData
-    {
-        public int cropType;
-        public float growthProgress;
-        public float destroyProgress;
-    }
-
-    [Serializable]
     public class PlantedCropKeyValue
     {
         public Vector2IntSerializable Key;
@@ -60,13 +52,15 @@ namespace Utils.Data
     public class PlantedCropInfo
     {
         public int cropType;
-        public float growthProgress;
+        public CropStage stage;
+        public float plantProgress;
         public float destroyProgress;
         
-        public PlantedCropInfo(int cropType, float growth, float destroyProgress)
+        public PlantedCropInfo(int cropType, CropStage stage, float plantProgress, float destroyProgress)
         {
             this.cropType = cropType;
-            this.growthProgress = growth;
+            this.stage = stage;
+            this.plantProgress = plantProgress;
             this.destroyProgress = destroyProgress;
         }
         public PlantedCropInfo() { }
@@ -227,7 +221,8 @@ namespace Utils.Data
                         var position = cropKeyValue.Key.ToVector2Int();
                         plantedCrops[position] = new PlantedCropInfo(
                             cropKeyValue.Value.cropType,
-                            cropKeyValue.Value.growthProgress,
+                            cropKeyValue.Value.stage,
+                            cropKeyValue.Value.plantProgress,
                             cropKeyValue.Value.destroyProgress
                         );
                     }
@@ -250,37 +245,6 @@ namespace Utils.Data
                 Debug.LogError($"Error loading game state: {e.Message}\n{e.StackTrace}");
                 NewGame(); // Fallback to new game if loading fails
             }
-        }
-        
-        public void SaveToJson()
-        {
-            var serializableData = new SerializableGameData
-            {
-                HealthUpgradeLevel = healthUpgradeLevel,
-                RegenUpgradeLevel = regenUpgradeLevel,
-                SpeedUpgradeLevel = speedUpgradeLevel,
-                StaminaUpgradeLevel = staminaUpgradeLevel,
-                KnockbackUpgradeLevel = knockbackUpgradeLevel,
-                SwordLevel = swordLevel,
-                HoeLevel = hoeLevel,
-                HammerLevel = hammerLevel,
-                Cash = cash,
-                Day = day,
-                CurHealth = curHealth,
-                SecondsSinceGameStarted = secondsSinceGameStarted,
-                InventoryCrops = crops,
-                InventoryMaterials = materials,
-                CropsInStore = cropsInStore,
-                MaterialsInStore = materialsInStore,
-                ThisDayEnemies = thisDayEnemies,
-                ThisNightEnemies = thisNightEnemies,
-                Towers = towers,
-                PlantedCrops = plantedCrops,
-                Pets = pets
-            };
-            
-            var json = JsonSerialization.ToJson(serializableData);
-            Debug.Log($"Game state serialized: {json}");
         }
     }
 

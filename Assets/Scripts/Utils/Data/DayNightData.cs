@@ -44,15 +44,13 @@ namespace Utils.Data
             }
             var daySpawns = new List<EnemySpawns>()
             {
-                // new(Constants.FirstDayEnemies), 
-                new(chickens:1), // todo new(), 
-                new(chickens:1), // todo new(), 
-                new(), new(), new(chickens:1),
+                new(chickens:1),//Constants.FirstDayEnemies), 
+                new(), new(), new(), new(chickens:1),
                 new(), new(chickens:2), new(chickens:0), new(chickens:1), new(chickens:3)
             };
             var nightSpawns = new List<EnemySpawns>()
             {
-                new(slimes: 1),//Constants.FirstNightEnemies), 
+                new(Constants.FirstNightEnemies), 
                 new(8, 1), 
                 new(5, 4), 
                 new(6, 5, 0, 0, 2), 

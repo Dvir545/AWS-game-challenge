@@ -43,6 +43,15 @@ namespace Utils
         Pumpkin = 4
     }
 
+    public enum CropStage
+    {
+        Planted = 0,
+        Seed = 1,
+        Sprout = 2,
+        Mature = 3,
+        Ripe = 4
+    }
+
     public enum Enemy
     {
         Slime = 0,
@@ -52,6 +61,13 @@ namespace Utils
         Goblin = 4,
         Demon = 5,
         EvilBall = 6
+    }
+
+    public enum WarningSignType
+    {
+        Warning = 0,
+        Enemy = 1,
+        Harvest = 2
     }
 
     public enum TowerMaterial

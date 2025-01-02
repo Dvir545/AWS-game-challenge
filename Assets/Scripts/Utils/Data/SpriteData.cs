@@ -17,7 +17,7 @@ namespace Utils.Data
         [SerializeField] private Sprite[] tomatoSprites;
         [SerializeField] private Sprite[] cornSprites;
         [SerializeField] private Sprite[] pumpkinSprites;
-        public Sprite GetCropSprite(Crop crop, float growth)
+        public Sprite GetCropSprite(Crop crop, CropStage stage)
         {
             var sprites = crop switch
             {
@@ -28,7 +28,7 @@ namespace Utils.Data
                 Crop.Pumpkin => pumpkinSprites,
                 _ => throw new ArgumentOutOfRangeException(nameof(crop), crop, null)
             };
-            return sprites[Mathf.Min(sprites.Length - 1, Mathf.FloorToInt(growth * sprites.Length))];
+            return sprites[(int)stage];
         }
         
         [Header("Tool Sprites")] 

@@ -45,12 +45,13 @@ namespace Enemies
             enemy.transform.position = spawnPosition;
             enemy.GetComponent<EnemyHealthManager>().Reset();
             enemy.GetComponent<EnemyMovementManager>().Reset();
+            enemy.transform.GetChild(0).GetComponent<EnemyWarnableBehaviour>().Reset();
             // fade in
             var body = enemy.transform.GetChild(0);
             var sr = body.GetComponent<SpriteRenderer>();
             sr.color = new Color(1, 1, 1, 0);
             sr.DOFade(1, 0.5f);
-            EventManager.Instance.TriggerEvent(EventManager.EnemySpawned, (body.transform, true));
+            EventManager.Instance.TriggerEvent(EventManager.EnemySpawned, (body.transform, WarningSignType.Enemy));
             EnemyCount++;
             _enemies.Add(enemy, type);
             return enemy;

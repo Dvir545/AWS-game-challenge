@@ -7,25 +7,22 @@ namespace Utils.Data
     {
         public Crop Crop { get; private set; }
         public int Price { get; private set; }
-        public int GrowthTime { get; private set; }
+        public int PlantTime { get; private set; }
+        public float DestroyTime { get; private set; }
         private int _sellPrice;
 
-        public CropData(Crop crop, int price, int sellPrice, int growthTime)
+        public CropData(Crop crop, int price, int sellPrice, int plantTime, float destroyTime)
         {
             Crop = crop;
             Price = price;
             _sellPrice = sellPrice;
-            GrowthTime = growthTime;
+            PlantTime = plantTime;
+            DestroyTime = destroyTime;
         }
 
         public int GetSellPrice()
         {
-            return (int)(_sellPrice * UnityEngine.Random.Range(0.8f, 1.2f));  // for fun
-        }
-        
-        public Sprite GetSprite(float growth) // growth is between 0 and 1
-        {
-            return SpriteData.Instance.GetCropSprite(Crop, growth);
+            return (int)(_sellPrice * Random.Range(0.8f, 1.2f));  // for fun
         }
     }
 
@@ -33,11 +30,11 @@ namespace Utils.Data
     {
 
         private CropData[] _cropsData = {
-            new CropData(Crop.Wheat, 1, 4, 3),  // 0.4$ profit per second
-            new CropData(Crop.Carrot, 5, 20, 5),  // 1$ profit per second
-            new CropData(Crop.Tomato, 30, 51, 3),  // 3$ profit per second
-            new CropData(Crop.Corn, 100, 178, 6),  // 5$ profit per second
-            new CropData(Crop.Pumpkin, 500, 700, 10)  // 10$ profit per second
+            new CropData(Crop.Wheat, 1, 4, 3, 3f),  // 0.4$ profit per second
+            new CropData(Crop.Carrot, 5, 20, 5, 4f),  // 1$ profit per second
+            new CropData(Crop.Tomato, 30, 51, 3, 5f),  // 3$ profit per second
+            new CropData(Crop.Corn, 100, 178, 6, 6f),  // 5$ profit per second
+            new CropData(Crop.Pumpkin, 500, 700, 10, 7f)  // 10$ profit per second
         };
         private Dictionary<Crop, CropData> _cropsDataDict = new Dictionary<Crop, CropData>();
         protected void Awake()
@@ -58,14 +55,14 @@ namespace Utils.Data
             return _cropsDataDict[crop].GetSellPrice();
         }
         
-        public int GetGrowthTime(Crop crop)
+        public int GetPlantTime(Crop crop)
         {
-            return _cropsDataDict[crop].GrowthTime;
+            return _cropsDataDict[crop].PlantTime;
         }
-
-        public Sprite GetSprite(Crop crop, float growth)
+        
+        public float GetDestroyTime(Crop crop)
         {
-            return _cropsDataDict[crop].GetSprite(growth);
+            return _cropsDataDict[crop].DestroyTime;
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Utils
         public const string NewHighScore = "NewHighScore";
         public const string Cooldown = "Cooldown";
         public const string Disconnect = "Disconnect";
+        public const string CropReadyForHarvest = "CropReadyForHarvest";
 
         protected EventManager()
         {

@@ -12,6 +12,7 @@ namespace UI.WarningSign
         [SerializeField] private GameObject warningSignPrefab;
         [SerializeField] private Sprite enemySignSprite;
         [SerializeField] private Sprite destroySignSprite;
+        [SerializeField] private Sprite harvestSprite;
         private static ObjectPool<GameObject> _warningSignPool;
         
         private Dictionary<Transform, GameObject> _tgt2Sign = new();
@@ -46,13 +47,24 @@ namespace UI.WarningSign
             _tgt2Sign.Clear();
         }
 
-        public GameObject GetWarningSign(Transform parent, Transform target, bool enemy=false)
+        public GameObject GetWarningSign(Transform parent, Transform target, WarningSignType type)
         {
             var warningSign = _warningSignPool.Get();
             warningSign.transform.SetParent(parent);
-            warningSign.GetComponent<WarningSignBehaviour>().Init(target, !enemy);
-            var sprite = enemy ? enemySignSprite : destroySignSprite;
+            warningSign.GetComponent<WarningSignBehaviour>().Init(target, type == WarningSignType.Warning);
+            var sprite = type switch
+            {
+                WarningSignType.Warning => destroySignSprite,
+                WarningSignType.Enemy => enemySignSprite,
+                WarningSignType.Harvest => harvestSprite,
+                _ => null
+            };
             warningSign.transform.GetChild(4).GetComponent<Image>().sprite = sprite;
+            if (_tgt2Sign.ContainsKey(target))
+            {
+                _warningSignPool.Release(_tgt2Sign[target]);
+                _tgt2Sign.Remove(target);
+            }
             _tgt2Sign.Add(target, warningSign);
             return warningSign;
         }

@@ -17,7 +17,6 @@ namespace Utils
         public const int BasePlayerDamage = 1;
         public const int BaseEnemyDamage = 1;
         public const int BaseKnockbackForce = 7;
-        public const float TimeToEatCrop = 3f;
         public const int MaxTowerLevels = 3;
         public const int TowerCount = 9;
         public const int MaxCropsInStore = 99;
@@ -31,9 +30,9 @@ namespace Utils
         public const int StoreCornAmountPerCycle = 3;
         public const int StorePumpkinAmountPerCycle = 1;
 
-        public const int FirstDayDurationInSeconds = 60;//180;
+        public const int FirstDayDurationInSeconds = 30;//180;
         public const int DaySecondsReductionPerCycle = 10;
-        public const int MinDayDurationInSeconds = 45;
+        public const int MinDayDurationInSeconds = 30;//45;
         public const float FirstNightDurationInSeconds = 10;
         public const float NightSecondsReductionPerCycle = .5f;
         public const float MinNightDurationInSeconds = 5;

@@ -20,20 +20,20 @@ namespace Enemies
             _warningSign = warningSign;
         }
 
-        public bool IsVisible()
+        public virtual bool IsVisible()
         {
             if (_spriteRenderer == null) return false;
             return _spriteRenderer.isVisible;
         }
 
-        public void ShowWarningSign()
+        public virtual void ShowWarningSign()
         {
             if (_warningSign == null)
                 return;
             _warningSign.SetVisibility(false);
         }
         
-        public void HideWarningSign()
+        public virtual void HideWarningSign()
         {
             if (_warningSign == null)
                 return;
@@ -48,6 +48,11 @@ namespace Enemies
         private void OnBecameInvisible()
         {
             ShowWarningSign();
+        }
+
+        public virtual void Reset()
+        {
+            return;
         }
     }
 }

@@ -58,15 +58,17 @@ namespace Enemies.Chicken
             Vector2Int? closestCrop = null;
             float closestDistance = float.MaxValue;
 
-            foreach (Vector2Int crop in _farmingManager.Farms.Keys)
+            foreach (Vector2Int tilePos in _farmingManager.Farms.Keys)
             {
-                Vector3 cropCenter = _farmingManager.Farms[crop].transform.position 
+                if (!_farmingManager.Farms[tilePos].IsEdible())
+                    continue;
+                Vector3 cropCenter = _farmingManager.Farms[tilePos].transform.position 
                                      + new Vector3(0.5f, 0.5f, 0);
                 float distance = Vector3.Distance(transform.position, cropCenter);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestCrop = crop;
+                    closestCrop = tilePos;
                     _foundCrop = true;
                 }
             }

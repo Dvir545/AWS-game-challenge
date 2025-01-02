@@ -47,6 +47,7 @@ namespace World
         [SerializeField] private UpgradeBuyer[] upgrades;
         [SerializeField] private PetBuyer[] pets;
         [SerializeField] private PetsManager petsManager;
+        [SerializeField] private AudioListener mainAudioListener;
         
         private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
@@ -114,6 +115,7 @@ namespace World
             anchoredBoat.gameObject.SetActive(false);
             boatWithPlayer.gameObject.SetActive(false);
             boatWithPlayer.position = _boatStartPos;
+            mainAudioListener.enabled = true;
             game.SetActive(false);
             gameCanvas.SetActive(false);
             player.gameObject.SetActive(false);
@@ -200,6 +202,7 @@ namespace World
             boatWithPlayer.gameObject.SetActive(false);
             SetPlayerPosition();
             petsManager.Init();
+            mainAudioListener.enabled = false;
             game.SetActive(true);
             player.GetComponent<PlayerSoundManager>().Init();
             npcBottom.Init();

@@ -31,13 +31,18 @@ namespace Crops
         [SerializeField] private GameObject cornPrefab;
         [SerializeField] private GameObject pumpkinPrefab;
         
-        private Vector2 _cropInstantiationOffset = new Vector2(.5f, 0.4f);
+        private readonly Vector2 _cropInstantiationOffset = new Vector2(.5f, 0.4f);
 
         public Dictionary<Vector2Int, CropBehaviour> Farms { get; private set; } =
             new Dictionary<Vector2Int, CropBehaviour>();
         public Dictionary<Vector2Int, PlantedCropInfo> PlantedCrops => GameData.Instance.plantedCrops;
         
         public bool IsFarming { get; private set; }
+
+        private void Awake()
+        {
+            EventManager.Instance.StartListening(EventManager.CropHarvested, OnCropHarvest);
+        }
 
         public void Init()
         {
@@ -49,7 +54,8 @@ namespace Crops
             // add existing crops to Farms
             foreach (var tilePos in PlantedCrops.Keys)
             {
-                PlantCrop(tilePos, (Crop)PlantedCrops[tilePos].cropType);
+                PlantCrop(tilePos, (Crop)PlantedCrops[tilePos].cropType, PlantedCrops[tilePos].stage,
+                    PlantedCrops[tilePos].plantProgress, PlantedCrops[tilePos].destroyProgress);
             }
         }
 
@@ -70,14 +76,29 @@ namespace Crops
                 Farm();
             }
         }
+
+        public Tuple<bool, Vector2Int> IsStandingOnEdibleFarmTile(Transform t)
+        {
+            bool isStandingOnFarmTile;
+            Vector2Int tilePos;
+            (isStandingOnFarmTile, tilePos) = IsStandingOnFarmTile(t);
+            if (isStandingOnFarmTile && Farms[tilePos].IsEdible())
+            {
+                return new Tuple<bool, Vector2Int>(true, tilePos);
+            }
+            else
+            {
+                return new Tuple<bool, Vector2Int>(false, tilePos);
+            }
+        }
         
-        public Tuple<bool, Vector2Int> IsStandingOnFarmTile(Transform t)
+        private Tuple<bool, Vector2Int> IsStandingOnFarmTile(Transform t)
         {
             Vector2Int tilePos = (Vector2Int)_canFarmTilemap.WorldToCell(t.position);
             return new Tuple<bool, Vector2Int>(_farmTilemap.GetTile((Vector3Int)tilePos) != null, tilePos);
         }
 
-        private void PlantCrop(Vector2Int tilePos, Crop cropType)
+        private void PlantCrop(Vector2Int tilePos, Crop cropType, CropStage stage, float plantProgress=0f, float destroyProgress=0f)
         {
             _farmTilemap.SetTile((Vector3Int)tilePos, farmTile);
             Vector2 cropPos = tilePos + new Vector2(_cropInstantiationOffset.x, _cropInstantiationOffset.y);
@@ -93,29 +114,30 @@ namespace Crops
             GameObject crop = Instantiate(cropSpritePrefab, cropPos, Quaternion.identity);
             crop.transform.SetParent(cropsParent.transform);
             Farms[tilePos] = crop.GetComponent<CropBehaviour>();
-            Farms[tilePos].Init(tilePos, cropType);
+            Farms[tilePos].Init(tilePos, cropType, stage, plantProgress, destroyProgress);
         }
 
         private void PlantBestCrop(Vector2Int tilePos)
         {
             var bestAvailableCrop = cropManager.GetBestAvailableCrop();
-            PlantCrop(tilePos, bestAvailableCrop);
+            PlantCrop(tilePos, bestAvailableCrop, CropStage.Planted);
             cropManager.RemoveCrop(Farms[tilePos].GetCrop());
         }
 
-        private void HarvestCrop(Vector2Int tilePos)
+        private void OnCropHarvest(object arg0)
         {
-            // Remove the tile and its progress
-            _farmTilemap.SetTile((Vector3Int)tilePos, null);
-            var cropTransform = Farms[tilePos].transform;
-            EventManager.Instance.TriggerEvent(EventManager.CropHarvested, cropTransform);
-            Destroy(cropTransform.gameObject);
-            // Reward player with the crop sell price
-            int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
-            playerData.AddCash(amount);
-            effectsManager.FloatingTextEffect(tilePos, 1, 1, amount.ToString() + "$", Constants.CashColor);
-            Farms.Remove(tilePos);
-            PlantedCrops.Remove(tilePos);
+            if (arg0 is Transform cropTransform)
+            {
+                Vector2Int tilePos = (Vector2Int)_farmTilemap.WorldToCell(cropTransform.position);
+                // Remove the tile and its progress
+                _farmTilemap.SetTile((Vector3Int)tilePos, null);
+                // Reward player with the crop sell price
+                int amount = CropsData.Instance.GetSellPrice(Farms[tilePos].GetCrop());
+                playerData.AddCash(amount);
+                effectsManager.FloatingTextEffect(tilePos, 1, 1, amount.ToString() + "$", Constants.CashColor);
+                Farms.Remove(tilePos);
+                PlantedCrops.Remove(tilePos);
+            }
         }
 
         private void DestroyCrop(Vector2Int tilePos)
@@ -142,22 +164,22 @@ namespace Crops
                 {
                     PlantBestCrop(tilePos);
                 }
-                progressBarBehavior.StartWork(Farms[tilePos].GetProgress());
+                progressBarBehavior.StartWork(Farms[tilePos].GetPlantProgress());
             }
 
-            // If we're on a tile that's being farmed, increase its progress
-            if (Farms.ContainsKey(tilePos))
+            // If we're on a tile that's being planted, increase its progress
+            if (Farms.ContainsKey(tilePos) && Farms[tilePos].Stage == CropStage.Planted)
             {
-                HandleFarm(tilePos);
+                IncFarmPlantProgress(tilePos);
             }
-            else  // check if there's an adjacent tile to farm
+            else  // check if there's an adjacent tile to plant
             {
                 bool foundAdjacentFarm = false;
                 foreach (Vector2Int adjacentTilePos in tilePos.GetAdjacentTiles(playerMovement.GetFacingDirection()))
                 {
-                    if (Farms.ContainsKey(adjacentTilePos))
+                    if (Farms.ContainsKey(adjacentTilePos) && Farms[adjacentTilePos].Stage == CropStage.Planted)
                     {
-                        HandleFarm(adjacentTilePos);
+                        IncFarmPlantProgress(adjacentTilePos);
                         foundAdjacentFarm = true;
                         break;
                     }
@@ -171,18 +193,18 @@ namespace Crops
         }
 
 
-        private void HandleFarm(Vector2Int tilePos)
+        private void IncFarmPlantProgress(Vector2Int tilePos)
         {
-            progressBarBehavior.StartWork(Farms[tilePos].GetProgress());
-            Farms[tilePos].AddToProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
-                                          / CropsData.Instance.GetGrowthTime(Farms[tilePos].GetCrop()));
-            progressBarBehavior.UpdateProgress(Farms[tilePos].GetProgress());
+            var plantProgress = Farms[tilePos].GetPlantProgress();
+            progressBarBehavior.StartWork(plantProgress);
+            var isPlantingComplete = Farms[tilePos].AddToPlantProgress(playerData.GetProgressSpeedMultiplier * Time.deltaTime 
+                                          / CropsData.Instance.GetPlantTime(Farms[tilePos].GetCrop()));
+            progressBarBehavior.UpdateProgress(plantProgress);
                 
-            // Check if farming is complete
-            if (Farms[tilePos].GetProgress() >= 1f)
+            // Check if planting is complete
+            if (isPlantingComplete)
             {
                 progressBarBehavior.StopWork();
-                HarvestCrop(tilePos);
             }
         }
         
@@ -191,7 +213,7 @@ namespace Crops
         {
             if (Farms.ContainsKey(tilePos))
             {
-                Farms[tilePos].AddToDestroyProgress(Time.deltaTime / Constants.TimeToEatCrop);
+                Farms[tilePos].AddToDestroyProgress(Time.deltaTime / CropsData.Instance.GetDestroyTime(Farms[tilePos].GetCrop()));
                 if (Farms[tilePos].GetDestroyProgress() >= 1f)
                 {
                     DestroyCrop(tilePos);
@@ -209,6 +231,42 @@ namespace Crops
                 Destroy(Farms[tilePos].gameObject);
             }
             Farms.Clear();
+        }
+
+        public void StartNight()
+        {
+            // convert all Seed crops to Sprout
+            foreach (var tilePos in Farms.Keys)
+            {
+                if (Farms[tilePos].Stage == CropStage.Seed)
+                {
+                    Farms[tilePos].SetStage(CropStage.Sprout);
+                }
+            }
+        }
+
+        public void HalfNight()
+        {
+            // convert all Sprout crops to Mature
+            foreach (var tilePos in Farms.Keys)
+            {
+                if (Farms[tilePos].Stage == CropStage.Sprout)
+                {
+                    Farms[tilePos].SetStage(CropStage.Mature);
+                }
+            }
+        }
+
+        public void StartDay()
+        {
+            // convert all Mature crops to Ripe
+            foreach (var tilePos in Farms.Keys)
+            {
+                if (Farms[tilePos].Stage == CropStage.Mature)
+                {
+                    Farms[tilePos].SetStage(CropStage.Ripe);
+                }
+            }
         }
     }
 }

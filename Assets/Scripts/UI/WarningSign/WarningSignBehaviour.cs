@@ -51,7 +51,7 @@ namespace UI.WarningSign
             _player = GameObject.FindWithTag("Player").transform;
         }
 
-        public void Init(Transform target, bool dangerous = false)
+        public void Init(Transform target, bool dangerous)
         {
             _target = target;
             var warnable = target.GetComponent<IWarnable>();

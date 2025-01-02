@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Crops;
 using DG.Tweening;
 using Enemies;
 using Player;
@@ -40,7 +41,8 @@ namespace World
         private Tween _waveDeclarationTween;
         [SerializeField] private PlayerHealthManager playerHealthManager;
         private DayPhase _currentDayPhase;
-        public DayPhase CurrentDayPhase => _currentDayPhase;
+
+        [SerializeField] private FarmingManager farmingManager;
 
         public void Reset()
         {
@@ -298,10 +300,11 @@ namespace World
             _currentDayPhase = DayPhase.Day;
             if (!force)
             {
-                waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
+                farmingManager.StartDay();
                 _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
                 DayTime = true;
                 NightTime = false;
+                waveDeclarationText.text = $"- DAY {GameData.Instance.day + 1} -";
                 ShowWaveDeclaration();
                 EventManager.Instance.TriggerEvent(EventManager.DayStarted, null);
             }
@@ -317,6 +320,7 @@ namespace World
             NightTime = true;
             globalLight.intensity = Constants.NightLightIntensity;
             _spawnEnemiesCR = StartCoroutine(SpawnEnemies());
+            farmingManager.StartNight();
             waveDeclarationText.text = $"- NIGHT -";
             ShowWaveDeclaration();
             EventManager.Instance.TriggerEvent(EventManager.NightStarted, null);
@@ -325,11 +329,7 @@ namespace World
         private void GetNextCycleAsync(EnemySpawnData spawnData)
         {
             var cycleNum = GameData.Instance.day + 1;
-            // await Task.Run(() =>
-            // {
             DayNightData.WarmupCycle(cycleNum, spawnData);
-            // });
-            GameData.Instance.SaveToJson();
         }
 
         public void EnemyDied(float waitTime)
@@ -352,6 +352,10 @@ namespace World
                 yield return null;
             }
             _remainingEnemies--;
+            if (_remainingEnemies <= 0.5f * _totalEnemies && (_remainingEnemies + 1) > 0.5f * _totalEnemies)
+            {
+                farmingManager.HalfNight();
+            }
         }
     }
 }

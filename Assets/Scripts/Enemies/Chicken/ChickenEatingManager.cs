@@ -41,7 +41,7 @@ namespace Enemies.Chicken
             }
             if (!_chickenMovementManager.IsMoving)
             {
-                (_isStandingOnFarmTile, _farmCellPos) = _farmingManager.IsStandingOnFarmTile(transform);
+                (_isStandingOnFarmTile, _farmCellPos) = _farmingManager.IsStandingOnEdibleFarmTile(transform);
                 if (_isStandingOnFarmTile)
                 {
                     bool isDestroyed = _farmingManager.IncDestroyProgress(_farmCellPos);
