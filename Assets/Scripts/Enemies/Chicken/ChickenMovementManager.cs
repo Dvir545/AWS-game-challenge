@@ -34,31 +34,22 @@ namespace Enemies.Chicken
                 }
                 return;
             }
-            if (Targeted)
+            if (Targeted)  // only crops can be targeted
             {
-                if (_roamCR != null)
+                if (_roamCR != null)  // still moving towards player
                 {
-                    StopCoroutine(_roamCR);//RoamingAgent.Instance.StopRoam(Agent);
+                    StopCoroutine(_roamCR);
                     _roamCR = null;
                     Agent.speed = AgentSetSpeed;
                 }
                 CurrentTargetPosition = CurrentTarget.position;
-                // if (_foundCrop)
-                //     CurrentTargetPosition += new Vector3(0.5f, 0.5f, 0);
                 Agent.SetDestination(CurrentTargetPosition);
             }
-            else {
-                if (_roamCR == null)
-                {
-                    FindClosestTarget();
-                    if (CurrentTarget == null) {
-                        Agent.speed = AgentOriginalSpeed * roamingSpeed * Random.Range(0.8f, 1.2f);
-                        _roamCR = StartCoroutine(RoamTowardsPlayerCoroutine());//RoamingAgent.Instance.Roam(Agent, roamRadius, roamSecondsToSwitchTarget);
-                    }
-                }
-                _enemyAnimationManager.SetFacingDirection();
+            else {  // no crop targeted
+                if (_roamCR == null)  // roam towards player
+                    _roamCR = StartCoroutine(RoamTowardsPlayerCoroutine());//RoamingAgent.Instance.Roam(Agent, roamRadius, roamSecondsToSwitchTarget);
             }
-
+            _enemyAnimationManager.SetFacingDirection();
             IsMoving = Agent.velocity.magnitude != 0 && !EnemyHealthManager.IsDead;
         }
 
@@ -105,9 +96,17 @@ namespace Enemies.Chicken
         
         private IEnumerator RoamTowardsPlayerCoroutine()
         {
-            var target = GetClosestTarget();
+            
+            
             while (true)
             {
+                FindClosestTarget();
+                if (CurrentTarget != null)
+                {
+                    yield break;
+                }
+                Agent.speed = AgentOriginalSpeed * roamingSpeed * Random.Range(0.8f, 1.2f);
+                var target = GetClosestTarget();
                 var position = Agent.transform.position;
                 var direction = (target.position - position).normalized;
                 Vector3 newPos = position + direction * (roamRadius + Random.Range(-1, 2)); //RandomNavSphere(agent.transform.position, radius, -1);

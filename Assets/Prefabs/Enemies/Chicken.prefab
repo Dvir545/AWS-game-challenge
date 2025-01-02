@@ -157,6 +157,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3480796997248486343, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
     - target: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -244,7 +248,6 @@ MonoBehaviour:
   roamRadius: 4
   roamSecondsToSwitchTarget: 3
   roamingSpeed: 1
-  _hitCollider: {fileID: 0}
 --- !u!114 &6696381113802702910
 MonoBehaviour:
   m_ObjectHideFlags: 0
