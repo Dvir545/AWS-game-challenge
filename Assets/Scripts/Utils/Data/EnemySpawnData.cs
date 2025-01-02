@@ -14,7 +14,7 @@ namespace Utils.Data
         [SerializeField] private int slimePower = 1;
         [SerializeField] private int skeletonPower = 3;
         [SerializeField] private int goblinPower = 4;
-        [SerializeField] private int chickenPower = 2;
+        [SerializeField] private int chickenPower = 5;
         [SerializeField] private int orcPower = 5;
         [SerializeField] private int demonPower = 20;
         
@@ -64,12 +64,15 @@ namespace Utils.Data
         public Tuple<Enemy, int> GetRandomEnemy(int points)
         {
             var enemies = new List<Enemy>();
+            int maxChickens = 1;
             foreach (var enemy in (Enemy[]) Enum.GetValues(typeof(Enemy)))
             {
                 if (enemy == Enemy.EvilBall) continue;
+                if (enemy == Enemy.Chicken && maxChickens == 0) continue;
                 if (GetPower(enemy) <= points)
                 {
                     enemies.Add(enemy);
+                    if (enemy == Enemy.Chicken) maxChickens--;
                 }
             }
 

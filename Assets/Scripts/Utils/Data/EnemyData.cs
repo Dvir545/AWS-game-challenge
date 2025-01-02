@@ -51,10 +51,10 @@ namespace Utils.Data
             {
                 maxHealth = 25,
                 damageMultiplier = 1,
-                cashDrop = 25,
+                cashDrop = 30,
                 speed = 0.75f,
                 knockbackForceMultiplier = .5f,
-                towerDamageMultiplier = 1/3f,
+                towerDamageMultiplier = 2/3f,
                 pushForceMultiplier = 1.2f
             }},
             { Enemy.Goblin, new EnemyInfo

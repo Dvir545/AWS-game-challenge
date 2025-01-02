@@ -129,7 +129,10 @@ namespace Enemies
            IsMoving = false;
            _collider2D.enabled = true;
            Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-           Rb.AddForce(hitDirection * (Constants.BaseKnockbackForce * playerData.KnockbackMultiplier * EnemyData.GetKnockbackForceMultiplier(_enemyType)), ForceMode2D.Impulse);
+           var force = EnemyData.GetKnockbackForceMultiplier(_enemyType);
+           if (force > 0)
+               force *= Constants.BaseKnockbackForce * playerData.KnockbackMultiplier;
+           Rb.AddForce(hitDirection * force, ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)
            {

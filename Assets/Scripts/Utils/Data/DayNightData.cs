@@ -44,13 +44,13 @@ namespace Utils.Data
             }
             var daySpawns = new List<EnemySpawns>()
             {
-                new(chickens:1),//Constants.FirstDayEnemies), 
+                new(Constants.FirstDayEnemies), 
                 new(), new(), new(), new(chickens:1),
                 new(), new(chickens:2), new(chickens:0), new(chickens:1), new(chickens:3)
             };
             var nightSpawns = new List<EnemySpawns>()
             {
-                new(Constants.FirstNightEnemies), 
+                new(goblins:1),//Constants.FirstNightEnemies), 
                 new(8, 1), 
                 new(5, 4), 
                 new(6, 5, 0, 0, 2), 
@@ -58,7 +58,7 @@ namespace Utils.Data
                 new(0, 8, 0, 2, 5), 
                 new(30),
                 new(0, 15, 0, 0, 3),
-                new(10, 8, 6, 3, 6), 
+                new(10, 8, 1, 3, 6), 
                 new(demons:1)
             };
 
@@ -69,9 +69,9 @@ namespace Utils.Data
             var p = Constants.StorePumpkinAmountPerCycle;
             var newCrops = new List<int[]>()
             {
-                new []{w, 0, 0, 0, 0},
                 new []{w, c, 0, 0, 0},
                 new []{w, c, 0, 0, 0},
+                new []{w, c, t, 0, 0},
                 new []{w, c, t, 0, 0},
                 new []{w, c, t, 0, 0},
                 new []{w, c, t, o, 0},

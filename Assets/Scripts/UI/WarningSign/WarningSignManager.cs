@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using Crops;
+using Enemies;
 using UnityEngine;
 using Utils;
 
@@ -7,7 +8,9 @@ namespace UI.WarningSign
     public class WarningSignManager: MonoBehaviour
     {
         [SerializeField] private Transform warningSignParent;
-        private void Start()
+        [SerializeField] private FarmingManager farmingManager;
+        
+        private void Awake()
         {
             EventManager.Instance.StartListening(EventManager.CropBeingDestroyed, StartWarningSign);
             EventManager.Instance.StartListening(EventManager.TowerUnderAttack, StartWarningSign);

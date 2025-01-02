@@ -429,10 +429,11 @@ private void OnEnable()
         description.text = "";
     }
 
-    private void CompleteGameEntry(string username)
+    private void CompleteGameEntry(string user)
     {
-        Debug.Log($"[COMPLETE] Starting CompleteGameEntry with username: {username}");
+        Debug.Log($"[COMPLETE] Starting CompleteGameEntry with username: {user}");
         GameStarter.Instance.Init(true);
+        username.placeholder.GetComponent<TextMeshProUGUI>().text = "USERNAME \\ EMAIL";
         gameObject.SetActive(false);
     }
 
@@ -500,6 +501,7 @@ private void OnEnable()
         if (_signUpStep == 0)
         {
             ShowSignUp();
+            username.placeholder.GetComponent<TextMeshProUGUI>().text = "USERNAME";
             _signUpStep = 1;
             return;
         }
@@ -529,6 +531,7 @@ private void OnEnable()
     public void OnBack()
     {
         if (_lockButtons) return;
+        username.placeholder.GetComponent<TextMeshProUGUI>().text = "USERNAME \\ EMAIL";
         _signUpStep = 0;
         ShowEntry();
     }

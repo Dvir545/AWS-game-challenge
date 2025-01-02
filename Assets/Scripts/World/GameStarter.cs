@@ -6,6 +6,7 @@ using Player;
 using Stores;
 using Towers;
 using UI.GameUI;
+using UI.WarningSign;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Utils;
@@ -172,14 +173,12 @@ namespace World
             knockbackUIBehaviour.Init();
             healingMatBehaviour.Init();
             cropManager.Init();
-            farmingManager.Init();
             materialManager.Init();
             towerBuildManager.Init();
             foreach (var crop in crops)
             {
                 crop.Init();
             }
-
             foreach (var material in materials)
             {
                 material.Init();
@@ -208,6 +207,8 @@ namespace World
             npcBottom.Init();
             npcMid.Init();
             gameCanvas.SetActive(true);
+            // after gameCanvas for warning signs
+            farmingManager.Init();
         }
 
         private void GameStart()

@@ -2,6 +2,7 @@
 using UnityEngine;
 using Utils;
 using Utils.Data;
+using World;
 
 namespace Enemies.Goblin
 {
@@ -11,6 +12,8 @@ namespace Enemies.Goblin
         private Vector2 _direction;
         [SerializeField] private float lifetime = 3f;
         private AudioSource _audioSource;
+        [SerializeField] private AudioClip deflectSound;
+        [SerializeField] private AudioClip hitSound;
         [SerializeField] private Sprite arrowDownSprite;
         [SerializeField] private Sprite arrowRightSprite;
         private SpriteRenderer _spriteRenderer;
@@ -72,6 +75,12 @@ namespace Enemies.Goblin
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.transform == _shooter) return;
+            if (other.CompareTag("Sword"))
+            {
+                SoundManager.Instance.PlaySFX(_audioSource, deflectSound);
+                DisableArrow();
+                return;
+            }
             if (other.CompareTag("Player") || other.CompareTag("Enemy"))
             {
                 var hitDirection = (other.transform.position - transform.position).normalized;
@@ -82,8 +91,7 @@ namespace Enemies.Goblin
                     var damage = EnemyData.GetDamageMultiplier(Enemy.Goblin);
                     other.GetComponent<EnemyHealthManager>().TakeDamage(damage, hitDirection);
                 }
-                _audioSource.volume = SettingsBehaviour.Instance.SFXVolume;
-                _audioSource.Play();
+                SoundManager.Instance.PlaySFX(_audioSource, hitSound);
                 DisableArrow();
             }
         }

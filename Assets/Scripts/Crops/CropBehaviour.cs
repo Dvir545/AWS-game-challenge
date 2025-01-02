@@ -53,6 +53,8 @@ namespace Crops
             _cropSprite.sprite = SpriteData.Instance.GetCropSprite(crop, stage);
             if (stage == CropStage.Planted && plantProgress == 0)
                 SoundManager.Instance.PlaySFX(_audioSource, cropStageChangedAudio);
+            if (stage == CropStage.Ripe)
+                EventManager.Instance.TriggerEvent(EventManager.CropReadyForHarvest, (transform, WarningSignType.Harvest));
             _destroyed = false;
         }
 
@@ -62,8 +64,6 @@ namespace Crops
             {
                 _isBeingDestroyed = false;
                 EventManager.Instance.TriggerEvent(EventManager.CropStoppedBeingDestroyed, transform);
-                EventManager.Instance.TriggerEvent(EventManager.CropReadyForHarvest, (transform, WarningSignType.Harvest));
-                
             }
             _prevDestroyProgress = DestroyProgress;
         }
@@ -132,6 +132,7 @@ namespace Crops
             if (_destroyed) return;
             if (Stage == CropStage.Ripe && other.CompareTag("Player"))
             {
+                _destroyed = true;
                 EventManager.Instance.TriggerEvent(EventManager.CropHarvested, transform);
                 Destroy(gameObject);
             }

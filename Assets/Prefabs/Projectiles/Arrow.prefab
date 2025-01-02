@@ -133,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 3
+  deflectSound: {fileID: 8300000, guid: 874b4d7f7aa67a24ea67de3532bc678f, type: 3}
+  hitSound: {fileID: 8300000, guid: 0b1c1dd1b8fde6140a35e01c19056691, type: 3}
   arrowDownSprite: {fileID: 663123603, guid: 3996e779325157640a021efe2e5e781d, type: 3}
   arrowRightSprite: {fileID: 324791078, guid: 3996e779325157640a021efe2e5e781d, type: 3}
   downCollider: {fileID: 1852459080529656477}

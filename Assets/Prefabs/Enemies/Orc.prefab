@@ -243,22 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a32d1b9e715bc1a5ae1ea4d9c8451b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressSprites:
-  - {fileID: 506520508, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 109732543, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 734396216, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -161002939, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1079205977, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1913725454, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1159296094, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -943660654, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -892226509, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -1537554483, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 284423159, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 508620983, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1464943191, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: -490359301, guid: cec2fad0888785141be5e66190963c0b, type: 3}
-  - {fileID: 1097045580, guid: cec2fad0888785141be5e66190963c0b, type: 3}
 --- !u!1001 &8050248281370406440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -442,6 +426,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: d9c2a801bb332024392a15f8d6af9c52, type: 3}
   deathSound: {fileID: 8300000, guid: d5ea1f8afe3c8ff4d88962b9f6adcc05, type: 3}
   walkingSound: {fileID: 8300000, guid: 1f3d67d2c6b1eac44a66ee61e54513d4, type: 3}
+  secondsBetweenWalks: 0.3
   attackSound: {fileID: 8300000, guid: 91a85085ba5c9c740ae3e09c4d5796c3, type: 3}
   attackAudioSource: {fileID: 3678897186130524293}
 --- !u!114 &456051199851266358

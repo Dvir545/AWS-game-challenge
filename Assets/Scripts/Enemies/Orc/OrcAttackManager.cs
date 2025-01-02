@@ -1,25 +1,39 @@
-﻿using System;
-using System.Collections;
-using Player;
-using Towers;
+﻿using Towers;
 using UI.GameUI;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
-using Utils.Data;
 
 namespace Enemies.Orc
 {
     public class OrcAttackManager: MonoBehaviour
     {
         private EnemyHealthManager _enemyHealthManager;
+        private EnemyMovementManager _enemyMovementManager;
         [SerializeField] private ProgressBarBehavior progressBarBehavior;
         private TowerBuild _curTarget;
+        private BoxCollider2D _hitTrigger;
         public bool _isAttacking;
+        private float _colliderXOffset = 0f;
+        private float _colliderXSize = 1.15f;
+        private float _attackRightColliderXOffset = 0.3f;
+        private float _attackRightColliderXSize = 1.75f;
+        
 
         private void Awake()
         {
             _enemyHealthManager = GetComponent<EnemyHealthManager>();
+            _enemyMovementManager = GetComponent<EnemyMovementManager>();
+            foreach (var boxCollider2D in GetComponents<BoxCollider2D>())
+            {
+                if (boxCollider2D.isTrigger)
+                {
+                    _hitTrigger = boxCollider2D;
+                    break;
+                }
+            }
+            {
+                
+            }
         }
 
         private void Start()
@@ -57,6 +71,18 @@ namespace Enemies.Orc
                 }
             } else if (progressBarBehavior.IsWorking)
                 progressBarBehavior.StopWork();
+            
+            if (_isAttacking && (_enemyMovementManager.GetFacingDirection() == FacingDirection.Right || _enemyMovementManager.GetFacingDirection() == FacingDirection.Left))
+            {
+                _hitTrigger.offset = new Vector2(_attackRightColliderXOffset, _hitTrigger.offset.y);
+                _hitTrigger.size = new Vector2(_attackRightColliderXSize, _hitTrigger.size.y);
+            }
+            else
+            {
+                _hitTrigger.offset = new Vector2(_colliderXOffset, _hitTrigger.offset.y);
+                _hitTrigger.size = new Vector2(_colliderXSize, _hitTrigger.size.y);
+            }
+                
         }
 
         public void StartAttacking(Transform tower)
