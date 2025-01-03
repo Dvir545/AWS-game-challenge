@@ -18,7 +18,7 @@ namespace UI.GameUI
         private float DayXWidth => Mathf.Abs(DayEndX - DayStartX);
         private float DayEndXWidth => Mathf.Abs(NightStartX - DayEndX);
         private float NightXWidth => Mathf.Abs(NightEndX2 - NightStartX);
-        private float NightEndXWidth => DayEndXWidth;
+        private float NightEndXWidth => Mathf.Abs(DayStartX - NightEndX);
 
         private DayPhase _nextDayPhase;
         private float _rollProgressWidth;
@@ -54,7 +54,7 @@ namespace UI.GameUI
                     _nextDayPhase = DayPhase.NightEnd;
                     break;
                 case DayPhase.NightEnd:
-                    _rollProgressWidth = NightEndXWidth;
+                        _rollProgressWidth = NightEndXWidth;
                     SetX(NightEndX);
                     _nextDayPhase = DayPhase.Day;
                     break;
