@@ -81,7 +81,11 @@ namespace World
         public void JumpToNight()
         {
             if (!GameStarter.Instance.GameStarted) return;
-            if (NightTime) return;
+            if (NightTime)
+            {
+                SoundManager.Instance.Error();
+                return;
+            }
             if (_currentDayPhase == DayPhase.Night) return;
             if (_dayNightCycleCR != null)
             {

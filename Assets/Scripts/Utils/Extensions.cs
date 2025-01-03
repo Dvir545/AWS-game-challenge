@@ -13,28 +13,36 @@ namespace Utils
                     {
                         tile + new Vector2Int(0, -1),
                         tile + new Vector2Int(1, -1),
-                        tile + new Vector2Int(-1, -1)
+                        tile + new Vector2Int(-1, -1),
+                        tile + new Vector2Int(1, 0),
+                        tile + new Vector2Int(-1, 0)
                     };
                 case FacingDirection.Up:
                     return new[]
                     {
                         tile + new Vector2Int(0, 1),
                         tile + new Vector2Int(1, 1),
-                        tile + new Vector2Int(-1, 1)
+                        tile + new Vector2Int(-1, 1),
+                        tile + new Vector2Int(1, 0),
+                        tile + new Vector2Int(-1, 0)
                     };
                 case  FacingDirection.Left:
                     return new[]
                     {
                         tile + new Vector2Int(1, 0),
                         tile + new Vector2Int(1, 1),
-                        tile + new Vector2Int(1, -1)
+                        tile + new Vector2Int(1, -1),
+                        tile + new Vector2Int(0, 1),
+                        tile + new Vector2Int(0, -1)
                     };
                 case FacingDirection.Right:
                     return new[]
                     {
                         tile + new Vector2Int(-1, 0),
                         tile + new Vector2Int(-1, 1),
-                        tile + new Vector2Int(-1, -1)
+                        tile + new Vector2Int(-1, -1),
+                        tile + new Vector2Int(0, 1),
+                        tile + new Vector2Int(0, -1)
                     };
                 default:
                     return null;

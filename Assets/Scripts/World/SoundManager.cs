@@ -159,6 +159,8 @@ namespace World
             PlaySFX(ui, cantPurchase, false);
         }
         
+        public void Error() => CantPurchase();
+        
         public void OpenStore()
         {
             PlaySFX(ui, openStore);
