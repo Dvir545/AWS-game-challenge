@@ -56,7 +56,7 @@ namespace Enemies
         }
 
 
-        private IEnumerator UpdatePath()
+        protected IEnumerator UpdatePath()
         {
             while (true)
             {
@@ -129,9 +129,9 @@ namespace Enemies
            IsMoving = false;
            _collider2D.enabled = true;
            Rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-           var force = EnemyData.GetKnockbackForceMultiplier(_enemyType);
+           var force = Constants.BaseKnockbackForce *EnemyData.GetKnockbackForceMultiplier(_enemyType);
            if (force > 0)
-               force *= Constants.BaseKnockbackForce * playerData.KnockbackMultiplier;
+               force *= playerData.KnockbackMultiplier;
            Rb.AddForce(hitDirection * force, ForceMode2D.Impulse);
            yield return new WaitForSeconds(hitTime);
            if (!dead)

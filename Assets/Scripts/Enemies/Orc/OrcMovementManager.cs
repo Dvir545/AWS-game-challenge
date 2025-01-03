@@ -24,6 +24,9 @@ namespace Enemies.Orc
         protected override void Update()
         {
             base.Update();
+            if (EnemyHealthManager.IsDead)
+                return;
+
             if (CurrentTarget != null)
             {
                 float distanceToTarget = Vector2.Distance(transform.position, CurrentTargetPosition);
@@ -53,6 +56,8 @@ namespace Enemies.Orc
                     Agent.speed = distanceToTarget <= accelerationDistance ? AgentSetSpeed * accelerationMultiplier : AgentSetSpeed;
                 }
             }
+            if (UpdatePathCR == null)
+                UpdatePathCR = StartCoroutine(UpdatePath());
         }
 
         protected override void FindClosestTarget()

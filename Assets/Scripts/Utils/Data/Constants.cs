@@ -32,7 +32,7 @@ namespace Utils
 
         public const int FirstDayDurationInSeconds = 180;
         public const int DaySecondsReductionPerCycle = 10;
-        public const int MinDayDurationInSeconds = 45;
+        public const int MinDayDurationInSeconds = 60;
         public const float FirstNightDurationInSeconds = 10;
         public const float NightSecondsReductionPerCycle = .5f;
         public const float MinNightDurationInSeconds = 5;
@@ -57,7 +57,7 @@ namespace Utils
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;
         public const int StartCash = 25;
-        public const int StartDay = 0;
+        public const int StartDay = 11;//0;
         public static readonly int[] StartCrops = {3, 0, 0, 0, 0};
         public static readonly int[] StartMaterials = {1, 0, 0, 0, 0};
         public static readonly int[] StartCropsInStore = {5, 0, 0, 0, 0};

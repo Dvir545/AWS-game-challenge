@@ -54,8 +54,8 @@ namespace Utils.Data
                 new(8, 1), 
                 new(5, 4), 
                 new(6, 5, 0, 0, 2), 
-                new(5, 6, 0, 0, 5), 
-                new(0, 8, 0, 2, 5), 
+                new(5, 6, 0, 0, 4), 
+                new(0, 8, 0, 2, 5),  
                 new(30),
                 new(0, 15, 0, 0, 3),
                 new(10, 8, 1, 3, 6), 
@@ -127,7 +127,7 @@ namespace Utils.Data
             {
                 var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum / 2)));
                 var nightEnemySpawns = new EnemySpawns();
-                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 2) / 2);
+                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 1.5f) * 2.5f);
                 while (enemyPowerPoints > 0)
                 {
                     var (enemy, points) = spawnData.GetRandomEnemy(enemyPowerPoints);
@@ -180,7 +180,7 @@ namespace Utils.Data
 
             var dayDuration = Mathf.Max(Constants.MinDayDurationInSeconds,
                 Constants.FirstDayDurationInSeconds -
-                Constants.DaySecondsReductionPerCycle * (day - NumPredefinedCycles));
+                Constants.DaySecondsReductionPerCycle * day);
             return new Cycle()
             {
                 DayWave = new DayWave()

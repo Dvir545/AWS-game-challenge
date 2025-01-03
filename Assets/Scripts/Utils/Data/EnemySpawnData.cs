@@ -11,11 +11,11 @@ namespace Utils.Data
         [SerializeField] private Dictionary<Enemy, GameObject> specificSpawnPositions = new();  // override default spawns
         
         [Header("Enemy Power Points")]
-        [SerializeField] private int slimePower = 1;
+        [SerializeField] private int slimePower = 2;
         [SerializeField] private int skeletonPower = 3;
-        [SerializeField] private int goblinPower = 4;
+        [SerializeField] private int goblinPower = 5;
         [SerializeField] private int chickenPower = 5;
-        [SerializeField] private int orcPower = 5;
+        [SerializeField] private int orcPower = 8;
         [SerializeField] private int demonPower = 20;
         
         public Dictionary<Enemy, Vector2[]> EnemySpawnPositions { get; private set; }
@@ -120,7 +120,7 @@ namespace Utils.Data
             
         public void AddEnemy(Enemy enemy, int amount=1)
         {
-            SpawnAmounts[(int)enemy] = amount;
+            SpawnAmounts[(int)enemy] += amount;
         }
             
         public int TotalSpawnsAmount()
