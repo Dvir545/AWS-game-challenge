@@ -31,6 +31,8 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     
     [SerializeField] private GameObject settingsParent;
     [SerializeField] private GameObject controlsParent;
+    [SerializeField] private GameObject controlsMobile;
+    [SerializeField] private GameObject controlsPC;
     [SerializeField] private PlayerHealthManager playerHealthManager;
 
     private bool _isOpen;
@@ -82,6 +84,17 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     {
         // Register pause/resume handlers
         Application.focusChanged += OnFocusChanged;
+        
+        if (MobileKeyboardManager.Instance.IsMobileDevice())
+        {
+            controlsMobile.SetActive(true);
+            controlsPC.SetActive(false);
+        }
+        else
+        {
+            controlsMobile.SetActive(false);
+            controlsPC.SetActive(true);
+        }
     }
     
     private void OnDestroy()

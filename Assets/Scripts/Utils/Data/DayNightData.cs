@@ -69,12 +69,12 @@ namespace Utils.Data
             var p = Constants.StorePumpkinAmountPerCycle;
             var newCrops = new List<int[]>()
             {
+                new []{w, 0, 0, 0, 0},
                 new []{w, c, 0, 0, 0},
                 new []{w, c, 0, 0, 0},
                 new []{w, c, t, 0, 0},
                 new []{w, c, t, 0, 0},
                 new []{w, c, t, 0, 0},
-                new []{w, c, t, o, 0},
                 new []{w, c, t, o, 0},
                 new []{w, c, t, o, 0},
                 new []{w, c, t, o, p},

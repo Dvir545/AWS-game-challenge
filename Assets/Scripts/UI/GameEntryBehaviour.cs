@@ -432,6 +432,7 @@ private void OnEnable()
     private void CompleteGameEntry(string user)
     {
         Debug.Log($"[COMPLETE] Starting CompleteGameEntry with username: {user}");
+        SettingsBehaviour.Instance.Init();
         GameStarter.Instance.Init(true);
         username.placeholder.GetComponent<TextMeshProUGUI>().text = "USERNAME \\ EMAIL";
         gameObject.SetActive(false);
