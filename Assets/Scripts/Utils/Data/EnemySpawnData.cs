@@ -64,15 +64,12 @@ namespace Utils.Data
         public Tuple<Enemy, int> GetRandomEnemy(int points)
         {
             var enemies = new List<Enemy>();
-            int maxChickens = 1;
             foreach (var enemy in (Enemy[]) Enum.GetValues(typeof(Enemy)))
             {
                 if (enemy == Enemy.EvilBall) continue;
-                if (enemy == Enemy.Chicken && maxChickens == 0) continue;
                 if (GetPower(enemy) <= points)
                 {
                     enemies.Add(enemy);
-                    if (enemy == Enemy.Chicken) maxChickens--;
                 }
             }
 

@@ -53,7 +53,7 @@ namespace Utils
         public const int StartSpeedUpgradeLevel = 0;
         public const int StartStaminaUpgradeLevel = 0;
         public const int StartKnockbackUpgradeLevel = 0;
-        public const int StartSwordLevel = 0;
+        public const int StartSwordLevel = 3;
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;
         public const int StartCash = 25;
