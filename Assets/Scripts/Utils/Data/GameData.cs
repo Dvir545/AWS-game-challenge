@@ -205,7 +205,7 @@ namespace Utils.Data
                                 towers[i].Add(new TowerLevelInfo(
                                     towerInfo.material,
                                     towerInfo.progress,
-                                    towerInfo.health
+                                    towerInfo.health > 0? towerInfo.health : TowersData.Instance.GetTowerData((TowerMaterial)towerInfo.material).SecondsToDestroy
                                 ));
                             }
                         }
@@ -223,7 +223,7 @@ namespace Utils.Data
                             cropKeyValue.Value.cropType,
                             cropKeyValue.Value.stage,
                             cropKeyValue.Value.plantProgress,
-                            cropKeyValue.Value.destroyProgress
+                            cropKeyValue.Value.destroyProgress > 0? cropKeyValue.Value.destroyProgress : CropsData.Instance.GetDestroyTime((Crop)cropKeyValue.Value.cropType)
                         );
                     }
                 }

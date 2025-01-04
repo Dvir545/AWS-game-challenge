@@ -153,6 +153,8 @@ namespace Towers
         
         public void SetUnderAttack(bool isUnderAttack)
         {
+            if (Time.timeScale == 0) // game paused
+                return;
             switch (isUnderAttack)
             {
                 case true when !_isUnderAttack:

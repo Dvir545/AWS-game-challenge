@@ -64,6 +64,15 @@ namespace Enemies
                 yield return new WaitForSeconds(secondsToUpdateTarget);
             }
         }
+        
+        private void OnDisable()
+        {
+            if (UpdatePathCR != null)
+            {
+                StopCoroutine(UpdatePathCR);
+                UpdatePathCR = null;
+            }
+        }
 
         protected virtual void Update()
         {

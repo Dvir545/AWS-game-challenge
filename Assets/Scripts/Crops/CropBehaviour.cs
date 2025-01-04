@@ -97,6 +97,7 @@ namespace Crops
             
         public void AddToDestroyProgress(float progress)
         {
+            if (Time.timeScale == 0) return; // Pause
             DestroyProgress += progress;
             if (!_isBeingDestroyed)
             {
