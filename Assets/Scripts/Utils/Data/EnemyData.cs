@@ -54,7 +54,7 @@ namespace Utils.Data
                 cashDrop = 30,
                 speed = 0.75f,
                 knockbackForceMultiplier = .5f,
-                towerDamageMultiplier = 2/3f,
+                towerDamageMultiplier = 1/3f,
                 pushForceMultiplier = 1.2f
             }},
             { Enemy.Goblin, new EnemyInfo
