@@ -15,7 +15,7 @@ namespace Enemies
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public void SetWarningSign(WarningSignBehaviour warningSign)
+        public virtual void SetWarningSign(WarningSignBehaviour warningSign)
         {
             _warningSign = warningSign;
         }

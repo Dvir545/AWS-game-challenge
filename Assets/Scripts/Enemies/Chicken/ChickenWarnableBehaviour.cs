@@ -1,5 +1,7 @@
 ﻿using System;
+using UI.WarningSign;
 using Utils;
+using World;
 
 namespace Enemies.Chicken
 {
@@ -7,17 +9,24 @@ namespace Enemies.Chicken
     public class ChickenWarnableBehaviour: EnemyWarnableBehaviour
     {
         private bool _needsToShow;
-        private bool _isNight;
 
         public override void Reset()
         {
             _needsToShow = false;
-            _isNight = false;
+        }
+        
+        public override void SetWarningSign(WarningSignBehaviour warningSign)
+        {
+            if (!DayNightManager.Instance.NightTime)
+            {
+                _needsToShow = true;
+            }
+            base.SetWarningSign(warningSign);
         }
         
         public override void ShowWarningSign()
         {
-            if (!_isNight)
+            if (!DayNightManager.Instance.NightTime)
             {
                 _needsToShow = true;
             }
@@ -35,18 +44,16 @@ namespace Enemies.Chicken
         
         public override bool IsVisible()
         {
-            return base.IsVisible() || !_isNight;  // we want the chicken to be considered visible in day
+            return base.IsVisible() || !DayNightManager.Instance.NightTime;  // we want the chicken to be considered visible in day
         }
 
         private void Start()
         {
             EventManager.Instance.StartListening(EventManager.NightStarted, RevealWarningSign);
-            EventManager.Instance.StartListening(EventManager.NightEnded, (object arg0) => _isNight = false);
         }
 
         private void RevealWarningSign(object arg0)
         {
-            _isNight = true;
             if (_needsToShow)
             {
                 base.ShowWarningSign();

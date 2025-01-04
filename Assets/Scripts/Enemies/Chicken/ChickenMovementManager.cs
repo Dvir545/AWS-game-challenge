@@ -23,6 +23,17 @@ namespace Enemies.Chicken
             base.Awake();
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            _foundCrop = false;
+            if (_roamCR != null)
+            {
+                StopCoroutine(_roamCR);
+                _roamCR = null;
+            }
+        }
+
         protected override void Update()
         {
             if (EnemyHealthManager.IsDead)
