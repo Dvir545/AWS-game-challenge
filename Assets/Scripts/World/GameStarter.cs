@@ -143,7 +143,7 @@ namespace World
 
         private void EnableContinueButton()
         {
-            if (!continueButton.activeSelf && menuCanvas.activeSelf)
+            if (!continueButton.activeSelf && menuCanvas.activeSelf && GameStatistics.Instance.LoadedGameData?.CurrentGameState != null)
             {
                 Debug.Log("Enabling continue button - save data found");
                 continueButton.SetActive(true);
