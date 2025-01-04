@@ -44,7 +44,7 @@ namespace Enemies
         public void TakeDamage(int damage, Vector2? hitDirection = null, bool tower = false)
         {
             if (_curHealth <= 0) return;
-            if (!_canGetHit) return;
+            if (!_canGetHit && !tower) return;
             StartCoroutine(TakeDamageCoroutine(damage, hitDirection, tower));
         }
         
