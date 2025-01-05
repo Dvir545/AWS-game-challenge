@@ -57,7 +57,7 @@ namespace Utils
         public const int StartHoeLevel = 0;
         public const int StartHammerLevel = 0;
         public const int StartCash = 25;
-        public const int StartDay = 0;
+        public const int StartDay = 1;
         public static readonly int[] StartCrops = {3, 0, 0, 0, 0};
         public static readonly int[] StartMaterials = {1, 0, 0, 0, 0};
         public static readonly int[] StartCropsInStore = {5, 0, 0, 0, 0};

@@ -128,7 +128,7 @@ public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
                 if (IsScoreHigher(daysSurvived, secondsPlayed, entry.DaysSurvived, entry.SecondsSurvived))
                 {
                     score.SetSiblingIndex(i);
-                    entry.ScoreTransform.SetSiblingIndex(i - 1);
+                    entry.ScoreTransform.SetSiblingIndex(i + 1);
                 }
                 else
                 {
