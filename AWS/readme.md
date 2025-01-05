@@ -4,8 +4,7 @@ This repository contains the AWS infrastructure and backend services for our Uni
 
 ## Project Structure
 
-![image](https://github.com/user-attachments/assets/8826da81-5508-4158-b25d-db3003b3ba51)
-
+![AWSstructure](https://github.com/user-attachments/assets/309d85c1-b319-4828-8260-6a0e7e2e43e1)
 
 ## Overview
 
