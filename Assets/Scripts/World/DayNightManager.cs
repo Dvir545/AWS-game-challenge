@@ -77,16 +77,9 @@ namespace World
             }
             _dayNightCycleCR = StartCoroutine(DayNightCycle());
         }
-
-        public void JumpToNight()
+        
+        public void StopAllLightChanges()
         {
-            if (!GameStarter.Instance.GameStarted) return;
-            if (NightTime)
-            {
-                SoundManager.Instance.Error();
-                return;
-            }
-            if (_currentDayPhase == DayPhase.Night) return;
             if (_dayNightCycleCR != null)
             {
                 StopCoroutine(_dayNightCycleCR);
@@ -105,6 +98,18 @@ namespace World
             }
             MinimapBehaviour.Instance.StopTweens();
 
+        }
+
+        public void JumpToNight()
+        {
+            if (!GameStarter.Instance.GameStarted) return;
+            if (NightTime)
+            {
+                SoundManager.Instance.Error();
+                return;
+            }
+            if (_currentDayPhase == DayPhase.Night) return;
+            StopAllLightChanges();
             if (_currentDayPhase == DayPhase.NightEnd)  // still on night end of previous day
             {
                 StartDay(force: true);

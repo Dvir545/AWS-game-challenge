@@ -7,6 +7,7 @@ using TMPro;
 using UI.Settings;
 using UI.WarningSign;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Utils;
 using Utils.Data;
@@ -34,6 +35,7 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
     [SerializeField] private GameObject controlsMobile;
     [SerializeField] private GameObject controlsPC;
     [SerializeField] private PlayerHealthManager playerHealthManager;
+    [SerializeField] private Light2D globalLight;
 
     private bool _isOpen;
     private bool _fromMenu;
@@ -172,6 +174,9 @@ public class SettingsBehaviour : Singleton<SettingsBehaviour>
         EnemyPool.Instance.ReleaseAll();
         BallPool.Instance.ReleaseAll();
         GameEnder.Instance.EndGame(died: false);
+        DayNightManager.Instance.StopAllLightChanges();
+        globalLight.intensity = 1;
+        
         CloseSettings();
     }
 
