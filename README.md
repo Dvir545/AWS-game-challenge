@@ -14,3 +14,12 @@ In *Farm, Build, Fight!*, you’ll take on the role of a survivor on a deserted 
 
 Enjoy the challenge and have fun! 🌱🏰⚔️
 
+## Credits
+(all sources used are under commercially royalty-free licence)
+* Most visual assets by Kenmi
+* Virtual Mobile Keyboard by Lilly Games
+* Gamer font by memesbruh03
+* SFX by pixabay
+* Background Music by Suno.ai
+
+*This game was made for and submitted to the AWS Game-Builder Challenge 2025*
