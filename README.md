@@ -16,10 +16,13 @@ Enjoy the challenge and have fun! 🌱🏰⚔️
 
 ## Credits
 (all sources used are under commercially royalty-free licence)
+
 * Most visual assets by Kenmi
 * Virtual Mobile Keyboard by Lilly Games
 * Gamer font by memesbruh03
 * SFX by pixabay
-* Background Music by Suno.ai
+* Background Music by Suno.ai 
+
+Made by Ohad Klein and Dvir Klein
 
 *This game was made for and submitted to the AWS Game-Builder Challenge 2025*
