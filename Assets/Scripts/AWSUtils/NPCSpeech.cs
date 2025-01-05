@@ -27,7 +27,7 @@ namespace AWSUtils
         private string _currentText = "";
         private bool _isNightTime = false;
         private const string NIGHT_MESSAGE_STORE = "Z Z Z...";
-        private const string NIGHT_MESSAGE_START = "Slay these monsters!";
+        private const string NIGHT_MESSAGE_START = "Slay those monsters!";
         private const string DEFAULT_MESSAGE = "...";
         private const int MAX_RETRIES = 3;
         private const float RETRY_DELAY = 2f;
