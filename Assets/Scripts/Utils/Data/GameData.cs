@@ -223,7 +223,7 @@ namespace Utils.Data
                             cropKeyValue.Value.cropType,
                             cropKeyValue.Value.stage,
                             cropKeyValue.Value.plantProgress,
-                            cropKeyValue.Value.destroyProgress > 0? cropKeyValue.Value.destroyProgress : CropsData.Instance.GetDestroyTime((Crop)cropKeyValue.Value.cropType)
+                            cropKeyValue.Value.destroyProgress > 0? cropKeyValue.Value.destroyProgress : 0
                         );
                     }
                 }
