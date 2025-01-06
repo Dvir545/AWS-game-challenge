@@ -44,7 +44,7 @@ namespace Enemies.Demon
             _audioSource = audioSource;
             _agent.updatePosition = false;
             // Calculate starting angle based on index
-            float angleOffset = MathUtils.Mod((int)(360f / _totalBalls) * _ballIndex + 180, 360);
+            float angleOffset = MathUtils.Mod((360f / _totalBalls) * _ballIndex + 180, 360);
             _angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
             _newAngle = _angle;
             _sent = false;
@@ -119,8 +119,11 @@ namespace Enemies.Demon
         {
             _ballIndex = i;
             _totalBalls = ballsCount;
-            float angleOffset = (360f / _totalBalls) * _ballIndex;
+            float angleOffset = MathUtils.Mod((360f / _totalBalls) * _ballIndex + 180, 360);
             _newAngle = angleOffset * Mathf.Deg2Rad;
+            // force going clockwise
+            if (_angle > _newAngle)
+                _angle -= 2 * Mathf.PI;
         }
         
         public void Release()

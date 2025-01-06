@@ -12,9 +12,9 @@ namespace Enemies
     {
         [SerializeField] public Enemy enemyType;
         [SerializeField] private int _maxHealthOverride = 0;
-        private int _maxHealth;
-        private int _curHealth;
-        public bool IsDead => _curHealth <= 0;
+        public int MaxHealth { get; private set; }
+        public int CurHealth { get; private set; }
+        public bool IsDead => CurHealth <= 0;
         private EnemyAnimationManager _enemyAnimationManager;
         private EnemyMovementManager _enemyMovementManager;
         private EnemySoundManager _enemySoundManager;
@@ -30,8 +30,8 @@ namespace Enemies
 
         private void Awake()
         {
-            _maxHealth = _maxHealthOverride == 0 ? EnemyData.GetMaxHealth(enemyType) : _maxHealthOverride;
-            _curHealth = _maxHealth;
+            MaxHealth = _maxHealthOverride == 0 ? EnemyData.GetMaxHealth(enemyType) : _maxHealthOverride;
+            CurHealth = MaxHealth;
             _enemyAnimationManager = GetComponent<EnemyAnimationManager>();
             _enemyMovementManager = GetComponent<EnemyMovementManager>();
             _enemySoundManager = GetComponent<EnemySoundManager>();
@@ -43,7 +43,7 @@ namespace Enemies
         
         public void TakeDamage(int damage, Vector2? hitDirection = null, bool tower = false)
         {
-            if (_curHealth <= 0) return;
+            if (CurHealth <= 0) return;
             if (!_canGetHit && !tower) return;
             StartCoroutine(TakeDamageCoroutine(damage, hitDirection, tower));
         }
@@ -54,11 +54,11 @@ namespace Enemies
                 damage = Mathf.Max(1, Mathf.FloorToInt(damage * EnemyData.GetTowerDamageMultiplier(enemyType)));
             else 
                 _canGetHit = false;
-            _curHealth -= damage;
+            CurHealth -= damage;
             UpdateHealthBar();
             _enemySoundManager.PlayHitSound();
             _effectsManager.FloatingTextEffect(transform.position, 2, .5f, damage.ToString(), Constants.EnemyDamageColor);
-            if (_curHealth > 0)
+            if (CurHealth > 0)
             {
                 if (!(enemyType == Enemy.Orc && tower))  // orcs destroy towers so we do not want hit anim from towers
                     _enemyAnimationManager.GotHit();
@@ -76,7 +76,7 @@ namespace Enemies
 
         private IEnumerator HealthBarCoroutine()
         {
-            healthBarFiller.fillAmount = (float)_curHealth / _maxHealth;
+            healthBarFiller.fillAmount = (float)CurHealth / MaxHealth;
             healthBar.SetActive(true);
             yield return new WaitForSeconds(1.5f);
             healthBar.SetActive(false);
@@ -116,7 +116,7 @@ namespace Enemies
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (_curHealth <= 0) return;
+            if (CurHealth <= 0) return;
             if (other.CompareTag("Player"))
             {
                 HitPlayer(other.transform);
@@ -125,7 +125,7 @@ namespace Enemies
         
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (_curHealth <= 0) return;
+            if (CurHealth <= 0) return;
             if (other.CompareTag("Player"))
             {
                 _timeSinceLastHit += Time.deltaTime;
@@ -139,7 +139,7 @@ namespace Enemies
 
         public void Reset()
         {
-            _curHealth = _maxHealth;
+            CurHealth = MaxHealth;
             UpdateHealthBar();
             _canGetHit = true;
         }

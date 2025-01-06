@@ -5,6 +5,7 @@ using DG.Tweening;
 using Player;
 using Stores;
 using Towers;
+using UI;
 using UI.GameUI;
 using UI.WarningSign;
 using UnityEngine;
@@ -49,6 +50,7 @@ namespace World
         [SerializeField] private PetBuyer[] pets;
         [SerializeField] private PetsManager petsManager;
         [SerializeField] private AudioListener mainAudioListener;
+        [SerializeField] private GameObject tutorialPopUp;
         
         private float xOffsetBetweenNewGameAndContinue = 260f;
         private Collider2D _collider;
@@ -220,13 +222,29 @@ namespace World
             DayNightManager.Instance.StartGame();
         }
 
-        public void PressedStartNewGame()
+        private void StartNewGame()
         {
             SoundManager.Instance.StopEntryMusicCR();
             menuCanvas.SetActive(false);
             GameData.Instance.NewGame();
             boatWithPlayer.gameObject.SetActive(true);
             boatWithPlayer.DOMoveX(anchoredBoat.position.x, 6f).SetEase(Ease.OutQuad).OnComplete(SetupGame);
+        }
+
+        public void PressedStartNewGame()
+        {
+            if (GameStatistics.Instance.totalGamesPlayed == 0 && !TutorialBehaviour.Instance.wasOpened)
+            {
+                TutorialBehaviour.Instance.wasOpened = true;
+                tutorialPopUp.SetActive(true);
+                menuCanvas.SetActive(false);
+            }
+            else
+            {
+                StartNewGame();
+            }
+            
+            
         }
         
         public void PressedContinue()

@@ -1,15 +1,19 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Utils;
 
 namespace UI
 {
-    public class TutorialBehaviour: MonoBehaviour
+    public class TutorialBehaviour: Singleton<TutorialBehaviour>
     {
         private GameObject _window;
         [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject[] tutorialPages;
         [SerializeField] private GameObject controlsMobile;
         [SerializeField] private GameObject controlsPC;
+
+        public bool wasOpened;
 
         private void Awake()
         {
@@ -32,6 +36,8 @@ namespace UI
                 Awake();
             _window.SetActive(true);
             mainMenu.SetActive(false);
+            tutorialPages[0].SetActive(true);
+            wasOpened = true;
         }
         
         public void NextPage()

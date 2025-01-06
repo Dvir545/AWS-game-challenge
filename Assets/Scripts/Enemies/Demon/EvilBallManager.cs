@@ -15,13 +15,14 @@ public class EvilBallManager : MonoBehaviour
     [SerializeField] private float rotationSpeed = 2f;
     
     [SerializeField] private float distanceToSendBall = 6f;
-    [SerializeField] private float timeToSpawnNewBall = 5f;
+    [SerializeField] private float timeToSpawnNewBall = 3f;
     private float _timeToSpawnNewBall;
     private List<EvilBallBehaviour> _balls = new List<EvilBallBehaviour>();
     [CanBeNull] private EvilBallBehaviour _sentBall;
     [SerializeField] private EnemyMovementManager enemyMovementManager;
     [SerializeField] private EnemyHealthManager enemyHealthManager;
     private AudioSource _audioSource;
+    private int _curHealth;  // used to get indication of enemy hits
     
     private void Awake()
     {
@@ -31,10 +32,11 @@ public class EvilBallManager : MonoBehaviour
     public void Init()
     {
         _timeToSpawnNewBall = 0f;
+        _curHealth = enemyHealthManager.MaxHealth;
         SpawnBalls();
     }
 
-    private void SpawnBall(int index)
+    private void SpawnBall(int index, bool updatePos = false)
     {
         GameObject ball = BallPool.Instance.GetBall();
         EvilBallBehaviour ballBehaviour = ball.GetComponent<EvilBallBehaviour>();
@@ -44,6 +46,10 @@ public class EvilBallManager : MonoBehaviour
             ballBehaviour.Init(rotationSpeed, horizontalRadius, verticalRadius, index, numberOfBalls, transform, _audioSource);
         }
         _balls.Add(ballBehaviour);
+        if (updatePos)
+            for (int i = 0; i < _balls.Count; i++)
+                if (i != index)
+                    _balls[i].UpdateBallPosition(i, _balls.Count);
     }
 
     private void SpawnBalls()
@@ -80,10 +86,15 @@ public class EvilBallManager : MonoBehaviour
 
         if (_balls.Count < numberOfBalls)
         {
+            if (_curHealth != enemyHealthManager.CurHealth)  // on hit, reset timer
+            {
+                _curHealth = enemyHealthManager.CurHealth;
+                _timeToSpawnNewBall = 0f;
+            }
             _timeToSpawnNewBall += Time.deltaTime;
             if (_timeToSpawnNewBall >= timeToSpawnNewBall)
             {
-                SpawnBall(_balls.Count);
+                SpawnBall(_balls.Count, true);
                 _timeToSpawnNewBall = 0f;
             }
         }
