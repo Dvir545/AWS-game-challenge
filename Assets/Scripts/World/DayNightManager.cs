@@ -205,7 +205,16 @@ namespace World
             if (NightTime)
             {
                 _totalEnemies = totalSpawnAmounts + EnemyPool.Instance.EnemyCount;
-                _remainingEnemies = totalSpawnAmounts + EnemyPool.Instance.EnemyCount;
+                _remainingEnemies = totalSpawnAmounts;
+                // add enemies from pool that are still alive
+                foreach (var enemy in EnemyPool.Instance.Enemies.Keys)
+                {
+                    if (enemy != null && enemy.TryGetComponent<EnemyHealthManager>(out var healthManager))
+                    {
+                        if (!healthManager.IsDead)
+                            _remainingEnemies++;
+                    }
+                }
             }
             var enemySpawns = new EnemySpawn[totalSpawnAmounts];
             // randomize spawn time and position for each enemy

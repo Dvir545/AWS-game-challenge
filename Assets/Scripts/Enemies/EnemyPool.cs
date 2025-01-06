@@ -12,7 +12,7 @@ namespace Enemies
     {
         private static Dictionary<Enemy, ObjectPool<GameObject>> _enemyPools;
         public int EnemyCount { get; set; }
-        private Dictionary<GameObject, Enemy> _enemies = new Dictionary<GameObject, Enemy>();
+        public Dictionary<GameObject, Enemy> Enemies { get; private set; } = new Dictionary<GameObject, Enemy>();
 
         private GameObject CreateEnemy(Enemy type)
         {
@@ -53,7 +53,7 @@ namespace Enemies
             sr.DOFade(1, 0.5f);
             EventManager.Instance.TriggerEvent(EventManager.EnemySpawned, (body.transform, WarningSignType.Enemy));
             EnemyCount++;
-            _enemies.Add(enemy, type);
+            Enemies.Add(enemy, type);
             return enemy;
         }
 
@@ -62,18 +62,18 @@ namespace Enemies
             var sr = enemy.transform.GetChild(0).GetComponent<SpriteRenderer>();
             sr.color = new Color(1, 1, 1, 0);
             _enemyPools[type].Release(enemy);
-            _enemies.Remove(enemy);
+            Enemies.Remove(enemy);
             EnemyCount--;
         }
 
         public void ReleaseAll()
         {
-            var enemies = new List<GameObject>(_enemies.Keys);
+            var enemies = new List<GameObject>(Enemies.Keys);
             foreach (var enemy in enemies)
             {
-                ReleaseEnemy(enemy, _enemies[enemy]);
+                ReleaseEnemy(enemy, Enemies[enemy]);
             }
-            _enemies.Clear();
+            Enemies.Clear();
         }
     }
 }
