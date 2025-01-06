@@ -258,6 +258,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 5b296782f90e39b448c6aab93db9af27, type: 3}
   deathSound: {fileID: 8300000, guid: 311418996c408044ba3ea9966504f5d2, type: 3}
   walkingSound: {fileID: 8300000, guid: ec12d18c73d5e834a87632b4bd3ed25f, type: 3}
+  secondsBetweenWalks: 0.3
   shootSound: {fileID: 8300000, guid: 3cb8b0619596e8148ab0e18dec756832, type: 3}
 --- !u!114 &913888620628908726
 MonoBehaviour:
@@ -306,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   secondsToUpdateTarget: 5
   defaultDistanceToAttack: 6
-  maxDistanceToAttack: 11
+  maxDistanceToAttack: 10
 --- !u!4 &4691820174570277990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
