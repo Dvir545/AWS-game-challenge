@@ -44,7 +44,7 @@ namespace Enemies.Demon
             _audioSource = audioSource;
             _agent.updatePosition = false;
             // Calculate starting angle based on index
-            float angleOffset = (360f / _totalBalls) * _ballIndex;
+            float angleOffset = MathUtils.Mod((int)(360f / _totalBalls) * _ballIndex + 180, 360);
             _angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
             _newAngle = _angle;
             _sent = false;
@@ -85,7 +85,9 @@ namespace Enemies.Demon
             float y = _verticalRadius * Mathf.Sin(_angle);
         
             Vector3 offset = new Vector3(x, y, 0);
-            transform.position = _pivot.position + offset;
+            var transform1 = transform;
+            transform1.position = _pivot.position + offset;
+            _agent.Warp(transform1.position);
         }
     
         private void FindClosestTarget()

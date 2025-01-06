@@ -20,17 +20,12 @@ namespace Utils.Data
             StaminaMultiplier = UpgradesData.GetStaminaMultiplier(GameData.Instance.staminaUpgradeLevel);
             KnockbackMultiplier = UpgradesData.GetKnockbackMultiplier(GameData.Instance.knockbackUpgradeLevel);
         }
-
-        private int Mod(int x, int m)
-        {
-            int r = x%m;
-            return r<0 ? r+m : r;
-        }
+        
 
         public void SwitchTool(bool next)
         {
             var idx = next? (int)_curTool + 1 : (int)_curTool - 1;
-            _curTool = (HeldTool)Mod(idx, Constants.NumTools);
+            _curTool = (HeldTool)MathUtils.Mod(idx, Constants.NumTools);
         }
         private int GetCurToolLevel() => _curTool switch
         {
