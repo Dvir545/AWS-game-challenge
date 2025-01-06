@@ -51,7 +51,7 @@ namespace Utils.Data
             {
                 maxHealth = 25,
                 damageMultiplier = 1,
-                cashDrop = 30,
+                cashDrop = 70,
                 speed = 0.75f,
                 knockbackForceMultiplier = .5f,
                 towerDamageMultiplier = 1/3f,
