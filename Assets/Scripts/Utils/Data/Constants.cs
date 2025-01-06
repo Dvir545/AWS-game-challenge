@@ -32,7 +32,7 @@ namespace Utils
 
         public const int FirstDayDurationInSeconds = 180;
         public const int DaySecondsReductionPerCycle = 10;
-        public const int MinDayDurationInSeconds = 60;
+        public const int MinDayDurationInSeconds = 90;
         public const float FirstNightDurationInSeconds = 10;
         public const float NightSecondsReductionPerCycle = .5f;
         public const float MinNightDurationInSeconds = 5;
