@@ -127,7 +127,7 @@ namespace Utils.Data
             {
                 var dayEnemySpawns = new EnemySpawns(chickens: UnityEngine.Random.Range(0, Mathf.FloorToInt(cycleNum / 4)));
                 var nightEnemySpawns = new EnemySpawns();
-                var enemyPowerPoints = Mathf.RoundToInt(Mathf.Pow(cycleNum, 1.5f));
+                var enemyPowerPoints = Mathf.RoundToInt(2 * Mathf.Pow(cycleNum, 1.5f));
                 var maxChicken = 1;
                 while (enemyPowerPoints > 0)
                 {
@@ -178,15 +178,6 @@ namespace Utils.Data
                 return FirstCycles[day];
             var dayEnemySpawns = new EnemySpawns(dayEnemies);
             var nightEnemySpawns = new EnemySpawns(nightEnemies);
-            for (int i = 0; i < dayEnemies.Length; i++)
-            {
-                dayEnemySpawns.AddEnemy((Enemy) i, dayEnemies[i]);
-            }
-            for (int i = 0; i < nightEnemies.Length; i++)
-            {
-                nightEnemySpawns.AddEnemy((Enemy) i, nightEnemies[i]);
-            }
-
             var dayDuration = Mathf.Max(Constants.MinDayDurationInSeconds,
                 Constants.FirstDayDurationInSeconds -
                 Constants.DaySecondsReductionPerCycle * day);
