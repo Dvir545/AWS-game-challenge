@@ -129,6 +129,7 @@ namespace Utils.Data
                 var nightEnemySpawns = new EnemySpawns();
                 var enemyPowerPoints = Mathf.RoundToInt(2 * Mathf.Pow(cycleNum, 1.5f));
                 var maxChicken = 1;
+                var maxOrcs = Mathf.FloorToInt(cycleNum / 4);
                 while (enemyPowerPoints > 0)
                 {
                     Enemy enemy;
@@ -136,10 +137,11 @@ namespace Utils.Data
                     do
                     {
                         (enemy, points) = spawnData.GetRandomEnemy(enemyPowerPoints);
-                    } while (enemy == Enemy.Chicken && maxChicken == 0);
+                    } while ((enemy == Enemy.Chicken && maxChicken == 0) || (enemy == Enemy.Orc && maxOrcs == 0));
                     if (enemy == Enemy.Chicken)
                         maxChicken--;
-
+                    if (enemy == Enemy.Orc)
+                        maxOrcs--;
                     enemyPowerPoints -= points;
                     nightEnemySpawns.AddEnemy(enemy);
                 }
