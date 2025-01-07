@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -16,6 +17,7 @@ namespace UI.WarningSign
         private static ObjectPool<GameObject> _warningSignPool;
         
         private Dictionary<Transform, GameObject> _tgt2Sign = new();
+        private List<GameObject> _importantWarnings = new();
 
         private GameObject CreateWarningSign()
         {
@@ -45,6 +47,17 @@ namespace UI.WarningSign
                 _warningSignPool.Release(sign);
             }
             _tgt2Sign.Clear();
+            _importantWarnings = new List<GameObject>();
+        }
+        
+        // Coroutine to wait for end of frame and then set as last sibling
+        private IEnumerator SetAsLastSiblingNextFrame(Transform childTransform)
+        {
+            // Wait until the end of the frame
+            yield return new WaitForEndOfFrame();
+
+            // Set as last sibling
+            childTransform.SetAsLastSibling();
         }
 
         public GameObject GetWarningSign(Transform parent, Transform target, WarningSignType type)
@@ -66,6 +79,13 @@ namespace UI.WarningSign
                 _tgt2Sign.Remove(target);
             }
             _tgt2Sign.Add(target, warningSign);
+            
+            // move all important warnings to the top
+            if (type == WarningSignType.Warning)
+                _importantWarnings.Add(warningSign);
+            foreach (var importantWarning in _importantWarnings)
+                StartCoroutine(SetAsLastSiblingNextFrame(importantWarning.transform));
+            
             return warningSign;
         }
 
@@ -73,6 +93,9 @@ namespace UI.WarningSign
         {
             if (!_tgt2Sign.ContainsKey(target)) return;
             _warningSignPool.Release(_tgt2Sign[target]);
+            var obj = _tgt2Sign[target];
+            if (_importantWarnings.Contains(obj))
+                _importantWarnings.Remove(obj);
             _tgt2Sign.Remove(target);
         }
     }

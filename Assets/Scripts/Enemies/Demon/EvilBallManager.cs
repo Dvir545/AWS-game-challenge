@@ -18,7 +18,7 @@ public class EvilBallManager : MonoBehaviour
     
     [SerializeField] private float distanceToSendBall = 6f;
     [SerializeField] private float timeToSpawnNewBall = 3f;
-    private float _timeToSpawnNewBall;
+    public float curTimeToSpawnNewBall;
     private List<EvilBallBehaviour> _balls = new List<EvilBallBehaviour>();
     [CanBeNull] private EvilBallBehaviour _sentBall;
     [SerializeField] private EnemyMovementManager enemyMovementManager;
@@ -34,7 +34,7 @@ public class EvilBallManager : MonoBehaviour
 
     public void Init()
     {
-        _timeToSpawnNewBall = 0f;
+        curTimeToSpawnNewBall = 0f;
         _maxNumOfBalls = numberOfBalls + Mathf.FloorToInt((GameData.Instance.day - 9) / 10f);
         _curHealth = enemyHealthManager.MaxHealth;
         SpawnBalls();
@@ -91,16 +91,11 @@ public class EvilBallManager : MonoBehaviour
 
         if (_balls.Count < _maxNumOfBalls)
         {
-            if (_curHealth != enemyHealthManager.CurHealth)  // on hit, reset timer
-            {
-                _curHealth = enemyHealthManager.CurHealth;
-                _timeToSpawnNewBall = 0f;
-            }
-            _timeToSpawnNewBall += Time.deltaTime;
-            if (_timeToSpawnNewBall >= timeToSpawnNewBall)
+            curTimeToSpawnNewBall += Time.deltaTime;
+            if (curTimeToSpawnNewBall >= timeToSpawnNewBall)
             {
                 SpawnBall(_balls.Count, true);
-                _timeToSpawnNewBall = 0f;
+                curTimeToSpawnNewBall = 0f;
             }
         }
     }

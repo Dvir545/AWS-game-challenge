@@ -41,7 +41,7 @@ namespace Enemies
             healthBarFiller.fillAmount = 1;
         }
         
-        public void TakeDamage(int damage, Vector2? hitDirection = null, bool tower = false)
+        public virtual void  TakeDamage(int damage, Vector2? hitDirection = null, bool tower = false)
         {
             if (CurHealth <= 0) return;
             if (!_canGetHit && !tower) return;

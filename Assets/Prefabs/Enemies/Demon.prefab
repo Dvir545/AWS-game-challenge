@@ -274,8 +274,10 @@ MonoBehaviour:
   verticalRadius: 1
   rotationSpeed: 2
   distanceToSendBall: 6
+  timeToSpawnNewBall: 3
+  curTimeToSpawnNewBall: 0
   enemyMovementManager: {fileID: 6351192737160943745}
-  enemyHealthManager: {fileID: 1907275858399666727}
+  enemyHealthManager: {fileID: 6885025453447981874}
 --- !u!1 &8306847627159078975
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +505,7 @@ PrefabInstance:
     - {fileID: 1486797434681197276, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     - {fileID: 1713211437746961488, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     - {fileID: 3491961778700133702, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+    - {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -524,23 +527,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6351192737160943745}
+    - targetCorrespondingSourceObject: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6885025453447981874}
   m_SourcePrefab: {fileID: 100100000, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
 --- !u!212 &822622157820182251 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4422533885639064450, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
   m_PrefabInstance: {fileID: 3906157295475115369}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1907275858399666727 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3192335344100927310, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
-  m_PrefabInstance: {fileID: 3906157295475115369}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8222977079772989281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1834dcf19e74f7583addab8f04bafec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2546312932790667800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1541118663059361649, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -551,6 +546,22 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1374507816573732898, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
   m_PrefabInstance: {fileID: 3906157295475115369}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2995660645287221364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2281016180077370653, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+  m_PrefabInstance: {fileID: 3906157295475115369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4383618597217604380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 783847057095644789, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
+  m_PrefabInstance: {fileID: 3906157295475115369}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8222977079772989281 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4911341743864283656, guid: aa6ce4d4de9a3054e8c640345566829b, type: 3}
@@ -605,4 +616,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToUpdateTarget: 5
+  evilBallManager: {fileID: 5876366269386063838}
+--- !u!114 &6885025453447981874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222977079772989281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23cd4df6c0784a2f9fcab8cbf8c896ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 5
+  _maxHealthOverride: 0
+  healthBar: {fileID: 2995660645287221364}
+  healthBarFiller: {fileID: 4383618597217604380}
   evilBallManager: {fileID: 5876366269386063838}
