@@ -14,8 +14,8 @@ namespace Enemies.Demon
         private float _verticalRadius;
         private int _ballIndex;
         private int _totalBalls;
-        private float _angle;
-        private float _newAngle;
+        public float angle;
+        public float newAngle;
         private bool _sent;
         
         private AudioSource _audioSource;
@@ -45,8 +45,8 @@ namespace Enemies.Demon
             _agent.updatePosition = false;
             // Calculate starting angle based on index
             float angleOffset = MathUtils.Mod((360f / _totalBalls) * _ballIndex + 180, 360);
-            _angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
-            _newAngle = _angle;
+            angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
+            newAngle = angle;
             _sent = false;
         }
 
@@ -76,13 +76,13 @@ namespace Enemies.Demon
 
         private void CircleAround()
         {
-            _angle += _rotationSpeed * Time.deltaTime;
-            _newAngle += _rotationSpeed * Time.deltaTime;
-            if (Math.Abs(_angle - _newAngle) > 0.01f)
-                _angle = Mathf.Lerp(_angle, _newAngle, Time.deltaTime/20f);
+            angle = MathUtils.Mod(angle + _rotationSpeed * Time.deltaTime, 2*Mathf.PI);
+            newAngle = MathUtils.Mod(newAngle + _rotationSpeed * Time.deltaTime, 2*Mathf.PI);
+            if (Math.Abs(angle - newAngle) > 0.01f)
+                angle = MathUtils.Mod(angle + Time.deltaTime, 2 * Mathf.PI);
         
-            float x = _horizontalRadius * Mathf.Cos(_angle);
-            float y = _verticalRadius * Mathf.Sin(_angle);
+            float x = _horizontalRadius * Mathf.Cos(angle);
+            float y = _verticalRadius * Mathf.Sin(angle);
         
             Vector3 offset = new Vector3(x, y, 0);
             var transform1 = transform;
@@ -113,17 +113,6 @@ namespace Enemies.Demon
             _agent.Warp(transform.position);
             _agent.updatePosition = true;
             FindClosestTarget();
-        }
-
-        public void UpdateBallPosition(int i, int ballsCount)
-        {
-            _ballIndex = i;
-            _totalBalls = ballsCount;
-            float angleOffset = MathUtils.Mod((360f / _totalBalls) * _ballIndex + 180, 360);
-            _newAngle = angleOffset * Mathf.Deg2Rad;
-            // force going clockwise
-            if (_angle > _newAngle)
-                _angle -= 2 * Mathf.PI;
         }
         
         public void Release()

@@ -6,6 +6,8 @@ using Enemies.Demon;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Pool;
+using Utils;
+using Utils.Data;
 
 public class EvilBallManager : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class EvilBallManager : MonoBehaviour
     [SerializeField] private EnemyHealthManager enemyHealthManager;
     private AudioSource _audioSource;
     private int _curHealth;  // used to get indication of enemy hits
+    private int _maxNumOfBalls;
     
     private void Awake()
     {
@@ -32,6 +35,7 @@ public class EvilBallManager : MonoBehaviour
     public void Init()
     {
         _timeToSpawnNewBall = 0f;
+        _maxNumOfBalls = numberOfBalls + Mathf.FloorToInt((GameData.Instance.day - 9) / 10f);
         _curHealth = enemyHealthManager.MaxHealth;
         SpawnBalls();
     }
@@ -43,18 +47,19 @@ public class EvilBallManager : MonoBehaviour
             
         if (ballBehaviour != null)
         {
-            ballBehaviour.Init(rotationSpeed, horizontalRadius, verticalRadius, index, numberOfBalls, transform, _audioSource);
+            ballBehaviour.Init(rotationSpeed, horizontalRadius, verticalRadius, index, _maxNumOfBalls, transform, _audioSource);
         }
         _balls.Add(ballBehaviour);
         if (updatePos)
-            for (int i = 0; i < _balls.Count; i++)
-                if (i != index)
-                    _balls[i].UpdateBallPosition(i, _balls.Count);
+            FixBallPositions();
+            // for (int i = 0; i < _balls.Count; i++)
+            //     if (i != index)
+            //         _balls[i].UpdateBallPosition(i, _balls.Count);
     }
 
     private void SpawnBalls()
     {
-        for (int i = 0; i < numberOfBalls; i++)
+        for (int i = 0; i < _maxNumOfBalls; i++)
         {
             SpawnBall(i);
         }
@@ -84,7 +89,7 @@ public class EvilBallManager : MonoBehaviour
             SendBall();
         }
 
-        if (_balls.Count < numberOfBalls)
+        if (_balls.Count < _maxNumOfBalls)
         {
             if (_curHealth != enemyHealthManager.CurHealth)  // on hit, reset timer
             {
@@ -97,6 +102,19 @@ public class EvilBallManager : MonoBehaviour
                 SpawnBall(_balls.Count, true);
                 _timeToSpawnNewBall = 0f;
             }
+        }
+    }
+
+    private void FixBallPositions() // TODO check
+    {
+        float targetAngleDifference = 2*Mathf.PI / _balls.Count;
+        _balls.Sort((a, b) => a.angle.CompareTo(b.angle));
+        for (int i = 0; i < _balls.Count; i++)
+        {
+            if (i == 0)
+                _balls[i].newAngle = _balls[i].angle;  // first ball serves as anchor
+            else
+                _balls[i].newAngle = MathUtils.Mod(_balls[i-1].newAngle + targetAngleDifference, 2*Mathf.PI);
         }
     }
 
@@ -122,11 +140,12 @@ public class EvilBallManager : MonoBehaviour
         _balls.RemoveAt(closestIndex);
         _sentBall!.Send();
         // adjust other balls positions
-        for (int i = 0; i < _balls.Count; i++)
-        {
-            EvilBallBehaviour ball = _balls[i];
-            // Calculate new position based on the new total number of balls
-            ball.UpdateBallPosition(i, _balls.Count);
-        }
+        FixBallPositions();
+        // for (int i = 0; i < _balls.Count; i++)
+        // {
+        //     EvilBallBehaviour ball = _balls[i];
+        //     // Calculate new position based on the new total number of balls
+        //     ball.UpdateBallPosition(i, _balls.Count);
+        // }
     }
 }
