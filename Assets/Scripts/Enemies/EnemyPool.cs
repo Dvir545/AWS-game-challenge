@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Enemies.Chicken;
+using Enemies.Orc;
 using UnityEngine;
 using UnityEngine.Pool;
 using Utils;
@@ -45,6 +47,10 @@ namespace Enemies
             enemy.transform.position = spawnPosition;
             enemy.GetComponent<EnemyHealthManager>().Reset();
             enemy.GetComponent<EnemyMovementManager>().Reset();
+            if (type == Enemy.Orc)
+                enemy.GetComponent<OrcAttackManager>().Reset();
+            if (type == Enemy.Chicken)
+                enemy.GetComponent<ChickenEatingManager>().Reset();
             enemy.transform.GetChild(0).GetComponent<EnemyWarnableBehaviour>().Reset();
             // fade in
             var body = enemy.transform.GetChild(0);

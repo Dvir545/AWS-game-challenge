@@ -31,9 +31,6 @@ namespace Enemies.Orc
                     break;
                 }
             }
-            {
-                
-            }
         }
 
         private void Start()
@@ -41,15 +38,19 @@ namespace Enemies.Orc
             progressBarBehavior.SetType(ProgressBarType.Evil);
         }
 
+        public void Reset()
+        {
+            _isAttacking = false;
+        }
+
         private void Update()
         {
             if (_enemyHealthManager.IsDead)
             {
-                SetAttacking(false);
+                if (_isAttacking)
+                    SetAttacking(false);
                 if (progressBarBehavior.IsWorking)
                     progressBarBehavior.StopWork();
-                if (_curTarget != null)
-                    _curTarget.SetUnderAttack(false);
                 return;
             }
             if (_isAttacking)

@@ -73,5 +73,11 @@ namespace Enemies.Chicken
                 progressBarBehavior.StopWork();
             }
         }
+        public void Reset()
+        {
+            IsEating = false;
+            _isStandingOnFarmTile = false;
+        }
     }
+    
 }

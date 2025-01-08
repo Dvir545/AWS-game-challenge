@@ -37,6 +37,7 @@ namespace Towers
         private Transform _newFloorBody;
         private GameObject _topConstruction;
         private bool _isUnderAttack;  // can't build while tower is under attack
+        private int _numAttackers;
         private int _worstFloor;
         
         // private const int MaxLevel = 3;  // The maximum level of the tower
@@ -71,6 +72,7 @@ namespace Towers
                 _towerDatas.Add(TowersData.Instance.GetTowerData((TowerMaterial)floor.material));
             }
             _worstFloor = GetWorstFloor();
+            _numAttackers = 0;
         }
 
         public bool CanBuild()
@@ -155,17 +157,29 @@ namespace Towers
         {
             if (Time.timeScale == 0) // game paused
                 return;
-            switch (isUnderAttack)
+            if (isUnderAttack)
             {
-                case true when !_isUnderAttack:
+                if (_numAttackers == 0)
+                {
+                    _isUnderAttack = true;
                     EventManager.Instance.TriggerEvent(EventManager.TowerUnderAttack, (transform, WarningSignType.Warning));
-                    break;
-                case false when _isUnderAttack:
-                    EventManager.Instance.TriggerEvent(EventManager.TowerStoppedBeingUnderAttack, transform);
-                    break;
+                }
+                _numAttackers++;
             }
-
-            _isUnderAttack = isUnderAttack;
+            else
+            {
+                if (_numAttackers == 0)
+                {
+                    Debug.Log("DETECTED LESS THAN 0 ATTACKERS - PLEASE CHECK");
+                    return;
+                }
+                _numAttackers--;
+                if (_numAttackers == 0)
+                {
+                    _isUnderAttack = false;
+                    EventManager.Instance.TriggerEvent(EventManager.TowerStoppedBeingUnderAttack, transform);
+                }
+            }
         }
 
         public float GetDestroyProgress()
@@ -270,6 +284,7 @@ namespace Towers
             _topConstruction.SetActive(false);
             IsBuilt = false;
             _isUnderAttack = false;
+            _numAttackers = 0;
             _worstFloor = 0;
             _warningSign = null;
         }
