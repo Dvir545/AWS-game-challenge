@@ -33,7 +33,6 @@ namespace Enemies
         public bool IsMoving { get; protected set; } = true;
         public bool Targeted => !Agent.isStopped && CurrentTarget != null;
 
-        // Start is called before the first frame update
         protected virtual void Awake()
         {
             EnemyHealthManager = GetComponent<EnemyHealthManager>();
@@ -166,8 +165,13 @@ namespace Enemies
 
         public virtual void Reset()
         {
+            UpdatePathCR = StartCoroutine(UpdatePath());
             Agent.isStopped = false;
-            Agent.SetDestination(CurrentTargetPosition);
+            if (CurrentTarget != null)
+            {
+                CurrentTargetPosition = CurrentTarget.position;
+                Agent.SetDestination(CurrentTargetPosition);
+            }
             Agent.speed = AgentSetSpeed;
             Agent.updatePosition = true;
             Agent.Warp(transform.position);

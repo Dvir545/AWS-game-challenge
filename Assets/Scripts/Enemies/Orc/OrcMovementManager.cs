@@ -45,7 +45,8 @@ namespace Enemies.Orc
                         IsMoving = true;
                         if (Math.Abs(Agent.speed - AgentSetSpeed) > 0.01f)
                             Agent.speed = AgentSetSpeed;
-                        _orcAttackManager.SetAttacking(false);
+                        if (_orcAttackManager.IsAttacking())
+                            _orcAttackManager.SetAttacking(false);
                         FindClosestTarget();
                     }
                 }

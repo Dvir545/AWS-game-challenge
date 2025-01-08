@@ -176,6 +176,7 @@ namespace Crops
         private void OnDestroy()
         {
             _destroyed = true;
+            _warningSign = null;
         }
     }
 }

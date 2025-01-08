@@ -27,6 +27,7 @@ namespace UI.WarningSign
         private Transform _player;
     
         private bool _isTargetVisible;
+        private bool _dangerous;
         
         [SerializeField] private AudioSource warningAudioSource;
         [SerializeField] private AudioClip warningSound;
@@ -57,6 +58,7 @@ namespace UI.WarningSign
             var warnable = target.GetComponent<IWarnable>();
             warnable.SetWarningSign(this);
             _parentBounds = transform.parent.GetComponent<RectTransform>().rect.size * 0.5f;
+            _dangerous = dangerous;
             SetVisibility(warnable.IsVisible());
             if (!_isTargetVisible && dangerous)
             {

@@ -113,7 +113,7 @@ namespace Enemies.Chicken
             
             while (true)
             {
-                FindClosestTarget();
+                FindClosestTarget();  // try to find a crop
                 if (CurrentTarget != null)
                 {
                     yield break;

@@ -271,6 +271,7 @@ namespace Towers
             IsBuilt = false;
             _isUnderAttack = false;
             _worstFloor = 0;
+            _warningSign = null;
         }
     }
 }
