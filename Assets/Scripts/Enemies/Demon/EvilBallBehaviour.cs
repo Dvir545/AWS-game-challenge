@@ -43,6 +43,7 @@ namespace Enemies.Demon
             transform.position = _pivot.position;
             _audioSource = audioSource;
             _agent.updatePosition = false;
+            _agent.enabled = false;
             // Calculate starting angle based on index
             float angleOffset = MathUtils.Mod((360f / _totalBalls) * _ballIndex + 180, 360);
             angle = angleOffset * Mathf.Deg2Rad; // Convert to radians
@@ -64,8 +65,9 @@ namespace Enemies.Demon
             if (!_sent)
             {
                 CircleAround();
-            } else if (!_agent.updatePosition)
+            } else if (!_agent.enabled)
             {
+                _agent.enabled = true;
                 _agent.updatePosition = true;
             }
             if (Targeted)
@@ -87,7 +89,6 @@ namespace Enemies.Demon
             Vector3 offset = new Vector3(x, y, 0);
             var transform1 = transform;
             transform1.position = _pivot.position + offset;
-            _agent.Warp(transform1.position);
         }
     
         private void FindClosestTarget()
@@ -120,6 +121,7 @@ namespace Enemies.Demon
             _sent = false;
             BallPool.Instance.ReleaseBall(gameObject);
             _agent.updatePosition = false;
+            _agent.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
