@@ -1,3 +1,4 @@
+using System;
 using Player;
 using UnityEngine;
 using World;
@@ -14,6 +15,11 @@ namespace Utils.Data
         public float KnockbackMultiplier { get; private set; }
 
         private void Start()
+        {
+            Init();
+        }
+
+        public void Init()
         {
             RegenSpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.regenUpgradeLevel);
             SpeedMultiplier = UpgradesData.GetSpeedMultiplier(GameData.Instance.speedUpgradeLevel);

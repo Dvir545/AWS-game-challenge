@@ -22,6 +22,7 @@ namespace World
         [SerializeField] private Transform boatWithPlayer;
         [SerializeField] private Transform anchoredBoat;
         [SerializeField] private Transform player;
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private GameObject game;
         [SerializeField] private GameObject gameCanvas;
         [SerializeField] private GameObject menuCanvas;
@@ -164,6 +165,7 @@ namespace World
         private void SetupGame()
         {
             SoundManager.Instance.Init(stop: true);
+            playerData.Init();
             player.GetComponent<PlayerHealthManager>().Init();
             player.GetComponent<PlayerAnimationManager>().Init();
             cashBehaviour.Init();

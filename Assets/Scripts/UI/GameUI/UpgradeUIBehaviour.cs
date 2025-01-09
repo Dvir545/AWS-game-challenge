@@ -26,6 +26,7 @@ namespace UI.GameUI
             ChangeIcon((Upgrade.Speed, GameData.Instance.speedUpgradeLevel));
             ChangeIcon((Upgrade.Regen, GameData.Instance.regenUpgradeLevel));
             ChangeIcon((Upgrade.Stamina, GameData.Instance.staminaUpgradeLevel));
+            ChangeIcon((Upgrade.Knockback, GameData.Instance.knockbackUpgradeLevel));
         }
 
         private void ChangeIcon(object arg0)

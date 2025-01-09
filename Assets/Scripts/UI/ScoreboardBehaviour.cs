@@ -349,18 +349,22 @@ public class ScoreboardBehaviour : Singleton<ScoreboardBehaviour>
 
     public void ShowScoreboard(bool fromMenu)
     {
-        if (!IsAvailable) return;
+        WarningSignPool.Instance.ReleaseAll();
+        EnemyPool.Instance.ReleaseAll();
+        BallPool.Instance.ReleaseAll();
+        SoundManager.Instance.PauseBackgroundSong(1f);
+        SoundManager.Instance.StartEntryMusicCR(true, 1f);
+        if (!IsAvailable)
+        {
+            ReturnToMenu();
+            return;
+        }
         if (fromMenu)
         {
             mainMenu.SetActive(false);
         }
         else
         {
-            WarningSignPool.Instance.ReleaseAll();
-            EnemyPool.Instance.ReleaseAll();
-            BallPool.Instance.ReleaseAll();
-            SoundManager.Instance.PauseBackgroundSong(1f);
-            SoundManager.Instance.StartEntryMusicCR(true, 1f);
             _darkOverlay.SetActive(true);
         }
         _window.SetActive(true);
