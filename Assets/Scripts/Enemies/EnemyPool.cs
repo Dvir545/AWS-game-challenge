@@ -27,23 +27,30 @@ namespace Enemies
         private void Awake()
         {
             _enemyPools  = new Dictionary<Enemy, ObjectPool<GameObject>>();
-            foreach (Enemy enemy in Enum.GetValues(typeof(Enemy)))
+            foreach (Enemy enemyType  in Enum.GetValues(typeof(Enemy)))
             {
-                _enemyPools.Add(enemy, new ObjectPool<GameObject>(
-                    createFunc: () => CreateEnemy(enemy),
+                Enemy localEnemyType = enemyType;
+                _enemyPools.Add(enemyType, new ObjectPool<GameObject>(
+                    createFunc: () => CreateEnemy(localEnemyType),
                     actionOnGet: obj => obj.SetActive(true),
-                    actionOnRelease: obj => obj.SetActive(false),
+                    actionOnRelease: obj =>
+                    {
+                        obj.SetActive(false);
+                        var rigidbody = obj.GetComponent<Rigidbody2D>();
+                        if (rigidbody) rigidbody.velocity = Vector2.zero;
+                    },
                     actionOnDestroy: Destroy,
                     collectionCheck: false,
                     defaultCapacity: 15,
-                    maxSize: 1000
+                    maxSize: 100
                 ));
             }
         }
         
-        public GameObject GetEnemy(Enemy type, Vector2 spawnPosition)
+        public bool GetEnemy(Enemy type, Vector2 spawnPosition)
         {
             GameObject enemy = _enemyPools[type].Get();
+            if (enemy == null) return false;
             enemy.transform.position = spawnPosition;
             enemy.GetComponent<EnemyHealthManager>().Reset();
             enemy.GetComponent<EnemyMovementManager>().Reset();
@@ -60,7 +67,7 @@ namespace Enemies
             EventManager.Instance.TriggerEvent(EventManager.EnemySpawned, (body.transform, WarningSignType.Enemy));
             EnemyCount++;
             Enemies.Add(enemy, type);
-            return enemy;
+            return true;
         }
 
         public void ReleaseEnemy(GameObject enemy, Enemy type)
@@ -70,6 +77,10 @@ namespace Enemies
             _enemyPools[type].Release(enemy);
             Enemies.Remove(enemy);
             EnemyCount--;
+            if (EnemyCount == 0)
+            {
+                EventManager.Instance.TriggerEvent(EventManager.LastEnemyKilled, null);
+            }
         }
 
         public void ReleaseAll()
@@ -80,6 +91,11 @@ namespace Enemies
                 ReleaseEnemy(enemy, Enemies[enemy]);
             }
             Enemies.Clear();
+            foreach (var enemyType in _enemyPools.Keys)
+            {
+                _enemyPools[enemyType].Clear();
+            }
+            EnemyCount = 0;
         }
     }
 }

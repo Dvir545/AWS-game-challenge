@@ -63,8 +63,9 @@ namespace Enemies.Goblin
         
         public void StartAttacking(Transform target)
         {
-            if (_attackCoroutine == null)
-                _attackCoroutine = StartCoroutine(AttackCoroutine(target));
+            if (_attackCoroutine != null)
+                StopCoroutine(_attackCoroutine);
+            _attackCoroutine = StartCoroutine(AttackCoroutine(target));
         }
         
         public void StopAttacking()

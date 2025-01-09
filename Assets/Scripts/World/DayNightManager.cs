@@ -192,7 +192,7 @@ namespace World
             {
                 spawnPosition =  positionOptions[Random.Range(0, positionOptions.Length)];
             } while (Vector2.Distance(spawnPosition, playerTransform.position) < Constants.MinEnemySpawnDistance);
-            var enemy = EnemyPool.Instance.GetEnemy(enemySpawn.Enemy, spawnPosition);
+            var succeeded = EnemyPool.Instance.GetEnemy(enemySpawn.Enemy, spawnPosition);
         }
 
         private IEnumerator SpawnEnemies()
@@ -229,7 +229,8 @@ namespace World
                         Enemy = (Enemy)enemyType,
                         SpawnTime = Random.Range(0, spawnDurationInSeconds)
                     };
-                    enemySpawns[i++] = enemySpawn;
+                    enemySpawns[i] = enemySpawn;
+                    i++;
                 }
             }
 

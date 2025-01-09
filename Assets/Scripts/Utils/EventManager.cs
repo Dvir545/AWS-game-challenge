@@ -29,6 +29,7 @@ namespace Utils
         public const string Cooldown = "Cooldown";
         public const string Disconnect = "Disconnect";
         public const string CropReadyForHarvest = "CropReadyForHarvest";
+        public const string LastEnemyKilled = "LastEnemyKilled";
 
         protected EventManager()
         {

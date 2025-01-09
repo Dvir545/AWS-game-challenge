@@ -80,55 +80,71 @@ namespace Utils.Data
     
     public class EnemySpawns
     {
-        public int[] SpawnAmounts { get; private set; }
-        public Vector2[][] SpawnPositions { get; private set; }
-            
+        private readonly Dictionary<Enemy, int> _spawnAmounts;
+        private readonly Dictionary<Enemy, Vector2[]> _spawnPositions;
 
-        public EnemySpawns(int slimes=0, int skeletons=0, int chickens=0, int orcs=0, int goblins=0, int demons=0)
+        public EnemySpawns(int slimes = 0, int skeletons = 0, int chickens = 0, int orcs = 0, int goblins = 0, int demons = 0)
         {
-            SpawnAmounts = new[] {slimes, skeletons, chickens, orcs, goblins, demons};
-
-            var spawnPositionsDict = EnemySpawnData.Instance.EnemySpawnPositions;
-            SpawnPositions = new[]
+            _spawnAmounts = new Dictionary<Enemy, int>
             {
-                spawnPositionsDict[(Enemy)0],
-                spawnPositionsDict[(Enemy)1],
-                spawnPositionsDict[(Enemy)2],
-                spawnPositionsDict[(Enemy)3],
-                spawnPositionsDict[(Enemy)4],
-                spawnPositionsDict[(Enemy)5]
+                { Enemy.Slime, slimes },
+                { Enemy.Skeleton, skeletons },
+                { Enemy.Chicken, chickens },
+                { Enemy.Orc, orcs },
+                { Enemy.Goblin, goblins },
+                { Enemy.Demon, demons }
             };
+
+            _spawnPositions = EnemySpawnData.Instance.EnemySpawnPositions;
         }
+        
+        public int[] SpawnAmounts => _spawnAmounts.Values.ToArray();
+        public Vector2[][] SpawnPositions => _spawnPositions.Values.ToArray();
 
         public EnemySpawns(int[] amounts)
         {
-            SpawnAmounts = amounts.ToArray();
-            var spawnPositionsDict = EnemySpawnData.Instance.EnemySpawnPositions;
-            SpawnPositions = new[]
+            if (amounts.Length != 6)
             {
-                spawnPositionsDict[(Enemy)0],
-                spawnPositionsDict[(Enemy)1],
-                spawnPositionsDict[(Enemy)2],
-                spawnPositionsDict[(Enemy)3],
-                spawnPositionsDict[(Enemy)4],
-                spawnPositionsDict[(Enemy)5]
-            };
-        }
-            
-        public void AddEnemy(Enemy enemy, int amount=1)
-        {
-            SpawnAmounts[(int)enemy] += amount;
-        }
-            
-        public int TotalSpawnsAmount()
-        {
-            int total = 0;
-            foreach (var amount in SpawnAmounts)
-            {
-                total += amount;
+                Debug.LogError($"[EnemySpawns] Invalid amounts array length: {amounts.Length}");
+                return;
             }
 
-            return total;
+            _spawnAmounts = new Dictionary<Enemy, int>
+            {
+                { Enemy.Slime, amounts[0] },
+                { Enemy.Skeleton, amounts[1] },
+                { Enemy.Chicken, amounts[2] },
+                { Enemy.Orc, amounts[3] },
+                { Enemy.Goblin, amounts[4] },
+                { Enemy.Demon, amounts[5] }
+            };
+
+            _spawnPositions = EnemySpawnData.Instance.EnemySpawnPositions;
+        }
+
+        public void AddEnemy(Enemy enemy, int amount = 1)
+        {
+            if (!_spawnAmounts.ContainsKey(enemy))
+            {
+                _spawnAmounts[enemy] = 0;
+            }
+            _spawnAmounts[enemy] += amount;
+        }
+
+        public int GetSpawnAmount(Enemy enemy)
+        {
+            return _spawnAmounts.TryGetValue(enemy, out int amount) ? amount : 0;
+        }
+
+        public Vector2[] GetSpawnPositions(Enemy enemy)
+        {
+            return _spawnPositions[enemy];
+        }
+
+        public int TotalSpawnsAmount()
+        {
+            return _spawnAmounts.Values.Sum();
         }
     }
+
 }

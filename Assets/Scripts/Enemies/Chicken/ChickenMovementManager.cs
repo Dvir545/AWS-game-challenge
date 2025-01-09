@@ -43,6 +43,7 @@ namespace Enemies.Chicken
                     StopCoroutine(_roamCR);//RoamingAgent.Instance.StopRoam(Agent);
                     _roamCR = null;
                 }
+                base.Update();
                 return;
             }
             if (Targeted)  // only crops can be targeted

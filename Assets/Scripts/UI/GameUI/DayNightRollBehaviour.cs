@@ -2,6 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Utils;
+using World;
 
 namespace UI.GameUI
 {
@@ -34,6 +35,19 @@ namespace UI.GameUI
             Init();
         }
 
+        private void Start()
+        {
+            EventManager.Instance.StartListening(EventManager.LastEnemyKilled, OnLastEnemyKilled);
+        }
+
+        private void OnLastEnemyKilled(object arg0)
+        {
+            if (_nextDayPhase == DayPhase.NightEnd && DayNightManager.Instance.NightTime)
+            {
+                SetRollProgressWidth();
+            }
+        }
+
         private void SetRollProgressWidth()
         {
             switch (_nextDayPhase)
@@ -54,7 +68,7 @@ namespace UI.GameUI
                     _nextDayPhase = DayPhase.NightEnd;
                     break;
                 case DayPhase.NightEnd:
-                        _rollProgressWidth = NightEndXWidth;
+                    _rollProgressWidth = NightEndXWidth;
                     SetX(NightEndX);
                     _nextDayPhase = DayPhase.Day;
                     break;

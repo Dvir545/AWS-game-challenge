@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -170,8 +171,9 @@ namespace Utils.Data
                 };
             }
 
-            GameData.Instance.thisDayEnemies = cycle.DayWave.EnemySpawns.SpawnAmounts;
-            GameData.Instance.thisNightEnemies = cycle.NightWave.EnemySpawns.SpawnAmounts;
+            GameData.Instance.thisDayEnemies = cycle.DayWave.EnemySpawns.SpawnAmounts.ToArray();
+            GameData.Instance.thisNightEnemies = cycle.NightWave.EnemySpawns.SpawnAmounts.ToArray();
+
         }
         
         public static Cycle GetCycle(int day, int[] dayEnemies, int[] nightEnemies)
