@@ -9,10 +9,12 @@ namespace Enemies
     {
         private WarningSignBehaviour _warningSign;
         private SpriteRenderer _spriteRenderer;
+        private EnemyHealthManager _healthManager;
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _healthManager = transform.parent.GetComponent<EnemyHealthManager>();
         }
 
         public virtual void SetWarningSign(WarningSignBehaviour warningSign)
@@ -47,12 +49,13 @@ namespace Enemies
 
         private void OnBecameInvisible()
         {
+            if (_healthManager.IsDead) return;
             ShowWarningSign();
         }
 
         public virtual void Reset()
         {
-            return;
+            _warningSign = null;
         }
     }
 }

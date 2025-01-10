@@ -35,7 +35,7 @@ namespace UI.WarningSign
                 actionOnDestroy: Destroy,
                 collectionCheck: false,
                 defaultCapacity: 4,
-                maxSize: 100
+                maxSize: 200
             );
 
         }
@@ -64,7 +64,6 @@ namespace UI.WarningSign
         {
             var warningSign = _warningSignPool.Get();
             warningSign.transform.SetParent(parent);
-            warningSign.GetComponent<WarningSignBehaviour>().Init(target, type == WarningSignType.Warning);
             var sprite = type switch
             {
                 WarningSignType.Warning => destroySignSprite,
@@ -73,6 +72,7 @@ namespace UI.WarningSign
                 _ => null
             };
             warningSign.transform.GetChild(4).GetComponent<Image>().sprite = sprite;
+            warningSign.GetComponent<WarningSignBehaviour>().Init(target, type == WarningSignType.Warning);
             if (_tgt2Sign.ContainsKey(target))
             {
                 _warningSignPool.Release(_tgt2Sign[target]);

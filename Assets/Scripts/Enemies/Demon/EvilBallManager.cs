@@ -37,6 +37,7 @@ public class EvilBallManager : MonoBehaviour
         curTimeToSpawnNewBall = 0f;
         _maxNumOfBalls = numberOfBalls + Mathf.FloorToInt((GameData.Instance.day - 9) / 10f);
         _curHealth = enemyHealthManager.MaxHealth;
+        _sentBall = null;
         SpawnBalls();
     }
 
