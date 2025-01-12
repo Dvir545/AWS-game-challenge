@@ -41,8 +41,7 @@ namespace Enemies
                     },
                     actionOnDestroy: Destroy,
                     collectionCheck: false,
-                    defaultCapacity: 15,
-                    maxSize: 100
+                    defaultCapacity: 15
                 ));
             }
         }

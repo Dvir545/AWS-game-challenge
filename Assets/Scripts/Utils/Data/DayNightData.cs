@@ -130,7 +130,7 @@ namespace Utils.Data
                 var nightEnemySpawns = new EnemySpawns();
                 var enemyPowerPoints = Mathf.RoundToInt(2 * Mathf.Pow(cycleNum, 1.5f));
                 var maxChicken = 1;
-                var maxOrcs = Mathf.FloorToInt(cycleNum / 4);
+                var maxOrcs = Mathf.FloorToInt(cycleNum / 2.5f);
                 while (enemyPowerPoints > 0)
                 {
                     Enemy enemy;

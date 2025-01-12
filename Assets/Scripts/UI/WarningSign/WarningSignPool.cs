@@ -34,9 +34,8 @@ namespace UI.WarningSign
                 actionOnRelease: obj => obj.SetActive(false),
                 actionOnDestroy: Destroy,
                 collectionCheck: false,
-                defaultCapacity: 4,
-                maxSize: 200
-            );
+                defaultCapacity: 4
+                );
 
         }
 

@@ -26,8 +26,7 @@ namespace Enemies.Demon
                 actionOnRelease: obj => obj.SetActive(false),
                 actionOnDestroy: Destroy,
                 collectionCheck: false,
-                defaultCapacity: 4,
-                maxSize: 100
+                defaultCapacity: 4
             );
         }
 
