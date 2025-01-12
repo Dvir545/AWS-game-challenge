@@ -17,8 +17,7 @@ namespace Enemies.Goblin
                 actionOnRelease: obj => obj.SetActive(false),
                 actionOnDestroy: Destroy,
                 collectionCheck: false,
-                defaultCapacity: 10,
-                maxSize: 100
+                defaultCapacity: 10
             );
         }
         
