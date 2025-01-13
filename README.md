@@ -4,6 +4,7 @@
 *Farm, Build, Fight!* is playable on both PC and mobile devices. Start your adventure anytime, anywhere!
 
 Dive into the survival RPG experience: [Play Farm, Build, Fight!](https://farmbuildfight.click)
+(You can also download .exe file for windows here: WindowsEXE/FBF.exe 
 
 ## Learn More
 - **Devpost Project Page**: Discover the development journey and features: [FBF on Devpost](https://devpost.com/software/fbf-farm-build-fight)
