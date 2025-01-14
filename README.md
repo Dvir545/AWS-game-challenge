@@ -5,6 +5,9 @@
 
 Dive into the survival RPG experience: [Play Farm, Build, Fight!](https://farmbuildfight.click)
 
+(You can also download .exe file for windows here: [WindowsEXE/FBF.exe](https://github.com/Dvir545/AWS-game-challenge/tree/main/WindowsEXE) )
+
+
 ## Learn More
 - **Devpost Project Page**: Discover the development journey and features: [FBF on Devpost](https://devpost.com/software/fbf-farm-build-fight)
 - **AWS Community Blog Post**: Read about how the game was built and the technologies used: [Farm, Build, Fight! on AWS Community](https://community.aws/content/2rDju24YVMQzFIiI3OJVMlCGAO3/farm-build-fight-the-survival-rpg-you-never-knew-you-need)
