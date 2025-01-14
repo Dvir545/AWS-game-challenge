@@ -36,6 +36,10 @@ namespace UI
                 Awake();
             _window.SetActive(true);
             mainMenu.SetActive(false);
+            foreach (var page in tutorialPages)
+            {
+                page.SetActive(false);
+            }
             tutorialPages[0].SetActive(true);
             wasOpened = true;
         }
